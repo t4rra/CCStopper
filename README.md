@@ -42,7 +42,8 @@ A: Windows might say that it is a virus, but that is a false positive. As stated
 <details>
 <summary>Q: I found a bug/issue! What do I do?</summary>
 <br>
-A: First check [the known issues section](https://github.com/E-Soda/CCStopper/blob/main/README.md#known-issues) for any issues that I am aware of. If your issue is not there, open up an issue describing your issue and how to reproduce it, and I'll work on it as soon as I can.
+
+A: First check [the known issues](https://github.com/E-Soda/CCStopper/blob/main/README.md#known-issues) for any issues that I am aware of. If your issue is not there, open up an issue describing your issue and how to reproduce it, and I'll work on it as soon as I can.
 </details>
 
 <br>
