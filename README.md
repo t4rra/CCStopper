@@ -62,6 +62,10 @@ A: Yes! If you have any suggestions, please open an issue.
 </details>
 <br>
 
+## Known Issues
+Issue: "the execution of scripts is disabled on this system. Please see "get-help about_signing" for more details."
+Fix: Run ```set-executionpolicy remotesigned ``` in an admininstrator powershell window. [Credit to /u/getblownaparte on Reddit for bringing this issue up](https://www.reddit.com/r/GenP/comments/ndhm94/i_made_a_script_to_stop_all_adobe_background/gyb0twq?utm_source=share&utm_medium=web2x&context=3)
+
 ## Disclaimer/Notice
 
 **Disclaimer:** This script is in a very early stage. There most likely will be bugs. I am not responsible for any damage or loss of data caused by this script. I am not affiliated with Adobe.
