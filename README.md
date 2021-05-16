@@ -4,7 +4,7 @@ Kills Adobe's pesky background apps and more!
 
 **Current Version:** v0.0.1 (Initial Release)
 
-# Menu Options
+## Menu Options
 
 **1: Kill all running Adobe Processess**
 
@@ -14,7 +14,7 @@ Does what it says, all Adobe processess will be stopped.
 
 It first stops AGSService, then deletes the AdobeGCClient folder.
 
-# Instructions
+## Instructions
 
 1. Get the latest [release](https://github.com/E-Soda/CCStopper/releases)
 2. Extract the ZIP file (This is important, CCStopper will not work without the additional scripts in the _scripts_ folder)
@@ -22,7 +22,7 @@ It first stops AGSService, then deletes the AdobeGCClient folder.
 4. Select an option
 5. Done!
 
-# FAQ
+## FAQ
 
 <details>
 <summary>Q: It asks for administrator permissions????</summary>
@@ -62,7 +62,7 @@ A: Yes! If you have any suggestions, please open an issue.
 </details>
 <br>
 
-# Disclaimer/Notice
+## Disclaimer/Notice
 
 **Disclaimer:** This script is in a very early stage. There most likely will be bugs. I am not responsible for any damage or loss of data caused by this script. I am not affiliated with Adobe.
 
