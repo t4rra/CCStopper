@@ -34,7 +34,7 @@ A: This script needs those permissions to stop Adobe from running in the backgro
 <details>
 <summary>Q: Is this a virus?</summary>
 <br>
-A: Windows might say that it is a virus, but that is a false positive. As stated before, don't run this script if you don't trust it/know what you're doing.
+A: Windows might say that it is a virus, but that is a false positive. As stated above, don't run this script if you don't trust it/know what you're doing.
 </details>
 
 <br>
