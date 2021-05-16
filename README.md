@@ -50,7 +50,7 @@ A: Open up an issue describing your issue and how to reproduce it, and I'll work
 <details>
 <summary>Q: Is this available for MacOS?</summary>
 <br>
-A: It is not currently avaliable for MacOS. If anyone in the community would like to port this to MacOS, feel free to do so (credit is welcomed, but not necessary).
+A: It is not currently avaliable for MacOS. If anyone in the community would like to port this to MacOS, feel free to do so!
 </details>
 
 <br>
