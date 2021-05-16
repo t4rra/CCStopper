@@ -16,7 +16,7 @@ It first stops AGSService, then deletes the AdobeGCClient folder.
 
 # Instructions
 
-1. Get the latest [release](link goes here)
+1. Get the latest [release](https://github.com/E-Soda/CCStopper/releases)
 2. Extract the ZIP file (This is important, CCStopper will not work without the additional scripts in the _scripts_ folder)
 3. Run CCStopper.bat
 4. Select an option
