@@ -63,6 +63,13 @@ A: Yes! If you have any suggestions, please open an issue.
 </details>
 <br>
 
+<details>
+<summary>Q: Will this affect Adobe apps in any way?</summary>
+<br>
+A: No, it won't. If you do have Adobe apps (Photoshop, After Effects, etc.) open, it will close them if you run the script. Other than that, everything should work normally. Please open an issue if this is not the case.
+</details>
+<br>
+
 ## Known Issues
 Issue: "the execution of scripts is disabled on this system. Please see "get-help about_signing" for more details."
 
