@@ -7,7 +7,7 @@ title CCStopper
 
 :: Source: https://github.com/nicamoq/batupdate
 :: Local is installed ver. remote is latest ver.
-set local=0.1.0-dev
+set local=1.0.1-dev
 set remote=%local%
 set link=https://raw.githubusercontent.com/E-Soda/CCStopper/AcrobatFix/version.bat
 :: Deletes version.bat if it exists
@@ -71,7 +71,7 @@ echo 0: Quit
 echo.
 echo Current version: %local%. Latest version: %remote%.
 
-set /p menu=Select an option: (1/2/3): 
+set /p menu=Select an option: (1/2/3/4/0): 
 
 If /I "%menu%"=="1" goto processkill
 If /I "%menu%"=="2" goto agskill
