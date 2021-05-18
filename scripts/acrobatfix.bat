@@ -15,21 +15,22 @@ echo This will edit the registry. It is HIGHLY recommended to create a system re
 :: Ask to create system restore point
 set /p restorePntConfirm=Create system restore point? (y/n): 
 :: Every other option other than "n" will create a system restore point
-If /I "%restorePntConfirm%"=="n" (goto editReg) else (goto makeRestorePnt)
+If /I "%restorePntConfirm%"=="n" (goto editReg) else (
+	echo.
+	echo Creating system restore point, please be patient.
+	echo.
+	Wmic.exe /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Acrobat Fix Script", 100, 12
+	goto editReg
+	)
+	pause
+)
 
 echo after restore point confirmation
 
-:makeRestorePnt
-echo.
-echo Creating system resttore point, please be patient.
-echo.
-wmic.exe /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "ESodaAcrobatFix", 100, 7)
-goto editReg
-
 :editReg
-
 echo editreg success!
-
+goto restartAsk
+pause
 
 :restartAsk
 cls
@@ -42,13 +43,9 @@ If /I "%restartConfirm%"=="y" (
 	echo The system will restart in 60 seconds.
 	shutdown /r /t 60
 	
-	)
-	
-	else (
+	) else (
 	:: Reminds user to restart, then pauses the script
 	echo.
 	echo You will need to manually restart for changes to take place.
 	pause
 )
-
-pause
