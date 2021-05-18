@@ -16,17 +16,18 @@ echo.
 echo MENU:
 echo 1: Kill all running Adobe Processess 
 echo 2: Delete Adobe Genuine Software Integrity Service (AdobeGCClient)
-echo 3: Quit
+echo 0: Quit
 
 set /p menu=Select an option: (1/2/3): 
 
-If /I "%menu%"=="1" goto 1
-If /I "%menu%"=="2" goto 2
-If /I "%menu%"=="3" goto 3
+If /I "%menu%"=="1" goto processkill
+If /I "%menu%"=="2" goto agskill
+If /I "%menu%"=="3" goto acrobatfix
+If /I "%menu%"=="0" goto quit
 
 goto other
 
-:1
+:processkill
 cls
 
 echo.
@@ -38,7 +39,7 @@ set /p StopAppConfirm=Are you sure you want to continue? (y/n):
 If /I "%StopAppConfirm%"=="y" Powershell.exe -executionpolicy remotesigned -File  .\scripts\ProcessKill.ps1
 goto menu
 
-:2
+:agskill
 cls
 
 echo.
@@ -48,7 +49,12 @@ set /p AGSDeleteConfirm=Are you sure you want to delete/disable AGS? (y/n):
 If /I "%AGSDeleteConfirm%"=="y" start .\scripts\AGSKill.bat
 goto menu
 
-:3
+:acrobatfix
+
+
+goto menu
+
+:quit
 cls
 
 echo.
