@@ -27,7 +27,7 @@ if errorlevel 1 (
 :: Source: https://github.com/nicamoq/batupdate
 :: Local is installed ver. remote is latest ver.
 set remote=%local%
-set link=https://raw.githubusercontent.com/E-Soda/CCStopper/AcrobatFix/version.bat
+set link=https://raw.githubusercontent.com/E-Soda/CCStopper/main/version.bat
 :: Deletes version.bat if it exists
 :check
 IF EXIST "version.bat" DEL /Q "version.bat"

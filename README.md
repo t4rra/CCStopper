@@ -2,8 +2,13 @@
 
 Kills Adobe's pesky background apps and more!
 
-**Current Version:** v0.0.1 (Initial Release)
+**Current Version:** v1.0.0
 
+## v1.0.0 Changelog
+- Added acrobatfix.bat
+    - Edits the system registry to patch acrobat
+- Added update checker
+    - [Download exe](https://github.com/TheBATeam/Download-1.3-by-Fatih-Kodak) used to make this work, [this script](https://github.com/nicamoq/batupdate) was also ~~copy-pasted~~ adapted for this program.
 ## Menu Options
 
 **1: Kill all running Adobe Processess**
@@ -13,6 +18,10 @@ Does what it says, all Adobe processess will be stopped.
 **2: Delete Adobe Genuine Software Integrity Service (AdobeGCClient)**
 
 It first stops AGSService, then deletes the AdobeGCClient folder.
+
+**3: Patch Acrobat**
+
+Edits the registry to patch Acrobat. 
 
 ## Instructions
 
@@ -79,4 +88,6 @@ Fix: Run ```set-executionpolicy remotesigned ``` in an admininstrator powershell
 
 **Disclaimer:** This script is in a very early stage. There most likely will be bugs. I am not responsible for any damage or loss of data caused by this script. I am not affiliated with Adobe.
 
-**Notice:** Don't use this tool for piracy. It's illegal, and multi-billion dollar companies like Adobe _needs_ to profit off unreliable and overpriced software. Plus, the developers at Adobe will be sad :(
+**Notices:**
+
+Don't use this tool for piracy. It's illegal, and multi-billion dollar companies like Adobe _needs_ to profit off unreliable and overpriced software. Plus, Adobe will be sad :(
