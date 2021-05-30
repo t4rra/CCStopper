@@ -92,6 +92,4 @@ Fix: Run ```set-executionpolicy remotesigned ``` in an admininstrator powershell
 
 **Disclaimer:** This script is in a very early stage. There most likely will be bugs. I am not responsible for any damage or loss of data caused by this script. I am not affiliated with Adobe.
 
-**Notices:**
-
-Don't use this tool for piracy. It's illegal, and multi-billion dollar companies like Adobe _needs_ to profit off unreliable and overpriced software. Plus, Adobe will be sad :(
+**Notice:** Don't use this tool for piracy. It's illegal, and multi-billion dollar companies like Adobe _needs_ to profit off unreliable and overpriced software. Plus, Adobe will be sad :(
