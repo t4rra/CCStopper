@@ -1,15 +1,15 @@
 @echo off
 color 70
-title CCStopper
+title CCStopper by ESoda
 
 :updateCHK
 :: Update Checker
 
 :: Source: https://github.com/nicamoq/batupdate
 :: Local is installed ver. remote is latest ver.
-set local=1.0.1-dev
+set local=1.0.0
 set remote=%local%
-set link=https://raw.githubusercontent.com/E-Soda/CCStopper/AcrobatFix/version.bat
+set link=https://raw.githubusercontent.com/E-Soda/CCStopper/main/version.bat
 :: Deletes version.bat if it exists
 :check
 IF EXIST "version.bat" DEL /Q "version.bat"
@@ -49,6 +49,7 @@ echo No updates found or update server cannot be accessed. Current version: %loc
 pause
 goto menu
 
+
 :: Main script
 :menu
 cls
@@ -68,7 +69,7 @@ echo.
 echo MENU:
 echo 1: Kill all running Adobe Processess 
 echo 2: Delete Adobe Genuine Software Integrity Service (AdobeGCClient)
-echo 3: Fix Acrobat
+echo 3: Patch Acrobat
 echo 4: Check for updates
 echo 0: Quit
 echo.
@@ -106,19 +107,17 @@ If /I "%AGSDeleteConfirm%"=="y" start .\scripts\AGSKill.bat
 goto menu
 
 :acrobatfix
-
-
-goto menu
-
-:quit
 cls
 
 echo.
 echo                                      ---ESODA'S CREATIVE CLOUD STOPPER---
 echo.
-set /p quit=Are you sure you want to quit? (y/n): 
-If /I "%quit%"=="y" exit
+set /p acrobatfixconfirm=Are you sure you want to patch Acrobat? (y/n): 
+If /I "%acrobatfixconfirm%"=="y" start .\scripts\acrobatfix.bat
 goto menu
+
+:quit
+exit
 
 :other
 echo That's not a valid option!

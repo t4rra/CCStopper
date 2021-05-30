@@ -37,7 +37,7 @@ If /I "%restorePntConfirm%"=="n" (goto editReg) else (
 
 
 :editReg
-:: goal: delete TestValue in Testkey, replace w/ TestValue1
+:: Adds IsAMTEnforced w/ proper values, then deletes IsNGLEnfoced
 
 reg add "HKLM\software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsAMTEnforced /t REG_DWORD /d 1 /f /reg:64
 

@@ -1,1 +1,1 @@
-set remote=1.0.0-dev
+set remote=1.0.0
