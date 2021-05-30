@@ -21,7 +21,11 @@ It first stops AGSService, then deletes the AdobeGCClient folder.
 
 **3: Patch Acrobat**
 
-Edits the registry to patch Acrobat. 
+Ask if the user wants to create a system restore point in case something goes wrong, then edit the registry to patch Acrobat. 
+
+**4. Check for updates**
+
+Checks if a newer version of the script is available
 
 ## Instructions
 
