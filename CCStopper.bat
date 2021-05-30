@@ -38,7 +38,7 @@ echo.
 echo It is recommended that you update the script. Would you like to go to the Github (1) or skip this update (2)?
 
 set /p updatechoice=Select an option: (1/2):
-If /I "%updatechoice%"=="1" (start https://github.com/E-Soda/CCStopper/releases)
+If /I "%updatechoice%"=="1" start https://github.com/E-Soda/CCStopper/releases
 
 goto menu
 pause
@@ -58,7 +58,10 @@ echo.
 echo Get rid of Adobe's pesky background apps and more!
 echo Made by ESoda (E-Soda on Github)
 echo.
+echo Current version: %local%. Latest version: %remote%.
+echo.
 echo NOTICE: Don't use this tool for piracy. It's illegal, and multi-billion dollar companies like Adobe *needs* to profit off of unreliable and overpriced software.
+echo Plus, Adobe will be sad :(
 echo.
 echo MAKE SURE TO SAVE YOUR FILES! This will kill all Adobe apps (INCLUDING Photoshop, After Effects, etc.)
 echo.
@@ -69,8 +72,6 @@ echo 3: Fix Acrobat
 echo 4: Check for updates
 echo 0: Quit
 echo.
-echo Current version: %local%. Latest version: %remote%.
-
 set /p menu=Select an option: (1/2/3/4/0): 
 
 If /I "%menu%"=="1" goto processkill
