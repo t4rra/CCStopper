@@ -4,12 +4,30 @@ title CCStopper by ESoda
 
 :updateCHK
 :: Update Checker
+set local=1.0.0
+
+:internetCHK
+:: Check if comptuer can connect to githubusercontent.com, if not, skip directly to menu
+
+echo Checking internet connection...
+echo.
+Ping www.githubusercontent.com -n 1 -w 1000
+cls
+if errorlevel 1 (
+	set remote=N/A
+	echo.
+	echo                                      ---ESODA'S CREATIVE CLOUD STOPPER---
+	echo.
+
+	echo Github cannot be reached right now, so this script cannot check for updates.
+	pause
+	goto menu
+)
 
 :: Source: https://github.com/nicamoq/batupdate
 :: Local is installed ver. remote is latest ver.
-set local=1.0.0
 set remote=%local%
-set link=https://raw.githubusercontent.com/E-Soda/CCStopper/main/version.bat
+set link=https://raw.githubusercontent.com/E-Soda/CCStopper/AcrobatFix/version.bat
 :: Deletes version.bat if it exists
 :check
 IF EXIST "version.bat" DEL /Q "version.bat"
