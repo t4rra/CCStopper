@@ -33,7 +33,7 @@ else
    }
 
 # Stops Adobe Processess, source: https://gist.github.com/carcheky/530fd85ffff6719486038542a8b5b997#gistcomment-3586740
-Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "Adobe"} | Stop-Process
+Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "Adobe"} | Stop-Process /f
 
 # Stops stragglers
 taskkill /IM AdobeUpdateService.exe /F
