@@ -2,13 +2,11 @@
 
 Kills Adobe's pesky background apps and more!
 
-**Current Version:** v1.0.0
+**Current Version:** v1.0.1
 
-## v1.0.0 Changelog
-- Added acrobatfix.bat
-    - Edits the system registry to patch acrobat
-- Added update checker
-    - [Download exe](https://github.com/TheBATeam/Download-1.3-by-Fatih-Kodak) used to make this work, [this script](https://github.com/nicamoq/batupdate) was also ~~copy-pasted~~ adapted for this program.
+## v1.0.1 Changelog
+- Removed /f from line 36
+
 ## Menu Options
 
 **1: Kill all running Adobe Processess**
