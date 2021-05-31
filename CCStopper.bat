@@ -4,7 +4,7 @@ title CCStopper by ESoda
 
 :updateCHK
 :: Update Checker
-set local=1.0.0
+set local=1.0.1
 
 :internetCHK
 :: Check if comptuer can connect to githubusercontent.com, if not, skip directly to menu
