@@ -5,7 +5,7 @@ Kills Adobe's pesky background apps and more!
 **Current Version:** v1.0.1
 
 ## v1.0.1 Changelog
-- Removed /f from line 36
+- Removed /f from line 36 in the processkill script
 
 ## Menu Options
 
