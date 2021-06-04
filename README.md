@@ -6,7 +6,7 @@ Kills Adobe's pesky background apps and more!
 
 ## v1.0.1 Changelog
 - Removed /f from line 36 in the processkill script
-
+###### Read previous changelogs from [the releases](https://github.com/E-Soda/CCStopper/releases)
 ## Menu Options
 
 **1: Kill all running Adobe Processess**
