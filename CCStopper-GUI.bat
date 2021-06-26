@@ -55,8 +55,9 @@ echo. Update found!  Current version: %local%. Latest version: %remote%.
 echo.
 echo. It is recommended that you update the script. Would you like to go to the Github Repo (1) or skip this update (2)?
 
-call Button 2 10 FC "Update" 29 10 F4 "Skip" X _Var_Box _Var_Hover
+call Button 1 7 F9 "Update" 15 7 F4 "Skip" X _Var_Box _Var_Hover
 If /I "%Errorlevel%"=="1" start https://github.com/E-Soda/CCStopper/releases
+GetInput /M %_Var_Box% /H %_Var_Hover% 
 
 goto menu
 pause
@@ -78,7 +79,7 @@ echo.
 echo. MAKE SURE TO SAVE YOUR FILES! Ending Adobe processess will also close apps like Photoshop, After Effects, etc. 
 echo.
 
-call Button 2 10 FC "End Adobe Processess" 29 10 FC "Remove AGS"  45 10 FC "Patch Acrobat" 2 14 F9 "Check For Updates"  X _Var_Box _Var_Hover
+call Button 1 10 F9 "End Adobe Processess" 27 10 F9 "Remove AGS"  43 10 F9 "Patch Acrobat" 1 14 FC "Check For Updates" 24 14 FC "Exit"  X _Var_Box _Var_Hover
 GetInput /M %_Var_Box% /H %_Var_Hover% 
 
 
@@ -87,7 +88,7 @@ If /I "%Errorlevel%"=="2" goto agskill
 If /I "%Errorlevel%"=="3" goto acrobatfix
 If /I "%Errorlevel%"=="4" goto updateCHK
 
-If /I "%menu%"=="0" goto quit
+If /I "%Errorlevel%"=="5" goto quit
 
 goto other
 

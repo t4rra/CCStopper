@@ -22,10 +22,10 @@ cls
 echo.
 echo                                      ---ESODA'S CREATIVE CLOUD STOPPER---
 echo.
-echo This will edit the registry to patch Acrobat.
-echo It is HIGHLY recommended to create a system restore point in case something goes wrong. 
+echo. This will edit the registry to patch Acrobat.
+echo. It is HIGHLY recommended to create a system restore point in case something goes wrong. 
 :: Ask to create system restore point
-call Button 2 6 F9 "Create Restore Point" 29 6 F4 "Skip" X _Var_Box _Var_Hover
+call Button 1 6 F9 "Create Restore Point" 28 6 F4 "Skip" X _Var_Box _Var_Hover
 GetInput /M %_Var_Box% /H %_Var_Hover% 
 
 :: Every other input other than "n" will create a system restore point
@@ -45,9 +45,9 @@ If /I "%Errorlevel%"=="2" (goto editReg) else (
 :editReg
 :: Adds IsAMTEnforced w/ proper values, then deletes IsNGLEnfoced
 
-@REM reg add "HKLM\software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsAMTEnforced /t REG_DWORD /d 1 /f /reg:64
+reg add "HKLM\software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsAMTEnforced /t REG_DWORD /d 1 /f /reg:64
 
-@REM reg delete "HKLM\software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsNGLEnforced /f /reg:64
+reg delete "HKLM\software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsNGLEnforced /f /reg:64
 
 echo editreg success!
 goto restartAsk
@@ -58,8 +58,8 @@ cls
 echo.
 echo                                      ---ESODA'S CREATIVE CLOUD STOPPER---
 echo.
-echo Acrobat patching is complete. The system needs to restart for changes to apply.
-call Button 2 6 F9 "Restart" 15 6 F4 "Skip" X _Var_Box _Var_Hover
+echo. Acrobat patching is complete. The system needs to restart for changes to apply.
+call Button 1 6 F9 "Restart" 14 6 F4 "Skip" X _Var_Box _Var_Hover
 GetInput /M %_Var_Box% /H %_Var_Hover% 
 
 If /I "%Errorlevel%"=="1" (
