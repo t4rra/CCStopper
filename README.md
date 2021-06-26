@@ -2,33 +2,37 @@
 
 Kills Adobe's pesky background apps and more!
 
-**Current Version:** v1.0.1
+**Current Version:** v1.1.0
 
-## v1.0.1 Changelog
-- Removed /f from line 36
+## v1.1.0 Changelog
+- GUI Update
+  - Made with a plugin from Thebateam
+- Updated the update checker
+- Updated the AGSKill script to create an empty AdobeGCClient folder w/ permissions denied
+  - This ensures that CC cannot create a AdobeGCClient folder 
 
 ## Menu Options
 
-**1: Kill all running Adobe Processess**
+**Kill all running Adobe Processess**
 
 Does what it says, all Adobe processess will be stopped.
 
-**2: Delete Adobe Genuine Software Integrity Service (AdobeGCClient)**
+**Delete Adobe Genuine Software Integrity Service (AdobeGCClient)**
 
 It first stops AGSService, then deletes the AdobeGCClient folder.
 
-**3: Patch Acrobat**
+**Patch Acrobat**
 
 Ask if the user wants to create a system restore point in case something goes wrong, then edit the registry to patch Acrobat. 
 
-**4. Check for updates**
+**Check for updates**
 
 Checks if a newer version of the script is available
 
 ## Instructions
 
 1. Get the latest [release](https://github.com/E-Soda/CCStopper/releases)
-2. Extract the ZIP file (This is important, CCStopper will not work without the additional scripts in the _scripts_ folder)
+2. Extract the ZIP file (This is important, CCStopper will not work without the additional scripts and plugins in the additional folders)
 3. Run CCStopper.bat
 4. Select an option
 5. Done!
@@ -62,7 +66,7 @@ A: First check [the known issues](https://github.com/E-Soda/CCStopper/blob/main/
 <details>
 <summary>Q: Is this available for MacOS?</summary>
 <br>
-A: It is not currently avaliable for MacOS. If anyone in the community would like to port this to MacOS, feel free to do so!
+A: It is not currently available for MacOS, and I do not intend on porting it to MacOS. If anyone in the community would like to port this to MacOS, feel free to do so!
 </details>
 
 <br>
@@ -77,7 +81,7 @@ A: Yes! If you have any suggestions, please open an issue.
 <details>
 <summary>Q: Will this affect Adobe apps in any way?</summary>
 <br>
-A: No, it won't. If you do have Adobe apps (Photoshop, After Effects, etc.) open, it will close them if you run the script. Other than that, everything should work normally. Please open an issue if this is not the case.
+A: No, it won't. If you do have Adobe apps (Photoshop, After Effects, etc.) open, it will close them if you decide to end Adobe processes. Other than that, everything should work normally. Please open an issue if this is not the case.
 </details>
 <br>
 
@@ -88,6 +92,6 @@ Fix: Run ```set-executionpolicy remotesigned ``` in an admininstrator powershell
 
 ## Disclaimer/Notice
 
-**Disclaimer:** This script is in a very early stage. There most likely will be bugs. I am not responsible for any damage or loss of data caused by this script. I am not affiliated with Adobe.
+**Disclaimer:** This script is in an early stage. There most likely will be bugs. I am not responsible for any damage or loss of data caused by this script. I am not affiliated with Adobe.
 
 **Notice:** Don't use this tool for piracy. It's illegal, and multi-billion dollar companies like Adobe _needs_ to profit off unreliable and overpriced software. Plus, Adobe will be sad :(
