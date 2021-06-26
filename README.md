@@ -1,4 +1,4 @@
-# ESoda's CCStopper
+# CCStopper
 
 Kills Adobe's pesky background apps and more!
 
@@ -13,9 +13,9 @@ Kills Adobe's pesky background apps and more!
 
 ## Menu Options
 
-**Kill all running Adobe Processess**
+**Kill all running Adobe Processes**
 
-Does what it says, all Adobe processess will be stopped.
+Does what it says, all Adobe processes will be stopped.
 
 **Delete Adobe Genuine Software Integrity Service (AdobeGCClient)**
 
@@ -86,12 +86,27 @@ A: No, it won't. If you do have Adobe apps (Photoshop, After Effects, etc.) open
 <br>
 
 ## Known Issues
-**Issue:** "the execution of scripts is disabled on this system. Please see "get-help about_signing" for more details."
+******
+**Issue:** Error message: `the execution of scripts is disabled on this system. Please see "get-help about_signing" for more details.`
 
-Fix: Run ```set-executionpolicy remotesigned ``` in an admininstrator powershell window. [Credit to /u/getblownaparte on Reddit for bringing this issue up](https://www.reddit.com/r/GenP/comments/ndhm94/i_made_a_script_to_stop_all_adobe_background/gyb0twq?utm_source=share&utm_medium=web2x&context=3)
+Fix: Run `set-executionpolicy remotesigned` in an admininstrator powershell window. [Credit to /u/getblownaparte on Reddit for bringing this issue up](https://www.reddit.com/r/GenP/comments/ndhm94/i_made_a_script_to_stop_all_adobe_background/gyb0twq?utm_source=share&utm_medium=web2x&context=3)
+******
+**Issue:** Error message: `The argument '.\scripts\ProcessKill.ps1' to the -File parameter does not exist. Provide the path to an existing file as an argument to the -File parameter.` and no apps are closed.
 
+**Fix:** Update to the latest version of the script. There might be an additional prompt when you end Adobe processes, enter `a` if prompted.
+******
+**Issue:** Error message: `The target registry key cannot be found, or it has been edited already. Cannot proceed with Acrobat fix.` and there is no value in the registry.
+
+**Fix:** Create a DWORD value called `IsAMTEnforced` with a value of 1. You will not need to patch Acrobat with the script after this. 
+******
+**Issue:** Resizing the command window breaks buttons.
+
+**Fix:** This is an issue with the GUI button plugin, please refrain from resizing the window. I've included a separate version of the script called `CCStopper-CMD` that keeps the keyboard input instead of the button input.
+******
 ## Disclaimer/Notice
 
 **Disclaimer:** This script is in an early stage. There most likely will be bugs. I am not responsible for any damage or loss of data caused by this script. I am not affiliated with Adobe.
 
 **Notice:** Don't use this tool for piracy. It's illegal, and multi-billion dollar companies like Adobe _needs_ to profit off unreliable and overpriced software. Plus, Adobe will be sad :(
+
+###### Made by esoda

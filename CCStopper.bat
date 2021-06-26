@@ -76,7 +76,7 @@ echo. Made by esoda (E-Soda on Github)
 echo.
 echo. Current version: %local%. Latest version: %remote%.
 echo.
-echo. MAKE SURE TO SAVE YOUR FILES! Ending Adobe processess will also close apps like Photoshop, After Effects, etc. 
+echo. MAKE SURE TO SAVE YOUR FILES! Ending Adobe processes will also close apps like Photoshop, After Effects, etc. 
 echo.
 
 call Button 1 10 F9 "End Adobe Processes" 27 10 F9 "Remove AGS"  43 10 F9 "Patch Acrobat" 1 14 FC "Check For Updates" 24 14 FC "Exit"  X _Var_Box _Var_Hover
