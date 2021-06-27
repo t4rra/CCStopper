@@ -10,24 +10,24 @@ Kills Adobe's pesky background apps and more!
 - Updated the update checker
 - Updated the AGSKill script to create an empty AdobeGCClient folder w/ permissions denied
   - This ensures that CC cannot create a AdobeGCClient folder 
-
+###### Read previous changelogs from [the releases](https://github.com/E-Soda/CCStopper/releases)
 ## Menu Options
 
-**Kill all running Adobe Processes**
+**End Adobe Processes**
 
 Does what it says, all Adobe processes will be stopped.
 
-**Delete Adobe Genuine Software Integrity Service (AdobeGCClient)**
+**Remove AGS**
 
-It first stops AGSService, then deletes the AdobeGCClient folder.
+It first stops AGSService, then clears the AdobeGCClient folder and changes its permissions so that it cannot be modified by the system.
 
 **Patch Acrobat**
 
-Ask if the user wants to create a system restore point in case something goes wrong, then edit the registry to patch Acrobat. 
+Edits the registry to patch Acrobat. 
 
 **Check for updates**
 
-Checks if a newer version of the script is available
+Checks if a newer version of the script is available.
 
 ## Instructions
 
@@ -42,14 +42,14 @@ Checks if a newer version of the script is available
 <details>
 <summary>Q: It asks for administrator permissions????</summary>
 <br>
-A: This script needs those permissions to stop Adobe from running in the background and to delete the AdobeGCClient folder. You should be weary of all software/scripts that ask for administrator permissions (especially Github scripts like this one). Please don't run this script if you don't know what you're doing. The full source code of this script is available in this repository.</details>
+A: This script needs those permissions to stop Adobe from running in the background and to delete the AdobeGCClient folder. The full source code of this script is available in this repository for auditing.</details>
 
 <br>
 
 <details>
 <summary>Q: Is this a virus?</summary>
 <br>
-A: Windows might say that it is a virus, but that is a false positive. As stated above, don't run this script if you don't trust it/know what you're doing.
+A: Windows might say that it is a virus, but that is a false positive. As stated above, the full source code for this script is avaliable for auditing.
 </details>
 
 <br>
