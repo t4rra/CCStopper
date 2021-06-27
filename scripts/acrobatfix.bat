@@ -59,7 +59,7 @@ echo.
 echo                                      ---ESODA'S CREATIVE CLOUD STOPPER---
 echo.
 echo. Acrobat patching is complete. The system needs to restart for changes to apply.
-call Button 1 6 F9 "Restart" 14 6 F4 "Skip" X _Var_Box _Var_Hover
+call Button 1 6 F9 "Restart" 14 6 FC "Skip" X _Var_Box _Var_Hover
 GetInput /M %_Var_Box% /H %_Var_Hover% 
 
 If /I "%Errorlevel%"=="1" (

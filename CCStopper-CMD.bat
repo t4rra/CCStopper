@@ -6,7 +6,7 @@ title CCStopper by ESoda
 set local=1.1.0
 
 :internetCHK
-:: Check if comptuer can connect to githubusercontent.com, if not, skip directly to menu
+:: Check if comptuer can connect to google.com, if not, skip directly to menu
 
 echo Checking internet connection...
 echo.
@@ -22,7 +22,6 @@ if errorlevel 1 (
 	pause
 	goto menu
 )
-
 :: Source: https://github.com/nicamoq/batupdate
 :: Local is installed ver. remote is latest ver.
 set remote=%local%
@@ -54,7 +53,7 @@ echo Update found!  Current version: %local%. Latest version: %remote%.
 echo.
 echo It is recommended that you update the script. Would you like to go to the Github (1) or skip this update (2)?
 
-set /p updatechoice=Select an option: (1/2):
+set /p updatechoice= Select an option: (1/2):
 If /I "%updatechoice%"=="1" start https://github.com/E-Soda/CCStopper/releases
 
 goto menu
