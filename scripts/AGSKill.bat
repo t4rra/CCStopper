@@ -12,11 +12,13 @@ sc config "AGMService" start= disabled
 sc stop "AGMService"
 taskkill /IM "AGMService.exe" /F
 
+
 :: Checks if AGSService Exists
 IF EXIST "C:\program files (x86)\common files\adobe\AdobeGCClient" (
-	cd "C:\program files (x86)\common files\adobe"
 	rmdir /Q /S "C:\program files (x86)\common files\adobe\AdobeGCClient"
-
-) ELSE (
-	exit
 )
+
+cd "C:\program files (x86)\common files\adobe\"
+mkdir "C:\program files (x86)\common files\adobe\AdobeGCClient"
+icacls "C:\program files (x86)\common files\adobe\AdobeGCClient" /deny Administrators:(F)
+pause

@@ -4,8 +4,8 @@
 reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsNGLEnforced
 
 if %ERRORLEVEL% EQU 1 (
-echo The target registry key cannot be found, or it has been edited already. Cannot proceed with Acrobat fix. 
-pause) else (
+echo The target registry key cannot be found, or it has been edited already. Cannot proceed with Acrobat fix.
+) else (
 goto sysResPnt
 )
 
@@ -15,16 +15,22 @@ exit
 :: Asks for Administrator Permissions
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
 cd /d "%~dp0"
+cd ..
+Set "Path=%Path%;%CD%;%CD%\Plugins;"
+
 cls
-color 70
 echo.
 echo                                      ---ESODA'S CREATIVE CLOUD STOPPER---
 echo.
-echo This will edit the registry to patch Acrobat. It is HIGHLY recommended to create a system restore point in case something goes wrong. 
+echo. This will edit the registry to patch Acrobat.
+echo. It is HIGHLY recommended to create a system restore point in case something goes wrong. 
 :: Ask to create system restore point
-set /p restorePntConfirm=Create system restore point? (y/n): 
+call Button 1 6 F9 "Create Restore Point" 28 6 F4 "Skip" X _Var_Box _Var_Hover
+GetInput /M %_Var_Box% /H %_Var_Hover% 
+
 :: Every other input other than "n" will create a system restore point
-If /I "%restorePntConfirm%"=="n" (goto editReg) else (
+If /I "%Errorlevel%"=="2" (goto editReg) else (
+	cls
 	echo.
 	echo Creating system restore point, please be patient.
 	echo.
@@ -52,10 +58,11 @@ cls
 echo.
 echo                                      ---ESODA'S CREATIVE CLOUD STOPPER---
 echo.
-echo Acrobat patching is complete. The system needs to restart.
-set /p restartConfirm=Restart? (y/n): 
+echo. Acrobat patching is complete. The system needs to restart for changes to apply.
+call Button 1 6 F9 "Restart" 14 6 FC "Skip" X _Var_Box _Var_Hover
+GetInput /M %_Var_Box% /H %_Var_Hover% 
 
-If /I "%restartConfirm%"=="y" (
+If /I "%Errorlevel%"=="1" (
 	:: Sets a restart to happen in 60 seconds
 	cls
 	shutdown /r /t 60
