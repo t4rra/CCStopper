@@ -41,7 +41,7 @@ goto check-2
 
 :: Check-2 checks if the current version matches the remote.
 :check-2
-IF "%local%"=="%remote%" (goto noupdate) else (goto update)
+IF "%local%"=="%remote%" (goto menu) else (goto update)
 :: IF NOT "%local%"=="%remote%" goto update
 
 :update
@@ -78,38 +78,36 @@ echo. 1: Kill all running Adobe Processess
 echo. 2: Delete Adobe Genuine Software Integrity Service (AdobeGCClient)
 echo. 3: Patch Acrobat
 echo. 4: Check for updates
+echo. 5: Github Repo
 echo. 0: Quit
 echo.
 set /p menu=Select an option: (1/2/3/4/0): 
 
-If /I "%menu%"=="1" goto processkill
-If /I "%menu%"=="2" goto agskill
-If /I "%menu%"=="3" goto acrobatfix
+If /I "%menu%"=="1"  (
+	cls
+	Powershell.exe -executionpolicy remotesigned -File  .\scripts\ProcessKill.ps1
+	goto menu
+)
+If /I "%menu%"=="2" (
+	cls
+	.\scripts\AGSKill.bat
+	goto menu
+)
+If /I "%menu%"=="3" (
+	cls
+	.\scripts\acrobatfix.bat
+	goto menu
+)
 If /I "%menu%"=="4" goto updateCHK
+If /I "%menu%"=="5" (
+	cls
+	start https://github.com/E-Soda/CCStopper
+	goto menu
+)
 
-If /I "%menu%"=="0" goto quit
+If /I "%menu%"=="0" exit
 
 goto other
-
-:processkill
-cls
-Powershell.exe -executionpolicy remotesigned -File  .\scripts\ProcessKill.ps1
-goto menu
-
-:agskill
-cls
-
-.\scripts\AGSKill.bat
-goto menu
-
-:acrobatfix
-cls
-
-.\scripts\acrobatfix.bat
-goto menu
-
-:quit
-exit
 
 :other
 cls

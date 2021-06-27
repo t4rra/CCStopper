@@ -53,7 +53,7 @@ echo                                      ---ESODA'S CREATIVE CLOUD STOPPER---
 echo.
 echo. Update found!  Current version: %local%. Latest version: %remote%.
 echo.
-echo. It is recommended that you update the script. Would you like to go to the Github Repo (1) or skip this update (2)?
+echo. It is recommended that you update the script.
 
 call Button 1 7 F9 "Update" 13 7 F4 "Skip" X _Var_Box _Var_Hover
 If /I "%Errorlevel%"=="1" start https://github.com/E-Soda/CCStopper/releases
@@ -99,7 +99,11 @@ If /I "%Errorlevel%"=="3" (
 	goto menu
 )
 If /I "%Errorlevel%"=="4" goto updateCHK
-If /I "%Errorlevel%"=="5" start https://github.com/E-Soda/CCStopper
+If /I "%Errorlevel%"=="5" (
+	cls
+	start https://github.com/E-Soda/CCStopper
+	goto menu
+)
 If /I "%Errorlevel%"=="6" exit
 
 goto other
