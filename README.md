@@ -97,16 +97,16 @@ Fix: Run `set-executionpolicy remotesigned` in an admininstrator powershell wind
 ******
 **Issue:** Error message: `The target registry key cannot be found, or it has been edited already. Cannot proceed with Acrobat fix.` and there is no value in the registry.
 
-**Fix:** Create a DWORD value called `IsAMTEnforced` with a value of 1. You will not need to patch Acrobat with the script after this. 
+**Fix:** Create a DWORD value (in the registry) called `IsAMTEnforced` with a value of 1. You will not need to patch Acrobat with the script after this. 
 ******
 **Issue:** Resizing the command window breaks buttons.
 
-**Fix:** This is an issue with the GUI button plugin, please refrain from resizing the window. I've included a separate version of the script called `CCStopper-CMD` that keeps the keyboard input instead of the button input.
+**Fix:** This is an issue with the GUI button plugin, please refrain from resizing the window. An update will be released if there is a fix.
 ******
 ## Disclaimer/Notice
 
 **Disclaimer:** This script is in an early stage. There most likely will be bugs. I am not responsible for any damage or loss of data caused by this script. I am not affiliated with Adobe.
 
-**Notice:** Don't use this tool for piracy. It's illegal, and multi-billion dollar companies like Adobe _needs_ to profit off unreliable and overpriced software. Plus, Adobe will be sad :(
+**Notice:** Don't use this tool for piracy. It's illegal, and multi-billion dollar companies like Adobe _needs_ to profit off unreliable and overpriced software. Piracy actually _helps_ Adobe by increasing their market dominance. If you want to dethrone Adobe, use alternatives.
 
 ###### Made by esoda
