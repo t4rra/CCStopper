@@ -4,7 +4,7 @@ Set "Path=%Path%;%CD%;%CD%\Plugins;"
 
 :updateCHK
 :: Update Checker
-set local=1.1.0
+set local=1.1.1
 
 :internetCHK
 :: Check if comptuer can connect to google.com, if not, skip directly to menu

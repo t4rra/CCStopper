@@ -24,4 +24,4 @@ icacls "C:\program files (x86)\common files\adobe\AdobeGCClient" /deny Administr
 
 cd %~dp0
 cd ..
-start CCStopper.bat
+start cmd /k CCStopper.bat

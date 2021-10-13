@@ -1,5 +1,6 @@
 @echo off
 
+
 :: Check if target path exists
 reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsNGLEnforced
 
@@ -9,12 +10,18 @@ echo The target registry key cannot be found, or it has been edited already. Can
 goto sysResPnt
 )
 
+pause
+cd %~dp0
+cd ..
+start cmd /k CCStopper.bat
+
 exit
 
 :sysResPnt
 :: Asks for Administrator Permissions
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
 cd /d "%~dp0"
+
 cd ..
 Set "Path=%Path%;%CD%;%CD%\Plugins;"
 
