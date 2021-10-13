@@ -22,5 +22,6 @@ cd "C:\program files (x86)\common files\adobe\"
 mkdir "C:\program files (x86)\common files\adobe\AdobeGCClient"
 icacls "C:\program files (x86)\common files\adobe\AdobeGCClient" /deny Administrators:(F)
 
+cd %~dp0
 cd ..
 start CCStopper.bat
