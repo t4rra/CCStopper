@@ -2,14 +2,13 @@
 
 Kills Adobe's pesky background apps and more!
 
-**Current Version:** v1.1.0
+**Current Version:** v1.1.1
 
-## v1.1.0 Changelog
-- GUI Update
-  - Made with a plugin from Thebateam
-- Updated the update checker
-- Updated the AGSKill script to create an empty AdobeGCClient folder w/ permissions denied
-  - This ensures that CC cannot create a AdobeGCClient folder 
+## v1.1.1 Changelog
+- Fixed (#10) the launch of CCStopper.bat after executing
+    - Thanks to [ZEN1X](https://github.com/ZEN1X) for fixing this issue!
+- Fix bug where the main CCStopper script wouldn't work after using acrobatfix.bat
+- 
 ###### Read previous changelogs from [the releases](https://github.com/E-Soda/CCStopper/releases)
 ## Menu Options
 
