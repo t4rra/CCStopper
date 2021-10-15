@@ -1,3 +1,4 @@
+blank_issues_enabled: true
 contact_links:
   - name: Feature Requests
     url: https://github.com/E-Soda/CCStopper/discussions/new
