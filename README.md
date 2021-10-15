@@ -9,7 +9,7 @@ Kills Adobe's pesky background apps and more!
     - Thanks to [ZEN1X](https://github.com/ZEN1X) for fixing this issue!
 - Fix bug where the main CCStopper script wouldn't work after using acrobatfix.bat
 ### Hotfix 1
-- Changed local variable
+- Changed local version variable
 
 ###### Read previous changelogs from [the releases](https://github.com/E-Soda/CCStopper/releases)
 ## Menu Options
