@@ -1,20 +1,35 @@
 @echo off
 
 
+:: Check if IsNGLEnforced already replaced w/ IsAMTEnforced
+:patchCheck
+reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsAMTEnforced
+
+if %ERRORLEVEL% EQU 0 (
+	cls
+	echo.
+	echo Acrobat has already been patched.
+	pause
+	goto :exit
+) else (
+goto targetCheck
+)
+
 :: Check if target path exists
+:targetCheck
 reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsNGLEnforced
 
 if %ERRORLEVEL% EQU 1 (
-echo The target registry key cannot be found, or it has been edited already. Cannot proceed with Acrobat fix.
+echo The target registry key cannot be found. Cannot proceed with Acrobat fix.
+pause
 ) else (
 goto sysResPnt
 )
 
-pause
+:exit
 cd %~dp0
 cd ..
 start cmd /k CCStopper.bat
-
 exit
 
 :sysResPnt
@@ -27,7 +42,7 @@ Set "Path=%Path%;%CD%;%CD%\Plugins;"
 
 cls
 echo.
-echo                                      ---ESODA'S CREATIVE CLOUD STOPPER---
+echo                                      ---CCSTOPPER---
 echo.
 echo. This will edit the registry to patch Acrobat.
 echo. It is HIGHLY recommended to create a system restore point in case something goes wrong. 
@@ -63,10 +78,10 @@ pause
 :restartAsk
 cls
 echo.
-echo                                      ---ESODA'S CREATIVE CLOUD STOPPER---
+echo                                      ---CCSTOPPER---
 echo.
 echo. Acrobat patching is complete. The system needs to restart for changes to apply.
-call Button 1 6 F9 "Restart" 14 6 FC "Skip" X _Var_Box _Var_Hover
+call Button 1 6 F9 "Restart (in 60 seconds)" 14 6 FC "Skip" X _Var_Box _Var_Hover
 GetInput /M %_Var_Box% /H %_Var_Hover% 
 
 If /I "%Errorlevel%"=="1" (
@@ -79,7 +94,7 @@ If /I "%Errorlevel%"=="1" (
 	:: Reminds user to restart, then pauses the script
 	cls
 	echo.
-	echo                                      ---ESODA'S CREATIVE CLOUD STOPPER---
+	echo                                      ---CCSTOPPER---
 	echo.
 	echo You will need to manually restart for changes to take place.
 	pause
