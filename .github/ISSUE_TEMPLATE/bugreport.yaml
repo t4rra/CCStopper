@@ -1,0 +1,17 @@
+name: Bug Report
+description: Problems with CCStopper?
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please make sure that you are on the latest version (unless this is part of the issue).
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Please include your expected outcome and actual outcome.
+      placeholder: "CCStopper caused the heat death of the universe!"
+    validations:
+      required: true

@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Feature Requests
+    url: https://github.com/E-Soda/CCStopper/discussions/new
+    about: Please open up a new discussion and catagorize it as a feature request.
+  - name: Questions/Support
+    url: https://github.com/E-Soda/CCStopper/discussions/new
+    about: Please open up a new discussion and catagorize it as a Q/A.
