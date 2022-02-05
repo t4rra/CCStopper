@@ -1,18 +1,34 @@
-# CCStopper
+# CCStopper <!-- omit in toc --> 
 
 Kills Adobe's pesky background apps and more!
 
-**Current Version:** v1.1.2
+THIS IS THE DEVELOPMENT BRANCH OF CCSTOPPER. DON'T RUN ANYTHING UNLESS YOU KNOW *EXACTLY* WHAT YOU'RE DOING. If you have the time (and know *exactly* what you're doing), then I encourage you to contribute if possible!
 
-## v1.1.2 Changelog
+## Table of Contents <!-- omit in toc -->
+- [v1.2.0-dev Changelog/ToDo](#v120-dev-changelogtodo)
+- [Instructions](#instructions)
+- [Menu Options](#menu-options)
+- [FAQ](#faq)
+- [Known Issues](#known-issues)
+- [Disclaimer/Notice](#disclaimernotice)
 
-- Removed Update Checker (and corresponding documentation)
-  - (The way CCStopper works will remain unchanged until it no longer works. Plus, I found the update checker annoying.)
-- Attempt to fix the confirmation issue with stopping background processes
-- Added a check to see if Acrobat was patched already for acrobatfix script
-- Documentation updates
+**Current Version (stable):** v1.1.2
 
-###### Read previous changelogs from [the releases](https://github.com/E-Soda/CCStopper/releases)
+## v1.2.0-dev Changelog/ToDo
+
+- [x] UI Change
+  - Removed external plugins for UI (thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for inspiration)
+- [ ] Added genP Patch Retention
+  - [ ] Adobe apps installation path (user selects)
+    - [ ] Save path to a paths.ini file
+    - [ ] Check if paths.ini exists, and if so, read path from it
+    - [ ] Selector for locking and unlocking permissions for the files
+- [ ] Convert ProcessKill.ps1 into a batch script (eventually so that everything can be done in one file instead of individual modules)
+- [ ] Documentation updates
+  
+  Next Update: Adding the ability to run in background in the next update!
+
+###### Read previous changelogs from [the releases](https://github.com/E-Soda/CCStopper/releases) <!-- omit in toc -->
 
 ## Instructions
 
@@ -26,23 +42,31 @@ Kills Adobe's pesky background apps and more!
 ## Menu Options
 
 <details>
-<summary>End Adobe Processes</summary>
+<summary>End Adobe Processes [1]</summary>
 <br>
 Does what it says, all Adobe processes will be stopped.
 </details>
 
 <details>
-<summary>Remove AGS</summary>
+<summary>Remove Genuine Checker [2]</summary>
 <br>
 Clears the AdobeGCClient (genuine checker) folder and changes its permissions so that it cannot be modified by applications.
 </details>
 
 <details>
-<summary>Patch Acrobat</summary>
+<summary>Patch Acrobat [3]</summary>
 <br>
 Run "Remove AGS" before proceeding. 
 
 This function edits the registry to patch Acrobat. Will ask if you want to create a restore point in the case that registry patching fails catastrophically. Automates <a href="https://www.reddit.com/r/GenP/wiki/redditgenpguides#wiki_guide_.2310_-_adobe_acrobat_pro_dc_.28standalone.2Fcc-less.29">this</a> guide.
+</details>
+
+<details>
+<summary>Patch Retention Fix [4]</summary>
+<br>
+Adobe likes to mess with patched files, and this module prevents anything (even genP) from messing with the patched files.
+
+NOTE: Make sure to patch files before running this command, or else you'll have to reset the permissions.
 </details>
 
 ## FAQ
@@ -106,21 +130,13 @@ Fix: Run `set-executionpolicy remotesigned` in an admininstrator powershell wind
 
 **Issue:** Error message: `The argument '.\scripts\ProcessKill.ps1' to the -File parameter does not exist. Provide the path to an existing file as an argument to the -File parameter.` and no apps are closed.
 
-**Fix:** Update to the latest version of the script. There might be an additional prompt when you end Adobe processes, enter `a` if prompted.
+**Fix:** Update to the latest version of the script.
 
 ---
 
 **Issue:** Error message: `The target registry key cannot be found, or it has been edited already. Cannot proceed with Acrobat fix.` and there is no value in the registry.
 
 **Fix:** Create a DWORD value (in the registry) called `IsAMTEnforced` with a value of 1. You will not need to patch Acrobat with the script after this.
-
----
-
-**Issue:** Resizing the command window breaks buttons.
-
-**Fix:** This is an issue with the GUI button plugin, please refrain from resizing the window. An update will be released if there is a fix.
-
----
 
 ## Disclaimer/Notice
 

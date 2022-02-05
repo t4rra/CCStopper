@@ -1,5 +1,6 @@
 @echo off
-
+title CCStopper - Acrobat Fix
+mode con: cols=100 lines=36
 
 :: Check if IsNGLEnforced already replaced w/ IsAMTEnforced
 :patchCheck
@@ -10,7 +11,7 @@ if %ERRORLEVEL% EQU 0 (
 	echo.
 	echo Acrobat has already been patched.
 	pause
-	goto :exit
+	exit
 ) else (
 goto targetCheck
 )
@@ -20,10 +21,12 @@ goto targetCheck
 reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsNGLEnforced
 
 if %ERRORLEVEL% EQU 1 (
-echo The target registry key cannot be found. Cannot proceed with Acrobat fix.
-pause
+	cls
+	echo The target registry key cannot be found. Cannot proceed with Acrobat fix.
+	pause
+	exit
 ) else (
-goto sysResPnt
+goto mainScript
 )
 
 :exit
@@ -32,36 +35,52 @@ cd ..
 start cmd /k CCStopper.bat
 exit
 
-:sysResPnt
+:mainScript
 :: Asks for Administrator Permissions
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
 cd /d "%~dp0"
 
-cd ..
-Set "Path=%Path%;%CD%;%CD%\Plugins;"
+cls
+:: Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+echo:
+echo:
+echo                   _______________________________________________________________
+echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^|
+echo                  ^|                            CCSTOPPER                          ^|
+echo                  ^|                         Made by eaaasun                       ^|
+echo                  ^|                        AcrobatFix Module                      ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|                  THIS WILL EDIT THE REGISTRY!                 ^|
+echo                  ^|                                                               ^|
+echo                  ^|      It is HIGHLY recommended to create a system restore      ^|
+echo                  ^|      point in case something goes wrong.                      ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [1] Make system restore point                            ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [2] Proceed without creating restore point               ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [3] Exit                                                 ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|_______________________________________________________________^|
+echo:          
+choice /C:12 /N /M ">                                            Select [1,2]: "
+
+if errorlevel  2 goto:editReg
+
 
 cls
-echo.
-echo                                      ---CCSTOPPER---
-echo.
-echo. This will edit the registry to patch Acrobat.
-echo. It is HIGHLY recommended to create a system restore point in case something goes wrong. 
-:: Ask to create system restore point
-call Button 1 6 F9 "Create Restore Point" 28 6 F4 "Skip" X _Var_Box _Var_Hover
-GetInput /M %_Var_Box% /H %_Var_Hover% 
-
-:: Every other input other than "n" will create a system restore point
-If /I "%Errorlevel%"=="2" (goto editReg) else (
-	cls
-	echo.
-	echo Creating system restore point, please be patient.
-	echo.
-	Wmic.exe /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Acrobat Fix Script", 100, 12
-	goto editReg
-	)
-	pause
-)
-
+echo beans
+pause
+exit
+echo/
+echo Creating system restore point, please be patient.
+Wmic.exe /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Acrobat Fix Script", 100, 12
+goto editReg
 
 
 :editReg
@@ -71,31 +90,39 @@ reg add "HKLM\software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsAMTEn
 
 reg delete "HKLM\software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsNGLEnforced /f /reg:64
 
-echo editreg success!
 goto restartAsk
 pause
 
 :restartAsk
 cls
-echo.
-echo                                      ---CCSTOPPER---
-echo.
-echo. Acrobat patching is complete. The system needs to restart for changes to apply.
-call Button 1 6 F9 "Restart (in 60 seconds)" 14 6 FC "Skip" X _Var_Box _Var_Hover
-GetInput /M %_Var_Box% /H %_Var_Hover% 
+:: Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+echo:
+echo:
+echo                   _______________________________________________________________
+echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^|
+echo                  ^|                            CCSTOPPER                          ^|
+echo                  ^|                         Made by eaaasun                       ^|
+echo                  ^|                        AcrobatFix Module                      ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|                   Acrobat patching complete!                  ^|
+echo                  ^|                                                               ^|
+echo                  ^|      The system needs to restart for changes to apply.        ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [1] Restart in 60 seconds.                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [2] Skip (You will need to manually restart later)       ^|
+echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^| 
+echo                  ^|_______________________________________________________________^|
+echo:          
+choice /C:12 /N /M ">                                            Select [1,2]: "
 
-If /I "%Errorlevel%"=="1" (
-	:: Sets a restart to happen in 60 seconds
+if errorlevel  1 (
 	cls
 	shutdown /r /t 60
-
-	
-	) else (
-	:: Reminds user to restart, then pauses the script
-	cls
-	echo.
-	echo                                      ---CCSTOPPER---
-	echo.
-	echo You will need to manually restart for changes to take place.
-	pause
 )
+
+if errorlevel  2 exit

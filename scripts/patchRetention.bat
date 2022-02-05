@@ -1,7 +1,17 @@
+@setlocal enableextensions enabledelayedexpansion
 @echo off
-title CCStopper
+title CCStopper - Patch Retention
 Set "Path=%Path%;%CD%;%CD%\Plugins;"
 mode con: cols=100 lines=36
+
+:filePathSet
+
+:: Asks for Administrator Permissions
+%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
+cd /d "%~dp0"
+
+:: set adobe apps installation path
+set paths="D:\Code\CCStopper\README.md"
 
 :: Main script
 :menu
@@ -14,50 +24,34 @@ echo                  ^|                                                        
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
 echo                  ^|                         Made by eaaasun                       ^|
-echo                  ^|                         ver. 1.2.0-dev                        ^|
+echo                  ^|                   genP Patch Retention Module                 ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|                   MAKE SURE TO SAVE YOUR FILES!               ^|
+echo                  ^|                      PATCH WITH GENP FIRST!                   ^|
 echo                  ^|                                                               ^|
-echo                  ^|      Stopping Adobe processess will also close apps           ^|
-echo                  ^|      like Photohsop/Premiere.                                 ^|
+echo                  ^|      This script prevents *any* program (including genP)      ^|
+echo                  ^|      from messing with the patched files or files that        ^|
+echo                  ^|      need to be patched.                                      ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [1] Stop Adobe Processess                                ^|
+echo                  ^|                                            ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [2] Remove Genuine Checker                               ^|
+echo                  ^|      [1] Patch Apps                                           ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [3] Patch Acrobat                                        ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [4] Patch Retention Fix                                  ^|
+echo                  ^|      [2] Reset patch (won't affect genP patch)                ^|
 echo                  ^|                                                               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [5] Github Repo (Detailed instructions there)            ^|
+echo                  ^|      [3] Set app installation path                            ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [6] Exit                                                 ^|
+echo                  ^|      [4] Back                                                 ^|
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|
 echo:          
-choice /C:123456 /N /M ">                                     Select [1,2,3,4,5,6,7]: "
+choice /C:1234 /N /M ">                               Select [1,2,3,4]: "
 
-if errorlevel  6 exit
-if errorlevel  5 (
-	cls
-	start https://github.com/eaaasun/CCStopper
-	goto menu
-
-)
-if errorlevel  4 (
-	cls
-	.\scripts\patchRetention.bat
-	goto menu
-)
-if errorlevel  3 (
-	cls
-	.\scripts\acrobatfix.bat
-	goto menu
-)
+if errorlevel  4 exit
+if errorlevel  3 goto installPath
 if errorlevel  2 (
 	cls
 	.\scripts\AGSKill.bat
@@ -68,3 +62,27 @@ if errorlevel  1 (
 	Powershell.exe -executionpolicy remotesigned -File  .\scripts\ProcessKill.ps1
 	goto menu
 )
+
+
+:: Deny permissions to file
+@REM icacls %paths% /deny Administrators:(F)
+
+cd %~dp0
+cd ..
+start cmd /k CCStopper.bat
+
+:: test file picker
+:installPath
+setlocal
+
+set "psCommand="(new-object -COM 'Shell.Application')^
+.BrowseForFolder(0,'Choose folder where Adobe apps are installed.',0,0).self.path""
+
+for /f "usebackq delims=" %%I in (`powershell %psCommand%`) do set "folder=%%I"
+
+setlocal enabledelayedexpansion
+:: !folder! is the path to the folder you chose
+echo paths=!folder!>.\paths.ini
+echo Path set successfully!
+pause
+endlocal

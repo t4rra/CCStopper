@@ -10,8 +10,6 @@ if ($myWindowsPrincipal.IsInRole($adminRole))
 
    $Host.UI.RawUI.WindowTitle = $myInvocation.MyCommand.Definition + "(Elevated)"
 
-   $Host.UI.RawUI.BackgroundColor = "DarkBlue"
-
    clear-host
 
    }
