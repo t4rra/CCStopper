@@ -7,6 +7,10 @@ mode con: cols=100 lines=36
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
 cd /d "%~dp0"
 
+:: checks if patchRetentionSettings folder exists
+if not exist ".\patchRetentionSettings" (
+	mkdir ".\patchRetentionSettings"
+)
 
 :: Sets the cc app year to 2022
 if not exist ".\pathRetentionSettiongs\appVer.txt" (
@@ -157,14 +161,24 @@ echo:
 choice /C:1234 /N /M ">                                       Select [1,2,3,4]: "
 
 if errorlevel  4 (
-	set CCAppYear=2027
-	echo AppYear set to %CCAppYear%.
-	pause
+	set CCAppYear=2019
+	goto writeFile
 ) 
-if errorlevel  3 set CCAppYear=2020
-if errorlevel  2 set CCAppYear=2021
-if errorlevel  1 set CCAppYear=2029
+if errorlevel  3 (
+	set CCAppYear=2020
+	goto writeFile
+)
+if errorlevel  2 (
+	set CCAppYear=2021
+	goto writeFile
+)
+if errorlevel  1 (
+	set CCAppYear=2022
+	goto writeFile
+)
 
+:writeFile
 echo %CCAppYear%>.\patchRetentionSettings\appVer.txt
+echo App version set successfully!
 pause
 goto menu
