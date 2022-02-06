@@ -14,7 +14,7 @@ if not exist ".\patchRetentionSettings" (
 
 :: Sets the cc app year to 2022
 if not exist ".\pathRetentionSettiongs\appVer.txt" (
-	set CCAppYear=2077
+	set CCAppYear=2022
 )
 else (
 	set /p "CCAppYear="<".\patchRetentionSettings\appVer.txt"
@@ -101,7 +101,7 @@ if errorlevel  2 (
 	:: reset patch
 )
 if errorlevel  1 (
-	
+	:: patch apps
 )
 
 
