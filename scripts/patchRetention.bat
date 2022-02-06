@@ -67,8 +67,8 @@ echo                  ^|                                                        
 echo                  ^|                      PATCH WITH GENP FIRST!                   ^|
 echo                  ^|                                                               ^|
 echo                  ^|      This script prevents *any* program (including genP)      ^|
-echo                  ^|      from messing with the patched files or files that        ^|
-echo                  ^|      need to be patched.                                      ^|
+echo                  ^|      from touching the patched files or files that need       ^|
+echo                  ^|      to be patched.                                           ^|
 echo                  ^|                                                               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|

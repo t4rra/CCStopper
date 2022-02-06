@@ -17,7 +17,7 @@ echo                  ^|                         Made by eaaasun                
 echo                  ^|                         ver. 1.2.0-dev                        ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|                   MAKE SURE TO SAVE YOUR FILES!               ^|
+echo                  ^|                         SAVE YOUR FILES!                      ^|
 echo                  ^|                                                               ^|
 echo                  ^|      Stopping Adobe processess will also close apps           ^|
 echo                  ^|      like Photohsop/Premiere.                                 ^|
