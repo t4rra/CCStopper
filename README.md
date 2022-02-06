@@ -16,17 +16,21 @@ THIS IS THE DEVELOPMENT BRANCH OF CCSTOPPER. DON'T RUN ANYTHING UNLESS YOU KNOW 
 
 ## v1.2.0-dev Changelog/ToDo
 
-- [x] UI Change
-  - Removed external plugins for UI (thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for inspiration)
+- [ ] UI Change
+  - [ ] Add success message to modules 
+  - [x] Replace button plugin (thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for UI ~~ripoff~~ inspiration)
 - [ ] Added genP Patch Retention
   - [ ] Adobe apps installation path (user selects)
-    - [ ] Save path to a paths.ini file
-    - [ ] Check if paths.ini exists, and if so, read path from it
+    - [x] Save path to a paths.txt file
+    - [x] Check if paths.ini exists, and if so, read path from it
     - [ ] Selector for locking and unlocking permissions for the files
+      - [ ] Lock/unlock permissions for file
+  - [ ] Convert all txt files generated into an .ini file (potentially in next update)
+  - Limitations: only works with apps that are in the same year (can change year if older/other ver. is installed)
 - [ ] Convert ProcessKill.ps1 into a batch script (eventually so that everything can be done in one file instead of individual modules)
 - [ ] Documentation updates
   
-  Next Update: Adding the ability to run in background in the next update!
+  Next Update: Adding the ability to run in background; Individual app selector for year/lock/unlock
 
 ###### Read previous changelogs from [the releases](https://github.com/E-Soda/CCStopper/releases) <!-- omit in toc -->
 
