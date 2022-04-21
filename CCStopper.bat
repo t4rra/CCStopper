@@ -1,51 +1,70 @@
 @echo off
 title CCStopper
 Set "Path=%Path%;%CD%;%CD%\Plugins;"
+mode con: cols=100 lines=36
 
 :: Main script
 :menu
 cls
+:: Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+echo:
+echo:
+echo                   _______________________________________________________________
+echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^|
+echo                  ^|                            CCSTOPPER                          ^|
+echo                  ^|                         Made by eaaasun                       ^|
+echo                  ^|                           ver. 1.1.3                          ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|                         SAVE YOUR FILES!                      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      Stopping Adobe processess will also close apps           ^|
+echo                  ^|      like Photohsop/Premiere.                                 ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [1] Stop Adobe Processess                                ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [2] Remove Genuine Checker                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [3] Patch Acrobat                                        ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [4] Credit Card Prompt Fix                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [5] Github Repo (Detailed instructions there)            ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [6] Exit                                                 ^|
+echo                  ^|                                                               ^|
+echo                  ^|_______________________________________________________________^|
+echo:          
+choice /C:123456 /N /M ">                                     Select [1,2,3,4,5,6]: "
 
-
-
-echo.
-echo                                      ---CCSTOPPER---
-echo.
-echo. Get rid of Adobe's pesky background apps and more!
-echo. Read the instructions first! They can be found in the Github repo.
-echo.
-echo. Made by easun (eaaasun on Github)
-echo.
-echo. MAKE SURE TO SAVE YOUR FILES! Ending Adobe processes will also close apps like Photoshop, After Effects, etc. 
-echo.
-
-call Button 1 10 F9 "End Adobe Processes" 26 10 F9 "Remove AGS"  42 10 F9 "Patch Acrobat" 1 14 FC "Github Repo" 18 14 FC "Exit"  X _Var_Box _Var_Hover
-GetInput /M %_Var_Box% /H %_Var_Hover% 
-
-
-If /I "%Errorlevel%"=="1" (
+if errorlevel  6 exit
+if errorlevel  5 (
 	cls
-	Powershell.exe -executionpolicy remotesigned -File  .\scripts\ProcessKill.ps1
+	start https://github.com/eaaasun/CCStopper
+	goto menu
+
+)
+if errorlevel  4 (
+	cls
+	.\scripts\creditCardStop.bat
 	goto menu
 )
-If /I "%Errorlevel%"=="2" (
-	cls
-	.\scripts\AGSKill.bat
-	goto menu
-)
-If /I "%Errorlevel%"=="3" (
+if errorlevel  3 (
 	cls
 	.\scripts\acrobatfix.bat
 	goto menu
 )
-If /I "%Errorlevel%"=="4" (
+if errorlevel  2 (
 	cls
-	start https://github.com/eaaasun/CCStopper
+	.\scripts\AGSKill.bat
 	goto menu
 )
-If /I "%Errorlevel%"=="5" exit
-
-goto other
-
-:other
-goto menu
+if errorlevel  1 (
+	cls
+	Powershell.exe -executionpolicy remotesigned -File  .\scripts\ProcessKill.ps1
+	goto menu
+)
