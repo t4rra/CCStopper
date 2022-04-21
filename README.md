@@ -6,11 +6,15 @@ Kills Adobe's pesky background apps and more!
 
 ## v1.1.2 Changelog
 
-- Removed Update Checker (and corresponding documentation)
-  - (The way CCStopper works will remain unchanged until it no longer works. Plus, I found the update checker annoying.)
-- Attempt to fix the confirmation issue with stopping background processes
-- Added a check to see if Acrobat was patched already for acrobatfix script
-- Documentation updates
+- UI Change
+  - Replace button plugin (thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for UI ~~ripoff~~ inspiration)
+- Added Credit Card Stop Module
+  - Creates a firewall rule that blocks `Adobe Desktop Service.exe` from accessing the internet
+  - Blocking ADS bypasses the credit card prompt (confirmed working as of Apr. 4, 2022; subject to change in the future)
+- Documentation Update
+  - Changed some things, added a "Future Features" section. If you have batch scripting knowledge, please take a look and see what you can do.
+
+###### Read previous changelogs from [the releases](https://github.com/E-Soda/CCStopper/releases) <!-- omit in toc -->
 
 ###### Read previous changelogs from [the releases](https://github.com/E-Soda/CCStopper/releases)
 
@@ -83,7 +87,7 @@ A: It is not currently available for MacOS, and I don't intend on porting it to 
 <details>
 <summary>Q: Will more features be added?</summary>
 <br>
-A: Yes! If you have any suggestions, please open an issue.
+A: Yes! They are all in the Future Features section below. Any help with the future features is greatly appreciated!
 </details>
 <br>
 
@@ -94,6 +98,30 @@ A: No, it won't. If you do have Adobe apps (Photoshop, After Effects, etc.) open
 </details>
 <br>
 
+<details>
+<summary>Q: Is there any way to support the project?</summary>
+<br>
+A: Please donate your time! If you have batch scripting knowledge, please look through the Future Features section below and see what you can contribute. Financial donations are not accepted at the moment.
+</details>
+<br>
+
+## Future Features
+> These are features that I'd like to implement in the future. If you can help, please open a thread in the discussions tab, under the "Development" category, or if you have code already, open a pull request! 
+
+- [ ] Patch Retention
+  - Locks the patched file from genP so that nothing can modify/delete it
+  - I'm stuck at setting a list of filepaths that the script can read off and patch.
+- [ ] Revamp the ProcessKill script
+  - Currently, the script stops any process that mentions `Adobe` in its `Company Name` attribute. It is a "'shotgun' approach" as stated by [the creator](https://gist.github.com/carcheky/530fd85ffff6719486038542a8b5b997#gistcomment-3586740) of the command. It'll kill any CC app (Photoshop, Premiere, etc.) running, destroying unsaved work.
+  - Getting individual processes and blocking them is unfeasible, as Adobe changes that every time they sneeze
+- [ ] Running in background
+  - tbh i have no idea where to even start with this
+  - Goal: have an option to run the ProcessKill script every set interval 
+- [ ] Converting ProcessKill module to a batch script
+  - Done by running powershell commands from a batch script
+  - i'm just too lazy to do this lmao
+- [ ] Backup documentation/scripts
+  - Host on my own website?
 ## Known Issues
 
 ---
