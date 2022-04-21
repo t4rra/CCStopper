@@ -1,10 +1,18 @@
-# CCStopper
+# CCStopper <!-- omit in toc --> 
 
 Kills Adobe's pesky background apps and more!
+## Table of Contents <!-- omit in toc -->
+- [v1.1.3 Changelog](#v113-changelog)
+- [Instructions](#instructions)
+- [Menu Options](#menu-options)
+- [FAQ](#faq)
+- [Future Features](#future-features)
+- [Known Issues](#known-issues)
+- [Disclaimer/Notice](#disclaimernotice)
 
-**Current Version:** v1.1.2
+**Current Version (stable):** v1.1.3
 
-## v1.1.2 Changelog
+## v1.1.3 Changelog
 
 - UI Change
   - Replace button plugin (thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for UI ~~ripoff~~ inspiration)
@@ -16,37 +24,44 @@ Kills Adobe's pesky background apps and more!
 
 ###### Read previous changelogs from [the releases](https://github.com/E-Soda/CCStopper/releases) <!-- omit in toc -->
 
-###### Read previous changelogs from [the releases](https://github.com/E-Soda/CCStopper/releases)
 
 ## Instructions
 
 1. Get the latest [release](https://github.com/E-Soda/CCStopper/releases)
-2. Extract the ZIP file (This is important, CCStopper will not work without the additional scripts and plugins in the additional folders)
+2. Extract the ZIP file (This is important, CCStopper will not work without the additional scripts in the additional folders)
 3. Run CCStopper.bat
 4. Select an option
-5. Profit
+5. Prevent Profit (for Adobe)
 
 
 ## Menu Options
 
 <details>
-<summary>End Adobe Processes</summary>
+<summary>End Adobe Processes [1]</summary>
 <br>
 Does what it says, all Adobe processes will be stopped.
 </details>
 
 <details>
-<summary>Remove AGS</summary>
+<summary>Remove Genuine Checker [2]</summary>
 <br>
 Clears the AdobeGCClient (genuine checker) folder and changes its permissions so that it cannot be modified by applications.
 </details>
 
 <details>
-<summary>Patch Acrobat</summary>
+<summary>Patch Acrobat [3]</summary>
 <br>
 Run "Remove AGS" before proceeding. 
 
 This function edits the registry to patch Acrobat. Will ask if you want to create a restore point in the case that registry patching fails catastrophically. Automates <a href="https://www.reddit.com/r/GenP/wiki/redditgenpguides#wiki_guide_.2310_-_adobe_acrobat_pro_dc_.28standalone.2Fcc-less.29">this</a> guide.
+</details>
+
+<details>
+<summary>Credit Card Prompt Fix [4]</summary>
+<br>
+Adds a firewall rule to block the credit card prompt from popping up when signing up for a trial.
+
+Has an option to delete the firewall rule just in case.
 </details>
 
 ## FAQ
@@ -54,7 +69,7 @@ This function edits the registry to patch Acrobat. Will ask if you want to creat
 <details>
 <summary>Q: It asks for administrator permissions?</summary>
 <br>
-A: This script needs those permissions to stop Adobe from running in the background and to delete the AdobeGCClient folder. The full source code of this script is available in this repository for auditing.</details>
+A: This script needs those permissions to modify files and settings. The full source code of this script is available in this repository for auditing.</details>
 
 <br>
 
@@ -123,8 +138,7 @@ A: Please donate your time! If you have batch scripting knowledge, please look t
 - [ ] Backup documentation/scripts
   - Host on my own website?
 ## Known Issues
-
----
+> There are more issues in the [issues](https://github.com/eaaasun/CCStopper/issues) section; these are just the most common ones.
 
 **Issue:** Error message: `the execution of scripts is disabled on this system. Please see "get-help about_signing" for more details.` or pushing the "Remove AGS" button gives no results.
 
@@ -134,7 +148,7 @@ Fix: Run `set-executionpolicy remotesigned` in an admininstrator powershell wind
 
 **Issue:** Error message: `The argument '.\scripts\ProcessKill.ps1' to the -File parameter does not exist. Provide the path to an existing file as an argument to the -File parameter.` and no apps are closed.
 
-**Fix:** Update to the latest version of the script. There might be an additional prompt when you end Adobe processes, enter `a` if prompted.
+**Fix:** Update to the latest version of the script.
 
 ---
 
@@ -142,17 +156,9 @@ Fix: Run `set-executionpolicy remotesigned` in an admininstrator powershell wind
 
 **Fix:** Create a DWORD value (in the registry) called `IsAMTEnforced` with a value of 1. You will not need to patch Acrobat with the script after this.
 
----
-
-**Issue:** Resizing the command window breaks buttons.
-
-**Fix:** This is an issue with the GUI button plugin, please refrain from resizing the window. An update will be released if there is a fix.
-
----
-
 ## Disclaimer/Notice
 
-**Disclaimer:** This script is in an early stage, and offered as-is. There will be bugs. I am not responsible for any damage or loss of data caused by this script. I am not affiliated with Adobe.
+**Disclaimer:** This script is in an early stage, and offered as-is. There will be bugs. I am not responsible for any damage, loss of data, or thermonuclear wars caused by these scripts. I am not affiliated with Adobe.
 
 **Notice:** Don't use this tool for piracy. It's illegal, and multi-billion dollar companies like Adobe _needs_ to profit off unreliable and overpriced software. Piracy _helps_ Adobe by increasing their market dominance. If you want to dethrone Adobe, use [alternatives](https://ass.easun.me).
 
