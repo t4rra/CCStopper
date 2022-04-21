@@ -14,7 +14,7 @@ echo                  ^|                                                        
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
 echo                  ^|                         Made by eaaasun                       ^|
-echo                  ^|                         ver. 1.2.0-dev                        ^|
+echo                  ^|                           ver. 1.1.3                          ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|                         SAVE YOUR FILES!                      ^|
@@ -29,7 +29,7 @@ echo                  ^|      [2] Remove Genuine Checker                        
 echo                  ^|                                                               ^|
 echo                  ^|      [3] Patch Acrobat                                        ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [4] Patch Retention Fix                                  ^|
+echo                  ^|      [4] Credit Card Prompt Fix                               ^|
 echo                  ^|                                                               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
@@ -39,7 +39,7 @@ echo                  ^|      [6] Exit                                          
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|
 echo:          
-choice /C:123456 /N /M ">                                     Select [1,2,3,4,5,6,7]: "
+choice /C:123456 /N /M ">                                     Select [1,2,3,4,5,6]: "
 
 if errorlevel  6 exit
 if errorlevel  5 (
@@ -50,7 +50,7 @@ if errorlevel  5 (
 )
 if errorlevel  4 (
 	cls
-	.\scripts\patchRetention.bat
+	.\scripts\creditCardStop.bat
 	goto menu
 )
 if errorlevel  3 (

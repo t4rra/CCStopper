@@ -1,46 +1,35 @@
 # CCStopper <!-- omit in toc --> 
 
 Kills Adobe's pesky background apps and more!
-
-THIS IS THE DEVELOPMENT BRANCH OF CCSTOPPER. DON'T RUN ANYTHING UNLESS YOU KNOW *EXACTLY* WHAT YOU'RE DOING. If you have the time (and know *exactly* what you're doing), then I encourage you to contribute if possible!
-
 ## Table of Contents <!-- omit in toc -->
-- [v1.2.0-dev Changelog/ToDo](#v120-dev-changelogtodo)
+- [v1.1.3 Changelog](#v113-changelog)
 - [Instructions](#instructions)
 - [Menu Options](#menu-options)
 - [FAQ](#faq)
+- [Future Features](#future-features)
 - [Known Issues](#known-issues)
 - [Disclaimer/Notice](#disclaimernotice)
 
-**Current Version (stable):** v1.1.2
+**Current Version (stable):** v1.1.3
 
-## v1.2.0-dev Changelog/ToDo
+## v1.1.3 Changelog
 
-- [ ] UI Change
-  - [ ] Add success message to modules 
-  - [x] Replace button plugin (thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for UI ~~ripoff~~ inspiration)
-- [ ] Added genP Patch Retention
-  - [ ] Adobe apps installation path (user selects)
-    - [x] Save path to a paths.txt file
-    - [x] Check if paths.ini exists, and if so, read path from it
-    - [ ] Selector for locking and unlocking permissions for the files
-      - [ ] Lock/unlock permissions for file
-  - [ ] Convert all txt files generated into an .ini file (potentially in next update)
-  - Limitations: only works with apps that are in the same year (can change year if older/other ver. is installed)
-- [ ] Convert ProcessKill.ps1 into a batch script (eventually so that everything can be done in one file instead of individual modules)
-- [ ] Documentation updates
-  
-  Next Update: Adding the ability to run in background; Individual app selector for year/lock/unlock
+- UI Change
+  - Replace button plugin (thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for UI ~~ripoff~~ inspiration)
+- Added Credit Card Stop Module
+  - Creates a firewall rule that blocks `Adobe Desktop Service.exe` from accessing the internet
+  - Blocking ADS bypasses the credit card prompt (confirmed working as of Apr. 4, 2022; subject to change in the future)
 
 ###### Read previous changelogs from [the releases](https://github.com/E-Soda/CCStopper/releases) <!-- omit in toc -->
+
 
 ## Instructions
 
 1. Get the latest [release](https://github.com/E-Soda/CCStopper/releases)
-2. Extract the ZIP file (This is important, CCStopper will not work without the additional scripts and plugins in the additional folders)
+2. Extract the ZIP file (This is important, CCStopper will not work without the additional scripts in the additional folders)
 3. Run CCStopper.bat
 4. Select an option
-5. Profit
+5. Prevent Profit (for Adobe)
 
 
 ## Menu Options
@@ -66,11 +55,11 @@ This function edits the registry to patch Acrobat. Will ask if you want to creat
 </details>
 
 <details>
-<summary>Patch Retention Fix [4]</summary>
+<summary>Credit Card Prompt Fix [4]</summary>
 <br>
-Adobe likes to mess with patched files, and this module prevents anything (even genP) from messing with the patched files.
+Adds a firewall rule to block the credit card prompt from popping up when signing up for a trial.
 
-NOTE: Make sure to patch files before running this command, or else you'll have to reset the permissions.
+Has an option to delete the firewall rule just in case.
 </details>
 
 ## FAQ
@@ -78,7 +67,7 @@ NOTE: Make sure to patch files before running this command, or else you'll have 
 <details>
 <summary>Q: It asks for administrator permissions?</summary>
 <br>
-A: This script needs those permissions to stop Adobe from running in the background and to delete the AdobeGCClient folder. The full source code of this script is available in this repository for auditing.</details>
+A: This script needs those permissions to modify files and settings. The full source code of this script is available in this repository for auditing.</details>
 
 <br>
 
@@ -111,7 +100,7 @@ A: It is not currently available for MacOS, and I don't intend on porting it to 
 <details>
 <summary>Q: Will more features be added?</summary>
 <br>
-A: Yes! If you have any suggestions, please open an issue.
+A: Yes! They are all in the [Future Features](#future-features) section below. Any help with the future features is greatly appreciated!
 </details>
 <br>
 
@@ -122,9 +111,25 @@ A: No, it won't. If you do have Adobe apps (Photoshop, After Effects, etc.) open
 </details>
 <br>
 
-## Known Issues
+## Future Features
+> These are features that I'd like to implement in the future. If you can help, please open a thread in the discussions tab.
 
----
+- [ ] Patch Retention
+  - Locks the patched file from genP so that nothing can modify/delete it
+  - I'm stuck at setting a list of filepaths that the script can read off and patch.
+- [ ] Revamp the ProcessKill script
+  - Currently, the script stops any process that mentions `Adobe` in its `Company Name` attribute. It is a "'shotgun' approach" as stated by [the creator](https://gist.github.com/carcheky/530fd85ffff6719486038542a8b5b997#gistcomment-3586740) of the command. It'll kill any CC app (Photoshop, Premiere, etc.) running, destroying unsaved work.
+  - Getting individual processes and blocking them is unfeasible, as Adobe changes that every time they sneeze
+- [ ] Running in background
+  - tbh i have no idea where to even start with this
+  - Goal: have an option to run the ProcessKill script every set interval 
+- [ ] Converting ProcessKill module to a batch script
+  - Done by running powershell commands from a batch script
+  - i'm just too lazy to do this lmao
+- [ ] Backup documentation/scripts
+  - Host on my own website?
+## Known Issues
+> There are more issues in the [issues](https://github.com/eaaasun/CCStopper/issues) section; these are just the most common ones.
 
 **Issue:** Error message: `the execution of scripts is disabled on this system. Please see "get-help about_signing" for more details.` or pushing the "Remove AGS" button gives no results.
 
@@ -144,7 +149,7 @@ Fix: Run `set-executionpolicy remotesigned` in an admininstrator powershell wind
 
 ## Disclaimer/Notice
 
-**Disclaimer:** This script is in an early stage, and offered as-is. There will be bugs. I am not responsible for any damage or loss of data caused by this script. I am not affiliated with Adobe.
+**Disclaimer:** This script is in an early stage, and offered as-is. There will be bugs. I am not responsible for any damage, loss of data, or thermonuclear wars caused by these scripts. I am not affiliated with Adobe.
 
 **Notice:** Don't use this tool for piracy. It's illegal, and multi-billion dollar companies like Adobe _needs_ to profit off unreliable and overpriced software. Piracy _helps_ Adobe by increasing their market dominance. If you want to dethrone Adobe, use [alternatives](https://ass.easun.me).
 

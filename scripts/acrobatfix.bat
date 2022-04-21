@@ -68,9 +68,15 @@ echo                  ^|                                                        
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|
 echo:          
-choice /C:12 /N /M ">                                            Select [1,2]: "
+choice /C:123 /N /M ">                                            Select [1,2,3]: "
 
 if errorlevel  2 goto:editReg
+
+if errorlevel  3 (
+cd %~dp0
+cd ..
+start cmd /k CCStopper.bat
+)
 
 
 cls
@@ -125,4 +131,8 @@ if errorlevel  1 (
 	shutdown /r /t 60
 )
 
-if errorlevel  2 exit
+if errorlevel  2 (
+cd %~dp0
+cd ..
+start cmd /k CCStopper.bat
+)
