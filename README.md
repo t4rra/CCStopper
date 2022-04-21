@@ -19,6 +19,7 @@ Kills Adobe's pesky background apps and more!
 - Added Credit Card Stop Module
   - Creates a firewall rule that blocks `Adobe Desktop Service.exe` from accessing the internet
   - Blocking ADS bypasses the credit card prompt (confirmed working as of Apr. 4, 2022; subject to change in the future)
+  - Automated the Credit Card workaround in [genP guide #2](https://www.reddit.com/r/GenP/wiki/redditgenpguides#wiki_guide_.232_-_dummy_guide_for_first_timers_genp_.28method_1.3A_cc.2Bgenp.29) 
 - Documentation Update
   - Changed some things, added a "Future Features" section. If you have batch scripting knowledge, please take a look and see what you can do.
 
