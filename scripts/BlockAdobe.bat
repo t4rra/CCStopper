@@ -1,100 +1,83 @@
-@echo off
-set hostspath=%windir%\System32\drivers\etc\hosts
-echo( >> %hostspath%
-echo( >> %hostspath%
-echo # BLOCK ADOBE >> %hostspath%
-echo 127.0.0.1 ic.adobe.io  >> %hostspath%
-echo 127.0.0.1 52.6.155.20 >> %hostspath%
-echo 127.0.0.1 52.10.49.85 >> %hostspath%
-echo 127.0.0.1 23.22.30.141 >> %hostspath%
-echo 127.0.0.1 34.215.42.13 >> %hostspath%
-echo 127.0.0.1 52.84.156.37 >> %hostspath%
-echo 127.0.0.1 65.8.207.109 >> %hostspath%
-echo 127.0.0.1 3.220.11.113 >> %hostspath%
-echo 127.0.0.1 3.221.72.231 >> %hostspath%
-echo 127.0.0.1 3.216.32.253 >> %hostspath%
-echo 127.0.0.1 3.208.248.199 >> %hostspath%
-echo 127.0.0.1 3.219.243.226 >> %hostspath%
-echo 127.0.0.1 13.227.103.57 >> %hostspath%
-echo 127.0.0.1 34.192.151.90 >> %hostspath%
-echo 127.0.0.1 34.237.241.83 >> %hostspath%
-echo 127.0.0.1 44.240.189.42 >> %hostspath%
-echo 127.0.0.1 52.20.222.155 >> %hostspath%
-echo 127.0.0.1 52.208.86.132 >> %hostspath%
-echo 127.0.0.1 54.208.86.132 >> %hostspath%
-echo 127.0.0.1 63.140.38.120 >> %hostspath%
-echo 127.0.0.1 63.140.38.160 >> %hostspath%
-echo 127.0.0.1 63.140.38.169 >> %hostspath%
-echo 127.0.0.1 63.140.38.219 >> %hostspath%
-echo 127.0.0.1 wip.adobe.com >> %hostspath%
-echo 127.0.0.1 adobeereg.com >> %hostspath%
-echo 127.0.0.1 18.228.243.121 >> %hostspath%
-echo 127.0.0.1 18.230.164.221 >> %hostspath%
-echo 127.0.0.1 54.156.135.114 >> %hostspath%
-echo 127.0.0.1 54.221.228.134 >> %hostspath%
-echo 127.0.0.1 54.224.241.105 >> %hostspath%
-echo 127.0.0.1 100.24.211.130 >> %hostspath%
-echo 127.0.0.1 162.247.242.20 >> %hostspath%
-echo 127.0.0.1 wip1.adobe.com >> %hostspath%
-echo 127.0.0.1 wip2.adobe.com >> %hostspath%
-echo 127.0.0.1 wip3.adobe.com >> %hostspath%
-echo 127.0.0.1 wip4.adobe.com >> %hostspath%
-echo 127.0.0.1 3dns.adobe.com >> %hostspath%
-echo 127.0.0.1 ereg.adobe.com >> %hostspath%
-echo 127.0.0.1 199.232.114.137 >> %hostspath%
-echo 127.0.0.1 bam.nr-data.net >> %hostspath%
-echo 127.0.0.1 practivate.adobe >> %hostspath%
-echo 127.0.0.1 ood.opsource.net >> %hostspath%
-echo 127.0.0.1 crl.verisign.net >> %hostspath%
-echo 127.0.0.1 3dns-1.adobe.com >> %hostspath%
-echo 127.0.0.1 3dns-2.adobe.com >> %hostspath%
-echo 127.0.0.1 3dns-3.adobe.com >> %hostspath%
-echo 127.0.0.1 3dns-4.adobe.com >> %hostspath%
-echo 127.0.0.1 hl2rcv.adobe.com >> %hostspath%
-echo 127.0.0.1 genuine.adobe.com >> %hostspath%
-echo 127.0.0.1 www.adobeereg.com >> %hostspath%
-echo 127.0.0.1 www.wip.adobe.com >> %hostspath%
-echo 127.0.0.1 www.wip1.adobe.com >> %hostspath%
-echo 127.0.0.1 www.wip2.adobe.com >> %hostspath%
-echo 127.0.0.1 www.wip3.adobe.com >> %hostspath%
-echo 127.0.0.1 www.wip4.adobe.com >> %hostspath%
-echo 127.0.0.1 ereg.wip.adobe.com >> %hostspath%
-echo 127.0.0.1 ereg.wip.adobe.com >> %hostspath%
-echo 127.0.0.1 activate.adobe.com >> %hostspath%
-echo 127.0.0.1 adobe-dns.adobe.com >> %hostspath%
-echo 127.0.0.1 ereg.wip1.adobe.com >> %hostspath%
-echo 127.0.0.1 ereg.wip2.adobe.com >> %hostspath%
-echo 127.0.0.1 ereg.wip3.adobe.com >> %hostspath%
-echo 127.0.0.1 ereg.wip4.adobe.com >> %hostspath%
-echo 127.0.0.1 ereg.wip1.adobe.com >> %hostspath%
-echo 127.0.0.1 ereg.wip2.adobe.com >> %hostspath%
-echo 127.0.0.1 ereg.wip3.adobe.com >> %hostspath%
-echo 127.0.0.1 ereg.wip4.adobe.com >> %hostspath%
-echo 127.0.0.1 cc-api-data.adobe.io >> %hostspath%
-echo 127.0.0.1 practivate.adobe.ntp >> %hostspath%
-echo 127.0.0.1 practivate.adobe.ipp >> %hostspath%
-echo 127.0.0.1 practivate.adobe.com >> %hostspath%
-echo 127.0.0.1 adobe-dns-1.adobe.com >> %hostspath%
-echo 127.0.0.1 adobe-dns-2.adobe.com >> %hostspath%
-echo 127.0.0.1 adobe-dns-3.adobe.com >> %hostspath%
-echo 127.0.0.1 adobe-dns-4.adobe.com >> %hostspath%
-echo 127.0.0.1 lm.licenses.adobe.com >> %hostspath%
-echo 127.0.0.1 hlrcv.stage.adobe.com >> %hostspath%
-echo 127.0.0.1 prod.adobegenuine.com >> %hostspath%
-echo 127.0.0.1 practivate.adobe.newoa >> %hostspath%
-echo 127.0.0.1 activate.wip.adobe.com >> %hostspath%
-echo 127.0.0.1 activate-sea.adobe.com >> %hostspath%
-echo 127.0.0.1 uds.licenses.adobe.com >> %hostspath%
-echo 127.0.0.1 k.sni.global.fastly.net >> %hostspath%
-echo 127.0.0.1 activate-sjc0.adobe.com >> %hostspath%
-echo 127.0.0.1 activate.wip1.adobe.com >> %hostspath%
-echo 127.0.0.1 activate.wip2.adobe.com >> %hostspath%
-echo 127.0.0.1 activate.wip3.adobe.com >> %hostspath%
-echo 127.0.0.1 activate.wip4.adobe.com >> %hostspath%
-echo 127.0.0.1 na1r.services.adobe.com >> %hostspath%
-echo 127.0.0.1 lmlicenses.wip4.adobe.com >> %hostspath%
-echo 127.0.0.1 na2m-pr.licenses.adobe.com >> %hostspath%
-echo 127.0.0.1 wwis-dubc1-vip60.adobe.com >> %hostspath%
-echo 127.0.0.1 workflow-ui-prod.licensingstack.com >> %hostspath%
+@REM Checks for existence of a line in hosts file and adds it if it doesn't exist
+@REM Thanks:
+@REM https://stackoverflow.com/a/46453499
+@REM https://github.com/sh32devnull 
 
-exit
+setlocal EnableDelayedExpansion
+
+@REM set "hosts=C:\WINDOWS\System32\drivers\etc\hosts"
+@REM Not using real hosts file b/c im not risking it lmao
+set "hosts=%userprofile%\Desktop\test.txt"
+
+
+@echo off
+setlocal enabledelayedexpansion
+
+set  "arrayline[0]=127.0.0.1 ic.adobe.io"
+set  "arrayline[1]=127.0.0.1 wip.adobe.com"
+set  "arrayline[2]=127.0.0.1 adobeereg.com"
+set  "arrayline[3]=127.0.0.1 wip1.adobe.com"
+set  "arrayline[4]=127.0.0.1 wip2.adobe.com"
+set  "arrayline[5]=127.0.0.1 wip3.adobe.com"
+set  "arrayline[6]=127.0.0.1 wip4.adobe.com"
+set  "arrayline[7]=127.0.0.1 3dns.adobe.com"
+set  "arrayline[8]=127.0.0.1 ereg.adobe.com"
+set  "arrayline[9]=127.0.0.1 practivate.adobe"
+set  "arrayline[10]=127.0.0.1 3dns-1.adobe.com"
+set  "arrayline[11]=127.0.0.1 3dns-2.adobe.com"
+set  "arrayline[12]=127.0.0.1 3dns-3.adobe.com"
+set  "arrayline[13]=127.0.0.1 3dns-4.adobe.com"
+set  "arrayline[14]=127.0.0.1 hl2rcv.adobe.com"
+set  "arrayline[15]=127.0.0.1 genuine.adobe.com"
+set  "arrayline[16]=127.0.0.1 www.adobeereg.com"
+set  "arrayline[17]=127.0.0.1 www.wip.adobe.com"
+set  "arrayline[18]=127.0.0.1 www.wip1.adobe.com"
+set  "arrayline[19]=127.0.0.1 www.wip2.adobe.com"
+set  "arrayline[20]=127.0.0.1 www.wip3.adobe.com"
+set  "arrayline[21]=127.0.0.1 www.wip4.adobe.com"
+set  "arrayline[22]=127.0.0.1 ereg.wip.adobe.com"
+set  "arrayline[23]=127.0.0.1 ereg.wip.adobe.com"
+set  "arrayline[24]=127.0.0.1 activate.adobe.com"
+set  "arrayline[25]=127.0.0.1 adobe-dns.adobe.com"
+set  "arrayline[26]=127.0.0.1 ereg.wip1.adobe.com"
+set  "arrayline[27]=127.0.0.1 ereg.wip2.adobe.com"
+set  "arrayline[28]=127.0.0.1 ereg.wip3.adobe.com"
+set  "arrayline[29]=127.0.0.1 ereg.wip4.adobe.com"
+set  "arrayline[30]=127.0.0.1 ereg.wip1.adobe.com"
+set  "arrayline[31]=127.0.0.1 ereg.wip2.adobe.com"
+set  "arrayline[32]=127.0.0.1 ereg.wip3.adobe.com"
+set  "arrayline[33]=127.0.0.1 ereg.wip4.adobe.com"
+set  "arrayline[34]=127.0.0.1 cc-api-data.adobe.io"
+set  "arrayline[35]=127.0.0.1 practivate.adobe.ntp"
+set  "arrayline[36]=127.0.0.1 practivate.adobe.ipp"
+set  "arrayline[37]=127.0.0.1 practivate.adobe.com"
+set  "arrayline[38]=127.0.0.1 adobe-dns-1.adobe.com"
+set  "arrayline[39]=127.0.0.1 adobe-dns-2.adobe.com"
+set  "arrayline[40]=127.0.0.1 adobe-dns-3.adobe.com"
+set  "arrayline[41]=127.0.0.1 adobe-dns-4.adobe.com"
+set  "arrayline[42]=127.0.0.1 lm.licenses.adobe.com"
+set  "arrayline[43]=127.0.0.1 hlrcv.stage.adobe.com"
+set  "arrayline[44]=127.0.0.1 prod.adobegenuine.com"
+set  "arrayline[45]=127.0.0.1 practivate.adobe.newoa"
+set  "arrayline[46]=127.0.0.1 activate.wip.adobe.com"
+set  "arrayline[47]=127.0.0.1 activate-sea.adobe.com"
+set  "arrayline[48]=127.0.0.1 uds.licenses.adobe.com"
+set  "arrayline[49]=127.0.0.1 activate-sjc0.adobe.com"
+set  "arrayline[50]=127.0.0.1 activate.wip1.adobe.com"
+set  "arrayline[51]=127.0.0.1 activate.wip2.adobe.com"
+set  "arrayline[52]=127.0.0.1 activate.wip3.adobe.com"
+set  "arrayline[53]=127.0.0.1 activate.wip4.adobe.com"
+set  "arrayline[54]=127.0.0.1 na1r.services.adobe.com"
+set  "arrayline[55]=127.0.0.1 lmlicenses.wip4.adobe.com"
+set  "arrayline[56]=127.0.0.1 na2m-pr.licenses.adobe.com"
+set  "arrayline[57]=127.0.0.1 wwis-dubc1-vip60.adobe.com"
+set  "arrayline[58]=127.0.0.1 workflow-ui-prod.licensingstack.com"
+
+::read it using a FOR /L statement
+for /l %%n in (0,1,58) do (
+    findstr /c:"!arrayline[%%n]!" "%hosts%" 1>nul 2>nul || (
+      (echo (!arrayline[%%n]!)>>"%hosts%" 
+    )
+)
+echo "complete"
+pause

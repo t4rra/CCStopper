@@ -14,7 +14,7 @@ echo                  ^|                                                        
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
 echo                  ^|                         Made by eaaasun                       ^|
-echo                  ^|                           ver. 1.1.3                          ^|
+echo                  ^|                          ver. 1.1.4-dev                       ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|                         SAVE YOUR FILES!                      ^|
@@ -29,35 +29,28 @@ echo                  ^|      [2] Remove Genuine Checker                        
 echo                  ^|                                                               ^|
 echo                  ^|      [3] Patch Acrobat                                        ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [4] Credit Card Prompt Fix                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [5] Block Adobe                                          ^|
+echo                  ^|      [4] Block Unnessessary Adobe Internet Requests           ^|
 echo                  ^|                                                               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [6] Github Repo (Detailed instructions there)            ^|
+echo                  ^|      [5] Github Repo (Detailed instructions there)            ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [7] Exit                                                 ^|
+echo                  ^|      [6] Exit                                                 ^|
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|
 echo:          
-choice /C:1234567 /N /M ">                                     Select [1,2,3,4,5,6,7]: "
+choice /C:123456 /N /M ">                                     Select [1,2,3,4,5,6]: "
 
-if errorlevel  7 exit
-if errorlevel  7 (
+if errorlevel  6 exit
+if errorlevel  5 (
 	cls
 	start https://github.com/eaaasun/CCStopper
 	goto menu
 
 )
-if errorlevel  5 (
-	cls
-	.\scripts\BlockAdobe.bat
-	goto menu
-)
 if errorlevel  4 (
 	cls
-	.\scripts\creditCardStop.bat
+	.\scripts\BlockAdobe.bat
 	goto menu
 )
 if errorlevel  3 (
