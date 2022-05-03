@@ -10,11 +10,11 @@ cls
 echo:
 echo:
 echo                   _______________________________________________________________
-echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
 echo                  ^|                         Made by eaaasun                       ^|
-echo                  ^|                           ver. 1.1.3                          ^|
+echo                  ^|                          ver. 1.1.4-dev                       ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|                         SAVE YOUR FILES!                      ^|
@@ -29,7 +29,7 @@ echo                  ^|      [2] Remove Genuine Checker                        
 echo                  ^|                                                               ^|
 echo                  ^|      [3] Patch Acrobat                                        ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [4] Credit Card Prompt Fix                               ^|
+echo                  ^|      [4] Block Unnessessary Adobe Internet Requests           ^|
 echo                  ^|                                                               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
@@ -50,7 +50,7 @@ if errorlevel  5 (
 )
 if errorlevel  4 (
 	cls
-	.\scripts\creditCardStop.bat
+	.\scripts\BlockAdobe.bat
 	goto menu
 )
 if errorlevel  3 (
