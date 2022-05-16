@@ -1,4 +1,5 @@
 @echo off
+
 title CCStopper
 Set "Path=%Path%;%CD%;%CD%\Plugins;"
 mode con: cols=100 lines=36
@@ -29,7 +30,7 @@ echo                  ^|      [2] Remove Genuine Checker                        
 echo                  ^|                                                               ^|
 echo                  ^|      [3] Patch Acrobat                                        ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [4] Block Unnessessary Adobe Internet Requests           ^|
+echo                  ^|      [4] Patch Host File                                      ^|
 echo                  ^|                                                               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
@@ -50,7 +51,7 @@ if errorlevel  5 (
 )
 if errorlevel  4 (
 	cls
-	.\scripts\BlockAdobe.bat
+	powershell.exe -command "& {Start-Process .\scripts\patchhostfile.bat -ArgumentList "Args" -Verb Runas}"
 	goto menu
 )
 if errorlevel  3 (
