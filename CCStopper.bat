@@ -29,7 +29,7 @@ echo                  ^|      [2] Remove Genuine Checker                        
 echo                  ^|                                                               ^|
 echo                  ^|      [3] Patch Acrobat                                        ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [4] Block Unnessessary Adobe Internet Requests           ^|
+echo                  ^|      [4] Credit Card Prompt Fix                               ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [5] Patch Host File                                      ^|
 echo                  ^|                                                               ^|
@@ -57,7 +57,7 @@ if errorlevel  5 (
 )
 if errorlevel  4 (
 	cls
-	.\scripts\BlockAdobe.bat
+	.\scripts\creditCardStop.bat
 	goto menu
 )
 if errorlevel  3 (
