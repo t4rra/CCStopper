@@ -41,30 +41,29 @@ echo                  ^|________________________________________________________
 echo:          
 choice /C:123456 /N /M ">                                     Select [1,2,3,4,5,6]: "
 
-if errorlevel  6 exit
-if errorlevel  5 (
+if errorlevel 6 exit
+if errorlevel 5 (
 	cls
 	start https://github.com/eaaasun/CCStopper
 	goto menu
-
 )
-if errorlevel  4 (
+if errorlevel 4 (
 	cls
 	.\scripts\creditCardStop.bat
 	goto menu
 )
-if errorlevel  3 (
+if errorlevel 3 (
 	cls
 	.\scripts\acrobatfix.bat
 	goto menu
 )
-if errorlevel  2 (
+if errorlevel 2 (
 	cls
 	.\scripts\AGSKill.bat
 	goto menu
 )
-if errorlevel  1 (
+if errorlevel 1 (
 	cls
-	Powershell.exe -executionpolicy remotesigned -File  .\scripts\ProcessKill.ps1
+	Powershell.exe -ExecutionPolicy RemoteSigned -File .\scripts\ProcessKill.ps1
 	goto menu
 )

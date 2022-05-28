@@ -14,13 +14,13 @@ taskkill /IM "AGMService.exe" /F
 
 
 :: Checks if AGSService Exists
-IF EXIST "C:\program files (x86)\common files\adobe\AdobeGCClient" (
-	rmdir /Q /S "C:\program files (x86)\common files\adobe\AdobeGCClient"
+IF EXIST "C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient" (
+	rmdir /Q /S "C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient"
 )
 
-cd "C:\program files (x86)\common files\adobe\"
-mkdir "C:\program files (x86)\common files\adobe\AdobeGCClient"
-icacls "C:\program files (x86)\common files\adobe\AdobeGCClient" /deny Administrators:(F)
+cd "C:\Program Files (x86)\Common Files\Adobe\"
+mkdir "C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient"
+icacls "C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient" /deny Administrators:(F)
 
 cd %~dp0
 cd ..
