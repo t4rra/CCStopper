@@ -56,9 +56,7 @@ if errorlevel  1 (
 )
 
 :exit
-cd %~dp0
-cd ..
-start cmd /k CCStopper.bat
+start cmd /k %~dp0\..\CCStopper.bat
 exit
 
 :ruleChecker
@@ -75,7 +73,6 @@ exit
 
 
 :ruleExists
-cls
 cls
 echo:
 echo:

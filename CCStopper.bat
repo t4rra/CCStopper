@@ -64,6 +64,6 @@ if errorlevel 2 (
 )
 if errorlevel 1 (
 	cls
-	Powershell.exe -ExecutionPolicy RemoteSigned -File .\scripts\ProcessKill.ps1
+	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\ProcessKill.ps1
 	goto menu
 )

@@ -37,7 +37,7 @@ exit
 
 :mainScript
 :: Asks for Administrator Permissions
-%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
+%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd", "/c %~s0 ::", "", "runas", 1)(window.close) && exit
 cd /d "%~dp0"
 
 cls
@@ -73,11 +73,8 @@ choice /C:123 /N /M ">                                            Select [1,2,3]
 if errorlevel  2 goto:editReg
 
 if errorlevel  3 (
-cd %~dp0
-cd ..
-start cmd /k CCStopper.bat
+start cmd /k %~dp0\..\CCStopper.bat
 )
-
 
 cls
 echo beans
@@ -88,14 +85,10 @@ echo Creating system restore point, please be patient.
 Wmic.exe /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Acrobat Fix Script", 100, 12
 goto editReg
 
-
 :editReg
-:: Adds IsAMTEnforced w/ proper values, then deletes IsNGLEnfoced
-
-reg add "HKLM\software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsAMTEnforced /t REG_DWORD /d 1 /f /reg:64
-
-reg delete "HKLM\software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsNGLEnforced /f /reg:64
-
+:: Adds IsAMTEnforced with proper values, then deletes IsNGLEnfoced
+reg add "HKLM\Software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsAMTEnforced /t REG_DWORD /d 1 /f /reg:64
+reg delete "HKLM\Software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsNGLEnforced /f /reg:64
 goto restartAsk
 pause
 
