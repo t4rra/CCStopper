@@ -33,21 +33,27 @@ echo                  ^|      [4] Credit Card Prompt Fix                        
 echo                  ^|                                                               ^|
 echo                  ^|      [5] Hide Creative Cloud Files from File Explorer         ^|
 echo                  ^|                                                               ^|
+echo                  ^|      [6] Disable Adobe services auto start                    ^|
+echo                  ^|                                                               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [6] Github Repo (Detailed instructions there)            ^|
+echo                  ^|      [7] Github Repo (Detailed instructions there)            ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [7] Exit                                                 ^|
+echo                  ^|      [8] Exit                                                 ^|
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|
 echo:          
 choice /C:123456 /N /M ">                                     Select [1,2,3,4,5,6]: "
 
 cls
-if errorlevel 7 exit
-if errorlevel 6 (
+if errorlevel 8 exit
+if errorlevel 7 (
 	cls
 	start https://github.com/eaaasun/CCStopper
+	goto menu
+)
+if errorlevel 6 (
+	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\DisableServicesAutoStart.ps1
 	goto menu
 )
 if errorlevel 5 (
