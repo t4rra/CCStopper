@@ -15,10 +15,10 @@ $Host.UI.RawUI.WindowTitle = $myInvocation.MyCommand.Definition + "(Elevated)"
 }
 
 # Stops Adobe Processess, source: https://gist.github.com/carcheky/530fd85ffff6719486038542a8b5b997#gistcomment-3586740
-Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "Adobe"} | Stop-Process -Force >$null
+Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "Adobe"} | Stop-Process -Force | Out-Null
 
 # Stops stragglers
-taskkill /IM AdobeUpdateService.exe /F >$null
-taskkill /IM AdobeExtensionsService.exe /F >$null
-taskkill /IM "Adobe CEF Helper.exe" /F >$null
-taskkill /IM AdobeIPCBroker.exe /F >$null
+Stop-Process AdobeUpdateService | Out-Null
+Stop-Process AdobeExtensionsService | Out-Null
+Stop-Process "Adobe CEF Helper" | Out-Null
+Stop-Process AdobeIPCBroker | Out-Null
