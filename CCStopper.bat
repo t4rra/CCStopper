@@ -31,21 +31,27 @@ echo                  ^|      [3] Patch Acrobat                                 
 echo                  ^|                                                               ^|
 echo                  ^|      [4] Credit Card Prompt Fix                               ^|
 echo                  ^|                                                               ^|
+echo                  ^|      [5] Hide Creative Cloud Files from File Explorer         ^|
+echo                  ^|                                                               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [5] Github Repo (Detailed instructions there)            ^|
+echo                  ^|      [6] Github Repo (Detailed instructions there)            ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [6] Exit                                                 ^|
+echo                  ^|      [7] Exit                                                 ^|
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|
 echo:          
 choice /C:123456 /N /M ">                                     Select [1,2,3,4,5,6]: "
 
 cls
-if errorlevel 6 exit
-if errorlevel 5 (
+if errorlevel 7 exit
+if errorlevel 6 (
 	cls
 	start https://github.com/eaaasun/CCStopper
+	goto menu
+)
+if errorlevel 5 (
+	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\HideCCF.ps1
 	goto menu
 )
 if errorlevel 4 (
