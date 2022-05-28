@@ -4,13 +4,11 @@
 cd /d "%~dp0"
 
 :: Disables AGSSerivce from starting up, then stops it
-sc config "AGSService" start= disabled
-sc stop "AGSService"
-taskkill /IM "AGSService.exe" /F
-
-sc config "AGMService" start= disabled
-sc stop "AGMService"
-taskkill /IM "AGMService.exe" /F
+for %%a in (AGSService AGMService) do ( 
+	sc config "%%a" start= disabled
+	sc stop "%%a"
+	taskkill /IM "%%a.exe" /F
+)
 
 :: Checks if AGSService Exists
 IF EXIST "C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient" (
