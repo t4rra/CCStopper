@@ -43,7 +43,7 @@ echo                  ^|      [8] Exit                                          
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|
 echo:          
-choice /C:123456 /N /M ">                                     Select [1,2,3,4,5,6]: "
+choice /C:12345678 /N /M ">                                     Select [1,2,3,4,5,6,7,8]: "
 
 cls
 if errorlevel 8 exit

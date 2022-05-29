@@ -30,14 +30,12 @@ goto mainScript
 )
 
 :exit
-cd %~dp0
-cd ..
-start cmd /k CCStopper.bat
+start cmd /k %~dp0\..\CCStopper.bat
 exit
 
 :mainScript
 :: Asks for Administrator Permissions
-%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd", "/c %~s0 ::", "", "runas", 1)(window.close) && exit
+%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close) && exit
 cd /d "%~dp0"
 
 cls
@@ -125,7 +123,5 @@ if errorlevel  1 (
 )
 
 if errorlevel  2 (
-cd %~dp0
-cd ..
-start cmd /k CCStopper.bat
+start cmd /k %~dp0\..\CCStopper.bat
 )

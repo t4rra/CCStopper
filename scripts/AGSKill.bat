@@ -1,6 +1,6 @@
 @echo off
 :: Asks for Administrator Permissions
-%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd", "/c %~s0 ::", "", "runas", 1)(window.close) && exit
+%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close) && exit
 cd /d "%~dp0"
 
 :: Disables AGSSerivce from starting up, then stops it
