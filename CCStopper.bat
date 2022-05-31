@@ -10,11 +10,11 @@ cls
 echo:
 echo:
 echo                   _______________________________________________________________
-echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
 echo                  ^|                         Made by eaaasun                       ^|
-echo                  ^|                           ver. 1.1.3                          ^|
+echo                  ^|                          ver. 1.1.4-dev                       ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|                         SAVE YOUR FILES!                      ^|
@@ -31,22 +31,29 @@ echo                  ^|      [3] Patch Acrobat                                 
 echo                  ^|                                                               ^|
 echo                  ^|      [4] Credit Card Prompt Fix                               ^|
 echo                  ^|                                                               ^|
+echo                  ^|      [5] Patch Host File                                      ^|
+echo                  ^|                                                               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [5] Github Repo (Detailed instructions there)            ^|
+echo                  ^|      [6] Github Repo (Detailed instructions there)            ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [6] Exit                                                 ^|
+echo                  ^|      [7] Exit                                                 ^|
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|
 echo:          
 choice /C:123456 /N /M ">                                     Select [1,2,3,4,5,6]: "
 
-if errorlevel  6 exit
-if errorlevel  5 (
+if errorlevel  7 exit
+if errorlevel  6 (
 	cls
 	start https://github.com/eaaasun/CCStopper
 	goto menu
 
+)
+if errorlevel  5 (
+	cls
+	powershell.exe -command "& {Start-Process .\scripts\patchhostfile.bat -ArgumentList "Args" -Verb Runas}"
+	goto menu
 )
 if errorlevel  4 (
 	cls
