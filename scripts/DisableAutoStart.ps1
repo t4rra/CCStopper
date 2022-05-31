@@ -32,7 +32,7 @@ Get-Item "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" | For
       (Get-Item $File).VersionInfo | Where-Object {$_.CompanyName -match "Adobe" -or $File -match "Adobe"} | Foreach-Object {
          # Disable the processes the same way task manager does it
          Write-Host "Disabling $Name"
-         Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32" -Name $Name -Value ([byte[]](0x03,0x00,0x00,0x00,0xba,0x4f,0x3d,0x69,0x59,0x6f,0xd8,0x01))
+         Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32" -Name $Name -Value ([byte[]](0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11))
       }
    }
 }
