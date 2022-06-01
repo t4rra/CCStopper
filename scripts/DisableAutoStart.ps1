@@ -14,10 +14,10 @@ $Host.UI.RawUI.WindowTitle = $myInvocation.MyCommand.Definition + "(Elevated)"
    exit
 }
 
-# Disable services auto start
+# Disable services auto-start
 Get-Service -DisplayName Adobe* | Set-Service -StartupType Manual
 
-# Disable processes auto start
+# Disable processes auto-start
 Get-Item "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" | Foreach-Object {
    $Path = $_.PSPath
    $_.Property | Foreach-Object {

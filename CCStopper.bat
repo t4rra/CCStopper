@@ -23,7 +23,7 @@ echo                  ^|      Stopping Adobe processess will also close apps    
 echo                  ^|      like Photohsop/Premiere.                                 ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [1] Stop Adobe Processess                                ^|
+echo                  ^|      [1] Stop Adobe Processes & Services                      ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [2] Remove Genuine Checker                               ^|
 echo                  ^|                                                               ^|
@@ -33,7 +33,7 @@ echo                  ^|      [4] Credit Card Prompt Fix                        
 echo                  ^|                                                               ^|
 echo                  ^|      [5] Hide Creative Cloud Files from File Explorer         ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [6] Disable Adobe services auto start                    ^|
+echo                  ^|      [6] Disable Adobe Processes & Services Auto-Start        ^|
 echo                  ^|                                                               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
@@ -53,7 +53,7 @@ if errorlevel 7 (
 	goto menu
 )
 if errorlevel 6 (
-	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\DisableServicesAutoStart.ps1
+	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\DisableAutoStart.ps1
 	goto menu
 )
 if errorlevel 5 (
