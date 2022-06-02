@@ -32,7 +32,7 @@ echo                  ^|      [3] Patch Acrobat                                 
 echo                  ^|                                                               ^|
 echo                  ^|      [4] Credit Card Prompt Fix                               ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [5] Hide Creative Cloud Files from File Explorer         ^|
+echo                  ^|      [5] Hide "Creative Cloud Files" from File Explorer       ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [6] Disable Adobe Processes & Services Auto-Start        ^|
 echo                  ^|                                                               ^|
@@ -65,7 +65,7 @@ if errorlevel 6 (
 	goto menu
 )
 if errorlevel 5 (
-	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\HideCCF.ps1
+	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\HideCCFiles.ps1
 	goto menu
 )
 if errorlevel 4 (
