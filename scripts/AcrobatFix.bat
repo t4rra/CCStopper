@@ -104,7 +104,7 @@ echo                  ^|                                                        
 echo                  ^|      The system needs to restart for changes to apply.        ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [1] Restart in 60 seconds.                               ^|
+echo                  ^|      [1] Restart now.                                         ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [2] Skip (You will need to manually restart later)       ^|
 echo                  ^|                                                               ^| 
@@ -118,5 +118,5 @@ if errorlevel 2 (
 )
 if errorlevel 1 (
 	cls
-	shutdown /r /t 60
+	shutdown /r /t 0
 )
