@@ -70,7 +70,7 @@ choice /C:123 /N /M ">                                            Select [1,2,3]
 
 cls
 if errorlevel 3 (
-	start cmd /k %~dp0\..\CCStopper.bat
+	goto exit
 )
 if errorlevel 2 goto:editReg
 if errorlevel 1 (
