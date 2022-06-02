@@ -69,10 +69,10 @@ echo:
 choice /C:123 /N /M ">                                            Select [1,2,3]: "
 
 cls
-if errorlevel 2 goto:editReg
 if errorlevel 3 (
 	start cmd /k %~dp0\..\CCStopper.bat
 )
+if errorlevel 2 goto:editReg
 if errorlevel 1 (
 	echo Creating system restore point, please be patient.
 	wmic /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Acrobat Fix Script", 100, 12
