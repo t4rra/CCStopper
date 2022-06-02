@@ -68,11 +68,11 @@ if errorlevel 5 (
 	goto menu
 )
 if errorlevel 4 (
-	.\scripts\creditCardStop.bat
+	.\scripts\CreditCardStop.bat
 	goto menu
 )
 if errorlevel 3 (
-	.\scripts\acrobatfix.bat
+	.\scripts\AcrobatFix.bat
 	goto menu
 )
 if errorlevel 2 (
