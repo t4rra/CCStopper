@@ -1,6 +1,6 @@
 @echo off
 title CCStopper - Acrobat Fix
-mode con: cols=100 lines=36
+mode con: cols=100 lines=42
 
 :: Check if IsNGLEnforced already replaced w/ IsAMTEnforced
 :patchCheck

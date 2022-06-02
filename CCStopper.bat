@@ -2,7 +2,7 @@
 title CCStopper
 cd /D "%~dp0"
 set "Path=%Path%;%CD%;%CD%\Plugins;"
-mode con: cols=100 lines=36
+mode con: cols=100 lines=42
 
 :: Main script
 :menu

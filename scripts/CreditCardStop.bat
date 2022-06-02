@@ -2,7 +2,7 @@
 @echo off
 title CCStopper - Credit Card Prompt Remover
 Set "Path=%Path%;%CD%;%CD%\Plugins;"
-mode con: cols=100 lines=36
+mode con: cols=100 lines=42
 
 :: ask for admin perms
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
