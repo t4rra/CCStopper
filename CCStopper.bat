@@ -65,7 +65,7 @@ if errorlevel 6 (
 	goto menu
 )
 if errorlevel 5 (
-	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\HideCCFiles.ps1
+	.\scripts\HideCCFiles.bat
 	goto menu
 )
 if errorlevel 4 (
