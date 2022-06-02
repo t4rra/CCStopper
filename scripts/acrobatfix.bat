@@ -13,7 +13,7 @@ if %ERRORLEVEL% EQU 0 (
 	pause
 	exit
 ) else (
-goto targetCheck
+	goto targetCheck
 )
 
 :: Check if target path exists
@@ -26,7 +26,7 @@ if %ERRORLEVEL% EQU 1 (
 	pause
 	exit
 ) else (
-goto mainScript
+	goto mainScript
 )
 
 :exit
@@ -68,20 +68,16 @@ echo                  ^|________________________________________________________
 echo:          
 choice /C:123 /N /M ">                                            Select [1,2,3]: "
 
+cls
 if errorlevel 2 goto:editReg
-
 if errorlevel 3 (
 	start cmd /k %~dp0\..\CCStopper.bat
 )
-
-cls
-echo beans
-pause
-exit
-echo/
-echo Creating system restore point, please be patient.
-Wmic.exe /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Acrobat Fix Script", 100, 12
-goto editReg
+if errorlevel 1 (
+	echo Creating system restore point, please be patient.
+	wmic /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Acrobat Fix Script", 100, 12
+	goto editReg
+)
 
 :editReg
 :: Adds IsAMTEnforced with proper values, then deletes IsNGLEnfoced
