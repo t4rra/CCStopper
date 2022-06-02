@@ -52,7 +52,6 @@ if errorlevel  1 (
 		netsh advfirewall firewall add rule name="CCStopper-CreditCardBlock" dir=out program="%programfiles(x86)%\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe" profile=any action=block
 		pause
 		goto exit
-
 )
 
 :exit
