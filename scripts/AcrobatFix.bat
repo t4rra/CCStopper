@@ -114,7 +114,7 @@ echo:
 choice /C:12 /N /M ">                                            Select [1,2]: "
 
 if errorlevel 2 (
-	start cmd /k %~dp0\..\CCStopper.bat
+	goto exit
 )
 if errorlevel 1 (
 	cls
