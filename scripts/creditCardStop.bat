@@ -1,6 +1,6 @@
 :: language: bat
 @echo off
-title CCStopper - Credit Card Prompt Stopper
+title CCStopper - Credit Card Prompt Remover
 Set "Path=%Path%;%CD%;%CD%\Plugins;"
 mode con: cols=100 lines=36
 
@@ -18,7 +18,7 @@ echo                  ^|                                                        
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
 echo                  ^|                         Made by eaaasun                       ^|
-echo                  ^|                    Credit Card Trial Remover                  ^|
+echo                  ^|                    Credit Card Prompt Remover                 ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|      This module stops the credit card prompt through         ^|
