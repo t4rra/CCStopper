@@ -98,7 +98,7 @@ echo                  ^|                                                        
 echo                  ^|      The system needs to restart for changes to apply.        ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [1] Restart now.                                         ^|
+echo                  ^|      [1] Restart now                                          ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [2] Skip (You will need to manually restart later)       ^|
 echo                  ^|                                                               ^| 
