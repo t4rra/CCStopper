@@ -2,14 +2,19 @@
 title CCStopper - Hide Creative Cloud Files
 mode con: cols=100 lines=42
 
-set isPinned="System.IsPinnedToNameSpaceTree"
-set clsidKey="(Get-ChildItem HKCU:\SOFTWARE\Classes\CLSID -Recurse | Where-Object {$_.PSChildName -Like '{0E270DAA-1BE6-48F2-AC49-*'}).Name.replace('HKEY_CURRENT_USER', 'HKCU:')"
+Setlocal EnableDelayedExpansion
+for /f "usebackq delims=" %%a in (`reg query "HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID"`) do (
+	set key=%%a
+	for %%f in (!key!) do set keyName=%%~nxf
+	if "!keyName:~0,25!" equ "{0E270DAA-1BE6-48F2-AC49-" set clsid=!key!
+)
+Setlocal DisableDelayedExpansion
 
 :: Check if System.IsPinnedToNameSpaceTree is already disabled
 :patchCheck
-for /F "usebackq delims=" %%I in (`%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe -Command Get-ItemPropertyValue -Path %clsidKey% -Name %isPinned%`) do set "output=%%I"
+for /f "usebackq tokens=3*" %%A IN (`reg query %clsid% /v System.IsPinnedToNameSpaceTree`) do set data=%%A %%B
 
-if %output% EQU 0 (
+if %data% EQU 0 (
 	cls
 	echo.
 	echo Creative Cloud Files are already hidden.
@@ -65,13 +70,13 @@ if errorlevel 3 (
 if errorlevel 2 goto:editReg
 if errorlevel 1 (
 	echo Creating system restore point, please be patient.
-	wmic /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Hide Creative Cloud Files Script", 100, 12
+	wmic /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Hide CC Files Script", 100, 12
 	goto editReg
 )
 
 :editReg
 :: Hides CCF from file explorer
-Powershell -Command Set-ItemProperty -Path %clsidKey% -Name %isPinned% -Value 0
+reg add %clsid% /v System.IsPinnedToNameSpaceTree /t REG_DWORD /d 0 /f /reg:64
 goto restartAsk
 pause
 
