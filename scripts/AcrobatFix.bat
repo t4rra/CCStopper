@@ -1,6 +1,6 @@
 @echo off
 title CCStopper - Acrobat Fix
-mode con: cols=100 lines=36
+mode con: cols=100 lines=42
 
 :: Check if IsNGLEnforced already replaced w/ IsAMTEnforced
 :patchCheck
@@ -13,7 +13,7 @@ if %ERRORLEVEL% EQU 0 (
 	pause
 	exit
 ) else (
-goto targetCheck
+	goto targetCheck
 )
 
 :: Check if target path exists
@@ -26,18 +26,16 @@ if %ERRORLEVEL% EQU 1 (
 	pause
 	exit
 ) else (
-goto mainScript
+	goto mainScript
 )
 
 :exit
-cd %~dp0
-cd ..
-start cmd /k CCStopper.bat
+start cmd /k %~dp0\..\CCStopper.bat
 exit
 
 :mainScript
 :: Asks for Administrator Permissions
-%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
+%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close) && exit
 cd /d "%~dp0"
 
 cls
@@ -70,32 +68,21 @@ echo                  ^|________________________________________________________
 echo:          
 choice /C:123 /N /M ">                                            Select [1,2,3]: "
 
-if errorlevel  2 goto:editReg
-
-if errorlevel  3 (
-cd %~dp0
-cd ..
-start cmd /k CCStopper.bat
+cls
+if errorlevel 3 (
+	goto exit
+)
+if errorlevel 2 goto:editReg
+if errorlevel 1 (
+	echo Creating system restore point, please be patient.
+	wmic /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Acrobat Fix Script", 100, 12
+	goto editReg
 )
 
-
-cls
-echo beans
-pause
-exit
-echo/
-echo Creating system restore point, please be patient.
-Wmic.exe /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Acrobat Fix Script", 100, 12
-goto editReg
-
-
 :editReg
-:: Adds IsAMTEnforced w/ proper values, then deletes IsNGLEnfoced
-
-reg add "HKLM\software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsAMTEnforced /t REG_DWORD /d 1 /f /reg:64
-
-reg delete "HKLM\software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsNGLEnforced /f /reg:64
-
+:: Adds IsAMTEnforced with proper values, then deletes IsNGLEnfoced
+reg add "HKLM\Software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsAMTEnforced /t REG_DWORD /d 1 /f /reg:64
+reg delete "HKLM\Software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsNGLEnforced /f /reg:64
 goto restartAsk
 pause
 
@@ -117,7 +104,7 @@ echo                  ^|                                                        
 echo                  ^|      The system needs to restart for changes to apply.        ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [1] Restart in 60 seconds.                               ^|
+echo                  ^|      [1] Restart now.                                         ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [2] Skip (You will need to manually restart later)       ^|
 echo                  ^|                                                               ^| 
@@ -126,13 +113,10 @@ echo                  ^|________________________________________________________
 echo:          
 choice /C:12 /N /M ">                                            Select [1,2]: "
 
-if errorlevel  1 (
-	cls
-	shutdown /r /t 60
+if errorlevel 2 (
+	goto exit
 )
-
-if errorlevel  2 (
-cd %~dp0
-cd ..
-start cmd /k CCStopper.bat
+if errorlevel 1 (
+	cls
+	shutdown /r /t 0
 )

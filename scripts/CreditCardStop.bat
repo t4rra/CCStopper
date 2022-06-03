@@ -1,8 +1,8 @@
 :: language: bat
 @echo off
-title CCStopper - Credit Card Prompt Stopper
+title CCStopper - Credit Card Prompt Remover
 Set "Path=%Path%;%CD%;%CD%\Plugins;"
-mode con: cols=100 lines=36
+mode con: cols=100 lines=42
 
 :: ask for admin perms
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
@@ -18,7 +18,7 @@ echo                  ^|                                                        
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
 echo                  ^|                         Made by eaaasun                       ^|
-echo                  ^|                    Credit Card Trial Remover                  ^|
+echo                  ^|                    Credit Card Prompt Remover                 ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|      This module stops the credit card prompt through         ^|
@@ -52,13 +52,10 @@ if errorlevel  1 (
 		netsh advfirewall firewall add rule name="CCStopper-CreditCardBlock" dir=out program="%programfiles(x86)%\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe" profile=any action=block
 		pause
 		goto exit
-
 )
 
 :exit
-cd %~dp0
-cd ..
-start cmd /k CCStopper.bat
+start cmd /k %~dp0\..\CCStopper.bat
 exit
 
 :ruleChecker
@@ -75,7 +72,6 @@ exit
 
 
 :ruleExists
-cls
 cls
 echo:
 echo:
