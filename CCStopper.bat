@@ -83,7 +83,7 @@ if errorlevel 3 (
 	goto menu
 )
 if errorlevel 2 (
-	.\scripts\AGSKill.bat
+	.\scripts\RemoveAGS.bat
 	goto menu
 )
 if errorlevel 1 (
