@@ -23,7 +23,6 @@ set folderHidden=false
 if %data% EQU 0 (
 	set folderHidden=true
 	cls
-	:: Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 	echo:
 	echo:
 	echo                   _______________________________________________________________

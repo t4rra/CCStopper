@@ -1,6 +1,11 @@
 # CCStopper <!-- omit in toc --> 
 
 Kills Adobe's pesky background apps and more!
+
+## THIS IS THE DEVELOPMENT VERSION! <!-- omit in toc -->
+
+Please don't run any code here, unless you know *exactly* what you're doing. If you do, please consider contributing.
+
 ## Table of Contents <!-- omit in toc -->
 - [v1.1.3 Changelog](#v113-changelog)
 - [Instructions](#instructions)
@@ -133,11 +138,7 @@ A: Please donate your time! If you have batch scripting knowledge, please look t
 - [ ] Running in background
   - tbh i have no idea where to even start with this
   - Goal: have an option to run the ProcessKill script every set interval 
-- [ ] Converting ProcessKill module to a batch script
-  - Done by running powershell commands from a batch script
-  - i'm just too lazy to do this lmao
 - [ ] Backup documentation/scripts
-  - Host on my own website?
 ## Known Issues
 > There are more issues in the [issues](https://github.com/eaaasun/CCStopper/issues) section; these are just the most common ones.
 

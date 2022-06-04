@@ -67,6 +67,15 @@ for %%A in (!BLOCKED_ADDRESSES!) do (
         goto :WRITING_FAILURE
     )
 )
+
+
+netsh advfirewall firewall show rule name="CCStopper-CreditCardBlock" > nul
+if errorlevel 1 (
+    netsh advfirewall firewall add rule name="CCStopper-CreditCardBlock" dir=out program="%programfiles(x86)%\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe" profile=any action=block
+) else (
+    echo firewall rule exists!
+)
+
 cls
 echo:
 echo:
@@ -75,7 +84,7 @@ echo                  ^|                                                        
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
 echo                  ^|                         Made by eaaasun                       ^|
-echo                  ^|                       HostFilePatch Module                    ^|
+echo                  ^|                       ServiceBlock Module                     ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|                       Patching completed.                     ^|
