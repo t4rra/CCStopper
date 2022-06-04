@@ -34,40 +34,44 @@ echo                  ^|      [4] Credit Card Prompt Fix                        
 echo                  ^|                                                               ^|
 echo                  ^|      [5] Patch Host File                                      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [5] Hide "Creative Cloud Files" from File Explorer       ^|
+echo                  ^|      [6] Hide "Creative Cloud Files" from File Explorer       ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [6] Disable Adobe Processes & Services Auto-Start        ^|
+echo                  ^|      [7] Disable Adobe Processes & Services Auto-Start        ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [7] Hide Trial Banner                                    ^|
+echo                  ^|      [8] Hide Trial Banner                                    ^|
 echo                  ^|                                                               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [8] Github Repo (Detailed instructions there)            ^|
+echo                  ^|      [G] Github Repo (Detailed instructions there)            ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [9] Exit                                                 ^|
+echo                  ^|      [Q] Exit                                                 ^|
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|
 echo:          
-choice /C:123456789 /N /M ">                                     Select [1,2,3,4,5,6,7,8,9]: "
+choice /C:123456789GQ /N /M ">                                     Select [1,2,3,4,5,6,7,8,9,G,Q]: "
 
 cls
-if errorlevel 9 exit
-if errorlevel 8 (
+if errorlevel 11 exit
+if errorlevel 10 (
 	cls
 	start https://github.com/eaaasun/CCStopper
 	goto menu
 )
-if errorlevel 7 (
+if errorlevel 8 (
 	:: Source: https://www.reddit.com/r/GenP/comments/qwermj/wrote_a_quick_script_to_fix_up_the_trial_banner/
 	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\TrialRemove.ps1
 	goto menu
 )
-if errorlevel 6 (
+if errorlevel 7 (
 	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\DisableAutoStart.ps1
 	goto menu
 )
-if errorlevel 5 (
+if errorlevel 6 (
 	.\scripts\HideCCFiles.bat
+	goto menu
+)
+if errorlevel 5 (
+	.\scripts\PatchHostFile.bat
 	goto menu
 )
 if errorlevel 4 (
