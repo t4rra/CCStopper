@@ -90,12 +90,12 @@ echo                  ^|                                                        
 echo                  ^|                       Patching completed.                     ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [1] Exit                                                 ^|
+echo                  ^|      [Q] Exit                                                 ^|
 echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|
 echo:          
-choice /C:1 /N /M ">                                         Select [1]: "
+choice /C:1 /N /M ">                                         Select [Q]: "
 
 cls
 if errorlevel 1 (

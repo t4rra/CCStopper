@@ -61,12 +61,12 @@ echo                  ^|                                                        
 echo                  ^|      [2] Proceed without creating restore point               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [3] Exit                                                 ^|
+echo                  ^|      [Q] Exit                                                 ^|
 echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|
 echo:          
-choice /C:123 /N /M ">                                            Select [1,2,3]: "
+choice /C:12Q /N /M ">                                            Select [1,2,Q]: "
 
 cls
 if errorlevel 3 (

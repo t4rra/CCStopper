@@ -28,12 +28,12 @@ Please don't run any code here, unless you know *exactly* what you're doing. If 
 - Documentation Update
   - Changed some things, added a "Future Features" section. If you have batch scripting knowledge, please take a look and see what you can do.
 
-###### Read previous changelogs from [the releases](https://github.com/E-Soda/CCStopper/releases) <!-- omit in toc -->
+###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
 
 
 ## Instructions
 
-1. Get the latest [release](https://github.com/E-Soda/CCStopper/releases)
+1. Get the latest [release](https://github.com/eaaasun/CCStopper/releases/latest)
 2. Extract the ZIP file (This is important, CCStopper will not work without the additional scripts in the additional folders)
 3. Run CCStopper.bat
 4. Select an option
@@ -91,7 +91,7 @@ A: Windows might say that it is a virus, but that is a false positive. As stated
 <summary>Q: I found a bug/issue! What do I do?</summary>
 <br>
 
-A: Update to the latest version. If the issue presists, check the open issues and [the known issues](https://github.com/E-Soda/CCStopper/blob/main/README.md#known-issues) for any issues that I am aware of. If it's not there, open up an issue describing your problem and how to reproduce it. I'll work on it as soon as I can.
+A: Update to the latest version. If the issue presists, check the open issues and [the known issues](https://github.com/eaaasun/CCStopper/blob/main/README.md#known-issues) for any issues that I am aware of. If it's not there, open up an issue describing your problem and how to reproduce it. I'll work on it as soon as I can.
 
 </details>
 

@@ -2,91 +2,239 @@
 title CCStopper
 cd /D "%~dp0"
 set "Path=%Path%;%CD%;%CD%\Plugins;"
-mode con: cols=100 lines=46
+mode con: cols=99 lines=35
 
 :: Main script
-:menu
-cls
+:mainMenu
 :: Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+cls
 echo:
 echo:
-echo                   _______________________________________________________________
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|                            CCSTOPPER                          ^|
-echo                  ^|                         Made by eaaasun                       ^|
-echo                  ^|                          ver. 1.2.0-dev                       ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|                         SAVE YOUR FILES!                      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      Stopping Adobe processess will also close apps           ^|
-echo                  ^|      like Photohsop/Premiere.                                 ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [1] Stop Adobe Processes ^& Services                      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [2] Remove Genuine Checker                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [3] Patch Acrobat                                        ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [4] Credit Card Prompt Fix                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [5] Block Adobe Servers                                  ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [6] Hide "Creative Cloud Files" from File Explorer       ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [7] Disable Adobe Processes ^& Services Auto-Start        ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [8] Hide Trial Banner                                    ^|
-echo                  ^|                                                               ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [G] Github Repo (Detailed instructions there)            ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [Q] Exit                                                 ^|
-echo                  ^|                                                               ^|
-echo                  ^|_______________________________________________________________^|
+echo           _______________________________________________________________________________
+echo          ^|                                                                               ^|
+echo          ^|                                                                               ^|
+echo          ^|                                   CCSTOPPER                                   ^|
+echo          ^|                                Made by eaaasun                                ^|
+echo          ^|                                 ver. 1.2.0-dev                                ^|
+echo          ^|      ___________________________________________________________________      ^|
+echo          ^|                                                                               ^|
+echo          ^|                                SAVE YOUR FILES!                               ^|
+echo          ^|                                                                               ^|
+echo          ^|      Stopping Adobe processess will also close apps like Photohsop or         ^|
+echo          ^|      Premiere.                                                                ^|
+echo          ^|      ___________________________________________________________________      ^|
+echo          ^|                                                                               ^|
+echo          ^|      [1] Stop Processess   ^|  Stops all Adobe Processess.                     ^|
+echo          ^|                            ^|                                                  ^|
+echo          ^|      [2] Utilities Menu    ^|  Disable auto start, hide Creative Cloud         ^|
+echo          ^|                            ^|  folder.                                         ^|
+echo          ^|                            ^|                                                  ^|
+echo          ^|      [3] Patches Menu      ^|  Patch: Genuine Checker, Service Block,          ^|
+echo          ^|                            ^|  Trial Banner, Acrobat                           ^|
+echo          ^|                            ^|                                                  ^|
+echo          ^|      [4] Credit/Repo       ^|  Credits, Github Repo                            ^|
+echo          ^|      _________________________________________________________________        ^|
+echo          ^|                                                                               ^|
+echo          ^|      [Q] Exit                                                                 ^|
+echo          ^|                                                                               ^|
+echo          ^|_______________________________________________________________________________^|
 echo:          
-choice /C:12345678GQ /N /M ">                                     Select [1,2,3,4,5,6,7,8,G,Q]: "
+choice /C:1234Q /N /M ">                                      Select [1,2,3,4,Q]: "
 
 cls
-if errorlevel 11 exit
-if errorlevel 10 (
+
+if errorlevel 5 exit
+if errorlevel 4 goto creditMenu
+if errorlevel 3 goto patchesMenu
+if errorlevel 2 goto utilityMenu
+
+if errorlevel 1 (
+	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\ProcessKill.ps1
+	goto mainMenu
+)
+
+:utilityMenu
+cls
+echo:
+echo:
+echo           _______________________________________________________________________________
+echo          ^|                                                                               ^|
+echo          ^|                                                                               ^|
+echo          ^|                                   CCSTOPPER                                   ^|
+echo          ^|                                Made by eaaasun                                ^|
+echo          ^|      ___________________________________________________________________      ^|
+echo          ^|                                                                               ^|
+echo          ^|                                    UTILITIES                                  ^|
+echo          ^|      ___________________________________________________________________      ^|
+echo          ^|                                                                               ^|
+echo          ^|      [1] Disable Autostart ^|  Prevents Adobe Services/Processess from         ^|
+echo          ^|                            ^|  starting automatically.                         ^|
+echo          ^|                            ^|                                                  ^|
+echo          ^|      [2] Hide CC Folder    ^|  Hides Creative Cloud Folder in Windows          ^|
+echo          ^|                            ^|  Explorer.                                       ^|
+echo          ^|      _________________________________________________________________        ^|
+echo          ^|                                                                               ^|
+echo          ^|      [Q] Back                                                                 ^|
+echo          ^|                                                                               ^|
+echo          ^|_______________________________________________________________________________^|
+echo:          
+choice /C:12Q /N /M ">                               Select [1,2,Q]: "
+
+cls
+if errorlevel 3 goto mainMenu
+
+if errorlevel 2 (
+	.\scripts\HideCCFiles.bat
+	goto utilityMenu
+)
+
+if errorlevel 1 (
+	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\DisableAutoStart.ps1
+	goto utilityMenu
+)
+
+:patchesMenu
+cls
+echo:
+echo:
+echo           _______________________________________________________________________________
+echo          ^|                                                                               ^|
+echo          ^|                                                                               ^|
+echo          ^|                                   CCSTOPPER                                   ^|
+echo          ^|                                Made by eaaasun                                ^|
+echo          ^|      ___________________________________________________________________      ^|
+echo          ^|                                                                               ^|
+echo          ^|                                     PATCHES                                   ^|
+echo          ^|      ___________________________________________________________________      ^|
+echo          ^|                                                                               ^|
+echo          ^|      [1] Genuine Checker   ^|  Prevents Adobe Services/Processess from         ^|
+echo          ^|                            ^|  starting automatically.                         ^|
+echo          ^|                            ^|                                                  ^|
+echo          ^|      [2] Service Block     ^|  Blocks Adobe servers and the credit card        ^|
+echo          ^|                            ^|  prompt from the hosts file and firewall.        ^|
+echo          ^|                            ^|                                                  ^|
+echo          ^|      [3] Trial Banner      ^|  Removes the trial banner found in apps.         ^|
+echo          ^|                            ^|                                                  ^|
+echo          ^|      [4] Acrobat           ^|  Edits registry to patch Acrobat. NOTE:          ^|
+echo          ^|                            ^|  stop Adobe Processess, patch genuine            ^|
+echo          ^|                            ^|  checker, and patch Acrobat with genP            ^|
+echo          ^|                            ^|  before running this patch.                      ^|
+echo          ^|      _________________________________________________________________        ^|
+echo          ^|                                                                               ^|
+echo          ^|      [Q] Back                                                                 ^|
+echo          ^|                                                                               ^|
+echo          ^|_______________________________________________________________________________^|
+echo:          
+choice /C:1234Q /N /M ">                               Select [1,2,3,4,Q]: "
+
+cls
+
+if errorlevel 5 goto mainMenu
+
+if errorlevel 4 (
+	.\scripts\AcrobatFix.bat
+	goto patchesMenu
+)
+
+if errorlevel 3 (
+	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\TrialRemove.ps1
+	goto patchesMenu
+)
+if errorlevel 2 (
+	.\scripts\ServiceBlock.bat
+	goto patchesMenu
+)
+
+if errorlevel 1 (
+	.\scripts\RemoveAGS.bat
+	goto patchesMenu
+)
+
+:creditMenu
+cls
+echo:
+echo:
+echo           _______________________________________________________________________________
+echo          ^|                                                                               ^|
+echo          ^|                                                                               ^|
+echo          ^|                                    CCSTOPPER                                  ^|
+echo          ^|                                 Made by eaaasun                               ^|
+echo          ^|      ___________________________________________________________________      ^|
+echo          ^|                                                                               ^|
+echo          ^|                                     CREDIT                                    ^|
+echo          ^|                                                                               ^|
+echo          ^|      None of this could have been possible without the lovely people          ^|
+echo          ^|      contributing to, testing, and supporting this script.                    ^|
+echo          ^|                                                                               ^|
+echo          ^|      @eaaasun              ^|  Creator/maintainer                              ^|
+echo          ^|                            ^|                                                  ^|
+echo          ^|      @ItsProfessional      ^|  Contributor                                     ^|
+echo          ^|      @sh32devnull          ^|                                                  ^|
+echo          ^|      @ZEN1X                ^|                                                  ^|
+echo          ^|                            ^|                                                  ^|
+echo          ^|      genP Discord/Reddit   ^|  Patch information and development help.         ^|
+echo          ^|                            ^|                                                  ^|
+echo          ^|      You!                  ^|  Reporting bugs and supporting the               ^|
+echo          ^|                            ^|  project!                                        ^|
+echo          ^|      _________________________________________________________________        ^|
+echo          ^|                                                                               ^|
+echo          ^|      [1] Github Repo                                                          ^|
+echo          ^|                                                                               ^|
+echo          ^|      [Q] Back                                                                 ^|
+echo          ^|                                                                               ^|
+echo          ^|_______________________________________________________________________________^|
+echo:          
+choice /C:1Q /N /M ">                               Select [1,Q]: "
+
+cls
+
+if errorlevel 2 goto mainMenu
+
+if errorlevel 1 (
 	cls
 	start https://github.com/eaaasun/CCStopper
 	goto menu
 )
-if errorlevel 8 (
-	:: Source: https://www.reddit.com/r/GenP/comments/qwermj/wrote_a_quick_script_to_fix_up_the_trial_banner/
-	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\TrialRemove.ps1
-	goto menu
-)
-if errorlevel 7 (
-	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\DisableAutoStart.ps1
-	goto menu
-)
-if errorlevel 6 (
-	.\scripts\HideCCFiles.bat
-	goto menu
-)
-if errorlevel 5 (
-	.\scripts\PatchHostFile.bat
-	goto menu
-)
-if errorlevel 4 (
-	.\scripts\CreditCardStop.bat
-	goto menu
-)
-if errorlevel 3 (
-	.\scripts\AcrobatFix.bat
-	goto menu
-)
-if errorlevel 2 (
-	.\scripts\RemoveAGS.bat
-	goto menu
-)
-if errorlevel 1 (
-	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\ProcessKill.ps1
-	goto menu
-)
+
+
+
+
+@REM if errorlevel 11 exit
+@REM if errorlevel 10 (
+@REM 	cls
+@REM 	start https://github.com/eaaasun/CCStopper
+@REM 	goto menu
+@REM )
+@REM if errorlevel 8 (
+@REM 	:: Source: https://www.reddit.com/r/GenP/comments/qwermj/wrote_a_quick_script_to_fix_up_the_trial_banner/
+@REM 	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\TrialRemove.ps1
+@REM 	goto menu
+@REM )
+@REM if errorlevel 7 (
+@REM 	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\DisableAutoStart.ps1
+@REM 	goto menu
+@REM )
+@REM if errorlevel 6 (
+@REM 	.\scripts\HideCCFiles.bat
+@REM 	goto menu
+@REM )
+@REM if errorlevel 5 (
+@REM 	.\scripts\PatchHostFile.bat
+@REM 	goto menu
+@REM )
+@REM if errorlevel 4 (
+@REM 	.\scripts\CreditCardStop.bat
+@REM 	goto menu
+@REM )
+@REM if errorlevel 3 (
+@REM 	.\scripts\AcrobatFix.bat
+@REM 	goto menu
+@REM )
+@REM if errorlevel 2 (
+@REM 	.\scripts\RemoveAGS.bat
+@REM 	goto menu
+@REM )
+@REM if errorlevel 1 (
+@REM 	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\ProcessKill.ps1
+@REM 	goto menu
+@REM )

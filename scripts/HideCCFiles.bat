@@ -41,12 +41,12 @@ if %data% EQU 0 (
 	echo                  ^|      [1] Restore Creative Cloud Files folder                  ^|
 	echo                  ^|      ___________________________________________________      ^|
 	echo                  ^|                                                               ^|
-	echo                  ^|      [2] Exit                                                 ^|
+	echo                  ^|      [Q] Exit Module                                          ^|
 	echo                  ^|                                                               ^|
 	echo                  ^|                                                               ^|
 	echo                  ^|_______________________________________________________________^|
 	echo:          
-	choice /C:12 /N /M ">                                            Select [1,2]: "
+	choice /C:1Q /N /M ">                                            Select [1,Q]: "
 	if errorlevel 2 (
 		goto exit
 	)
@@ -85,12 +85,12 @@ echo                  ^|                                                        
 echo                  ^|      [2] Proceed without creating restore point               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [3] Exit                                                 ^|
+echo                  ^|      [Q] Exit Module                                          ^|
 echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|
 echo:          
-choice /C:123 /N /M ">                                         Select [1,2,3]: "
+choice /C:12Q /N /M ">                                         Select [1,2,Q]: "
 
 cls
 if errorlevel 3 (
