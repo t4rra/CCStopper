@@ -191,50 +191,6 @@ cls
 if errorlevel 2 goto mainMenu
 
 if errorlevel 1 (
-	cls
 	start https://github.com/eaaasun/CCStopper
-	goto menu
+	goto creditMenu
 )
-
-
-
-
-@REM if errorlevel 11 exit
-@REM if errorlevel 10 (
-@REM 	cls
-@REM 	start https://github.com/eaaasun/CCStopper
-@REM 	goto menu
-@REM )
-@REM if errorlevel 8 (
-@REM 	:: Source: https://www.reddit.com/r/GenP/comments/qwermj/wrote_a_quick_script_to_fix_up_the_trial_banner/
-@REM 	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\TrialRemove.ps1
-@REM 	goto menu
-@REM )
-@REM if errorlevel 7 (
-@REM 	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\DisableAutoStart.ps1
-@REM 	goto menu
-@REM )
-@REM if errorlevel 6 (
-@REM 	.\scripts\HideCCFiles.bat
-@REM 	goto menu
-@REM )
-@REM if errorlevel 5 (
-@REM 	.\scripts\PatchHostFile.bat
-@REM 	goto menu
-@REM )
-@REM if errorlevel 4 (
-@REM 	.\scripts\CreditCardStop.bat
-@REM 	goto menu
-@REM )
-@REM if errorlevel 3 (
-@REM 	.\scripts\AcrobatFix.bat
-@REM 	goto menu
-@REM )
-@REM if errorlevel 2 (
-@REM 	.\scripts\RemoveAGS.bat
-@REM 	goto menu
-@REM )
-@REM if errorlevel 1 (
-@REM 	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\ProcessKill.ps1
-@REM 	goto menu
-@REM )

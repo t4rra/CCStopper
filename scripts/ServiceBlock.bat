@@ -95,7 +95,7 @@ echo                  ^|                                                        
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|
 echo:          
-choice /C:1 /N /M ">                                         Select [Q]: "
+choice /C:Q /N /M ">                                         Select [Q]: "
 
 cls
 if errorlevel 1 (
