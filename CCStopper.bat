@@ -71,7 +71,7 @@ if errorlevel 6 (
 	goto menu
 )
 if errorlevel 5 (
-	.\scripts\PatchHostFile.bat
+	.\scripts\ServiceBlock.bat
 	goto menu
 )
 if errorlevel 4 (
