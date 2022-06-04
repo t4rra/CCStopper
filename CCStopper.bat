@@ -48,7 +48,7 @@ echo                  ^|      [Q] Exit                                          
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|
 echo:          
-choice /C:123456789GQ /N /M ">                                     Select [1,2,3,4,5,6,7,8,9,G,Q]: "
+choice /C:12345678GQ /N /M ">                                     Select [1,2,3,4,5,6,7,8,G,Q]: "
 
 cls
 if errorlevel 11 exit
