@@ -20,11 +20,11 @@ echo          ^|      __________________________________________________________
 echo          ^|                                                                               ^|
 echo          ^|                                SAVE YOUR FILES!                               ^|
 echo          ^|                                                                               ^|
-echo          ^|      Stopping Adobe processess will also close apps like Photohsop or         ^|
+echo          ^|      Stopping Adobe Processes will also close apps like Photohsop or          ^|
 echo          ^|      Premiere.                                                                ^|
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
-echo          ^|      [1] Stop Processess   ^|  Stops all Adobe Processess.                     ^|
+echo          ^|      [1] Stop Processes    ^|  Stops all Adobe Processes.                      ^|
 echo          ^|                            ^|                                                  ^|
 echo          ^|      [2] Utilities Menu    ^|  Disable auto start, hide Creative Cloud         ^|
 echo          ^|                            ^|  folder.                                         ^|
@@ -67,10 +67,10 @@ echo          ^|                                                                
 echo          ^|                                    UTILITIES                                  ^|
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
-echo          ^|      [1] Disable Autostart ^|  Prevents Adobe Services/Processess from         ^|
+echo          ^|      [1] Disable Autostart ^|  Prevents Adobe services/processes from         ^|
 echo          ^|                            ^|  starting automatically.                         ^|
 echo          ^|                            ^|                                                  ^|
-echo          ^|      [2] Hide CC Folder    ^|  Hides Creative Cloud Folder in Windows          ^|
+echo          ^|      [2] Hide CC Folder    ^|  Hides Creative Cloud folder in Windows          ^|
 echo          ^|                            ^|  Explorer.                                       ^|
 echo          ^|      _________________________________________________________________        ^|
 echo          ^|                                                                               ^|
@@ -107,16 +107,16 @@ echo          ^|                                                                
 echo          ^|                                     PATCHES                                   ^|
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
-echo          ^|      [1] Genuine Checker   ^|  Prevents Adobe Services/Processess from         ^|
-echo          ^|                            ^|  starting automatically.                         ^|
+echo          ^|      [1] Genuine Checker   ^|  Deletes and locks the Genuine Checker           ^|
+echo          ^|                            ^|  folder.                                         ^|
 echo          ^|                            ^|                                                  ^|
-echo          ^|      [2] Service Block     ^|  Blocks Adobe servers and the credit card        ^|
-echo          ^|                            ^|  prompt from the hosts file and firewall.        ^|
+echo          ^|      [2] Internet Block    ^|  Blocks Adobe servers and the credit card        ^|
+echo          ^|                            ^|  prompt from accessing the internet.             ^|
 echo          ^|                            ^|                                                  ^|
 echo          ^|      [3] Trial Banner      ^|  Removes the trial banner found in apps.         ^|
 echo          ^|                            ^|                                                  ^|
 echo          ^|      [4] Acrobat           ^|  Edits registry to patch Acrobat. NOTE:          ^|
-echo          ^|                            ^|  stop Adobe Processess, patch genuine            ^|
+echo          ^|                            ^|  stop Adobe Processes, patch genuine             ^|
 echo          ^|                            ^|  checker, and patch Acrobat with genP            ^|
 echo          ^|                            ^|  before running this patch.                      ^|
 echo          ^|      _________________________________________________________________        ^|

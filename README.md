@@ -7,8 +7,8 @@ Kills Adobe's pesky background apps and more!
 Please don't run any code here, unless you know *exactly* what you're doing. If you do, please consider contributing.
 
 ## Table of Contents <!-- omit in toc -->
-- [v1.1.3 Changelog](#v113-changelog)
-- [Instructions](#instructions)
+- [v1.2.0 Changelog](#v120-changelog)
+- [Installation](#installation)
 - [Menu Options](#menu-options)
 - [FAQ](#faq)
 - [Future Features](#future-features)
@@ -17,114 +17,103 @@ Please don't run any code here, unless you know *exactly* what you're doing. If 
 
 **Current Version (stable):** v1.1.3
 
-## v1.1.3 Changelog
+**Current Version (development):** v1.2.0-dev
+
+## v1.2.0 Changelog
 
 - UI Change
-  - Replace button plugin (thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for UI ~~ripoff~~ inspiration)
-- Added Credit Card Stop Module
-  - Creates a firewall rule that blocks `Adobe Desktop Service.exe` from accessing the internet
-  - Blocking ADS bypasses the credit card prompt (confirmed working as of Apr. 4, 2022; subject to change in the future)
-  - Automated the Credit Card workaround in [genP guide #2](https://www.reddit.com/r/GenP/wiki/redditgenpguides#wiki_guide_.232_-_dummy_guide_for_first_timers_genp_.28method_1.3A_cc.2Bgenp.29) 
+  - Added submenus and changed inputs
+- Combined Credit Card Stop module and ServiceBlock module
+  - Thanks to [@sh32devnull](https://github.com/sh32devnull) for ServiceBlock module
+  - Adds Adobe IPs to hosts file and blocks Adobe Desktop Service in firewall
+- Added DisableAutoStart, HideCCFiles, and TrialRemove modules
+  - Thanks to [@ItsProfessional](https://github.com/ItsProfessional) for all these modules
+- Bug Fixes and Improvements
+  - Again, big thanks to contributors mentioned above for helping!
 - Documentation Update
-  - Changed some things, added a "Future Features" section. If you have batch scripting knowledge, please take a look and see what you can do.
-
 ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
 
 
-## Instructions
+## Installation
 
 1. Get the latest [release](https://github.com/eaaasun/CCStopper/releases/latest)
 2. Extract the ZIP file (This is important, CCStopper will not work without the additional scripts in the additional folders)
 3. Run CCStopper.bat
 4. Select an option
-5. Prevent Profit (for Adobe)
-
+5. Prevent profit (for Adobe)
 
 ## Menu Options
 
 <details>
-<summary>End Adobe Processes [1]</summary>
-<br>
-Does what it says, all Adobe processes will be stopped.
+<summary>[1] Stop Processes</summary>
+&nbsp;&nbsp;&nbsp;&nbsp;Does what it says, all Adobe processes will be stopped.
+</details>
+<details>
+<summary>[2] Utilities Menu</summary>
+
+- [1] Disable Autostart - Prevents Adobe services/processes from starting automatically.
+- [2] Hide CC Folder - Hides Creative Cloud folder in Windows Explorer.
+
 </details>
 
 <details>
-<summary>Remove Genuine Checker [2]</summary>
-<br>
-Clears the AdobeGCClient (genuine checker) folder and changes its permissions so that it cannot be modified by applications.
+<summary>[3] Patches Menu</summary>
+
+- [1] Genuine Checker - Deletes and locks the Genuine Checker folder.
+- [2] Service Block - Blocks Adobe servers and the credit card prompt from accessing the internet.
+- [3] Trial Banner - Removes the trial banner found in apps.
+- [4] Acrobat - Edits registry to patch Acrobat. NOTE: please stop Adobe Processes, patch genuine checker, and patch Acrobat with genP before running this patch.
 </details>
 
 <details>
-<summary>Patch Acrobat [3]</summary>
-<br>
-Run "Remove AGS" before proceeding. 
+<summary>[4] Credits/Repo Menu</summary>
 
-This function edits the registry to patch Acrobat. Will ask if you want to create a restore point in the case that registry patching fails catastrophically. Automates <a href="https://www.reddit.com/r/GenP/wiki/redditgenpguides#wiki_guide_.2310_-_adobe_acrobat_pro_dc_.28standalone.2Fcc-less.29">this</a> guide.
-</details>
-
-<details>
-<summary>Credit Card Prompt Fix [4]</summary>
-<br>
-Adds a firewall rule to block the credit card prompt from popping up when signing up for a trial.
-
-Has an option to delete the firewall rule just in case.
+- [1] Github Repo
 </details>
 
 ## FAQ
 
 <details>
 <summary>Q: It asks for administrator permissions?</summary>
-<br>
-A: This script needs those permissions to modify files and settings. The full source code of this script is available in this repository for auditing.</details>
 
-<br>
+A: This script needs those permissions to modify files and settings. The full source code of this script is available in this repository for auditing.</details>
 
 <details>
 <summary>Q: Is this a virus?</summary>
-<br>
-A: Windows might say that it is a virus, but that is a false positive. As stated above, the full source code for this script is avaliable for auditing.
-</details>
 
-<br>
+A: Windows might say that it is a virus, but that is a false positive. As stated above, the full source code for this script is available for auditing.
+</details>
 
 <details>
 <summary>Q: I found a bug/issue! What do I do?</summary>
-<br>
 
-A: Update to the latest version. If the issue presists, check the open issues and [the known issues](https://github.com/eaaasun/CCStopper/blob/main/README.md#known-issues) for any issues that I am aware of. If it's not there, open up an issue describing your problem and how to reproduce it. I'll work on it as soon as I can.
+A: Update to the latest version. If the issue persists, check the open issues and [the known issues](https://github.com/eaaasun/CCStopper/blob/main/README.md#known-issues) for any issues that I am aware of. If it's not there, open up an issue describing your problem and how to reproduce it. I'll work on it as soon as I can.
 
 </details>
-
-<br>
 
 <details>
 <summary>Q: Is this available for MacOS?</summary>
-<br>
+
 A: It is not currently available for MacOS, and I don't intend on porting it to MacOS. Community ports are welcome, but please credit accordingly.
 </details>
 
-<br>
-
 <details>
 <summary>Q: Will more features be added?</summary>
-<br>
+
 A: Yes! They are all in the Future Features section below. Any help with the future features is greatly appreciated!
 </details>
-<br>
 
 <details>
 <summary>Q: Will this affect Adobe apps in any negative way?</summary>
-<br>
+
 A: No, it won't. If you do have Adobe apps (Photoshop, After Effects, etc.) open, it will close them if you decide to end Adobe processes. Other than that, everything should work normally. Please open an issue if this is not the case.
 </details>
-<br>
 
 <details>
 <summary>Q: Is there any way to support the project?</summary>
-<br>
+
 A: Please donate your time! If you have batch scripting knowledge, please look through the Future Features section below and see what you can contribute. Financial donations are not accepted at the moment.
 </details>
-<br>
 
 ## Future Features
 > These are features that I'd like to implement in the future. If you can help, please open a thread in the discussions tab, under the "Development" category, or if you have code already, open a pull request! 
@@ -144,7 +133,7 @@ A: Please donate your time! If you have batch scripting knowledge, please look t
 
 **Issue:** Error message: `the execution of scripts is disabled on this system. Please see "get-help about_signing" for more details.` or pushing the "Remove AGS" button gives no results.
 
-Fix: Run `set-executionpolicy remotesigned` in an admininstrator powershell window, or manually execute the `ProcessKill.ps1` script in the scripts folder once (you can use CCStopper running the script for the first time manually). [Credit to /u/getblownaparte on Reddit for bringing this issue up](https://www.reddit.com/r/GenP/comments/ndhm94/i_made_a_script_to_stop_all_adobe_background/gyb0twq?utm_source=share&utm_medium=web2x&context=3)
+Fix: Run `set-executionpolicy remotesigned` in an administrator powershell window, or manually execute the `ProcessKill.ps1` script in the scripts folder once (you can use CCStopper running the script for the first time manually). [Credit to /u/getblownaparte on Reddit for bringing this issue up](https://www.reddit.com/r/GenP/comments/ndhm94/i_made_a_script_to_stop_all_adobe_background/gyb0twq?utm_source=share&utm_medium=web2x&context=3)
 
 ---
 
@@ -164,4 +153,4 @@ Fix: Run `set-executionpolicy remotesigned` in an admininstrator powershell wind
 
 **Notice:** Don't use this tool for piracy. It's illegal, and multi-billion dollar companies like Adobe _needs_ to profit off unreliable and overpriced software. Piracy _helps_ Adobe by increasing their market dominance. If you want to dethrone Adobe, use [alternatives](https://ass.easun.me).
 
-<h6 align="center">Made with &lt;3 from easun and &lt;/3 for Adobe</h6>
+<h6 align="center">Made with &lt;3, and &lt;/3 for Adobe</h6>
