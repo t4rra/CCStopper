@@ -6,13 +6,13 @@ mode con: cols=100 lines=42
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close) && exit
 cd /d "%~dp0"
 
-Setlocal EnableDelayedExpansion
+setlocal EnableDelayedExpansion
 for /f "usebackq delims=" %%a in (`reg query "HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID"`) do (
 	set key=%%a
 	for %%f in (!key!) do set keyName=%%~nxf
 	if "!keyName:~0,25!" equ "{0E270DAA-1BE6-48F2-AC49-" set clsid=!key!
 )
-Setlocal DisableDelayedExpansion
+setlocal DisableDelayedExpansion
 
 :: Check if System.IsPinnedToNameSpaceTree is already disabled
 :patchCheck
@@ -54,7 +54,6 @@ if %data% EQU 0 (
 		goto mainScript
 	)
 ) else (
-	@REM set folderHidden=false
 	goto mainScript
 )
 
@@ -98,34 +97,30 @@ if errorlevel 3 (
 	goto exit
 )
 if errorlevel 2 (
-	if %folderHidden% == true (
-		goto showFolder
-	) else (
-		goto hideFolder
-	)
+	goto editReg
 )
 if errorlevel 1 (
 	echo Creating system restore point, please be patient.
 	wmic /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Hide CC Files Script", 100, 12
-	if %folderHidden% == true (
-		goto showFolder
-	) else (
-		goto hideFolder
-	)
+	goto editReg
 )
 
+:editReg
+if %folderHidden% == true (
+	goto showFolder
+) else (
+	goto hideFolder
+)
 
 :showFolder
-:: shows CCF in explorer
+:: Shows CCF in file explorer
 reg add %clsid% /v System.IsPinnedToNameSpaceTree /t REG_DWORD /d 1 /f /reg:64
 goto restartAsk
-pause
 
 :hideFolder
-:: Hides CCF from file explorer
+:: Hides CCF in file explorer
 reg add %clsid% /v System.IsPinnedToNameSpaceTree /t REG_DWORD /d 0 /f /reg:64
 goto restartAsk
-pause
 
 :restartAsk
 cls
@@ -160,6 +155,6 @@ if errorlevel 2 (
 )
 if errorlevel 1 (
 	cls
-	taskkill /F /IM explorer.exe & start explorer
+	taskkill /f /im explorer.exe & start explorer
 	goto exit 
 )
