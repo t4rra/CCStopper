@@ -1,18 +1,18 @@
-$myWindowsID=[System.Security.Principal.WindowsIdentity]::GetCurrent()
-$myWindowsPrincipal=new-object System.Security.Principal.WindowsPrincipal($myWindowsID)
-$adminRole=[System.Security.Principal.WindowsBuiltInRole]::Administrator
+$MyWindowsID=[System.Security.Principal.WindowsIdentity]::GetCurrent()
+$MyWindowsPrincipal=New-Object System.Security.Principal.WindowsPrincipal($MyWindowsID)
+$AdminRole=[System.Security.Principal.WindowsBuiltInRole]::Administrator
 
-if($myWindowsPrincipal.IsInRole($adminRole)) {
-$Host.UI.RawUI.WindowTitle = $myInvocation.MyCommand.Definition + "(Elevated)"
+if($MyWindowsPrincipal.IsInRole($AdminRole)) {
+$Host.UI.RawUI.WindowTitle = $MyInvocation.MyCommand.Definition + "(Elevated)"
    Clear-Host
 } else {
    $NewProcess = New-Object System.Diagnostics.ProcessStartInfo "PowerShell";
-   $NewProcess.Arguments = $myInvocation.MyCommand.Definition;
+   $NewProcess.Arguments = $MyInvocation.MyCommand.Definition;
    $NewProcess.Verb = "runas";
    [System.Diagnostics.Process]::Start($newProcess);
-
    exit
 }
+
 $PsAppLocation = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\PHSP_23_3").InstallLocation
 $AiAppLocation = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\ILST_26_2_1").InstallLocation
 $Button = $Shell.Popup($AppLocation, 0, "Trial Banner Hider", 0)
