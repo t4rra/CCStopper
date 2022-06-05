@@ -20,7 +20,7 @@ $Button = $Shell.Popup($AppLocation, 0, "Trial Banner Hider", 0)
 
 $StylePath = 'C:\Program Files\Common Files\Adobe\UXP\extensions\com.adobe.ccx.start-5.9.0\css\styles.css'
 $StylePath1 = "$($PsAppLocation)\Required\UXP\com.adobe.ccx.start\css\styles.css"
-$StylePath2 = "$($AiAppLocation)\Adobe Illustrator 2022\Support Files\Required\UXP\extensions\com.adobe.ccx.start\css\styles.css"
+$StylePath2 = "$($AiAppLocation)\Support Files\Required\UXP\extensions\com.adobe.ccx.start\css\styles.css"
 $LocalePath = 'C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient\locales'
 
 $Style_None = '{"display":"none"}'
