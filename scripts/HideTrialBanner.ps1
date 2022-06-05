@@ -13,13 +13,14 @@ $Host.UI.RawUI.WindowTitle = $myInvocation.MyCommand.Definition + "(Elevated)"
 
    exit
 }
-$AppLocation = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\CORE_1_0_32").InstallLocation
+$PsAppLocation = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\PHSP_23_3").InstallLocation
+$AiAppLocation = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\ILST_26_2_1").InstallLocation
 $Button = $Shell.Popup($AppLocation, 0, "Trial Banner Hider", 0)
 
 
 $StylePath = 'C:\Program Files\Common Files\Adobe\UXP\extensions\com.adobe.ccx.start-5.9.0\css\styles.css'
-$StylePath1 = "$($AppLocation)\Adobe Photoshop 2022\Required\UXP\com.adobe.ccx.start\css\styles.css"
-$StylePath2 = "$($AppLocation)\Adobe Illustrator 2022\Support Files\Required\UXP\extensions\com.adobe.ccx.start\css\styles.css"
+$StylePath1 = "$($PsAppLocation)\Required\UXP\com.adobe.ccx.start\css\styles.css"
+$StylePath2 = "$($AiAppLocation)\Adobe Illustrator 2022\Support Files\Required\UXP\extensions\com.adobe.ccx.start\css\styles.css"
 $LocalePath = 'C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient\locales'
 
 $Style_None = '{"display":"none"}'
