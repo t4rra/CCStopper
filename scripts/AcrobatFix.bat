@@ -61,7 +61,7 @@ echo                  ^|                                                        
 echo                  ^|      [2] Proceed without creating restore point               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [Q] Exit                                                 ^|
+echo                  ^|      [Q] Exit Module                                          ^|
 echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|

@@ -24,7 +24,7 @@ $Style_TrialExpiresBanner = '{"background-color":"#1473E6"}'
 $Style_TrialEnded = '{"background-color":"#d7373f"}'
 
 # Back up file
-powershell -Command "(gc '$StylePath') | Out-File -encoding ASCII '$StylePath.bak'"
+(Get-Content $StylePath) | Out-File -encoding ASCII '$StylePath.bak'
 
 # Replace contents
 
@@ -40,4 +40,4 @@ $ErrorActionPreference= 'silentlycontinue'
 Remove-Item '$LocalePath' -Force -Recurse
 
 $Shell = New-Object -ComObject "WScript.Shell"
-$Button = $Shell.Popup("Trial Banner Removed!", 0, "Trial Banner Remover", 0)
+$Button = $Shell.Popup("Trial banner has been hidden!", 0, "Trial Banner Hider", 0)
