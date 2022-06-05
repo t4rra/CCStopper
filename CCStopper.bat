@@ -84,7 +84,7 @@ cls
 if errorlevel 3 goto mainMenu
 
 if errorlevel 2 (
-	.\scripts\HideCCFiles.bat
+	.\scripts\HideCCFolder.bat
 	goto utilityMenu
 )
 

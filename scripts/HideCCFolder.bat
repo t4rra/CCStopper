@@ -30,7 +30,7 @@ if %data% EQU 0 (
 	echo                  ^|                                                               ^|
 	echo                  ^|                            CCSTOPPER                          ^|
 	echo                  ^|                         Made by eaaasun                       ^|
-	echo                  ^|                        HideCCFiles Module                     ^|
+	echo                  ^|                        HideCCFolder Module                    ^|
 	echo                  ^|      ___________________________________________________      ^|
 	echo                  ^|                                                               ^|
 	echo                  ^|          CREATIVE CLOUD FILES FOLDER ALREADY HIDDEN!          ^|
@@ -101,7 +101,7 @@ if errorlevel 2 (
 )
 if errorlevel 1 (
 	echo Creating system restore point, please be patient.
-	wmic /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Hide CC Files Script", 100, 12
+	wmic /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Hide CC Folder Script", 100, 12
 	goto editReg
 )
 
@@ -132,7 +132,7 @@ echo                  ^|                                                        
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
 echo                  ^|                         Made by eaaasun                       ^|
-echo                  ^|                          HideCCF Module                       ^|
+echo                  ^|                          HideCCFolder Module                  ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|                Hiding CCF from explorer complete!             ^|
