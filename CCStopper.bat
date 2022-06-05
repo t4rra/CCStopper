@@ -137,7 +137,7 @@ if errorlevel 4 (
 )
 
 if errorlevel 3 (
-	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\TrialRemove.ps1
+	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\HideTrialBanner.ps1
 	goto patchesMenu
 )
 if errorlevel 2 (

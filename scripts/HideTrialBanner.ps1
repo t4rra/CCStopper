@@ -40,4 +40,4 @@ $ErrorActionPreference= 'silentlycontinue'
 Remove-Item '$LocalePath' -Force -Recurse
 
 $Shell = New-Object -ComObject "WScript.Shell"
-$Button = $Shell.Popup("Trial Banner Removed!", 0, "Trial Banner Remover", 0)
+$Button = $Shell.Popup("Trial banner has been hidden!", 0, "Trial Banner Hider", 0)
