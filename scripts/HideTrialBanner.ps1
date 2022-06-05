@@ -24,7 +24,7 @@ $Style_TrialExpiresBanner = '{"background-color":"#1473E6"}'
 $Style_TrialEnded = '{"background-color":"#d7373f"}'
 
 # Back up file
-powershell -Command "(gc '$StylePath') | Out-File -encoding ASCII '$StylePath.bak'"
+Powershell -Command "(gc '$StylePath') | Out-File -encoding ASCII '$StylePath.bak'"
 
 # Replace contents
 
