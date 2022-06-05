@@ -49,7 +49,7 @@ if errorlevel 3 goto patchesMenu
 if errorlevel 2 goto utilityMenu
 
 if errorlevel 1 (
-	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\ProcessKill.ps1
+	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\StopProcesses.ps1
 	goto mainMenu
 )
 
