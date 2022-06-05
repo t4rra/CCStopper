@@ -72,7 +72,6 @@ Please don't run any code here, unless you know *exactly* what you're doing. If 
 </details>
 
 ## FAQ
-
 <details>
 <summary>Q: It asks for administrator permissions?</summary>
 
