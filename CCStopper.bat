@@ -20,7 +20,7 @@ echo          ^|      __________________________________________________________
 echo          ^|                                                                               ^|
 echo          ^|                                SAVE YOUR FILES!                               ^|
 echo          ^|                                                                               ^|
-echo          ^|      Stopping Adobe Processes will also close apps like Photohsop or          ^|
+echo          ^|      Stopping Adobe Processes will also close apps like Photoshop or          ^|
 echo          ^|      Premiere.                                                                ^|
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
@@ -84,7 +84,7 @@ cls
 if errorlevel 3 goto mainMenu
 
 if errorlevel 2 (
-	.\scripts\HideCCFiles.bat
+	.\scripts\HideCCFolder.bat
 	goto utilityMenu
 )
 
