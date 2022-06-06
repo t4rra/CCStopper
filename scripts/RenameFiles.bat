@@ -1,0 +1,198 @@
+@echo off
+title CCStopper - Acrobat Fix
+mode con: cols=100 lines=42
+
+:: Asks for Administrator Permissions
+%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close) && exit
+cd /d "%~dp0"
+
+:: Thanks to Verix#2020, from GenP Discord.
+for /f "usebackq tokens=3*" %%A IN (`reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\PHSP_23_3" /v InstallLocation`) do set psAppLocation=%%A %%B
+
+set file0="C:\Program Files (x86)\Adobe\Adobe Sync\CoreSync\CoreSync.exe"
+set file1="C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe"
+set file2="C:\Program Files (x86)\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe"
+set file3="C:\Program Files\Common Files\Adobe\Creative Cloud Libraries\CCLibrary.exe"
+set file4="%psAppLocation%\LogTransport2.exe"
+set file5="C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe"
+set files=%file0% %file1% %file2% %file3% %file4% %file5%
+
+set targetExists=false
+set renameExists=false
+
+:: Check if files are already renamed
+:renameCheck
+for %%a in (%files%) do (
+	setlocal EnableDelayedExpansion
+	set original=%%a
+	set renamed=!original:.exe=.exe.renamed!
+	if exist !renamed! (
+	 	set renameExists=true	
+	)
+	setlocal DisableDelayedExpansion
+)
+
+if %renameExists% == true (
+	cls
+	echo:
+	echo:
+	echo                   _______________________________________________________________
+	echo                  ^|                                                               ^| 
+	echo                  ^|                                                               ^|
+	echo                  ^|                            CCSTOPPER                          ^|
+	echo                  ^|                         Made by eaaasun                       ^|
+	echo                  ^|                        RenameFiles Module                     ^|
+	echo                  ^|      ___________________________________________________      ^|
+	echo                  ^|                                                               ^|
+	echo                  ^|                ADOBE FILES ARE ALREADY RENAMED!               ^|
+	echo                  ^|                                                               ^|
+	echo                  ^|             Would you like to restore those files?            ^|
+	echo                  ^|      ___________________________________________________      ^|
+	echo                  ^|                                                               ^|
+	echo                  ^|      [1] Restore Adobe files                                  ^|
+	echo                  ^|      ___________________________________________________      ^|
+	echo                  ^|                                                               ^|
+	echo                  ^|      [Q] Exit Module                                          ^|
+	echo                  ^|                                                               ^|
+	echo                  ^|                                                               ^|
+	echo                  ^|_______________________________________________________________^|
+	echo:          
+	choice /C:1Q /N /M ">                                            Select [1,Q]: "
+	if errorlevel 2 (
+		goto exit
+	)
+	if errorlevel 1 (
+		goto mainScript
+	)
+) else (
+	goto targetCheck
+)
+
+:: Check if target path exists
+:targetCheck
+for %%a in (%files%) do (
+	if exist %%a (
+		set targetExists=true	
+	)
+)
+
+if %targetExists% == true (
+	goto mainScript
+) else (
+	cls
+	echo The target file cannot be found. Cannot proceed with renaming adobe files.
+	pause
+	goto exit
+)
+
+:exit
+start cmd /k %~dp0\..\CCStopper.bat
+exit
+
+:mainScript
+cls
+:: Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+echo:
+echo:
+echo                   _______________________________________________________________
+echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^|
+echo                  ^|                            CCSTOPPER                          ^|
+echo                  ^|                         Made by eaaasun                       ^|
+echo                  ^|                        RenameFiles Module                     ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|                  THIS WILL RENAME ADOBE FILES!                ^|
+echo                  ^|                                                               ^|
+echo                  ^|      It is HIGHLY recommended to create a system restore      ^|
+echo                  ^|      point in case something goes wrong. All adobe processes  ^|
+echo                  ^|      will also be closed, in order to rename the files.       ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [1] Make system restore point                            ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [2] Proceed without creating restore point               ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [Q] Exit Module                                          ^|
+echo                  ^|                                                               ^|
+echo                  ^|                                                               ^|
+echo                  ^|_______________________________________________________________^|
+echo:          
+choice /C:12Q /N /M ">                                            Select [1,2,Q]: "
+
+cls
+if errorlevel 3 (
+	goto exit
+)
+if errorlevel 2 goto:editFiles
+if errorlevel 1 (
+	echo Creating system restore point, please be patient.
+	wmic /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Rename Adobe Files Script", 100, 12
+	goto renameFiles
+)
+
+:editFiles
+Powershell -ExecutionPolicy RemoteSigned -File .\StopProcesses.ps1
+if %targetExists% == true (
+	goto renameFiles
+) else if %renameExists% == true (
+	goto restoreFiles
+)
+
+:renameFiles
+for %%a in (%files%) do ( 
+	setlocal EnableDelayedExpansion
+	set original=%%a
+	set renamed=!original:.exe=.exe.renamed!
+	for %%f in (!renamed!) do set renamedName=%%~nxf
+	rename %%a !renamedName!
+	setlocal DisableDelayedExpansion
+)
+goto restartAsk
+
+:restoreFiles
+for %%a in (%files%) do ( 
+	setlocal EnableDelayedExpansion
+	set original=%%a
+	set renamed=!original:.exe=.exe.renamed!
+	for %%f in (!original!) do set originalName=%%~nxf
+	rename !renamed! !originalName!
+	setlocal DisableDelayedExpansion
+)
+goto restartAsk
+
+:restartAsk
+cls
+:: Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+echo:
+echo:
+echo                   _______________________________________________________________
+echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^|
+echo                  ^|                            CCSTOPPER                          ^|
+echo                  ^|                         Made by eaaasun                       ^|
+echo                  ^|                        RenameFiles Module                     ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|                   Renaming adobe files complete!              ^|
+echo                  ^|                                                               ^|
+echo                  ^|      The system needs to restart for changes to apply.        ^|
+echo                  ^|      ___________________________________________________      ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [1] Restart now.                                         ^|
+echo                  ^|                                                               ^|
+echo                  ^|      [2] Skip (You will need to manually restart later)       ^|
+echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^| 
+echo                  ^|_______________________________________________________________^|
+echo:          
+choice /C:12 /N /M ">                                            Select [1,2]: "
+
+if errorlevel 2 (
+	goto exit
+)
+if errorlevel 1 (
+	cls
+	shutdown /r /t 0
+)
