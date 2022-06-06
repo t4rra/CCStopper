@@ -1,6 +1,6 @@
 @echo off
 title CCStopper
-cd /D "%~dp0"
+cd /d "%~dp0"
 set "Path=%Path%;%CD%;"
 mode con: cols=99 lines=35
 
