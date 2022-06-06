@@ -24,7 +24,7 @@ if %ERRORLEVEL% EQU 1 (
 	cls
 	echo The target registry key cannot be found. Cannot proceed with Acrobat fix.
 	pause
-	exit
+	goto exit
 ) else (
 	goto mainScript
 )
