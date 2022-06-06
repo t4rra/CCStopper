@@ -21,11 +21,10 @@ set targetExists=false
 set renamedExists=false
 
 :: Check if files are already renamed
-:renameCheck
+:renamedCheck
 for %%a in (%files%) do (
 	setlocal EnableDelayedExpansion
-	set original=%%a
-	set renamed=!original:.exe=.exe.renamed!
+	set "_=%%a" & set renamed=!_:.exe=.exe.renamed!
 	if exist !renamed! (
 	 	set renamedExists=true	
 	)
@@ -137,12 +136,14 @@ Powershell -ExecutionPolicy RemoteSigned -File .\StopProcesses.ps1
 for %%a in (%files%) do ( 
 	setlocal EnableDelayedExpansion
 	set "_=%%a" & set renamed=!_:.exe=.exe.renamed!
-	for %%f in (%%a) do set originalName=%%~nxf
+
+	for %%f in (%%a) do set name=%%~nxf
 	for %%f in (!renamed!) do set renamedName=%%~nxf
+	
 	if %targetExists% == true (
 		rename %%a "!renamedName!" >nul 2>&1
 	) else if %renamedExists% == true (
-		rename !renamed! "!originalName!" >nul 2>&1
+		rename !renamed! "!name!" >nul 2>&1
 	)
 	setlocal DisableDelayedExpansion
 )
