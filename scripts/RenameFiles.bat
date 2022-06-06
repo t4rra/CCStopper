@@ -1,5 +1,5 @@
 @echo off
-title CCStopper - Acrobat Fix
+title CCStopper - Rename Adobe Files
 mode con: cols=100 lines=42
 
 :: Asks for Administrator Permissions
