@@ -9,12 +9,12 @@ cd /d "%~dp0"
 :: Thanks to Verix#2020, from GenP Discord.
 for /f "usebackq tokens=3*" %%A IN (`reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\PHSP_23_3" /v InstallLocation`) do set psAppLocation=%%A %%B
 
-set file1=C:\Program Files (x86)\Adobe\Adobe Sync\CoreSync\CoreSync.exe
-set file2=C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe
-set file3=C:\Program Files (x86)\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe
-set file4=C:\Program Files\Common Files\Adobe\Creative Cloud Libraries\CCLibrary.exe
-set file5=%psAppLocation%\LogTransport2.exe
-set file6=C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe
+set file1="C:\Program Files (x86)\Adobe\Adobe Sync\CoreSync\CoreSync.exe"
+set file2="C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe"
+set file3="C:\Program Files (x86)\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe"
+set file4="C:\Program Files\Common Files\Adobe\Creative Cloud Libraries\CCLibrary.exe"
+set file5="%psAppLocation%\LogTransport2.exe"
+set file6="C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe"
 set files=%file1% %file2% %file3% %file4% %file5% %file6%
 
 set targetExists=false
@@ -141,9 +141,9 @@ for %%a in (%files%) do (
 	for %%f in (!renamed!) do set renamedName=%%~nxf
 	
 	if %targetExists% == true (
-		rename "%%a" "!renamedName!" >nul 2>&1
+		rename %%a "!renamedName!" >nul 2>&1
 	) else if %renamedExists% == true (
-		rename "!renamed!" "!name!" >nul 2>&1
+		rename !renamed! "!name!" >nul 2>&1
 	)
 	setlocal DisableDelayedExpansion
 )
