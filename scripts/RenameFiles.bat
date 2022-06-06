@@ -18,7 +18,7 @@ set file6="C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe"
 set files=%file1% %file2% %file3% %file4% %file5% %file6%
 
 set targetExists=false
-set renameExists=false
+set renamedExists=false
 
 :: Check if files are already renamed
 :renameCheck
@@ -27,12 +27,12 @@ for %%a in (%files%) do (
 	set original=%%a
 	set renamed=!original:.exe=.exe.renamed!
 	if exist !renamed! (
-	 	set renameExists=true	
+	 	set renamedExists=true	
 	)
 	setlocal DisableDelayedExpansion
 )
 
-if %renameExists% == true (
+if %renamedExists% == true (
 	cls
 	echo:
 	echo:
@@ -125,39 +125,25 @@ cls
 if errorlevel 3 (
 	goto exit
 )
-if errorlevel 2 goto:editFiles
+if errorlevel 2 goto:renameFiles
 if errorlevel 1 (
 	echo Creating system restore point, please be patient.
 	wmic /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Rename Adobe Files Script", 100, 12
 	goto renameFiles
 )
 
-:editFiles
-Powershell -ExecutionPolicy RemoteSigned -File .\StopProcesses.ps1
-if %targetExists% == true (
-	goto renameFiles
-) else if %renameExists% == true (
-	goto restoreFiles
-)
-
 :renameFiles
+Powershell -ExecutionPolicy RemoteSigned -File .\StopProcesses.ps1
 for %%a in (%files%) do ( 
 	setlocal EnableDelayedExpansion
-	set original=%%a
-	set renamed=!original:.exe=.exe.renamed!
+	set "_=%%a" & set renamed=!_:.exe=.exe.renamed!
+	for %%f in (%%a) do set originalName=%%~nxf
 	for %%f in (!renamed!) do set renamedName=%%~nxf
-	rename %%a "!renamedName!" >nul 2>&1
-	setlocal DisableDelayedExpansion
-)
-goto restartAsk
-
-:restoreFiles
-for %%a in (%files%) do ( 
-	setlocal EnableDelayedExpansion
-	set original=%%a
-	set renamed=!original:.exe=.exe.renamed!
-	for %%f in (!original!) do set originalName=%%~nxf
-	rename !renamed! "!originalName!" >nul 2>&1
+	if %targetExists% == true (
+		rename %%a "!renamedName!" >nul 2>&1
+	) else if %renamedExists% == true (
+		rename !renamed! "!originalName!" >nul 2>&1
+	)
 	setlocal DisableDelayedExpansion
 )
 goto restartAsk
