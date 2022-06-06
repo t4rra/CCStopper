@@ -1,7 +1,7 @@
 @echo off
 title CCStopper
 cd /D "%~dp0"
-set "Path=%Path%;%CD%;%CD%\Plugins;"
+set "Path=%Path%;%CD%;"
 mode con: cols=99 lines=35
 
 :: Main script
