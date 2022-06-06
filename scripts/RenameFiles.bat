@@ -147,7 +147,7 @@ for %%a in (%files%) do (
 	set renamed=!original:.exe=.exe.renamed!
 	for %%f in (!renamed!) do set renamedName=%%~nxf
 	set renamedName=^"!renamedName!^"
-	rename %%a !renamedName!
+	rename %%a !renamedName! >nul 2>&1
 	setlocal DisableDelayedExpansion
 )
 goto restartAsk
@@ -159,7 +159,7 @@ for %%a in (%files%) do (
 	set renamed=!original:.exe=.exe.renamed!
 	for %%f in (!original!) do set originalName=%%~nxf
 	set originalName=^"!originalName!^"
-	rename !renamed! !originalName!
+	rename !renamed! !originalName! >nul 2>&1
 	setlocal DisableDelayedExpansion
 )
 goto restartAsk
