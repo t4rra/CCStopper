@@ -162,7 +162,7 @@ echo                  ^|                         Made by eaaasun                
 echo                  ^|                        RenameFiles Module                     ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|                   Renaming adobe files complete!              ^|
+echo                  ^|              Renaming adobe process files complete!           ^|
 echo                  ^|                                                               ^|
 echo                  ^|      The system needs to restart for changes to apply.        ^|
 echo                  ^|      ___________________________________________________      ^|
