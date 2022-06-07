@@ -15,7 +15,7 @@ echo          ^|                                                                
 echo          ^|                                                                               ^|
 echo          ^|                                   CCSTOPPER                                   ^|
 echo          ^|                                Made by eaaasun                                ^|
-echo          ^|                                 ver. 1.2.0-dev                                ^|
+echo          ^|                                  v1.2.0-dev                                   ^|
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
 echo          ^|                                SAVE YOUR FILES!                               ^|
@@ -27,9 +27,10 @@ echo          ^|                                                                
 echo          ^|      [1] Stop Processes    ^|  Stops all Adobe Processes.                      ^|
 echo          ^|                            ^|                                                  ^|
 echo          ^|      [2] Utilities Menu    ^|  Disable auto start, hide Creative Cloud         ^|
-echo          ^|                            ^|  folder, rename adobe process files.             ^|
+echo          ^|                            ^|  folder, block unnecessary background            ^|
+echo          ^|                            ^|  processes.                                      ^|
 echo          ^|                            ^|                                                  ^|
-echo          ^|      [3] Patches Menu      ^|  Patch: Genuine Checker, Service Block,          ^|
+echo          ^|      [3] Patches Menu      ^|  Patch: Genuine Checker, Internet Block,         ^|
 echo          ^|                            ^|  Trial Banner, Acrobat                           ^|
 echo          ^|                            ^|                                                  ^|
 echo          ^|      [4] Credit/Repo       ^|  Credits, Github Repo                            ^|
@@ -61,13 +62,12 @@ echo           _________________________________________________________________
 echo          ^|                                                                               ^|
 echo          ^|                                                                               ^|
 echo          ^|                                   CCSTOPPER                                   ^|
-echo          ^|                                Made by eaaasun                                ^|
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
 echo          ^|                                    UTILITIES                                  ^|
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
-echo          ^|      [1] Disable Autostart ^|  Prevents Adobe services/processes from         ^|
+echo          ^|      [1] Disable Autostart ^|  Prevents Adobe services or processes from       ^|
 echo          ^|                            ^|  starting automatically.                         ^|
 echo          ^|                            ^|                                                  ^|
 echo          ^|      [2] Hide CC Folder    ^|  Hides Creative Cloud folder in Windows          ^|
@@ -81,7 +81,7 @@ echo          ^|      [Q] Back                                                  
 echo          ^|                                                                               ^|
 echo          ^|_______________________________________________________________________________^|
 echo:          
-choice /C:123Q /N /M ">                               Select [1,2,3,Q]: "
+choice /C:123Q /N /M ">                                     Select [1,2,3,Q]: "
 
 cls
 if errorlevel 4 goto mainMenu
@@ -109,7 +109,6 @@ echo           _________________________________________________________________
 echo          ^|                                                                               ^|
 echo          ^|                                                                               ^|
 echo          ^|                                   CCSTOPPER                                   ^|
-echo          ^|                                Made by eaaasun                                ^|
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
 echo          ^|                                     PATCHES                                   ^|
@@ -149,7 +148,7 @@ if errorlevel 3 (
 	goto patchesMenu
 )
 if errorlevel 2 (
-	.\scripts\ServiceBlock.bat
+	.\scripts\InternetBlock.bat
 	goto patchesMenu
 )
 
@@ -166,10 +165,9 @@ echo           _________________________________________________________________
 echo          ^|                                                                               ^|
 echo          ^|                                                                               ^|
 echo          ^|                                    CCSTOPPER                                  ^|
-echo          ^|                                 Made by eaaasun                               ^|
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
-echo          ^|                                     CREDIT                                    ^|
+echo          ^|                                     CREDITS                                   ^|
 echo          ^|                                                                               ^|
 echo          ^|      None of this could have been possible without the lovely people          ^|
 echo          ^|      contributing to, testing, and supporting this script.                    ^|

@@ -83,8 +83,7 @@ echo                   _________________________________________________________
 echo                  ^|                                                               ^| 
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
-echo                  ^|                         Made by eaaasun                       ^|
-echo                  ^|                       ServiceBlock Module                     ^|
+echo                  ^|                       InternetBlock Module                    ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|                       Patching completed.                     ^|

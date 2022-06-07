@@ -46,7 +46,6 @@ echo                   _________________________________________________________
 echo                  ^|                                                               ^| 
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
-echo                  ^|                         Made by eaaasun                       ^|
 echo                  ^|                        AcrobatFix Module                      ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
@@ -95,7 +94,6 @@ echo                   _________________________________________________________
 echo                  ^|                                                               ^| 
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
-echo                  ^|                         Made by eaaasun                       ^|
 echo                  ^|                        AcrobatFix Module                      ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|

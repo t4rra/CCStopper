@@ -39,7 +39,6 @@ if %renamedExists% == true (
 	echo                  ^|                                                               ^| 
 	echo                  ^|                                                               ^|
 	echo                  ^|                            CCSTOPPER                          ^|
-	echo                  ^|                         Made by eaaasun                       ^|
 	echo                  ^|                        RenameFiles Module                     ^|
 	echo                  ^|      ___________________________________________________      ^|
 	echo                  ^|                                                               ^|
@@ -97,7 +96,6 @@ echo                   _________________________________________________________
 echo                  ^|                                                               ^| 
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
-echo                  ^|                         Made by eaaasun                       ^|
 echo                  ^|                        RenameFiles Module                     ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
@@ -166,7 +164,6 @@ echo                   _________________________________________________________
 echo                  ^|                                                               ^| 
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
-echo                  ^|                         Made by eaaasun                       ^|
 echo                  ^|                        RenameFiles Module                     ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|

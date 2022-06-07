@@ -29,7 +29,6 @@ if %data% EQU 0 (
 	echo                  ^|                                                               ^| 
 	echo                  ^|                                                               ^|
 	echo                  ^|                            CCSTOPPER                          ^|
-	echo                  ^|                         Made by eaaasun                       ^|
 	echo                  ^|                        HideCCFolder Module                    ^|
 	echo                  ^|      ___________________________________________________      ^|
 	echo                  ^|                                                               ^|
@@ -70,7 +69,6 @@ echo                   _________________________________________________________
 echo                  ^|                                                               ^| 
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
-echo                  ^|                         Made by eaaasun                       ^|
 echo                  ^|                        HideCCFiles Module                     ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
@@ -131,8 +129,7 @@ echo                   _________________________________________________________
 echo                  ^|                                                               ^| 
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
-echo                  ^|                         Made by eaaasun                       ^|
-echo                  ^|                          HideCCFolder Module                  ^|
+echo                  ^|                       HideCCFolder Module                     ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|                Hiding CCF from explorer complete!             ^|
