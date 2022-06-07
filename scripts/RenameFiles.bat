@@ -103,14 +103,14 @@ echo                  ^|      __________________________________________________
 echo                  ^|                                                               ^|
 echo                  ^|                  THIS WILL RENAME ADOBE FILES!                ^|
 echo                  ^|                                                               ^|
-echo                  ^|      It is HIGHLY recommended to create a system restore      ^|
-echo                  ^|      point in case something goes wrong. All adobe processes  ^|
+echo                  ^|      It is HIGHLY recommended to backup the adobe files in    ^|
+echo                  ^|      case something goes wrong. All adobe processes           ^|
 echo                  ^|      will also be closed, in order to rename the files.       ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [1] Make system restore point                            ^|
+echo                  ^|      [1] Backup adobe files (Backup will be at C:\AdobeFiles) ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [2] Proceed without creating restore point               ^|
+echo                  ^|      [2] Proceed without backing up adobe files               ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [Q] Exit Module                                          ^|
@@ -126,15 +126,23 @@ if errorlevel 3 (
 )
 if errorlevel 2 goto:renameFiles
 if errorlevel 1 (
-	echo Creating system restore point, please be patient.
-	wmic /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "Before CCStopper Rename Adobe Files Script", 100, 12
-	goto renameFiles
+	for %%a in (%files%) do ( 
+		setlocal EnableDelayedExpansion
+
+		for %%f in (%%a) do set name=%%~nxf
+		
+		if %targetExists% == true (
+			if not exist "C:\AdobeFiles" mkdir C:\AdobeFiles
+			copy %%a "C:\AdobeFiles" /y >nul 2>&1
+		)
+		setlocal DisableDelayedExpansion
+	)
 )
 
 :renameFiles
 Powershell -ExecutionPolicy RemoteSigned -File .\StopProcesses.ps1
 setlocal EnableDelayedExpansion
-for %%a in (%files%) do ( 
+for %%a in (%files%) do (
 	set "_=%%a" & set renamed=!_:.exe=.exe.renamed!
 
 	for %%f in (%%a) do set name="%%~nxf"
