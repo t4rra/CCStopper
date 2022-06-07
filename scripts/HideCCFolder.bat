@@ -16,7 +16,7 @@ setlocal DisableDelayedExpansion
 
 :: Check if System.IsPinnedToNameSpaceTree is already disabled
 :patchCheck
-for /f "usebackq tokens=3*" %%A IN (`reg query %clsid% /v System.IsPinnedToNameSpaceTree`) do set data=%%A
+for /f "usebackq tokens=3*" %%A IN (`reg query %clsid% /v System.IsPinnedToNameSpaceTree`) do set data=%%A %%B
 
 set folderHidden=false
 

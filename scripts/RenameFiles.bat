@@ -7,7 +7,7 @@ mode con: cols=100 lines=42
 cd /d "%~dp0"
 
 :: Thanks to Verix#2020, from GenP Discord.
-for /f "usebackq tokens=3*" %%A IN (`reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\PHSP_23_3" /v InstallLocation`) do set psAppLocation=%%A
+for /f "usebackq tokens=3*" %%A IN (`reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\PHSP_23_3" /v InstallLocation`) do set psAppLocation=%%A %%B
 
 set file1="C:\Program Files (x86)\Adobe\Adobe Sync\CoreSync\CoreSync.exe"
 set file2="C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe"
