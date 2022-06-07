@@ -105,7 +105,7 @@ A: Yes! They are all in the Future Features section below. Any help with the fut
 <details>
 <summary>Q: Will this affect Adobe apps in any negative way?</summary>
 
-A: No, it won't. If you do have Adobe apps (Photoshop, After Effects, etc.) open, it will close them if you decide to end Adobe processes. Other than that, everything should work normally. Please open an issue if this is not the case.
+A: No, it won't. If you do have Adobe apps (Photoshop, After Effects, etc.) open, it will close them if you decide to end Adobe processes. If you decide to rename adobe process files some functionality of adobe apps might be lost, however 95% of functionality will remain. Other than that, everything should work normally. Please open an issue if this is not the case.
 </details>
 
 <details>

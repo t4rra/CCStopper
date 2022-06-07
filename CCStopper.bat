@@ -27,7 +27,7 @@ echo          ^|                                                                
 echo          ^|      [1] Stop Processes    ^|  Stops all Adobe Processes.                      ^|
 echo          ^|                            ^|                                                  ^|
 echo          ^|      [2] Utilities Menu    ^|  Disable auto start, hide Creative Cloud         ^|
-echo          ^|                            ^|  folder.                                         ^|
+echo          ^|                            ^|  folder, rename adobe process files.             ^|
 echo          ^|                            ^|                                                  ^|
 echo          ^|      [3] Patches Menu      ^|  Patch: Genuine Checker, Service Block,          ^|
 echo          ^|                            ^|  Trial Banner, Acrobat                           ^|
@@ -72,16 +72,24 @@ echo          ^|                            ^|  starting automatically.         
 echo          ^|                            ^|                                                  ^|
 echo          ^|      [2] Hide CC Folder    ^|  Hides Creative Cloud folder in Windows          ^|
 echo          ^|                            ^|  Explorer.                                       ^|
+echo          ^|                            ^|                                                  ^|
+echo          ^|      [3] Rename Files      ^|  Renames unnecessary Adobe process files to      ^|
+echo          ^|                            ^|  prevent them from ever starting.                ^|
 echo          ^|      _________________________________________________________________        ^|
 echo          ^|                                                                               ^|
 echo          ^|      [Q] Back                                                                 ^|
 echo          ^|                                                                               ^|
 echo          ^|_______________________________________________________________________________^|
 echo:          
-choice /C:12Q /N /M ">                               Select [1,2,Q]: "
+choice /C:123Q /N /M ">                               Select [1,2,3,Q]: "
 
 cls
-if errorlevel 3 goto mainMenu
+if errorlevel 4 goto mainMenu
+
+if errorlevel 3 (
+	.\scripts\RenameFiles.bat
+	goto utilityMenu
+)
 
 if errorlevel 2 (
 	.\scripts\HideCCFolder.bat
