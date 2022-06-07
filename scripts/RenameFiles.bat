@@ -171,23 +171,15 @@ echo                  ^|                        RenameFiles Module              
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|              Renaming adobe process files complete!           ^|
-echo                  ^|                                                               ^|
-echo                  ^|      The system needs to restart for changes to apply.        ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|      [1] Restart now.                                         ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [2] Skip (You will need to manually restart later)       ^|
+echo                  ^|      [Q] Exit Module                                          ^|
 echo                  ^|                                                               ^| 
 echo                  ^|                                                               ^| 
 echo                  ^|_______________________________________________________________^|
 echo:          
-choice /C:12 /N /M ">                                            Select [1,2]: "
+choice /C:Q /N /M ">                                            Select [Q]: "
 
-if errorlevel 2 (
-	goto exit
-)
 if errorlevel 1 (
-	cls
-	shutdown /r /t 0
+	goto exit
 )
