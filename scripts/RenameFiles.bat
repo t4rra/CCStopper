@@ -137,13 +137,13 @@ for %%a in (%files%) do (
 	setlocal EnableDelayedExpansion
 	set "_=%%a" & set renamed=!_:.exe=.exe.renamed!
 
-	for %%f in (%%a) do set name=%%~nxf
-	for %%f in (!renamed!) do set renamedName=%%~nxf
+	for %%f in (%%a) do set name="%%~nxf"
+	for %%f in (!renamed!) do set renamedName="%%~nxf"
 	
 	if %targetExists% == true (
-		rename %%a "!renamedName!" >nul 2>&1
+		rename %%a !renamedName! >nul 2>&1
 	) else if %renamedExists% == true (
-		rename !renamed! "!name!" >nul 2>&1
+		rename !renamed! !name! >nul 2>&1
 	)
 	setlocal DisableDelayedExpansion
 )
