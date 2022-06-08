@@ -67,13 +67,14 @@ Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "
 }
 
 if($adobeAppRunning) {
-	echo "You had an adobe app open, do you want to continue?"
-	Pause
-	# if(yes) {
-	# 	Foreach($process in $processes) {
-	# 		if(!($process.HasExited)) {
-	# 			$process | Stop-Process -Force -Out-Null
-	# 		}
-	# 	}
-	# }
+	$continueStopProcess = Read-Host "There are Adobe apps open. Do you want to continue? (y/n)"
+	if($continueStopProcess -eq "y") {
+		Foreach($process in $processes) {
+			if(!($process.HasExited)) {
+				$process | Stop-Process -Force | Out-Null
+			}
+		}
+	} else {
+		exit
+	}
 }
