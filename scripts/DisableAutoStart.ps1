@@ -19,7 +19,7 @@ Get-Service -DisplayName Adobe* | Set-Service -StartupType Manual
 # Disable processes auto-start
 Get-Item "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" | Foreach-Object {
    $Path = $_.PSPath
-   $_.Property | Foreach-Object {
+   $_.Property | ForEach-Object {
       $Name = $_
       $File = Get-ItemProperty -LiteralPath $Path -Name $Name | Select -Expand $Name
 
