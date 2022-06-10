@@ -13,68 +13,33 @@ $Host.UI.RawUI.WindowTitle = $MyInvocation.MyCommand.Definition + "(Elevated)"
    exit
 }
 
-Add-Type -TypeDefinition @'
-using System;
-using System.Runtime.InteropServices;
-
-public class ProcessWindowFinder
-{
-	private delegate bool WindowDelegate(IntPtr hWnd, int lParam);
-
-	[DllImport("user32.dll", SetLastError=true)]
-	private static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
-
-	[DllImport("user32.dll")]
-	private static extern bool EnumDesktopWindows(IntPtr hDesktop, WindowDelegate lpfn, IntPtr lParam);
-
-	public static bool FindByPID(uint pid)
-	{
-		bool found = false;
-		ProcessWindowFinder.WindowDelegate filter = delegate(IntPtr hWnd, int lParam)
-		{
-			if(!found)
-			{
-				// test whether this window belongs to the target process 
-				// if we haven't already found a windows belonging to it
-				uint _pid;
-				GetWindowThreadProcessId(hWnd, out _pid);
-				if(pid == _pid)
-					found = true;
-			}
-
-			return true;
-		};
-		EnumDesktopWindows(IntPtr.Zero, filter, IntPtr.Zero);
-
-		return found;
-	}
-}
-'@
-
 # Stops Adobe Processes and Services, source: https://gist.github.com/carcheky/530fd85ffff6719486038542a8b5b997#gistcomment-3586740
+
+# Stop adobe services
 Get-Service -DisplayName Adobe* | Stop-Service
 
-$processes = @()
-$adobeAppRunning = $false
+# Stop adobe processes
+$Processes = @()
+$AdobeAppRunning = $False
 
 Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "Adobe"} | Foreach-Object {
-	$processes += ,$_
-
-	if([ProcessWindowFinder]::FindByPID($_.Id)) {
-		# process has a window
-		$adobeAppRunning = $true
+	$Processes += ,$_
+	$Shell  = New-Object -ComObject Wscript.Shell
+	if($Shell.AppActivate($_.ProcessName) -eq "True") {
+		# Process has a window
+		$AdobeAppRunning = $True
 	}
 }
 
-if($adobeAppRunning) {
-	$continueStopProcess = Read-Host "There are Adobe apps open. Do you want to continue? (y/n)"
-	if($continueStopProcess -eq "y") {
-		Foreach($process in $processes) {
-			if(!($process.HasExited)) {
-				$process | Stop-Process -Force | Out-Null
+if($AdobeAppRunning -eq $True) {
+	$ContinueStopProcess = Read-Host "There are Adobe apps open. Do you want to continue? (y/n)"
+	if($ContinueStopProcess -eq "y") {
+		Foreach($Process in $Processes) {
+			if(!($Process.HasExited)) {
+				$Process | Stop-Process -Force | Out-Null
 			}
 		}
 	} else {
-		exit
+		Exit
 	}
 }
