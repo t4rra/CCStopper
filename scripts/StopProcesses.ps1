@@ -22,7 +22,7 @@ Get-Service -DisplayName Adobe* | Stop-Service
 $Processes = @()
 $AdobeAppRunning = $False
 
-Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "Adobe"} | Foreach-Object {
+Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "Adobe"} | ForEach-Object {
 	$Processes += ,$_
 	$Shell  = New-Object -ComObject Wscript.Shell
 	if($Shell.AppActivate($_.ProcessName) -eq "True") {
