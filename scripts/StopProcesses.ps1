@@ -24,8 +24,8 @@ $AdobeAppRunning = $False
 
 Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "Adobe"} | ForEach-Object {
 	$Processes += ,$_
-	$Shell  = New-Object -ComObject Wscript.Shell
-	if($Shell.AppActivate($_.ProcessName) -eq "True" -or $_.ProcessName -eq "msedgewebview2") {
+	$MyShell  = New-Object -ComObject Wscript.Shell
+	if($MyShell.AppActivate($_.ProcessName) -eq "True" -or $_.ProcessName -eq "msedgewebview2") {
 		# Process has a window
 		$AdobeAppRunning = $True
 	}
