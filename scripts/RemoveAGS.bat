@@ -6,8 +6,8 @@ cd /d "%~dp0"
 :: Disables AGSSerivce from starting up, then stops it
 for %%a in (AGSService AGMService) do ( 
 	sc config "%%a" start= disabled
-	sc stop "%%a"
-	taskkill /IM "%%a.exe" /F
+	sc stop "%%a" >nul 2>&1
+	taskkill /im "%%a.exe" /f
 )
 
 :: Checks if AGSService Exists

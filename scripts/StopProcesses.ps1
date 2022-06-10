@@ -63,6 +63,8 @@ Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "
 	if([ProcessWindowFinder]::FindByPID($_.Id)) {
 		# process has a window
 		$adobeAppRunning = $true
+		write-host $adobeAppRunning
+		write-host $_.
 	}
 }
 
