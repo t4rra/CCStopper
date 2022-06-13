@@ -7,7 +7,7 @@ cd /d "%~dp0"
 for %%a in (AGSService AGMService) do ( 
 	sc config "%%a" start= disabled
 	sc stop "%%a" >nul 2>&1
-	taskkill /im "%%a.exe" >nul 2>&1 /f
+	taskkill /im "%%a.exe" /f >nul 2>&1
 )
 
 :: Checks if AGSService Exists
