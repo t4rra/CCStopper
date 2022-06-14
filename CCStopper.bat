@@ -73,7 +73,7 @@ echo          ^|                            ^|                                  
 echo          ^|      [2] Hide CC Folder    ^|  Hides Creative Cloud folder in Windows          ^|
 echo          ^|                            ^|  Explorer.                                       ^|
 echo          ^|                            ^|                                                  ^|
-echo          ^|      [3] Rename Files      ^|  Renames unnecessary Adobe process files to      ^|
+echo          ^|      [3] Block Processes   ^|  Blocks unnecessary Adobe process files to       ^|
 echo          ^|                            ^|  prevent them from ever starting.                ^|
 echo          ^|      _________________________________________________________________        ^|
 echo          ^|                                                                               ^|
@@ -87,7 +87,7 @@ cls
 if errorlevel 4 goto mainMenu
 
 if errorlevel 3 (
-	.\scripts\RenameFiles.bat
+	.\scripts\BlockProcesses.bat
 	goto utilityMenu
 )
 
