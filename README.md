@@ -26,7 +26,7 @@ Please don't run any code here, unless you know *exactly* what you're doing. If 
 - Combined Credit Card Stop module and ServiceBlock module
   - Thanks to [@sh32devnull](https://github.com/sh32devnull) for ServiceBlock module
   - Adds Adobe IPs to hosts file and blocks Adobe Desktop Service in firewall
-- Added DisableAutoStart, HideCCFolder, and HideTrialBanner modules
+- Added DisableAutoStart, HideCCFolder, BlockProcesses, and HideTrialBanner modules
   - Thanks to [@ItsProfessional](https://github.com/ItsProfessional) for all these modules
 - Bug Fixes and Improvements
   - Again, big thanks to contributors mentioned above for helping!
