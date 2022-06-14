@@ -103,9 +103,9 @@ for %%a in (%files%) do (
 	)
 )
 setlocal DisableDelayedExpansion
-goto restartAsk
+goto done
 
-:restartAsk
+:done
 cls
 :: Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 echo:
