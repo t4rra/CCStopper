@@ -1,5 +1,5 @@
 @echo off
-title CCStopper - Rename Adobe Files
+title CCStopper - Block Adobe Processes
 mode con: cols=100 lines=42
 
 :: Asks for Administrator Permissions
@@ -18,20 +18,20 @@ set file6="C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe"
 set files=%file1% %file2% %file3% %file4% %file5% %file6%
 
 set targetExists=false
-set renamedExists=false
+set blockedExists=false
 
-:: Check if files are already renamed
-:renamedCheck
+:: Check if files are already blocked
+:blockedCheck
 setlocal EnableDelayedExpansion
 for %%a in (%files%) do (
-	set "_=%%a" & set renamed=!_:.exe=.exe.renamed!
-	if exist !renamed! (
-	 	set renamedExists=true	
+	set "_=%%a" & set blocked=!_:.exe=.exe.blocked!
+	if exist !blocked! (
+		set blockedExists=true
 	)
 )
 setlocal DisableDelayedExpansion
 
-if %renamedExists% == true (
+if %blockedExists% == true (
 	cls
 	echo:
 	echo:
@@ -39,10 +39,10 @@ if %renamedExists% == true (
 	echo                  ^|                                                               ^| 
 	echo                  ^|                                                               ^|
 	echo                  ^|                            CCSTOPPER                          ^|
-	echo                  ^|                        RenameFiles Module                     ^|
+	echo                  ^|                        BlockProcesses Module                  ^|
 	echo                  ^|      ___________________________________________________      ^|
 	echo                  ^|                                                               ^|
-	echo                  ^|                ADOBE FILES ARE ALREADY RENAMED!               ^|
+	echo                  ^|                ADOBE FILES ARE ALREADY BLOCKED!               ^|
 	echo                  ^|                                                               ^|
 	echo                  ^|             Would you like to restore those files?            ^|
 	echo                  ^|      ___________________________________________________      ^|
@@ -78,7 +78,7 @@ if %targetExists% == true (
 	goto mainScript
 ) else (
 	cls
-	echo The target file cannot be found. Cannot proceed with renaming adobe files.
+	echo The target file cannot be found. Cannot proceed with blocking adobe files.
 	pause
 	goto exit
 )
@@ -91,15 +91,15 @@ exit
 Powershell -ExecutionPolicy RemoteSigned -File .\StopProcesses.ps1
 setlocal EnableDelayedExpansion
 for %%a in (%files%) do (
-	set "_=%%a" & set renamed=!_:.exe=.exe.renamed!
+	set "_=%%a" & set blocked=!_:.exe=.exe.blocked!
 
 	for %%f in (%%a) do set name="%%~nxf"
-	for %%f in (!renamed!) do set renamedName="%%~nxf"
+	for %%f in (!blocked!) do set blockedName="%%~nxf"
 	
 	if %targetExists% == true (
-		rename %%a !renamedName! >nul 2>&1
-	) else if %renamedExists% == true (
-		rename !renamed! !name! >nul 2>&1
+		rename %%a !blockedName! >nul 2>&1
+	) else if %blockedExists% == true (
+		rename !blocked! !name! >nul 2>&1
 	)
 )
 setlocal DisableDelayedExpansion
@@ -114,10 +114,10 @@ echo                   _________________________________________________________
 echo                  ^|                                                               ^| 
 echo                  ^|                                                               ^|
 echo                  ^|                            CCSTOPPER                          ^|
-echo                  ^|                        RenameFiles Module                     ^|
+echo                  ^|                        BlockProcesses Module                  ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|              Renaming adobe process files complete!           ^|
+echo                  ^|              Blocking adobe process files complete!           ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [Q] Exit Module                                          ^|
