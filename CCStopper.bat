@@ -83,7 +83,7 @@ echo          ^|      [Q] Back                                                  
 echo          ^|                                                                               ^|
 echo          ^|_______________________________________________________________________________^|
 echo:          
-choice /C:1234Q /N /M ">                                   Select [1,2,3,4,Q]: "
+choice /C:1234Q /N /M ">                                        Select [1,2,3,4,Q]: "
 
 cls
 if errorlevel 5 goto mainMenu
@@ -136,11 +136,11 @@ echo          ^|      [Q] Back                                                  
 echo          ^|                                                                               ^|
 echo          ^|_______________________________________________________________________________^|
 echo:          
-choice /C:123Q /N /M ">                                Select [1,2,3,Q]: "
+choice /C:123Q /N /M ">                                       Select [1,2,3,Q]: "
 
 cls
 
-if errorlevel 5 goto mainMenu
+if errorlevel 4 goto mainMenu
 
 if errorlevel 3 (
 	.\scripts\AcrobatFix.bat

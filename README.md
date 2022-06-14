@@ -119,10 +119,7 @@ A: Please donate your time! If you have batch scripting knowledge, please look t
 
 - [ ] Patch Retention
   - Locks the patched file from genP so that nothing can modify/delete it
-  - I'm stuck at setting a list of filepaths that the script can read off and patch.
-- [ ] Running in background
-  - tbh i have no idea where to even start with this
-  - Goal: have an option to run the ProcessKill script every set interval 
+  - I'm stuck at setting a list of filepaths that the script can read off and patch. 
 - [ ] Backup documentation/scripts
 ## Known Issues
 > There are more issues in the [issues](https://github.com/eaaasun/CCStopper/issues) section; these are just the most common ones.
