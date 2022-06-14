@@ -73,7 +73,7 @@ echo          ^|                            ^|                                  
 echo          ^|      [2] Hide CC Folder    ^|  Hides Creative Cloud folder in Windows          ^|
 echo          ^|                            ^|  Explorer.                                       ^|
 echo          ^|                            ^|                                                  ^|
-echo          ^|      [3] Block Processes   ^|  Blocks unnecessary Adobe process files to      ^|
+echo          ^|      [3] Block Processes   ^|  Blocks unnecessary Adobe process files to       ^|
 echo          ^|                            ^|  prevent them from ever starting.                ^|
 echo          ^|      _________________________________________________________________        ^|
 echo          ^|                                                                               ^|
