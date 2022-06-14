@@ -20,19 +20,13 @@ Get-Service -DisplayName Adobe* | Stop-Service
 
 # Stop adobe processes
 $Processes = @()
-$AdobeAppRunning = $False
-
 Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "Adobe"} | ForEach-Object {
 	$Processes += ,$_
 	if($_.mainWindowTitle.Length) {
 		# Process has a window
-		$AdobeAppRunning = $True
+		$ContinueStopProcess = Read-Host "There are Adobe apps open. Do you want to continue? (y/n)"
+		if($ContinueStopProcess -ne "y") { Exit }
 	}
-}
-
-if($AdobeAppRunning) {
-	$ContinueStopProcess = Read-Host "There are Adobe apps open. Do you want to continue? (y/n)"
-	if($ContinueStopProcess -ne "y") { Exit }
 }
 
 Foreach($Process in $Processes) { Stop-Process $Process -Force | Out-Null }
