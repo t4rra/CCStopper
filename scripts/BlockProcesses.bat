@@ -88,56 +88,6 @@ start cmd /k %~dp0\..\CCStopper.bat
 exit
 
 :mainScript
-cls
-:: Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-echo:
-echo:
-echo                   _______________________________________________________________
-echo                  ^|                                                               ^| 
-echo                  ^|                                                               ^|
-echo                  ^|                            CCSTOPPER                          ^|
-echo                  ^|                        RenameFiles Module                     ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|                  THIS WILL RENAME ADOBE FILES!                ^|
-echo                  ^|                                                               ^|
-echo                  ^|      It is HIGHLY recommended to backup the adobe files in    ^|
-echo                  ^|      case something goes wrong. All adobe processes           ^|
-echo                  ^|      will also be closed, in order to rename the files.       ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [1] Backup adobe files (Backup will be at C:\AdobeFiles) ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [2] Proceed without backing up adobe files               ^|
-echo                  ^|      ___________________________________________________      ^|
-echo                  ^|                                                               ^|
-echo                  ^|      [Q] Exit Module                                          ^|
-echo                  ^|                                                               ^|
-echo                  ^|                                                               ^|
-echo                  ^|_______________________________________________________________^|
-echo:          
-choice /C:12Q /N /M ">                                            Select [1,2,Q]: "
-
-cls
-if errorlevel 3 (
-	goto exit
-)
-if errorlevel 2 goto:renameFiles
-if errorlevel 1 (
-	for %%a in (%files%) do ( 
-		setlocal EnableDelayedExpansion
-
-		for %%f in (%%a) do set name=%%~nxf
-		
-		if %targetExists% == true (
-			if not exist "C:\AdobeFiles" mkdir C:\AdobeFiles
-			copy %%a "C:\AdobeFiles" /y >nul 2>&1
-		)
-		setlocal DisableDelayedExpansion
-	)
-)
-
-:renameFiles
 Powershell -ExecutionPolicy RemoteSigned -File .\StopProcesses.ps1
 setlocal EnableDelayedExpansion
 for %%a in (%files%) do (
