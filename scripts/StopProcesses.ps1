@@ -23,7 +23,6 @@ Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "
 	if($_.mainWindowTitle.Length) {
 		# Process has a window
 		$ContinueStopProcess = Read-Host "There are Adobe apps open. Do you want to continue? (y/n)"
-		if($ContinueStopProcess -ne "y") { Exit }
-		Foreach($Process in $Processes) { Stop-Process $Process -Force | Out-Null }
+		if($ContinueStopProcess -eq "y") { Stop-Process $_ -Force | Out-Null }
 	}
 }
