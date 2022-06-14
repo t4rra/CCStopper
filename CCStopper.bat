@@ -19,19 +19,17 @@ echo          ^|                                  v1.2.0-dev                    
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
 echo          ^|                                SAVE YOUR FILES!                               ^|
-echo          ^|                                                                               ^|
-echo          ^|      Stopping Adobe Processes will also close apps like Photoshop or          ^|
-echo          ^|      Premiere.                                                                ^|
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
 echo          ^|      [1] Stop Processes    ^|  Stops all Adobe Processes.                      ^|
 echo          ^|                            ^|                                                  ^|
 echo          ^|      [2] Utilities Menu    ^|  Disable auto start, hide Creative Cloud         ^|
 echo          ^|                            ^|  folder, block unnecessary background            ^|
-echo          ^|                            ^|  processes.                                      ^|
+echo          ^|                            ^|  processes and internet access (fixes            ^|
+echo          ^|                            ^|  credit card prompt).                            ^|
 echo          ^|                            ^|                                                  ^|
-echo          ^|      [3] Patches Menu      ^|  Patch: Genuine Checker, Internet Block,         ^|
-echo          ^|                            ^|  Trial Banner, Acrobat                           ^|
+echo          ^|      [3] Patches Menu      ^|  Patch: Genuine Checker, Trial Banner,           ^|
+echo          ^|                            ^|  Acrobat                                         ^|
 echo          ^|                            ^|                                                  ^|
 echo          ^|      [4] Credit/Repo       ^|  Credits, Github Repo                            ^|
 echo          ^|      _________________________________________________________________        ^|
@@ -64,7 +62,7 @@ echo          ^|                                                                
 echo          ^|                                   CCSTOPPER                                   ^|
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
-echo          ^|                                    UTILITIES                                  ^|
+echo          ^|                                   UTILITIES                                   ^|
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
 echo          ^|      [1] Disable Autostart ^|  Prevents Adobe services or processes from       ^|
@@ -75,16 +73,25 @@ echo          ^|                            ^|  Explorer.                       
 echo          ^|                            ^|                                                  ^|
 echo          ^|      [3] Block Processes   ^|  Blocks unnecessary Adobe process files to       ^|
 echo          ^|                            ^|  prevent them from ever starting.                ^|
+echo          ^|                            ^|                                                  ^|
+echo          ^|      [4] Internet Block    ^|  Blocks Adobe servers and the credit card        ^|
+echo          ^|                            ^|  prompt from accessing the internet.             ^|
+echo          ^|                            ^|  All functionality should remain the same.       ^|
 echo          ^|      _________________________________________________________________        ^|
 echo          ^|                                                                               ^|
 echo          ^|      [Q] Back                                                                 ^|
 echo          ^|                                                                               ^|
 echo          ^|_______________________________________________________________________________^|
 echo:          
-choice /C:123Q /N /M ">                                     Select [1,2,3,Q]: "
+choice /C:1234Q /N /M ">                                   Select [1,2,3,4,Q]: "
 
 cls
-if errorlevel 4 goto mainMenu
+if errorlevel 5 goto mainMenu
+
+if errorlevel 4 (
+	.\scripts\InternetBlock.bat
+	goto utilityMenu
+)
 
 if errorlevel 3 (
 	.\scripts\BlockProcesses.bat
@@ -111,18 +118,15 @@ echo          ^|                                                                
 echo          ^|                                   CCSTOPPER                                   ^|
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
-echo          ^|                                     PATCHES                                   ^|
+echo          ^|                                    PATCHES                                    ^|
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
 echo          ^|      [1] Genuine Checker   ^|  Deletes and locks the Genuine Checker           ^|
 echo          ^|                            ^|  folder.                                         ^|
 echo          ^|                            ^|                                                  ^|
-echo          ^|      [2] Internet Block    ^|  Blocks Adobe servers and the credit card        ^|
-echo          ^|                            ^|  prompt from accessing the internet.             ^|
+echo          ^|      [2] Trial Banner      ^|  Removes the trial banner found in apps.         ^|
 echo          ^|                            ^|                                                  ^|
-echo          ^|      [3] Trial Banner      ^|  Removes the trial banner found in apps.         ^|
-echo          ^|                            ^|                                                  ^|
-echo          ^|      [4] Acrobat           ^|  Edits registry to patch Acrobat. NOTE:          ^|
+echo          ^|      [3] Acrobat           ^|  Edits registry to patch Acrobat. NOTE:          ^|
 echo          ^|                            ^|  stop Adobe Processes, patch genuine             ^|
 echo          ^|                            ^|  checker, and patch Acrobat with genP            ^|
 echo          ^|                            ^|  before running this patch.                      ^|
@@ -132,23 +136,19 @@ echo          ^|      [Q] Back                                                  
 echo          ^|                                                                               ^|
 echo          ^|_______________________________________________________________________________^|
 echo:          
-choice /C:1234Q /N /M ">                               Select [1,2,3,4,Q]: "
+choice /C:123Q /N /M ">                                Select [1,2,3,Q]: "
 
 cls
 
 if errorlevel 5 goto mainMenu
 
-if errorlevel 4 (
+if errorlevel 3 (
 	.\scripts\AcrobatFix.bat
 	goto patchesMenu
 )
 
-if errorlevel 3 (
-	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\HideTrialBanner.ps1
-	goto patchesMenu
-)
 if errorlevel 2 (
-	.\scripts\InternetBlock.bat
+	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\HideTrialBanner.ps1
 	goto patchesMenu
 )
 

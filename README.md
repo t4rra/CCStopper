@@ -120,9 +120,6 @@ A: Please donate your time! If you have batch scripting knowledge, please look t
 - [ ] Patch Retention
   - Locks the patched file from genP so that nothing can modify/delete it
   - I'm stuck at setting a list of filepaths that the script can read off and patch.
-- [ ] Revamp the ProcessKill script
-  - Currently, the script stops any process that mentions `Adobe` in its `Company Name` attribute. It is a "'shotgun' approach" as stated by [the creator](https://gist.github.com/carcheky/530fd85ffff6719486038542a8b5b997#gistcomment-3586740) of the command. It'll kill any CC app (Photoshop, Premiere, etc.) running, destroying unsaved work.
-  - Getting individual processes and blocking them is unfeasible, as Adobe changes that every time they sneeze
 - [ ] Running in background
   - tbh i have no idea where to even start with this
   - Goal: have an option to run the ProcessKill script every set interval 
