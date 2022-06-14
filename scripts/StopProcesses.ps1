@@ -25,13 +25,13 @@ $AdobeAppRunning = $False
 Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "Adobe"} | ForEach-Object {
 	$Processes += ,$_
 	$MyShell  = New-Object -ComObject Wscript.Shell
-	if($MyShell.AppActivate($_.ProcessName) -eq "True" -or $_.ProcessName -eq "msedgewebview2" -or $_.ProcessName -eq "CEPHtmlEngine" -or $_.Path.StartsWith('C:\Program Files\WindowsApps\')) {
+	if($MyShell.AppActivate($_.ProcessName) -or $_.mainWindowTitle.Length) {
 		# Process has a window
 		$AdobeAppRunning = $True
 	}
 }
 
-if($AdobeAppRunning -eq $True) {
+if($AdobeAppRunning) {
 	$ContinueStopProcess = Read-Host "There are Adobe apps open. Do you want to continue? (y/n)"
 	if($ContinueStopProcess -ne "y") { Exit }
 }
