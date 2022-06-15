@@ -17,9 +17,8 @@ function Get-UninstallKey ([String]$ID) {
 	return (Get-ChildItem HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall -Recurse | Where-Object {$_.PSChildName -Like "$ID*"}).Name
 }
 
-$AppLocation = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\CORE_1_0_32").InstallLocation
-$PSAppLocation = (Get-ItemProperty -Path Registry::$(Get-UninstallKey -ID "PHSP") -Name InstallLocation)
-$AIAppLocation = (Get-ItemProperty -Path Registry::$(Get-UninstallKey -ID "ILST") -Name InstallLocation)
+$PSAppLocation = (Get-ItemProperty -Path Registry::$(Get-UninstallKey -ID "PHSP")).InstallLocation
+$AIAppLocation = (Get-ItemProperty -Path Registry::$(Get-UninstallKey -ID "ILST")).InstallLocation
 
 $CommonExtensions = 'C:\Program Files\Common Files\Adobe\UXP\extensions'
 $StylePath = "$CommonExtensions\$((Get-ChildItem $CommonExtensions -Recurse | Where-Object {$_.PSChildName -Like 'com.adobe.ccx.start-*' } | Select -Last 1).Name)\css\styles.css"
@@ -36,12 +35,11 @@ $Style_TrialEnded = '{"background-color":"#d7373f"}'
 
 # Replace contents
 
-(Get-Content $StylePath -Raw) -replace $Style_TrialExpiresBanner, $Style_None | Set-Content $StylePath
-(Get-Content $StylePath1 -Raw) -replace $Style_TrialExpiresBanner, $Style_None | Set-Content $StylePath1
-(Get-Content $StylePath2 -Raw) -replace $Style_TrialExpiresBanner, $Style_None | Set-Content $StylePath2
-(Get-Content $StylePath -Raw) -replace $Style_TrialEnded, $Style_None | Set-Content $StylePath
-(Get-Content $StylePath1 -Raw) -replace $Style_TrialEnded, $Style_None | Set-Content $StylePath1
-(Get-Content $StylePath2 -Raw) -replace $Style_TrialEnded, $Style_None | Set-Content $StylePath2
+$StylePaths = @($StylePath, $StylePath1, $StylePath2)
+$StylePaths | ForEach-Object {
+   (Get-Content "$_" -Raw) -replace $Style_TrialExpiresBanner, $Style_None | Set-Content $_
+   (Get-Content "$_" -Raw) -replace $Style_TrialEnded, $Style_None | Set-Content $_
+}
 
 # Delete Language Packs
 $ErrorActionPreference= 'silentlycontinue'
