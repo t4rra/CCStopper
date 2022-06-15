@@ -83,7 +83,6 @@ if errorlevel 1 (
 reg add "HKLM\Software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsAMTEnforced /t REG_DWORD /d 1 /f /reg:64
 reg delete "HKLM\Software\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsNGLEnforced /f /reg:64
 goto restartAsk
-pause
 
 :restartAsk
 cls
