@@ -19,10 +19,14 @@ $Host.UI.RawUI.WindowTitle = $MyInvocation.MyCommand.Definition + "(Elevated)"
 Get-Service -DisplayName Adobe* | Stop-Service
 
 # Stop adobe processes
+$Processes = @()
 Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "Adobe"} | ForEach-Object {
+	$Processes += ,$_
 	if($_.mainWindowTitle.Length) {
 		# Process has a window
 		$ContinueStopProcess = Read-Host "There are Adobe apps open. Do you want to continue? (y/n)"
-		if($ContinueStopProcess -eq "y") { Stop-Process $_ -Force | Out-Null }
+		if($ContinueStopProcess -ne "y") { Exit }
 	}
 }
+
+Foreach($Process in $Processes) { Stop-Process $Process -Force | Out-Null }
