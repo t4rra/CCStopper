@@ -19,8 +19,8 @@ function Get-UninstallKey ([String]$ID) {
 
 $PSAppLocation = (Get-ItemProperty -Path Registry::$(Get-UninstallKey -ID "PHSP")).InstallLocation
 $AIAppLocation = (Get-ItemProperty -Path Registry::$(Get-UninstallKey -ID "ILST")).InstallLocation
-
 $CommonExtensions = 'C:\Program Files\Common Files\Adobe\UXP\extensions'
+
 $StylePath = "$CommonExtensions\$((Get-ChildItem $CommonExtensions -Recurse | Where-Object {$_.PSChildName -Like 'com.adobe.ccx.start-*' } | Select -Last 1).Name)\css\styles.css"
 $StylePath1 = "$($PSAppLocation)\Required\UXP\com.adobe.ccx.start\css\styles.css"
 $StylePath2 = "$($AIAppLocation)\Support Files\Required\UXP\extensions\com.adobe.ccx.start\css\styles.css"
