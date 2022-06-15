@@ -34,8 +34,7 @@ set blockedExists=false
 for %%a in (%files%) do (
 	icacls "C:\Program Files (x86)\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe" | findstr "BUILTIN\Administrators:(F)"
 	if errorlevel 1 (
-		@REM WILL TRIGGER IF FILE DOESN'T EXIST!!!!!!!!!!
-		set blockedExists=true
+		if exist %%a set blockedExists=true
 	)
 	if errorlevel 0 (
 		set targetExists=true	
