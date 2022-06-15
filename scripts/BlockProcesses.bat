@@ -12,7 +12,9 @@ setlocal EnableDelayedExpansion
 for /f "usebackq delims=" %%a in (`reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"`) do (
 	set key=%%a
 	for %%f in (!key!) do set keyName=%%~nxf
-	if "!keyName:~0,5!" equ "PHSP_" set psAppLocation=!key!
+	if "!keyName:~0,5!" equ "PHSP_" (
+		for /f "usebackq tokens=3*" %%A IN (`reg query !key! /v InstallLocation`) do set psAppLocation=%%A %%B
+	)
 )
 setlocal DisableDelayedExpansion
 
