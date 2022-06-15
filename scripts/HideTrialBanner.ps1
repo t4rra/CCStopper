@@ -20,7 +20,6 @@ function Get-UninstallKey ([String]$ID) {
 $AppLocation = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\CORE_1_0_32").InstallLocation
 $PSAppLocation = (Get-ItemProperty -Path Registry::$(Get-UninstallKey -ID "PHSP") -Name InstallLocation)
 $AIAppLocation = (Get-ItemProperty -Path Registry::$(Get-UninstallKey -ID "ILST") -Name InstallLocation)
-# $Button = $Shell.Popup($AppLocation, 0, "Trial Banner Hider", 0)
 
 $CommonExtensions = 'C:\Program Files\Common Files\Adobe\UXP\extensions'
 $StylePath = "$CommonExtensions\$((Get-ChildItem $CommonExtensions -Recurse | Where-Object {$_.PSChildName -Like 'com.adobe.ccx.start-*' } | Select -Last 1).Name)\css\styles.css"
@@ -50,4 +49,3 @@ Remove-Item "$LocalePath" -Force -Recurse
 
 $Shell = New-Object -ComObject "WScript.Shell"
 $Shell.Popup("Trial banner has been hidden!", 0, "Trial Banner Hider", 0)
-# $Button = $Shell.Popup("Trial banner has been hidden!", 0, "Trial Banner Hider", 0)
