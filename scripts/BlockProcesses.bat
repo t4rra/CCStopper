@@ -26,22 +26,22 @@ set file5="%psAppLocation%\LogTransport2.exe"
 set file6="C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe"
 set files=%file1% %file2% %file3% %file4% %file5% %file6%
 
-set targetExists=false
-set blockedExists=false
+set isNotBlocked=false
+set isBlocked=false
 
 :: Check if files are already blocked
 :blockedCheck
 for %%a in (%files%) do (
 	icacls "C:\Program Files (x86)\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe" | findstr "BUILTIN\Administrators:(F)"
 	if errorlevel 1 (
-		if exist %%a set blockedExists=true
+		if exist %%a set isBlocked=true
 	)
 	if errorlevel 0 (
-		set targetExists=true	
+		set isNotBlocked=true	
 	)
 )
 
-if %blockedExists% == true (
+if %isBlocked% == true (
 	cls
 	echo:
 	echo:
@@ -73,7 +73,7 @@ if %blockedExists% == true (
 		goto mainScript
 	)
 )
-if %targetExists% == true (
+if %isNotBlocked% == true (
 	goto mainScript
 )
 
@@ -89,9 +89,9 @@ exit
 :mainScript
 Powershell -ExecutionPolicy RemoteSigned -File .\StopProcesses.ps1
 for %%a in (%files%) do (
-	if %targetExists% == true (
+	if %isNotBlocked% == true (
 		icacls %%a /deny Administrators:(F)
-	) else if %blockedExists% == true (
+	) else if %isBlocked% == true (
 		icacls %%a /grant Administrators:(F)
 	)
 )
