@@ -1,15 +1,15 @@
-$MyWindowsID=[System.Security.Principal.WindowsIdentity]::GetCurrent()
-$MyWindowsPrincipal=New-Object System.Security.Principal.WindowsPrincipal($MyWindowsID)
-$AdminRole=[System.Security.Principal.WindowsBuiltInRole]::Administrator
+$MyWindowsID = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+$MyWindowsPrincipal = New-Object System.Security.Principal.WindowsPrincipal($MyWindowsID)
+$AdminRole = [System.Security.Principal.WindowsBuiltInRole]::Administrator
 
 if($MyWindowsPrincipal.IsInRole($AdminRole)) {
 $Host.UI.RawUI.WindowTitle = $MyInvocation.MyCommand.Definition + "(Elevated)"
    Clear-Host
 } else {
-   $NewProcess = New-Object System.Diagnostics.ProcessStartInfo "PowerShell";
-   $NewProcess.Arguments = $MyInvocation.MyCommand.Definition;
-   $NewProcess.Verb = "runas";
-   [System.Diagnostics.Process]::Start($newProcess);
+   $NewProcess = New-Object System.Diagnostics.ProcessStartInfo "PowerShell"
+   $NewProcess.Arguments = $MyInvocation.MyCommand.Definition
+   $NewProcess.Verb = "runas"
+   [System.Diagnostics.Process]::Start($newProcess)
    exit
 }
 
