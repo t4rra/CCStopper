@@ -1,6 +1,6 @@
 # CCStopper <!-- omit in toc --> 
 
-Kills Adobe's pesky background apps and more!
+Stops Adobe's pesky background apps and more!
 
 ## THIS IS THE DEVELOPMENT VERSION! <!-- omit in toc -->
 
@@ -105,7 +105,7 @@ A: Yes! They are all in the Future Features section below. Any help with the fut
 <details>
 <summary>Q: Will this affect Adobe apps in any negative way?</summary>
 
-A: No, it won't. If you do have Adobe apps (Photoshop, After Effects, etc.) open, it will close them if you decide to end Adobe processes. If you decide to block adobe process files some functionality of adobe apps might be lost, however 95% of functionality will remain. Other than that, everything should work normally. Please open an issue if this is not the case.
+A: No, it won't. If you do have Adobe apps (Photoshop, After Effects, etc.) open, it will close them if you decide to end Adobe processes. If you decide to block adobe processes some functionality of adobe apps might be lost, however 95% of functionality will remain. Other than that, everything should work normally. Please open an issue if this is not the case.
 </details>
 
 <details>
@@ -124,7 +124,7 @@ A: Please donate your time! If you have batch scripting knowledge, please look t
 ## Known Issues
 > There are more issues in the [issues](https://github.com/eaaasun/CCStopper/issues) section; these are just the most common ones.
 
-**Issue:** Error message: `the execution of scripts is disabled on this system. Please see "get-help about_signing" for more details.` or pushing the "Remove AGS" button gives no results.
+**Issue:** Error message: `The execution of scripts is disabled on this system. Please see "Get-Help about_signing" for more details.` or selecting the "Genuine Checker" patch gives no results.
 
 Fix: Run `Set-ExecutionPolicy RemoteSigned` in an administrator powershell window, or manually execute the `ProcessKill.ps1` script in the scripts folder once (you can use CCStopper running the script for the first time manually). [Credit to /u/getblownaparte on Reddit for bringing this issue up](https://www.reddit.com/r/GenP/comments/ndhm94/i_made_a_script_to_stop_all_adobe_background/gyb0twq?utm_source=share&utm_medium=web2x&context=3)
 
