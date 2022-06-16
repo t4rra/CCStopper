@@ -108,11 +108,15 @@ echo:
 echo                   _______________________________________________________________
 echo                  ^|                                                               ^| 
 echo                  ^|                                                               ^|
-echo                  ^|                            CCSTOPPER                          ^|
-echo                  ^|                        BlockProcesses Module                  ^|
+echo                  ^|                           CCSTOPPER                           ^|
+echo                  ^|                     BlockProcesses Module                     ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|              Blocking adobe process files complete!           ^|
+if %isBlocked% == true (
+	echo                  ^|                        Unblocked files!                       ^|
+) else (
+	echo                  ^|              Blocking adobe process files complete!           ^|
+)
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [Q] Exit Module                                          ^|
