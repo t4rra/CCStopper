@@ -31,12 +31,15 @@ set isBlocked=false
 :: Check if files are already blocked
 :blockedCheck
 for %%a in (%files%) do (
-	icacls %%a | findstr "BUILTIN\Administrators:(I)(F)"
-	if errorlevel 1 (
-		if exist %%a set isBlocked=true
-	)
-	if errorlevel 0 (
-		set isNotBlocked=true	
+	if exist %%a (
+		icacls %%a | findstr "BUILTIN\Administrators:(N)" >nul 2>&1
+		if errorlevel 1 (
+			set isNotBlocked=true
+		) else (
+			if errorlevel 0 (
+				set isBlocked=true	
+			)
+		)
 	)
 )
 
@@ -88,13 +91,14 @@ exit
 :mainScript
 Powershell -ExecutionPolicy RemoteSigned -File .\StopProcesses.ps1
 for %%a in (%files%) do (
-	if %isNotBlocked% == true (
-		icacls %%a /deny Administrators:(F)
-	) else if %isBlocked% == true (
-		icacls %%a /reset
+	if %isBlocked% == true (
+		icacls %%a /reset >nul 2>&1
+	) else (
+		if %isNotBlocked% == true (
+			icacls %%a /deny Administrators:^(F^) >nul 2>&1
+		)
 	)
 )
-goto done
 
 :done
 cls
