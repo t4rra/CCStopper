@@ -11,7 +11,7 @@ for %%a in (AGSService AGMService) do (
 )
 
 :: Checks if AGSService Exists
-IF EXIST "%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient" (
+if exist "%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient" (
 	rmdir /Q /S "%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient"
 )
 
