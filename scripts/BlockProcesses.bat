@@ -32,7 +32,7 @@ set isBlocked=false
 :: Check if files are already blocked
 :blockedCheck
 for %%a in (%files%) do (
-	icacls "C:\Program Files (x86)\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe" | findstr "BUILTIN\Administrators:(F)"
+	icacls %%a | findstr "BUILTIN\Administrators:(I)(F)"
 	if errorlevel 1 (
 		if exist %%a set isBlocked=true
 	)
@@ -92,7 +92,7 @@ for %%a in (%files%) do (
 	if %isNotBlocked% == true (
 		icacls %%a /deny Administrators:(F)
 	) else if %isBlocked% == true (
-		icacls %%a /grant Administrators:(F)
+		icacls %%a /reset
 	)
 )
 goto done
