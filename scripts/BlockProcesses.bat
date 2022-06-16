@@ -6,8 +6,6 @@ mode con: cols=100 lines=42
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close) && exit
 cd /d "%~dp0"
 
-:: Thanks to Verix#2020, from GenP Discord.
-
 setlocal EnableDelayedExpansion
 for /f "usebackq delims=" %%a in (`reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"`) do (
 	set key=%%a
@@ -18,6 +16,7 @@ for /f "usebackq delims=" %%a in (`reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW643
 )
 setlocal DisableDelayedExpansion
 
+:: Thanks to Verix#2020, from GenP Discord.
 set file1="C:\Program Files (x86)\Adobe\Adobe Sync\CoreSync\CoreSync.exe"
 set file2="C:\Program Files\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe"
 set file3="C:\Program Files (x86)\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe"
@@ -32,12 +31,15 @@ set isBlocked=false
 :: Check if files are already blocked
 :blockedCheck
 for %%a in (%files%) do (
-	icacls "C:\Program Files (x86)\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe" | findstr "BUILTIN\Administrators:(F)"
-	if errorlevel 1 (
-		if exist %%a set isBlocked=true
-	)
-	if errorlevel 0 (
-		set isNotBlocked=true	
+	if exist %%a (
+		icacls %%a | findstr "BUILTIN\Administrators:(N)" >nul 2>&1
+		if errorlevel 1 (
+			set isNotBlocked=true
+		) else (
+			if errorlevel 0 (
+				set isBlocked=true	
+			)
+		)
 	)
 )
 
@@ -89,13 +91,14 @@ exit
 :mainScript
 Powershell -ExecutionPolicy RemoteSigned -File .\StopProcesses.ps1
 for %%a in (%files%) do (
-	if %isNotBlocked% == true (
-		icacls %%a /deny Administrators:(F)
-	) else if %isBlocked% == true (
-		icacls %%a /grant Administrators:(F)
+	if %isBlocked% == true (
+		icacls %%a /reset >nul 2>&1
+	) else (
+		if %isNotBlocked% == true (
+			icacls %%a /deny Administrators:^(F^) >nul 2>&1
+		)
 	)
 )
-goto done
 
 :done
 cls
