@@ -76,7 +76,7 @@ echo          ^|                            ^|  prevent them from ever starting.
 echo          ^|                            ^|                                                  ^|
 echo          ^|      [4] Internet Block    ^|  Blocks Adobe servers and the credit card        ^|
 echo          ^|                            ^|  prompt from accessing the internet.             ^|
-echo          ^|                            ^|  All functionality should remain the same.       ^|
+echo          ^|                            ^|  Core functionality should be unaffected.        ^|
 echo          ^|      _________________________________________________________________        ^|
 echo          ^|                                                                               ^|
 echo          ^|      [Q] Back                                                                 ^|
@@ -190,7 +190,7 @@ echo          ^|      [Q] Back                                                  
 echo          ^|                                                                               ^|
 echo          ^|_______________________________________________________________________________^|
 echo:          
-choice /C:1Q /N /M ">                               Select [1,Q]: "
+choice /C:1Q /N /M ">                                        Select [1,Q]: "
 
 cls
 

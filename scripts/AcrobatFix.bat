@@ -1,4 +1,8 @@
 @echo off
+:: Asks for Administrator Permissions
+%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close) && exit
+cd /d "%~dp0"
+
 title CCStopper - Acrobat Fix
 mode con: cols=100 lines=42
 
@@ -34,10 +38,6 @@ start cmd /k %~dp0\..\CCStopper.bat
 exit
 
 :mainScript
-:: Asks for Administrator Permissions
-%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close) && exit
-cd /d "%~dp0"
-
 cls
 :: Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 echo:

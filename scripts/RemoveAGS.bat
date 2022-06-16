@@ -11,12 +11,12 @@ for %%a in (AGSService AGMService) do (
 )
 
 :: Checks if AGSService Exists
-IF EXIST "C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient" (
-	rmdir /Q /S "C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient"
+IF EXIST "%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient" (
+	rmdir /Q /S "%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient"
 )
 
-cd "C:\Program Files (x86)\Common Files\Adobe\"
-mkdir "C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient"
-icacls "C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient" /deny Administrators:(F)
+cd "%ProgramFiles(x86)%\Common Files\Adobe\"
+mkdir "%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient"
+icacls "%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient" /deny Administrators:(F)
 
 start cmd /k %~dp0\..\CCStopper.bat
