@@ -89,7 +89,7 @@ exit
 Powershell -ExecutionPolicy RemoteSigned -File .\StopProcesses.ps1
 for %%a in (%files%) do (
 	if %isNotBlocked% == true (
-		icacls %%a /deny Administrators:(F)
+		icacls %%a /deny Administrators:F
 		goto continue
 	)
 	if %isBlocked% == true (
