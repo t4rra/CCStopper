@@ -62,7 +62,7 @@ Please don't run any code here, unless you know *exactly* what you're doing. If 
 - [1] Genuine Checker - Deletes and locks the Genuine Checker folder.
 - [2] Service Block - Blocks Adobe servers and the credit card prompt from accessing the internet.
 - [3] Trial Banner - Removes the trial banner found in apps.
-- [4] Acrobat - Edits registry to patch Acrobat. NOTE: please stop Adobe Processes, patch genuine checker, and patch Acrobat with genP before running this patch.
+- [4] Acrobat - Edits registry to patch Acrobat. NOTE: please stop Adobe Processes, patch genuine checker, and patch Acrobat with GenP before running this patch.
 </details>
 
 <details>
@@ -118,7 +118,7 @@ A: Please donate your time! If you have batch scripting knowledge, please look t
 > These are features that I'd like to implement in the future. If you can help, please open a thread in the discussions tab, under the "Development" category, or if you have code already, open a pull request! 
 
 - [ ] Patch Retention
-  - Locks the patched file from genP so that nothing can modify/delete it
+  - Locks the patched file from GenP so that nothing can modify/delete it
   - I'm stuck at setting a list of filepaths that the script can read off and patch. 
 - [ ] Backup documentation/scripts
 ## Known Issues
@@ -126,7 +126,7 @@ A: Please donate your time! If you have batch scripting knowledge, please look t
 
 **Issue:** Error message: `The execution of scripts is disabled on this system. Please see "Get-Help about_signing" for more details.` or selecting the "Genuine Checker" patch gives no results.
 
-Fix: Run `Set-ExecutionPolicy RemoteSigned` in an administrator powershell window, or manually execute the `ProcessKill.ps1` script in the scripts folder once (you can use CCStopper running the script for the first time manually). [Credit to /u/getblownaparte on Reddit for bringing this issue up](https://www.reddit.com/r/GenP/comments/ndhm94/i_made_a_script_to_stop_all_adobe_background/gyb0twq?utm_source=share&utm_medium=web2x&context=3)
+Fix: Run `Set-ExecutionPolicy RemoteSigned` in an administrator powershell window, or manually execute the `ProcessKill.ps1` script in the scripts folder once (you can use CCStopper running the script for the first time manually). [Credit to /u/getblownaparte on Reddit for bringing this issue up](https://www.reddit.com/user/getblownaparte/)
 
 ---
 
@@ -142,7 +142,7 @@ Fix: Run `Set-ExecutionPolicy RemoteSigned` in an administrator powershell windo
 
 ## Disclaimer/Notice
 
-**Disclaimer:** This script is in an early stage, and offered as-is. There will be bugs. I am not responsible for any damage, loss of data, or thermonuclear wars caused by these scripts. I am not affiliated with Adobe.
+**Disclaimer:** This script is in an early stage, and offered as-is. There will be bugs. I am not responsible for any damage or loss of data caused by these scripts. I am not affiliated with Adobe.
 
 **Notice:** Don't use this tool for piracy. It's illegal, and multi-billion dollar companies like Adobe _needs_ to profit off unreliable and overpriced software. Piracy _helps_ Adobe by increasing their market dominance. If you want to dethrone Adobe, use [alternatives](https://ass.easun.me).
 
