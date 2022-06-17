@@ -25,6 +25,7 @@ set file5="%psAppLocation%\LogTransport2.exe"
 set file6="%ProgramFiles(x86)%\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe"
 set files=%file1% %file2% %file3% %file4% %file5% %file6%
 
+set isNotBlocked=false
 set isBlocked=false
 
 :: Check if files are already blocked
@@ -32,7 +33,13 @@ set isBlocked=false
 for %%a in (%files%) do (
 	if exist %%a (
 		icacls %%a | findstr "BUILTIN\Administrators:(N)" >nul 2>&1
-		if errorlevel 0 set isBlocked=true	
+		if errorlevel 1 (
+			set isNotBlocked=true
+		) else (
+			if errorlevel 0 (
+				set isBlocked=true	
+			)
+		)
 	)
 )
 
@@ -64,8 +71,13 @@ if %isBlocked% == true (
 	if errorlevel 2 (
 		goto exit
 	)
+	if errorlevel 1 (
+		goto mainScript
+	)
 )
-goto mainScript
+if %isNotBlocked% == true (
+	goto mainScript
+)
 
 :exit
 start cmd /k %~dp0\..\CCStopper.bat
@@ -99,7 +111,9 @@ echo                  ^|                                                        
 if %isBlocked% == true (
 	echo                  ^|                        Unblocked files!                       ^|
 ) else (
-	echo                  ^|              Blocking adobe process files complete!           ^|
+	if %isNotBlocked% == true (
+		echo                  ^|              Blocking adobe process files complete!           ^|
+	)
 )
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
