@@ -10,7 +10,23 @@ Kills Adobe's pesky background apps and more!
 - [Known Issues](#known-issues)
 - [Disclaimer/Notice](#disclaimernotice)
 
-**Current Version (stable):** v1.1.3
+**Stable Version:** v1.1.3
+
+**Current Version (pre-release):** v1.2.0
+
+## v1.2.0_pre.1 Changelog
+
+- UI Change
+  - Added submenus and changed inputs
+- Combined Credit Card Stop module and ServiceBlock module
+  - Thanks to [@sh32devnull](https://github.com/sh32devnull) for ServiceBlock module
+  - Adds Adobe IPs to hosts file and blocks Adobe Desktop Service in firewall
+- Added DisableAutoStart, HideCCFolder, BlockProcesses, and HideTrialBanner modules
+  - Thanks to [@ItsProfessional](https://github.com/ItsProfessional) for all these modules
+- Bug Fixes and Improvements
+  - Again, big thanks to contributors mentioned above for helping!
+- Documentation Update
+
 
 ## v1.1.3 Changelog
 
