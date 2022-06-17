@@ -15,7 +15,7 @@ echo          ^|                                                                
 echo          ^|                                                                               ^|
 echo          ^|                                   CCSTOPPER                                   ^|
 echo          ^|                                Made by eaaasun                                ^|
-echo          ^|                                  v1.2.0-dev                                   ^|
+echo          ^|                                 v1.2.0-pre.1                                  ^|
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
 echo          ^|                                SAVE YOUR FILES!                               ^|
@@ -168,8 +168,9 @@ echo          ^|                                    CCSTOPPER                   
 echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
 echo          ^|                                     CREDITS                                   ^|
+echo          ^|      ___________________________________________________________________      ^|
 echo          ^|                                                                               ^|
-echo          ^|      None of this could have been possible without the lovely people          ^|
+echo          ^|      None of this could have been possible without the people                 ^|
 echo          ^|      contributing to, testing, and supporting this script.                    ^|
 echo          ^|                                                                               ^|
 echo          ^|      @eaaasun              ^|  Creator/maintainer                              ^|
