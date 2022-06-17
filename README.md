@@ -28,7 +28,7 @@ Kills Adobe's pesky background apps and more!
 - Bug Fixes and Improvements
   - Again, big thanks to contributors mentioned above for helping!
 - Documentation Update (this readme won't reflect changes, go to the development branch for full updated documentation)
-
+###### Download 1.2.0_pre.1 [here](https://github.com/eaaasun/CCStopper/releases/tag/v1.2.0_pre.1)
 
 ## v1.1.3 Changelog
 
