@@ -56,7 +56,7 @@ if %isBlocked% == true (
 	echo                  ^|                                                               ^|
 	echo                  ^|             ADOBE PROCESSES ARE ALREADY BLOCKED!              ^|
 	echo                  ^|                                                               ^|
-	echo                  ^|            Would you like to restore those files?             ^|
+	echo                  ^|          Would you like to restore those processes?           ^|
 	echo                  ^|      ___________________________________________________      ^|
 	echo                  ^|                                                               ^|
 	echo                  ^|      [1] Restore Adobe processes                              ^|
@@ -109,10 +109,10 @@ echo                  ^|                     BlockProcesses Module              
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
 if %isBlocked% == true (
-	echo                  ^|                        Unblocked files!                       ^|
+echo                  ^|                      Unblocked processes!                     ^|
 ) else (
 	if %isNotBlocked% == true (
-		echo                  ^|              Blocking adobe process files complete!           ^|
+echo                  ^|              Blocking adobe processes complete!               ^|
 	)
 )
 echo                  ^|      ___________________________________________________      ^|
