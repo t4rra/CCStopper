@@ -132,7 +132,11 @@ echo                  ^|                            CCSTOPPER                   
 echo                  ^|                       HideCCFolder Module                     ^|
 echo                  ^|      ___________________________________________________      ^|
 echo                  ^|                                                               ^|
-echo                  ^|                Hiding CCF from explorer complete!             ^|
+if %folderHidden% == true (
+	echo                  ^|               Restoring CCF in explorer complete              ^|
+) else (
+	echo                  ^|                 Hiding CCF in explorer complete!              ^|
+)
 echo                  ^|                                                               ^|
 echo                  ^|      Windows Explorer needs to restart for changes to         ^|
 echo                  ^|      apply. Things will flash; please do not worry.           ^|
