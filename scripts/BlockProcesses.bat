@@ -77,9 +77,7 @@ for %%a in (%files%) do (
 	if %isBlocked% == true (
 		icacls %%a /reset >nul 2>&1
 	) else (
-		if %isNotBlocked% == true (
-			icacls %%a /deny Administrators:^(F^) >nul 2>&1
-		)
+		icacls %%a /deny Administrators:^(F^) >nul 2>&1
 	)
 )
 goto done
