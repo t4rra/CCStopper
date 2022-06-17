@@ -43,13 +43,13 @@ if %isBlocked% == true (
 	echo                   _______________________________________________________________
 	echo                  ^|                                                               ^| 
 	echo                  ^|                                                               ^|
-	echo                  ^|                            CCSTOPPER                          ^|
-	echo                  ^|                        BlockProcesses Module                  ^|
+	echo                  ^|                           CCSTOPPER                           ^|
+	echo                  ^|                     BlockProcesses Module                     ^|
 	echo                  ^|      ___________________________________________________      ^|
 	echo                  ^|                                                               ^|
-	echo                  ^|                ADOBE PROCESSES ARE ALREADY BLOCKED!           ^|
+	echo                  ^|             ADOBE PROCESSES ARE ALREADY BLOCKED!              ^|
 	echo                  ^|                                                               ^|
-	echo                  ^|             Would you like to restore those files?            ^|
+	echo                  ^|            Would you like to restore those files?             ^|
 	echo                  ^|      ___________________________________________________      ^|
 	echo                  ^|                                                               ^|
 	echo                  ^|      [1] Restore Adobe processes                              ^|
