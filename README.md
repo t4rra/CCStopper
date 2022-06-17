@@ -2,6 +2,8 @@
 
 Kills Adobe's pesky background apps and more!
 ## Table of Contents <!-- omit in toc -->
+
+- [v1.2.0_pre.1 Changelog](#v120_pre1-changelog)
 - [v1.1.3 Changelog](#v113-changelog)
 - [Instructions](#instructions)
 - [Menu Options](#menu-options)
@@ -25,7 +27,7 @@ Kills Adobe's pesky background apps and more!
   - Thanks to [@ItsProfessional](https://github.com/ItsProfessional) for all these modules
 - Bug Fixes and Improvements
   - Again, big thanks to contributors mentioned above for helping!
-- Documentation Update
+- Documentation Update (this readme won't reflect changes, go to the development branch for full updated documentation)
 
 
 ## v1.1.3 Changelog
