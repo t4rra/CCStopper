@@ -10,7 +10,7 @@ mode con: cols=100 lines=42
 :patchCheck
 reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsAMTEnforced
 
-if %ERRORLEVEL% EQU 0 (
+if %errorlevel% equ 0 (
 	cls
 	echo.
 	echo Acrobat has already been patched.
@@ -24,7 +24,7 @@ if %ERRORLEVEL% EQU 0 (
 :targetCheck
 reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" /v IsNGLEnforced
 
-if %ERRORLEVEL% EQU 1 (
+if %errorlevel% equ 1 (
 	cls
 	echo The target registry key cannot be found. Cannot proceed with Acrobat fix.
 	pause
