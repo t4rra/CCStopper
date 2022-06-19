@@ -126,7 +126,7 @@ A: Please donate your time! If you have batch scripting knowledge, please look t
 
 **Issue:** Error message: `The execution of scripts is disabled on this system. Please see "Get-Help about_signing" for more details.` or selecting the "Genuine Checker" patch gives no results.
 
-Fix: Run `Set-ExecutionPolicy RemoteSigned` in an administrator powershell window, or manually execute the `ProcessKill.ps1` script in the scripts folder once (you can use CCStopper running the script for the first time manually). [Credit to /u/getblownaparte on Reddit for bringing this issue up](https://www.reddit.com/user/getblownaparte/)
+Fix: Run `Set-ExecutionPolicy RemoteSigned` in an administrator powershell window, or manually execute the `StopProcesses.ps1` script in the scripts folder once (you can use CCStopper running the script for the first time manually). [Credit to /u/getblownaparte on Reddit for bringing this issue up](https://www.reddit.com/user/getblownaparte/)
 
 ---
 
@@ -136,7 +136,7 @@ Fix: Run `Set-ExecutionPolicy RemoteSigned` in an administrator powershell windo
 
 ---
 
-**Issue:** Error message: `The target registry key cannot be found, or it has been edited already. Cannot proceed with Acrobat fix.` and there is no value in the registry.
+**Issue:** Error message: `The target registry key cannot be found. Cannot proceed with Acrobat fix.`
 
 **Fix:** Create a DWORD value (in the registry) called `IsAMTEnforced` with a value of 1. You will not need to patch Acrobat with the script after this.
 
