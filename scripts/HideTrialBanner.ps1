@@ -9,7 +9,7 @@ $Host.UI.RawUI.WindowTitle = $MyInvocation.MyCommand.Definition + "(Elevated)"
    $NewProcess = New-Object System.Diagnostics.ProcessStartInfo "PowerShell"
    $NewProcess.Arguments = $MyInvocation.MyCommand.Definition
    $NewProcess.Verb = "runas"
-   [System.Diagnostics.Process]::Start($newProcess)
+   [System.Diagnostics.Process]::Start($NewProcess)
    exit
 }
 
