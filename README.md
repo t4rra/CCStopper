@@ -130,7 +130,7 @@ Fix: Run `Set-ExecutionPolicy RemoteSigned` in an administrator powershell windo
 
 ---
 
-**Issue:** Error message: `The argument '.\scripts\ProcessKill.ps1' to the -File parameter does not exist. Provide the path to an existing file as an argument to the -File parameter.` and no apps are closed.
+**Issue:** Error message: `The argument '.\scripts\StopProcesses.ps1' to the -File parameter does not exist. Provide the path to an existing file as an argument to the -File parameter.` and no apps are closed.
 
 **Fix:** Update to the latest version of the script.
 
