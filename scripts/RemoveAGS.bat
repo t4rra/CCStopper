@@ -17,6 +17,6 @@ if exist "%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient" (
 
 cd "%ProgramFiles(x86)%\Common Files\Adobe\"
 mkdir "%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient"
-icacls "%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient" /deny Administrators:(F)
+icacls "%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient" /deny Administrators:^(F^)
 
 start cmd /k %~dp0\..\CCStopper.bat
