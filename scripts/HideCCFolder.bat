@@ -2,10 +2,6 @@
 title CCStopper - Hide Creative Cloud Files
 mode con: cols=100 lines=42
 
-:: Asks for Administrator Permissions
-%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close) && exit
-cd /d "%~dp0"
-
 setlocal EnableDelayedExpansion
 for /f "usebackq delims=" %%a in (`reg query "HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID"`) do (
 	set key=%%a

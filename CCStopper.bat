@@ -1,8 +1,11 @@
 @echo off
 title CCStopper
-cd /d "%~dp0"
 set "Path=%Path%;%CD%;"
 mode con: cols=99 lines=35
+
+:: Asks for Administrator Permissions
+%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close) && exit
+cd /d "%~dp0"
 
 :: Main script
 :mainMenu
