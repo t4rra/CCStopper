@@ -9,7 +9,7 @@ if($MyWindowsPrincipal.IsInRole($AdminRole)) {
 	$NewProcess = New-Object System.Diagnostics.ProcessStartInfo "PowerShell"
 	$NewProcess.Arguments = $MyInvocation.MyCommand.Definition
 	$NewProcess.Verb = "runas"
-	[System.Diagnostics.Process]::Start($NewProcess)
+	[System.Diagnostics.Process]::Start($NewProcess) | Out-Null
 	Exit
 }
 
