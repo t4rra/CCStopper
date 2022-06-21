@@ -1,18 +1,3 @@
-$MyWindowsID = [System.Security.Principal.WindowsIdentity]::GetCurrent()
-$MyWindowsPrincipal = New-Object System.Security.Principal.WindowsPrincipal($MyWindowsID)
-$AdminRole = [System.Security.Principal.WindowsBuiltInRole]::Administrator
-
-if($MyWindowsPrincipal.IsInRole($AdminRole)) {
-	$Host.UI.RawUI.WindowTitle = $MyInvocation.MyCommand.Definition + "(Elevated)"
-	Clear-Host
-} else {
-	$NewProcess = New-Object System.Diagnostics.ProcessStartInfo "PowerShell"
-	$NewProcess.Arguments = $MyInvocation.MyCommand.Definition
-	$NewProcess.Verb = "runas"
-	[System.Diagnostics.Process]::Start($NewProcess) | Out-Null
-	Exit
-}
-
 function Set-ConsoleWindow([int]$Width, [int]$Height) {
 	$WindowSize = $Host.UI.RawUI.WindowSize
 	$WindowSize.Width = [Math]::Min($Width, $Host.UI.RawUI.BufferSize.Width)
@@ -28,12 +13,7 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 }
 
 $Host.UI.RawUI.WindowTitle = "CCStopper - Acrobat Fix"
-Set-ConsoleWindow -Width 100 -Height 42
-
-function Back {
-	Start-Process -FilePath "cmd" -ArgumentList "/k %~dp0\..\CCStopper.bat"
-	Exit
-}
+# Set-ConsoleWindow -Width 73 -Height 42
 
 function MainScript {
 	Clear-Host
@@ -66,7 +46,7 @@ function MainScript {
 	$Choice = Read-Host ">                                            Select [1,2,Q]: "
 	Clear-Host
 	Switch($Choice) {
-		Q { Back }
+		Q { Exit }
 		2 { EditReg }
 		1 {
 			Checkpoint-Computer -Description "Before CCStopper Acrobat Fix Script" -RestorePointType "MODIFY_SETTINGS"
@@ -109,7 +89,7 @@ function RestartAsk {
 	$Choice = Read-Host ">                                            Select [1,2]: "
 	Clear-Host
 	Switch($Choice) {
-		2 { Back }
+		2 { Exit }
 		1 { Restart-Computer }
 	}
 }
@@ -121,7 +101,7 @@ if($IsAMTEnforced -eq 1) {
 	Clear-Host
 	Write-Host Acrobat has already been patched.
 	Pause
-	Back
+	Exit
 } else {
 	# Check if target path exists
 	$IsNGLEnforced = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation").IsNGLEnforced
@@ -129,7 +109,7 @@ if($IsAMTEnforced -eq 1) {
 		Clear-Host
 		Write-Host The target registry key cannot be found. Cannot proceed with Acrobat fix.
 		Pause
-		Back
+		Exit
 	} else {
 		MainScript
 	}
