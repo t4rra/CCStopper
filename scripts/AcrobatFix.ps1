@@ -43,7 +43,7 @@ function MainScript {
 	Write-Host "                  `|                                                               `|"
 	Write-Host "                  `|_______________________________________________________________`|"
 	Write-Host "`n"
-	$Choice = Read-Host ">                                            Select [1,2,Q]: "
+	$Choice = Read-Host ">                                            Select [1,2,Q]"
 	Clear-Host
 	Switch($Choice) {
 		Q { Exit }
