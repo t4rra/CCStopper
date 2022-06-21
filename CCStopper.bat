@@ -11,7 +11,7 @@ cd /d "%~dp0"
 goto mainMenu
 
 :elevate
-%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close) && exit
+%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close)
 exit
 
 :: Main script
