@@ -10,7 +10,7 @@ $Host.UI.RawUI.WindowTitle = $MyInvocation.MyCommand.Definition + "(Elevated)"
    $NewProcess.Arguments = $MyInvocation.MyCommand.Definition
    $NewProcess.Verb = "runas"
    [System.Diagnostics.Process]::Start($NewProcess)
-   exit
+   Exit
 }
 
 # Stops Adobe Processes and Services, source: https://gist.github.com/carcheky/530fd85ffff6719486038542a8b5b997#gistcomment-3586740

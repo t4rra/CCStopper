@@ -10,7 +10,7 @@ $Host.UI.RawUI.WindowTitle = $MyInvocation.MyCommand.Definition + "(Elevated)"
    $NewProcess.Arguments = $MyInvocation.MyCommand.Definition
    $NewProcess.Verb = "runas"
    [System.Diagnostics.Process]::Start($NewProcess)
-   exit
+   Exit
 }
 
 function Get-UninstallKey ([String]$ID) {
