@@ -143,7 +143,7 @@ cls
 if errorlevel 4 goto mainMenu
 
 if errorlevel 3 (
-	.\scripts\AcrobatFix.bat
+	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\AcrobatFix.ps1
 	goto patchesMenu
 )
 
