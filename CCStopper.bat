@@ -1,13 +1,14 @@
 @echo off
 title CCStopper
-set "Path=%Path%;%CD%;"
 mode con: cols=99 lines=35
 
 :: Asks for Administrator Permissions
 net session >nul 2>&1
 if %errorlevel% neq 0 goto elevate
-cd /d "%~dp0"
+cd /d "%~dp0\scripts"
 goto mainMenu
+
+set "Path=%Path%;%CD%;"
 
 :elevate
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close)
@@ -57,7 +58,7 @@ if errorlevel 3 goto patchesMenu
 if errorlevel 2 goto utilityMenu
 
 if errorlevel 1 (
-	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\StopProcesses.ps1
+	Powershell -ExecutionPolicy RemoteSigned -File .\StopProcesses.ps1
 	goto mainMenu
 )
 
@@ -98,22 +99,22 @@ cls
 if errorlevel 5 goto mainMenu
 
 if errorlevel 4 (
-	.\scripts\InternetBlock.bat
+	.\InternetBlock.bat
 	goto utilityMenu
 )
 
 if errorlevel 3 (
-	.\scripts\BlockProcesses.bat
+	.\BlockProcesses.bat
 	goto utilityMenu
 )
 
 if errorlevel 2 (
-	.\scripts\HideCCFolder.bat
+	.\HideCCFolder.bat
 	goto utilityMenu
 )
 
 if errorlevel 1 (
-	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\DisableAutoStart.ps1
+	Powershell -ExecutionPolicy RemoteSigned -File .\DisableAutoStart.ps1
 	goto utilityMenu
 )
 
@@ -152,17 +153,17 @@ cls
 if errorlevel 4 goto mainMenu
 
 if errorlevel 3 (
-	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\AcrobatFix.ps1
+	Powershell -ExecutionPolicy RemoteSigned -File .\AcrobatFix.ps1
 	goto patchesMenu
 )
 
 if errorlevel 2 (
-	Powershell -ExecutionPolicy RemoteSigned -File .\scripts\HideTrialBanner.ps1
+	Powershell -ExecutionPolicy RemoteSigned -File .\HideTrialBanner.ps1
 	goto patchesMenu
 )
 
 if errorlevel 1 (
-	.\scripts\RemoveAGS.bat
+	.\RemoveAGS.bat
 	goto patchesMenu
 )
 
