@@ -57,10 +57,6 @@ if %data% EQU 0 (
 	goto mainScript
 )
 
-:exit
-start cmd /k %~dp0\..\CCStopper.bat
-exit
-
 :mainScript
 cls
 :: Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
@@ -164,3 +160,7 @@ if errorlevel 1 (
 :elevate
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close)
 exit
+
+:exit
+@REM call %~dp0\..\CCStopper.bat
+@REM exit

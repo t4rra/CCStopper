@@ -23,8 +23,12 @@ mkdir %AGCCFolder%
 takeown /f %AGCCFolder%
 icacls %AGCCFolder% /deny Administrators:^(F^)
 
-start cmd /k %~dp0\..\CCStopper.bat
+goto exit
 
 :elevate
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close)
 exit
+
+:exit
+@REM call %~dp0\..\CCStopper.bat
+@REM exit

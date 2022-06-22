@@ -99,17 +99,17 @@ cls
 if errorlevel 5 goto mainMenu
 
 if errorlevel 4 (
-	.\InternetBlock.bat
+	call .\InternetBlock.bat
 	goto utilityMenu
 )
 
 if errorlevel 3 (
-	.\BlockProcesses.bat
+	call .\BlockProcesses.bat
 	goto utilityMenu
 )
 
 if errorlevel 2 (
-	.\HideCCFolder.bat
+	call .\HideCCFolder.bat
 	goto utilityMenu
 )
 
@@ -163,7 +163,7 @@ if errorlevel 2 (
 )
 
 if errorlevel 1 (
-	.\RemoveAGS.bat
+	call .\RemoveAGS.bat
 	goto patchesMenu
 )
 
