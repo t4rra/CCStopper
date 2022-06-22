@@ -2,6 +2,11 @@
 title CCStopper - Block Adobe Processes
 mode con: cols=100 lines=42
 
+:: Asks for Administrator Permissions
+net session >nul 2>&1
+if %errorlevel% neq 0 goto elevate
+cd /d "%~dp0"
+
 setlocal EnableDelayedExpansion
 for /f "usebackq delims=" %%a in (`reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"`) do (
 	set key=%%a
@@ -123,3 +128,11 @@ choice /C:Q /N /M ">                                            Select [Q]: "
 if errorlevel 1 (
 	goto exit
 )
+
+:elevate
+%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close)
+exit
+
+:exit
+@REM call %~dp0\..\CCStopper.bat
+@REM exit
