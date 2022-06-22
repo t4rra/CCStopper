@@ -6,11 +6,6 @@ mode con: cols=100 lines=42
 net session >nul 2>&1
 if %errorlevel% neq 0 goto elevate
 cd /d "%~dp0"
-goto mainMenu
-
-:elevate
-%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close)
-exit
 
 setlocal EnableDelayedExpansion
 for /f "usebackq delims=" %%a in (`reg query "HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID"`) do (
@@ -165,3 +160,7 @@ if errorlevel 1 (
 	taskkill /f /im explorer.exe & start explorer
 	goto exit 
 )
+
+:elevate
+%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close)
+exit
