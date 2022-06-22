@@ -47,6 +47,57 @@ Foreach($File in $Files) {
 	}
 }
 
+function Done {
+	Clear-Host
+	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+	Write-Host "`n"
+	Write-Host "`n"
+	Write-Host "                   _______________________________________________________________"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|                           CCSTOPPER                           `|"
+	Write-Host "                  `|                     BlockProcesses Module                     `|"
+	Write-Host "                  `|      ___________________________________________________      `|"
+	Write-Host "                  `|                                                               `|"
+	if($IsBlocked) {
+	Write-Host "                  `|                      Unblocked processes!                     `|"
+	} elseif($IsNotBlocked) {
+	Write-Host "                  `|              Blocking adobe processes complete!               `|"
+	}
+	Write-Host "                  `|      ___________________________________________________      `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|      [Q] Exit Module                                          `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|_______________________________________________________________`|"
+	Write-Host "`n"
+	$Choice = Read-Host ">                                            Select [Q]"
+	Clear-Host
+	Switch($Choice) {
+		Q { Exit }
+	}
+}
+
+function MainScript {
+	Powershell -ExecutionPolicy RemoteSigned -File .\StopProcesses.ps1
+	Foreach($File in $Files) {
+		$Exists = Test-Path -Path $File -PathType Leaf
+		if($Exists) {
+			$ACL = Get-Acl -Path $File
+			Set-Acl -Path $File -AclObject $ACL # Reorder ACL to canonical order to prevent errors
+			if($IsBlocked) {
+				Clear-NTFSAccess -Path $File
+				Enable-NTFSAccessInheritance -Path $File
+			} elseif($IsBlocked) {
+				$FileSystemAccessRule = New-Object -TypeName System.Security.AccessControl.FileSystemAccessRule -ArgumentList @("BUILTIN\Administrators", "FullControl", "Deny")
+				$ACL.SetAccessRule($FileSystemAccessRule)
+				Set-Acl -Path $File -AclObject $ACL
+			}
+		}
+	}
+	Done
+}
+
 if($IsBlocked) {
 	Clear-Host
 	Write-Host "`n"
@@ -78,54 +129,3 @@ if($IsBlocked) {
 		1 { MainScript }
 	}
 } elseif($IsNotBlocked) { MainScript }
-
-function MainScript {
-	Powershell -ExecutionPolicy RemoteSigned -File .\StopProcesses.ps1
-	Foreach($File in $Files) {
-		$Exists = Test-Path -Path $File -PathType Leaf
-		if($Exists) {
-			$ACL = Get-Acl -Path $File
-			Set-Acl -Path $File -AclObject $ACL # Reorder ACL to canonical order to prevent errors
-			if($IsBlocked) {
-				Clear-NTFSAccess -Path $File
-				Enable-NTFSAccessInheritance -Path $File
-			} elseif($IsBlocked) {
-				$FileSystemAccessRule = New-Object -TypeName System.Security.AccessControl.FileSystemAccessRule -ArgumentList @("BUILTIN\Administrators", "FullControl", "Deny")
-				$ACL.SetAccessRule($FileSystemAccessRule)
-				Set-Acl -Path $File -AclObject $ACL
-			}
-		}
-	}
-	Done
-}
-
-function Done {
-	Clear-Host
-	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-	Write-Host "`n"
-	Write-Host "`n"
-	Write-Host "                   _______________________________________________________________"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                           CCSTOPPER                           `|"
-	Write-Host "                  `|                     BlockProcesses Module                     `|"
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	if($IsBlocked) {
-	Write-Host "                  `|                      Unblocked processes!                     `|"
-	} elseif($IsNotBlocked) {
-	Write-Host "                  `|              Blocking adobe processes complete!               `|"
-	}
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|      [Q] Exit Module                                          `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|_______________________________________________________________`|"
-	Write-Host "`n"
-	$Choice = Read-Host ">                                            Select [Q]"
-	Clear-Host
-	Switch($Choice) {
-		Q { Exit }
-	}
-}
