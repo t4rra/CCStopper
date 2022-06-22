@@ -1,3 +1,8 @@
+if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+	Start-Process -FilePath PowerShell -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`"  `"$($MyInvocation.MyCommand.UnboundArguments)`""
+	Exit
+}
+
 function Set-ConsoleWindow([int]$Width, [int]$Height) {
 	$WindowSize = $Host.UI.RawUI.WindowSize
 	$WindowSize.Width = [Math]::Min($Width, $Host.UI.RawUI.BufferSize.Width)
