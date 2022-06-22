@@ -2,6 +2,7 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
 	Start-Process -FilePath PowerShell -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" `"$($MyInvocation.MyCommand.UnboundArguments)`""
 	Exit
 }
+Set-Location $PSScriptRoot
 
 function Set-ConsoleWindow([int]$Width, [int]$Height) {
 	$WindowSize = $Host.UI.RawUI.WindowSize

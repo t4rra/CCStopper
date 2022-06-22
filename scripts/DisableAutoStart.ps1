@@ -2,6 +2,7 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
 	Start-Process -FilePath PowerShell -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" `"$($MyInvocation.MyCommand.UnboundArguments)`""
 	Exit
 }
+Set-Location $PSScriptRoot
 
 # Disable services auto-start
 Get-Service -DisplayName Adobe* | Set-Service -StartupType Manual
