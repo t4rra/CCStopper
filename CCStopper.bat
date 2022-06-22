@@ -104,7 +104,7 @@ if errorlevel 4 (
 )
 
 if errorlevel 3 (
-	call .\BlockProcesses.bat
+	Powershell -ExecutionPolicy RemoteSigned -File .\BlockProcesses.ps1
 	goto utilityMenu
 )
 
