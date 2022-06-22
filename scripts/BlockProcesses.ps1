@@ -37,7 +37,7 @@ $IsBlocked = $false
 Foreach($File in $Files) {
 	$Exists = Test-Path -Path $File -PathType Leaf
 	if($Exists) {
-		(Get-Acl .\CCXProcess.exe).Access | ForEach-Object {
+		(Get-Acl $File).Access | ForEach-Object {
 			if(($_.AccessControlType -eq "Deny") -and ($_.FileSystemRights -eq "FullControl") -and ($_.IdentityReference -eq "BUILTIN\Administrators")) {
 				$IsBlocked = $true	
 			} else {
