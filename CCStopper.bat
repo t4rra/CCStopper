@@ -4,7 +4,6 @@ set "Path=%Path%;%CD%;"
 mode con: cols=99 lines=35
 
 :: Asks for Administrator Permissions
-
 net session >nul 2>&1
 if %errorlevel% neq 0 goto elevate
 cd /d "%~dp0"
