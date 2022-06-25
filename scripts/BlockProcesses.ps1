@@ -81,8 +81,7 @@ function Done {
 function MainScript {
 	Invoke-Expression -Command "$PSScriptRoot\StopProcesses.ps1"
 	Foreach($File in $Files) {
-		$Exists = Test-Path -Path $File -PathType Leaf
-		if($Exists) {
+		if((Test-Path -Path $File -PathType Leaf)) {
 			$Acl = Get-Acl -Path $File
 			Set-Acl -Path $File -AclObject $Acl # Reorder ACL to canonical order to prevent errors
 
