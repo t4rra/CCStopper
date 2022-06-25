@@ -12,8 +12,8 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 	try {
 		$Host.UI.RawUI.WindowSize = $WindowSize
 	} catch [System.Management.Automation.SetValueInvocationException] {
-		$Maxvalue = ($_.Exception.Message | Select-String "\d+").Matches[0].Value
-		$WindowSize.Height = $Maxvalue
+		$MaxValue = ($_.Exception.Message | Select-String "\d+").Matches[0].Value
+		$WindowSize.Height = $MaxValue
 		$Host.UI.RawUI.WindowSize = $WindowSize
 	}
 }

@@ -4,6 +4,23 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
 }
 Set-Location $PSScriptRoot
 
+function Set-ConsoleWindow([int]$Width, [int]$Height) {
+	$WindowSize = $Host.UI.RawUI.WindowSize
+	$WindowSize.Width = [Math]::Min($Width, $Host.UI.RawUI.BufferSize.Width)
+	$WindowSize.Height = $Height
+
+	try {
+		$Host.UI.RawUI.WindowSize = $WindowSize
+	} catch [System.Management.Automation.SetValueInvocationException] {
+		$MaxValue = ($_.Exception.Message | Select-String "\d+").Matches[0].Value
+		$WindowSize.Height = $MaxValue
+		$Host.UI.RawUI.WindowSize = $WindowSize
+	}
+}
+
+$Host.UI.RawUI.WindowTitle = "CCStopper - Hide Trial Banner"
+# Set-ConsoleWindow -Width 73 -Height 42
+
 function Get-Subkey([String]$Key, [String]$SubkeyPattern) {
 	return (Get-ChildItem Registry::$Key -Recurse | Where-Object {$_.PSChildName -Like "$SubkeyPattern"}).Name
 }
