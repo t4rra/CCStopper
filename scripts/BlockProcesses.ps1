@@ -79,7 +79,7 @@ function Done {
 }
 
 function MainScript {
-	Powershell -ExecutionPolicy RemoteSigned -File .\StopProcesses.ps1
+	Invoke-Expression -Command "$PSScriptRoot\StopProcesses.ps1"
 	Foreach($File in $Files) {
 		$Exists = Test-Path -Path $File -PathType Leaf
 		if($Exists) {
