@@ -1,34 +1,44 @@
-@echo off
+if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+	Start-Process -FilePath PowerShell -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" `"$($MyInvocation.MyCommand.UnboundArguments)`""
+	Exit
+}
+Set-Location $PSScriptRoot
 
-:: Asks for Administrator Permissions
-net session >nul 2>&1
-if %errorlevel% neq 0 goto elevate
-cd /d "%~dp0"
+function Set-ConsoleWindow([int]$Width, [int]$Height) {
+	$WindowSize = $Host.UI.RawUI.WindowSize
+	$WindowSize.Width = [Math]::Min($Width, $Host.UI.RawUI.BufferSize.Width)
+	$WindowSize.Height = $Height
 
-set AGCCFolder="%ProgramFiles(x86)%\Common Files\Adobe\AdobeGCClient"
+	try {
+		$Host.UI.RawUI.WindowSize = $WindowSize
+	} catch [System.Management.Automation.SetValueInvocationException] {
+		$MaxValue = ($_.Exception.Message | Select-String "\d+").Matches[0].Value
+		$WindowSize.Height = $MaxValue
+		$Host.UI.RawUI.WindowSize = $WindowSize
+	}
+}
 
-:: Disables AGSSerivce from starting up, then stops it
-for %%a in (AGSService AGMService) do ( 
-	sc config "%%a" start= disabled
-	sc stop "%%a" >nul 2>&1
-	taskkill /im "%%a.exe" /f >nul 2>&1
-)
+$Host.UI.RawUI.WindowTitle = "CCStopper - Hide Trial Banner"
+# Set-ConsoleWindow -Width 73 -Height 42
 
-:: Checks if AGSService Exists
-if exist %AGCCFolder% (
-	rmdir /Q /S %AGCCFolder%
-)
+$AGCCFolder = "${Env:ProgramFiles(x86)}\Common Files\Adobe\AdobeGCClient"
 
-mkdir %AGCCFolder%
-takeown /f %AGCCFolder%
-icacls %AGCCFolder% /deny Administrators:^(F^)
+# Disables AGSSerivce from starting up, then stops it
+Foreach($Service in @("AGSService", "AGMService")) {
+	Get-Service -DisplayName $Service | Set-Service -StartupType Disabled
+	Get-Service -DisplayName $Service | Stop-Service
+	Stop-Process $Service -Force | Out-Null
+}
 
-goto exit
+# Checks if AGSService Exists
+if (Test-Path -Path $AGCCFolder) {
+	Remove-Item -Path $AGCCFolder -Recurse -Force
+}
 
-:elevate
-%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close)
-exit
-
-:exit
-@REM call %~dp0\..\CCStopper.bat
-@REM exit
+New-Item -Path $AGCCFolder -ItemType Directory
+takeown /f $AGCCFolder
+$Acl = Get-Acl -Path $AGCCFolder
+Set-Acl -Path $AGCCFolder -AclObject $Acl # Reorder ACL to canonical order to prevent errors
+$FileSystemAccessRule = New-Object -TypeName System.Security.AccessControl.FileSystemAccessRule -ArgumentList @("BUILTIN\Administrators", "FullControl", "Deny")
+$Acl.SetAccessRule($FileSystemAccessRule)
+Set-Acl -Path $AGCCFolder -AclObject $Acl
