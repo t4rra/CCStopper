@@ -4,12 +4,12 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
 }
 Set-Location $PSScriptRoot
 
-function Get-UninstallKey ([String]$ID) {
-	return (Get-ChildItem HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall -Recurse | Where-Object {$_.PSChildName -Like "$ID*"}).Name
+function Get-Subkey([String]$Key, [String]$SubkeyPattern) {
+	return (Get-ChildItem Registry::$Key -Recurse | Where-Object {$_.PSChildName -Like "$SubkeyPattern"}).Name
 }
 
-$PSAppLocation = (Get-ItemProperty -Path Registry::$(Get-UninstallKey -ID "PHSP")).InstallLocation
-$AIAppLocation = (Get-ItemProperty -Path Registry::$(Get-UninstallKey -ID "ILST")).InstallLocation
+$PSAppLocation = (Get-ItemProperty -Path Registry::$(Get-Subkey -Key "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall" -SubkeyPattern "PHSP*")).InstallLocation
+$AIAppLocation = (Get-ItemProperty -Path Registry::$(Get-Subkey -Key "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall" -SubkeyPattern "ILST*")).InstallLocation
 $CommonExtensions = Join-Path -Path ${env:ProgramFiles} -ChildPath "Common Files\Adobe\UXP\extensions"
 
 $StylePath = "$CommonExtensions\$((Get-ChildItem $CommonExtensions -Recurse | Where-Object {$_.PSChildName -Like 'com.adobe.ccx.start-*' } | Select -Last 1).Name)\css\styles.css"

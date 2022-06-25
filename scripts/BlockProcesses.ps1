@@ -21,11 +21,11 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 $Host.UI.RawUI.WindowTitle = "CCStopper - Block Adobe Processes"
 # Set-ConsoleWindow -Width 73 -Height 42
 
-function Get-UninstallKey ([String]$ID) {
-	return (Get-ChildItem HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall -Recurse | Where-Object {$_.PSChildName -Like "$ID*"}).Name
+function Get-Subkey([String]$Key, [String]$SubkeyPattern) {
+	return (Get-ChildItem Registry::$Key -Recurse | Where-Object {$_.PSChildName -Like "$SubkeyPattern"}).Name
 }
 
-$PSAppLocation = (Get-ItemProperty -Path Registry::$(Get-UninstallKey -ID "PHSP")).InstallLocation
+$PSAppLocation = (Get-ItemProperty -Path Registry::$(Get-Subkey -Key "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall" -SubkeyPattern "PHSP*")).InstallLocation
 
 # Thanks to Verix#2020, from GenP Discord.
 $Files = @("${Env:ProgramFiles(x86)}\Adobe\Adobe Sync\CoreSync\CoreSync.exe", "$Env:ProgramFiles\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe", "${Env:ProgramFiles(x86)}\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe", "$Env:ProgramFiles\Common Files\Adobe\Creative Cloud Libraries\CCLibrary.exe", "$PSAppLocation\LogTransport2.exe", "${Env:ProgramFiles(x86)}\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe")
