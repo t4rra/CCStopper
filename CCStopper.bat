@@ -109,7 +109,7 @@ if errorlevel 3 (
 )
 
 if errorlevel 2 (
-	call .\HideCCFolder.bat
+	Powershell -ExecutionPolicy RemoteSigned -File .\HideCCFolder.ps1
 	goto utilityMenu
 )
 
@@ -163,7 +163,7 @@ if errorlevel 2 (
 )
 
 if errorlevel 1 (
-	call .\RemoveAGS.bat
+	Powershell -ExecutionPolicy RemoteSigned -File .\RemoveAGS.ps1
 	goto patchesMenu
 )
 
@@ -189,7 +189,7 @@ echo          ^|      @ItsProfessional      ^|  Contributor                     
 echo          ^|      @sh32devnull          ^|                                                  ^|
 echo          ^|      @ZEN1X                ^|                                                  ^|
 echo          ^|                            ^|                                                  ^|
-echo          ^|      genP Discord/Reddit   ^|  Patch information and development help.         ^|
+echo          ^|      GenP Discord/Reddit   ^|  Patch information and development help.         ^|
 echo          ^|                            ^|                                                  ^|
 echo          ^|      You!                  ^|  Reporting bugs and supporting the               ^|
 echo          ^|                            ^|  project!                                        ^|
