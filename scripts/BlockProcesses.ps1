@@ -28,7 +28,7 @@ function Get-UninstallKey ([String]$ID) {
 $PSAppLocation = (Get-ItemProperty -Path Registry::$(Get-UninstallKey -ID "PHSP")).InstallLocation
 
 # Thanks to Verix#2020, from GenP Discord.
-$Files = @("%ProgramFiles(x86)%\Adobe\Adobe Sync\CoreSync\CoreSync.exe", "%ProgramFiles%\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe", "%ProgramFiles(x86)%\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe", "%ProgramFiles%\Common Files\Adobe\Creative Cloud Libraries\CCLibrary.exe", "$PSAppLocation\LogTransport2.exe", "%ProgramFiles(x86)%\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe")
+$Files = @("${Env:ProgramFiles(x86)}\Adobe\Adobe Sync\CoreSync\CoreSync.exe", "$Env:ProgramFiles\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe", "${Env:ProgramFiles(x86)}\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe", "$Env:ProgramFiles\Common Files\Adobe\Creative Cloud Libraries\CCLibrary.exe", "$PSAppLocation\LogTransport2.exe", "${Env:ProgramFiles(x86)}\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe")
 
 $IsNotBlocked = $false
 $IsBlocked = $false
@@ -83,15 +83,20 @@ function MainScript {
 	Foreach($File in $Files) {
 		$Exists = Test-Path -Path $File -PathType Leaf
 		if($Exists) {
-			$ACL = Get-Acl -Path $File
-			Set-Acl -Path $File -AclObject $ACL # Reorder ACL to canonical order to prevent errors
+			$Acl = Get-Acl -Path $File
+			Set-Acl -Path $File -AclObject $Acl # Reorder ACL to canonical order to prevent errors
+
 			if($IsBlocked) {
-				Clear-NTFSAccess -Path $File
-				Enable-NTFSAccessInheritance -Path $File
-			} elseif($IsBlocked) {
+				# Enable inheritence
+				$Acl.SetAccessRuleProtection($false,$true)
+				Set-Acl -Path $File -AclObject $Acl
+				# Create new empty ACL, removing all inherited ACLs
+				$NewAcl = New-Object System.Security.AccessControl.FileSecurity
+				Set-Acl -Path $File -AclObject $NewAcl
+			} elseif($IsNotBlocked) {
 				$FileSystemAccessRule = New-Object -TypeName System.Security.AccessControl.FileSystemAccessRule -ArgumentList @("BUILTIN\Administrators", "FullControl", "Deny")
-				$ACL.SetAccessRule($FileSystemAccessRule)
-				Set-Acl -Path $File -AclObject $ACL
+				$Acl.SetAccessRule($FileSystemAccessRule)
+				Set-Acl -Path $File -AclObject $Acl
 			}
 		}
 	}
