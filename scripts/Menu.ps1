@@ -116,7 +116,7 @@ function UtilityMenu {
 			UtilityMenu
 		}
 		4 {
-			cmd /k .\InternetBlock.bat
+			.\InternetBlock.ps1
 			UtilityMenu
 		}
 	}
@@ -164,10 +164,6 @@ function PatchesMenu {
 		}
 		3 {
 			.\AcrobatFix.ps1
-			UtilityMenu
-		}
-		4 {
-			.\InternetBlock.ps1
 			UtilityMenu
 		}
 	}
