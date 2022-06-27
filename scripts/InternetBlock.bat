@@ -103,10 +103,6 @@ if errorlevel 1 (
 )
 echo:
 
-:END
-start cmd /k %~dp0\..\CCStopper.bat
-exit
-
 :WRITING_FAILURE
 call :CHECK_FILE_ATTRIBUTES HOST_FILE && (
     echo ERROR: Something went wrong and the script could not write in your hosts file.
@@ -202,3 +198,7 @@ exit /b 0
 :elevate
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close)
 exit
+
+:END
+@REM Powershell -ExecutionPolicy RemoteSigned -File ..\Menu.ps1
+@REM exit
