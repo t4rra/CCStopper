@@ -19,7 +19,7 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 }
 
 $Host.UI.RawUI.WindowTitle = "CCStopper"
-Set-ConsoleWindow -Width 73 -Height 42
+# Set-ConsoleWindow -Width 73 -Height 42
 MainMenu
 
 function MainMenu {
