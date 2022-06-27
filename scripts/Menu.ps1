@@ -192,7 +192,7 @@ function CreditMenu {
 	Write-Host "          `|      @eaaasun              `|  Creator/maintainer                              `|"
 	Write-Host "          `|                            `|                                                  `|"
 	Write-Host "          `|      @ItsProfessional      `|  Contributor                                     `|"
-	Write-Host "          `|      @sh32devnull          `|                                                  `|"
+	Write-Host "          `|      @shdevnull            `|                                                  `|"
 	Write-Host "          `|      @ZEN1X                `|                                                  `|"
 	Write-Host "          `|                            `|                                                  `|"
 	Write-Host "          `|      GenP Discord/Reddit   `|  Patch information and development help.         `|"
