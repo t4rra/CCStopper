@@ -117,7 +117,7 @@ function MainScript {
 	Write-Host "                  `|                                                               `|"
 	Write-Host "                  `|                                                               `|"
 	Write-Host "                  `|                            CCSTOPPER                          `|"
-	Write-Host "                  `|                        HideCCFiles Module                     `|"
+	Write-Host "                  `|                       HideCCFolder Module                     `|"
 	Write-Host "                  `|      ___________________________________________________      `|"
 	Write-Host "                  `|                                                               `|"
 	Write-Host "                  `|                  THIS WILL EDIT THE REGISTRY!                 `|"
