@@ -27,7 +27,7 @@ $AGCCFolder = "${Env:ProgramFiles(x86)}\Common Files\Adobe\AdobeGCClient"
 Foreach($Service in @("AGSService", "AGMService")) {
 	Get-Service -DisplayName $Service | Set-Service -StartupType Disabled
 	Get-Service -DisplayName $Service | Stop-Service
-	Stop-Process $Service -Force | Out-Null
+	Stop-Process -Name $Service -Force | Out-Null
 }
 
 # Checks if AGSService Exists
@@ -35,8 +35,8 @@ if (Test-Path -Path $AGCCFolder) {
 	Remove-Item -Path $AGCCFolder -Recurse -Force
 }
 
-New-Item -Path $AGCCFolder -ItemType Directory
 takeown /f $AGCCFolder
+New-Item -Path $AGCCFolder -ItemType Directory
 $Acl = Get-Acl -Path $AGCCFolder
 Set-Acl -Path $AGCCFolder -AclObject $Acl # Reorder ACL to canonical order to prevent errors
 $FileSystemAccessRule = New-Object -TypeName System.Security.AccessControl.FileSystemAccessRule -ArgumentList @("BUILTIN\Administrators", "FullControl", "Deny")
