@@ -100,7 +100,6 @@ function HideFolder {
 }
 
 function EditReg {
-	# Adds IsAMTEnforced with proper values, then deletes IsNGLEnfoced
 	if($folderHidden -eq $true) {
 		ShowFolder
 	} else {
@@ -150,7 +149,7 @@ function MainScript {
 }	
 
 $CLSID = (Get-Subkey -Key "HKCU:\SOFTWARE\Classes\CLSID" -SubkeyPattern "{0E270DAA-1BE6-48F2-AC49-*")
-$Data = (Get-ItemProperty -Path Registry::$CLSID).{System.IsPinnedToNameSpaceTree}
+$Data = (Get-ItemProperty -Path Registry::$CLSID)."System.IsPinnedToNameSpaceTree"
 
 # Check if System.IsPinnedToNameSpaceTree is already disabled
 $FolderHidden = $false
