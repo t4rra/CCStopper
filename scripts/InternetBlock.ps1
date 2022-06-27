@@ -72,7 +72,6 @@ ForEach($BlockedAddress in $BlockedAddresses) {
 		try {
 			Set-Content -Value ((Select-String -Path $HostFile -Pattern $('^' + "$LocalAddress $BlockedAddress" + '$') -NotMatch -CaseSensitive).Line) -Path "$HostFile.tmp"
 		} catch { WritingFailure }
-		1..100000 | ForEach-Object { Write-Host "`n" }
 		try {
 			Move-Item -Path "$HostFile.tmp" -Destination $HostFile -Force
 		} catch { WritingFailure }
