@@ -200,5 +200,5 @@ exit /b 0
 exit
 
 :END
-@REM Powershell -ExecutionPolicy RemoteSigned -File ..\Menu.ps1
+@REM powershell -ExecutionPolicy RemoteSigned -File ..\Menu.ps1
 @REM exit

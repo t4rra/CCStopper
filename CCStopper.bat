@@ -17,4 +17,4 @@ exit
 :: Unblock files
 for %%a in (*.ps1) do (echo.>%%a:Zone.Identifier)
 
-Powershell -ExecutionPolicy RemoteSigned -File .\Menu.ps1
+powershell -ExecutionPolicy RemoteSigned -File .\Menu.ps1
