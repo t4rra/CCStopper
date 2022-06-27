@@ -156,15 +156,15 @@ function PatchesMenu {
 		Q { MainMenu }
 		1 {
 			.\RemoveAGS.ps1
-			UtilityMenu
+			PatchesMenu
 		}
 		2 {
 			.\HideTrialBanner.ps1
-			UtilityMenu
+			PatchesMenu
 		}
 		3 {
 			.\AcrobatFix.ps1
-			UtilityMenu
+			PatchesMenu
 		}
 	}
 }
