@@ -14,7 +14,7 @@ set "Path=%Path%;%CD%;"
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd","/c %~s0 ::","","runas",1)(window.close)
 exit
 
-:: Unblock files here
-:: gonna implement this later too lazy rn lmao
+:: Unblock files
+for %%a in (*.ps1) do (echo.>%%a:Zone.Identifier)
 
 Powershell -ExecutionPolicy RemoteSigned -File .\scripts\Menu.ps1
