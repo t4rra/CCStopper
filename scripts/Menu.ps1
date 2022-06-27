@@ -167,7 +167,7 @@ function PatchesMenu {
 			UtilityMenu
 		}
 		4 {
-			cmd /k .\InternetBlock.bat
+			.\InternetBlock.ps1
 			UtilityMenu
 		}
 	}
