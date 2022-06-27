@@ -50,7 +50,7 @@ if(Test-Path variable:StartCounter) {
     StartCounter = ""
 }
 
-$NumberOfLinesAfterCommentedLine=0
+$NumberOfLinesAfterCommentedLine = 0
 
 ForEach ($Line in (Get-Content -Path $HostFile)) {
 	if(Test-Path variable:StartCounter) {
@@ -62,11 +62,14 @@ ForEach ($Line in (Get-Content -Path $HostFile)) {
 		$NumberOfLinesAfterCommentedLine = 0
 	}
 }
+
 if($NumberOfLinesAfterCommentedLine -le $BlockedAddresses.Length) {
 	$CommentedEntry = 1
 }
+
 ForEach($BlockedAddress in $BlockedAddresses) {
     Write-Host Adding to the hosts file: $LocalAddress $BlockedAddress
+
 	$Found = Select-String -Path $HostFile -Pattern $('^' + "$LocalAddress $BlockedAddress" + '$') -CaseSensitive -Quiet
     if($Found) {
 		try {
@@ -76,6 +79,7 @@ ForEach($BlockedAddress in $BlockedAddresses) {
 			Move-Item -Path "$HostFile.tmp" -Destination $HostFile -Force
 		} catch { WritingFailure }
 	}
+
 	if(!(Test-Path variable:CommentedEntry)) {
 		$CommentedEntry = 1
 		try {
