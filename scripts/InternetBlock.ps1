@@ -28,9 +28,9 @@ $BlockedAddresses = @("ic.adobe.io", "52.6.155.20", "52.10.49.85", "23.22.30.141
 $HostFile = "$Env:SystemRoot\System32\drivers\etc\hosts"
 
 # if(!((Get-ItemProperty $HostFile).IsReadOnly)) {
-# 	Write-Host Cannot write in host file because it is read-only.
-# 	Pause
-#     Exit
+	# Write-Host Cannot write in host file because it is read-only.
+	# Pause
+    # Exit
 # }
 
 try {
