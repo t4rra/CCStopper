@@ -29,7 +29,7 @@ $PSAppLocation = (Get-ItemProperty -Path Registry::$(Get-Subkey -Key "HKLM:\SOFT
 $AIAppLocation = (Get-ItemProperty -Path Registry::$(Get-Subkey -Key "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall" -SubkeyPattern "ILST*")).InstallLocation
 $CommonExtensions = Join-Path -Path ${env:ProgramFiles} -ChildPath "Common Files\Adobe\UXP\extensions"
 
-$StylePath = "$CommonExtensions\$((Get-ChildItem $CommonExtensions -Recurse | Where-Object {$_.PSChildName -Like 'com.adobe.ccx.start-*' } | Select -Last 1).Name)\css\styles.css"
+$StylePath = "$CommonExtensions\$((Get-ChildItem $CommonExtensions -Recurse | Where-Object {$_.PSChildName -Like 'com.adobe.ccx.start-*' } | Select-Object -Last 1).Name)\css\styles.css"
 $StylePath1 = "$($PSAppLocation)\Required\UXP\com.adobe.ccx.start\css\styles.css"
 $StylePath2 = "$($AIAppLocation)\Support Files\Required\UXP\extensions\com.adobe.ccx.start\css\styles.css"
 $LocalePath = Join-Path -Path ${env:ProgramFiles(x86)} -ChildPath "\Common Files\Adobe\AdobeGCClient\locales"
