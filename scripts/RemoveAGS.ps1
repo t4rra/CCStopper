@@ -44,25 +44,26 @@ $FileSystemAccessRule = New-Object -TypeName System.Security.AccessControl.FileS
 $Acl.SetAccessRule($FileSystemAccessRule)
 Set-Acl -Path $AGCCFolder -AclObject $Acl
 
-Clear-Host
-Write-Host "`n"
-Write-Host "`n"
-Write-Host "                   _______________________________________________________________"
-Write-Host "                  `|                                                               `| "
-Write-Host "                  `|                                                               `|"
-Write-Host "                  `|                            CCSTOPPER                          `|"
-Write-Host "                  `|                         RemoveAGS Module                      `|"
-Write-Host "                  `|      ___________________________________________________      `|"
-Write-Host "                  `|                                                               `|"
-Write-Host "                  `|                     Removing AGS complete.                    `|"
-Write-Host "                  `|      ___________________________________________________      `|"
-Write-Host "                  `|                                                               `|"
-Write-Host "                  `|      [Q] Exit Module                                          `|"
-Write-Host "                  `|                                                               `|"
-Write-Host "                  `|                                                               `|"
-Write-Host "                  `|_______________________________________________________________`|"
-Write-Host "`n"          
 Do {
+	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+	Clear-Host
+	Write-Host "`n"
+	Write-Host "`n"
+	Write-Host "                   _______________________________________________________________"
+	Write-Host "                  `|                                                               `| "
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|                            CCSTOPPER                          `|"
+	Write-Host "                  `|                         RemoveAGS Module                      `|"
+	Write-Host "                  `|      ___________________________________________________      `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|                     Removing AGS complete!                    `|"
+	Write-Host "                  `|      ___________________________________________________      `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|      [Q] Exit Module                                          `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|_______________________________________________________________`|"
+	Write-Host "`n"          
 	$Invalid = $false
 	$Choice = Read-Host ">                                            Select [Q]"
 	Switch($Choice) {

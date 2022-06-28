@@ -100,25 +100,26 @@ if(Get-NetFirewallRule -DisplayName "CCStopper-CreditCardBlock" -ErrorAction Sil
 	New-NetFirewallRule -DisplayName "CCStopper-CreditCardBlock" -Direction Outbound -Program "${Env:ProgramFiles(x86)}\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe" -Action Block
 }
 
-Clear-Host
-Write-Host "`n"
-Write-Host "`n"
-Write-Host "                   _______________________________________________________________"
-Write-Host "                  `|                                                               `| "
-Write-Host "                  `|                                                               `|"
-Write-Host "                  `|                            CCSTOPPER                          `|"
-Write-Host "                  `|                       InternetBlock Module                    `|"
-Write-Host "                  `|      ___________________________________________________      `|"
-Write-Host "                  `|                                                               `|"
-Write-Host "                  `|                       Patching completed.                     `|"
-Write-Host "                  `|      ___________________________________________________      `|"
-Write-Host "                  `|                                                               `|"
-Write-Host "                  `|      [Q] Exit Module                                          `|"
-Write-Host "                  `|                                                               `|"
-Write-Host "                  `|                                                               `|"
-Write-Host "                  `|_______________________________________________________________`|"
-Write-Host "`n"          
 Do {
+	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+	Clear-Host
+	Write-Host "`n"
+	Write-Host "`n"
+	Write-Host "                   _______________________________________________________________"
+	Write-Host "                  `|                                                               `| "
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|                            CCSTOPPER                          `|"
+	Write-Host "                  `|                       InternetBlock Module                    `|"
+	Write-Host "                  `|      ___________________________________________________      `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|                       Patching complete!                      `|"
+	Write-Host "                  `|      ___________________________________________________      `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|      [Q] Exit Module                                          `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|_______________________________________________________________`|"
+	Write-Host "`n"          
 	$Invalid = $false
 	$Choice = Read-Host ">                                            Select [Q]"
 	Switch($Choice) {

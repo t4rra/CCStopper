@@ -54,5 +54,33 @@ $StylePaths | ForEach-Object {
 $ErrorActionPreference= 'silentlycontinue'
 Remove-Item "$LocalePath" -Force -Recurse
 
-$Shell = New-Object -ComObject "WScript.Shell"
-$Shell.Popup("Trial banner has been hidden!", 0, "Trial Banner Hider", 0)
+Do {
+	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+	Clear-Host
+	Write-Host "`n"
+	Write-Host "`n"
+	Write-Host "                   _______________________________________________________________"
+	Write-Host "                  `|                                                               `| "
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|                            CCSTOPPER                          `|"
+	Write-Host "                  `|                      HideTrialBanner Module                   `|"
+	Write-Host "                  `|      ___________________________________________________      `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|                  Hiding Trial Banner complete!                `|"
+	Write-Host "                  `|      ___________________________________________________      `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|      [Q] Exit Module                                          `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|_______________________________________________________________`|"
+	Write-Host "`n"          
+	$Invalid = $false
+	$Choice = Read-Host ">                                            Select [Q]"
+	Switch($Choice) {
+		Q { Exit }
+		Default {
+			$Invalid = $true
+			[Console]::Beep(500,100)
+		}
+	}
+} Until (!($Invalid))

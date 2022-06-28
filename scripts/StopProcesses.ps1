@@ -23,25 +23,26 @@ Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "
 
 Foreach($Process in $Processes) { Stop-Process $Process -Force | Out-Null }
 
-Clear-Host
-Write-Host "`n"
-Write-Host "`n"
-Write-Host "                   _______________________________________________________________"
-Write-Host "                  `|                                                               `| "
-Write-Host "                  `|                                                               `|"
-Write-Host "                  `|                            CCSTOPPER                          `|"
-Write-Host "                  `|                       StopProcesses Module                    `|"
-Write-Host "                  `|      ___________________________________________________      `|"
-Write-Host "                  `|                                                               `|"
-Write-Host "                  `|                Stopping adobe processes complete.             `|"
-Write-Host "                  `|      ___________________________________________________      `|"
-Write-Host "                  `|                                                               `|"
-Write-Host "                  `|      [Q] Exit Module                                          `|"
-Write-Host "                  `|                                                               `|"
-Write-Host "                  `|                                                               `|"
-Write-Host "                  `|_______________________________________________________________`|"
-Write-Host "`n"          
 Do {
+	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+	Clear-Host
+	Write-Host "`n"
+	Write-Host "`n"
+	Write-Host "                   _______________________________________________________________"
+	Write-Host "                  `|                                                               `| "
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|                            CCSTOPPER                          `|"
+	Write-Host "                  `|                       StopProcesses Module                    `|"
+	Write-Host "                  `|      ___________________________________________________      `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|                Stopping adobe processes complete!             `|"
+	Write-Host "                  `|      ___________________________________________________      `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|      [Q] Exit Module                                          `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|                                                               `|"
+	Write-Host "                  `|_______________________________________________________________`|"
+	Write-Host "`n"          
 	$Invalid = $false
 	$Choice = Read-Host ">                                            Select [Q]"
 	Switch($Choice) {

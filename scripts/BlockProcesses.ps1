@@ -49,30 +49,30 @@ Foreach($File in $Files) {
 }
 
 function Done {
-	Clear-Host
-	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-	Write-Host "`n"
-	Write-Host "`n"
-	Write-Host "                   _______________________________________________________________"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                           CCSTOPPER                           `|"
-	Write-Host "                  `|                     BlockProcesses Module                     `|"
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	if($IsBlocked) {
-	Write-Host "                  `|                      Unblocked processes!                     `|"
-	} elseif($IsNotBlocked) {
-	Write-Host "                  `|              Blocking adobe processes complete!               `|"
-	}
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|      [Q] Exit Module                                          `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|_______________________________________________________________`|"
-	Write-Host "`n"
 	Do {
+		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+		Clear-Host
+		Write-Host "`n"
+		Write-Host "`n"
+		Write-Host "                   _______________________________________________________________"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|                           CCSTOPPER                           `|"
+		Write-Host "                  `|                     BlockProcesses Module                     `|"
+		Write-Host "                  `|      ___________________________________________________      `|"
+		Write-Host "                  `|                                                               `|"
+		if($IsBlocked) {
+		Write-Host "                  `|                      Unblocked processes!                     `|"
+		} elseif($IsNotBlocked) {
+		Write-Host "                  `|              Blocking adobe processes complete!               `|"
+		}
+		Write-Host "                  `|      ___________________________________________________      `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|      [Q] Exit Module                                          `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|_______________________________________________________________`|"
+		Write-Host "`n"
 		$Invalid = $false
 		$Choice = Read-Host ">                                            Select [Q]"
 		Switch($Choice) {
@@ -111,30 +111,31 @@ function MainScript {
 }
 
 if($IsBlocked) {
-	Clear-Host
-	Write-Host "`n"
-	Write-Host "`n"
-	Write-Host "                   _______________________________________________________________"
-	Write-Host "                  `|                                                               `| "
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                           CCSTOPPER                           `|"
-	Write-Host "                  `|                     BlockProcesses Module                     `|"
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|             ADOBE PROCESSES ARE ALREADY BLOCKED!              `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|          Would you like to restore those processes?           `|"
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|      [1] Restore Adobe processes                              `|"
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|      [Q] Exit Module                                          `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|_______________________________________________________________`|"
-	Write-Host "`n"
 	Do {
+		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+		Clear-Host
+		Write-Host "`n"
+		Write-Host "`n"
+		Write-Host "                   _______________________________________________________________"
+		Write-Host "                  `|                                                               `| "
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|                           CCSTOPPER                           `|"
+		Write-Host "                  `|                     BlockProcesses Module                     `|"
+		Write-Host "                  `|      ___________________________________________________      `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|             ADOBE PROCESSES ARE ALREADY BLOCKED!              `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|          Would you like to restore those processes?           `|"
+		Write-Host "                  `|      ___________________________________________________      `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|      [1] Restore Adobe processes                              `|"
+		Write-Host "                  `|      ___________________________________________________      `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|      [Q] Exit Module                                          `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|_______________________________________________________________`|"
+		Write-Host "`n"
 		$Invalid = $false
 		$Choice = Read-Host ">                                            Select [1,Q]"
 		Switch($Choice) {

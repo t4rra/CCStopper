@@ -30,35 +30,35 @@ function Get-Subkey([String]$Key, [String]$SubkeyPattern) {
 }
 
 function RestartAsk {
-	Clear-Host
-	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-	Write-Host "`n"
-	Write-Host "`n"
-	Write-Host "                   _______________________________________________________________"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                            CCSTOPPER                          `|"
-	Write-Host "                  `|                       HideCCFolder Module                     `|"
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	if($FolderHidden) {
-		Write-Host "                  `|               Restoring CCF in explorer complete              `|"
-	} else {
-		Write-Host "                  `|                 Hiding CCF in explorer complete!              `|"
-	}
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|      Windows Explorer needs to restart for changes to         `|"
-	Write-Host "                  `|      apply. Things will flash; please do not worry.           `|"
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|      [1] Restart now                                          `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|      [2] Skip (Restart from task manager later)               `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|_______________________________________________________________`|"
-	Write-Host "`n"
 	Do {
+		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+		Clear-Host
+		Write-Host "`n"
+		Write-Host "`n"
+		Write-Host "                   _______________________________________________________________"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|                            CCSTOPPER                          `|"
+		Write-Host "                  `|                       HideCCFolder Module                     `|"
+		Write-Host "                  `|      ___________________________________________________      `|"
+		Write-Host "                  `|                                                               `|"
+		if($FolderHidden) {
+		Write-Host "                  `|               Restoring CCF in explorer complete!             `|"
+		} else {
+		Write-Host "                  `|                 Hiding CCF in explorer complete!              `|"
+		}
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|      Windows Explorer needs to restart for changes to         `|"
+		Write-Host "                  `|      apply. Things will flash; please do not worry.           `|"
+		Write-Host "                  `|      ___________________________________________________      `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|      [1] Restart now                                          `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|      [2] Skip (Restart from task manager later)               `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|_______________________________________________________________`|"
+		Write-Host "`n"
 		$Invalid = $false
 		$Choice = Read-Host ">                                            Select [1,2]: "
 		Switch($Choice) {
@@ -116,34 +116,34 @@ function EditReg {
 }
 
 function MainScript {
-	Clear-Host
-	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-	Write-Host "`n"
-	Write-Host "`n"
-	Write-Host "                   _______________________________________________________________"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                            CCSTOPPER                          `|"
-	Write-Host "                  `|                       HideCCFolder Module                     `|"
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                  THIS WILL EDIT THE REGISTRY!                 `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|      It is HIGHLY recommended to create a system restore      `|"
-	Write-Host "                  `|      point in case something goes wrong.                      `|"
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|      [1] Make system restore point                            `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|      [2] Proceed without creating restore point               `|"
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|      [Q] Exit Module                                          `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|_______________________________________________________________`|"
-	Write-Host "`n"
 	Do {
+		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+		Clear-Host
+		Write-Host "`n"
+		Write-Host "`n"
+		Write-Host "                   _______________________________________________________________"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|                            CCSTOPPER                          `|"
+		Write-Host "                  `|                       HideCCFolder Module                     `|"
+		Write-Host "                  `|      ___________________________________________________      `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|                  THIS WILL EDIT THE REGISTRY!                 `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|      It is HIGHLY recommended to create a system restore      `|"
+		Write-Host "                  `|      point in case something goes wrong.                      `|"
+		Write-Host "                  `|      ___________________________________________________      `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|      [1] Make system restore point                            `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|      [2] Proceed without creating restore point               `|"
+		Write-Host "                  `|      ___________________________________________________      `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|      [Q] Exit Module                                          `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|_______________________________________________________________`|"
+		Write-Host "`n"
 		$Invalid = $false
 		$Choice = Read-Host ">                                            Select [1,2,Q]"
 		Switch($Choice) {
@@ -170,30 +170,31 @@ $FolderHidden = $false
 
 if($Data -eq 0) {
 	$FolderHidden = $true
-	Clear-Host
-	Write-Host "`n"
-	Write-Host "`n"
-	Write-Host "                   _______________________________________________________________"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                            CCSTOPPER                          `|"
-	Write-Host "                  `|                        HideCCFolder Module                    `|"
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|          CREATIVE CLOUD FILES FOLDER ALREADY HIDDEN!          `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|      Would you like to restore the folder's visibility?       `|"
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|      [1] Restore Creative Cloud Files folder                  `|"
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|      [Q] Exit Module                                          `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|_______________________________________________________________`|"
-	Write-Host "`n"
 	Do {
+		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+		Clear-Host
+		Write-Host "`n"
+		Write-Host "`n"
+		Write-Host "                   _______________________________________________________________"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|                            CCSTOPPER                          `|"
+		Write-Host "                  `|                        HideCCFolder Module                    `|"
+		Write-Host "                  `|      ___________________________________________________      `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|          CREATIVE CLOUD FILES FOLDER ALREADY HIDDEN!          `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|      Would you like to restore the folder's visibility?       `|"
+		Write-Host "                  `|      ___________________________________________________      `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|      [1] Restore Creative Cloud Files folder                  `|"
+		Write-Host "                  `|      ___________________________________________________      `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|      [Q] Exit Module                                          `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|                                                               `|"
+		Write-Host "                  `|_______________________________________________________________`|"
+		Write-Host "`n"
 		$Invalid = $false
 		$Choice = Read-Host ">                                            Select [1,Q]: "
 		Switch($Choice) {
