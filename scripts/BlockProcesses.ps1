@@ -40,7 +40,7 @@ Foreach($File in $Files) {
 	if($Exists) {
 		(Get-Acl $File).Access | ForEach-Object {
 			if(($_.AccessControlType -eq "Deny") -and ($_.FileSystemRights -eq "FullControl") -and ($_.IdentityReference -eq "BUILTIN\Administrators")) {
-				$IsBlocked = $true	
+				$IsBlocked = $true
 			} else {
 				$IsNotBlocked = $true
 			}
@@ -52,27 +52,27 @@ function Done {
 	Do {
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 		Clear-Host
-		Write-Host "`n"
-		Write-Host "`n"
-		Write-Host "                   _______________________________________________________________"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                           CCSTOPPER                           `|"
-		Write-Host "                  `|                     BlockProcesses Module                     `|"
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
+		Write-Output "`n"
+		Write-Output "`n"
+		Write-Output "                   _______________________________________________________________"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                           CCSTOPPER                           `|"
+		Write-Output "                  `|                     BlockProcesses Module                     `|"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
 		if($IsBlocked) {
-		Write-Host "                  `|                      Unblocked processes!                     `|"
+		Write-Output "                  `|                      Unblocked processes!                     `|"
 		} elseif($IsNotBlocked) {
-		Write-Host "                  `|              Blocking adobe processes complete!               `|"
+		Write-Output "                  `|              Blocking adobe processes complete!               `|"
 		}
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      [Q] Exit Module                                          `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|_______________________________________________________________`|"
-		Write-Host "`n"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      [Q] Exit Module                                          `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|_______________________________________________________________`|"
+		Write-Output "`n"
 		$Invalid = $false
 		$Choice = Read-Host ">                                            Select [Q]"
 		Switch($Choice) {
@@ -87,7 +87,7 @@ function Done {
 
 function MainScript {
 	Clear-Host
-	Invoke-Expression -Command "$PSScriptRoot\StopProcesses.ps1"
+	.\StopProcesses.ps1
 	Foreach($File in $Files) {
 		if((Test-Path -Path $File -PathType Leaf)) {
 			$Acl = Get-Acl -Path $File
@@ -114,28 +114,28 @@ if($IsBlocked) {
 	Do {
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 		Clear-Host
-		Write-Host "`n"
-		Write-Host "`n"
-		Write-Host "                   _______________________________________________________________"
-		Write-Host "                  `|                                                               `| "
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                           CCSTOPPER                           `|"
-		Write-Host "                  `|                     BlockProcesses Module                     `|"
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|             ADOBE PROCESSES ARE ALREADY BLOCKED!              `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|          Would you like to restore those processes?           `|"
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      [1] Restore Adobe processes                              `|"
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      [Q] Exit Module                                          `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|_______________________________________________________________`|"
-		Write-Host "`n"
+		Write-Output "`n"
+		Write-Output "`n"
+		Write-Output "                   _______________________________________________________________"
+		Write-Output "                  `|                                                               `| "
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                           CCSTOPPER                           `|"
+		Write-Output "                  `|                     BlockProcesses Module                     `|"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|             ADOBE PROCESSES ARE ALREADY BLOCKED!              `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|          Would you like to restore those processes?           `|"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      [1] Restore Adobe processes                              `|"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      [Q] Exit Module                                          `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|_______________________________________________________________`|"
+		Write-Output "`n"
 		$Invalid = $false
 		$Choice = Read-Host ">                                            Select [1,Q]"
 		Switch($Choice) {

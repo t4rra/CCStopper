@@ -42,27 +42,27 @@ function RestartAsk {
 	Do {
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 		Clear-Host
-		Write-Host "`n"
-		Write-Host "`n"
-		Write-Host "                   _______________________________________________________________"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                            CCSTOPPER                          `|"
-		Write-Host "                  `|                       DisableAutoStart Module                 `|"
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
+		Write-Output "`n"
+		Write-Output "`n"
+		Write-Output "                   _______________________________________________________________"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                            CCSTOPPER                          `|"
+		Write-Output "                  `|                       DisableAutoStart Module                 `|"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
 		if($AutostartDisabled) {
-			Write-Host "                  `|                Enabling Autostart Complete!                   `|"
+			Write-Output "                  `|                Enabling Autostart Complete!                   `|"
 		} else {
-			Write-Host "                  `|               Disabling Autostart Complete!                   `|"
+			Write-Output "                  `|               Disabling Autostart Complete!                   `|"
 		}
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      [Q] Exit Module                                          `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|_______________________________________________________________`|"
-		Write-Host "`n"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      [Q] Exit Module                                          `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|_______________________________________________________________`|"
+		Write-Output "`n"
 		$Invalid = $false
 		$Choice = Read-Host ">                                            Select [Q]"
 		Switch($Choice) {
@@ -113,7 +113,7 @@ Get-Item "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" | For
 function EnableAutostart {
 	# Enable services auto-start
 	Get-Service -DisplayName Adobe* | Set-Service -StartupType Automatic
-	
+
 	# Enable the processes the same way task manager does it
 	foreach ($Program in $Programs) {
 		Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32" -Name $Program -Value ([byte[]](0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00))
@@ -144,31 +144,31 @@ function MainScript {
 	Do {
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 		Clear-Host
-		Write-Host "`n"
-		Write-Host "`n"
-		Write-Host "                   _______________________________________________________________"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                            CCSTOPPER                          `|"
-		Write-Host "                  `|                       DisableAutoStart Module                 `|"
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                  THIS WILL EDIT THE REGISTRY!                 `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      It is HIGHLY recommended to create a system restore      `|"
-		Write-Host "                  `|      point in case something goes wrong.                      `|"
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      [1] Make system restore point                            `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      [2] Proceed without creating restore point               `|"
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      [Q] Exit Module                                          `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|_______________________________________________________________`|"
-		Write-Host "`n"
+		Write-Output "`n"
+		Write-Output "`n"
+		Write-Output "                   _______________________________________________________________"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                            CCSTOPPER                          `|"
+		Write-Output "                  `|                       DisableAutoStart Module                 `|"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                  THIS WILL EDIT THE REGISTRY!                 `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      It is HIGHLY recommended to create a system restore      `|"
+		Write-Output "                  `|      point in case something goes wrong.                      `|"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      [1] Make system restore point                            `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      [2] Proceed without creating restore point               `|"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      [Q] Exit Module                                          `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|_______________________________________________________________`|"
+		Write-Output "`n"
 		$Invalid = $false
 		$Choice = Read-Host ">                                            Select [1,2,Q]"
 		Switch($Choice) {
@@ -185,7 +185,7 @@ function MainScript {
 			}
 		}
 	} Until (!($Invalid))
-}	
+}
 
 foreach ($Program in $Programs) {
 	$ByteArray = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32").$Program
@@ -201,28 +201,28 @@ if($Data[0] -eq "03") {
 	Do {
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 		Clear-Host
-		Write-Host "`n"
-		Write-Host "`n"
-		Write-Host "                   _______________________________________________________________"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                            CCSTOPPER                          `|"
-		Write-Host "                  `|                       DisableAutoStart Module                 `|"
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                  AUTO START ALREADY DISABLED!                 `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                Would you like enable auto start?              `|"
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      [1] Enable Auto start                                    `|"
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      [Q] Exit Module                                          `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|_______________________________________________________________`|"
-		Write-Host "`n"
+		Write-Output "`n"
+		Write-Output "`n"
+		Write-Output "                   _______________________________________________________________"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                            CCSTOPPER                          `|"
+		Write-Output "                  `|                       DisableAutoStart Module                 `|"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                  AUTO START ALREADY DISABLED!                 `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                Would you like enable auto start?              `|"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      [1] Enable Auto start                                    `|"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      [Q] Exit Module                                          `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|_______________________________________________________________`|"
+		Write-Output "`n"
 		$Invalid = $false
 		$Choice = Read-Host ">                                            Select [1,Q]: "
 		Switch($Choice) {

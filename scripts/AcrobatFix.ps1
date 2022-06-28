@@ -26,31 +26,31 @@ function MainScript {
 	Do {
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 		Clear-Host
-		Write-Host "`n"
-		Write-Host "`n"
-		Write-Host "                   _______________________________________________________________"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                            CCSTOPPER                          `|"
-		Write-Host "                  `|                        AcrobatFix Module                      `|"
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                  THIS WILL EDIT THE REGISTRY!                 `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      It is HIGHLY recommended to create a system restore      `|"
-		Write-Host "                  `|      point in case something goes wrong.                      `|"
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      [1] Make system restore point                            `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      [2] Proceed without creating restore point               `|"
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      [Q] Exit Module                                          `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|_______________________________________________________________`|"
-		Write-Host "`n"
+		Write-Output "`n"
+		Write-Output "`n"
+		Write-Output "                   _______________________________________________________________"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                            CCSTOPPER                          `|"
+		Write-Output "                  `|                        AcrobatFix Module                      `|"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                  THIS WILL EDIT THE REGISTRY!                 `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      It is HIGHLY recommended to create a system restore      `|"
+		Write-Output "                  `|      point in case something goes wrong.                      `|"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      [1] Make system restore point                            `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      [2] Proceed without creating restore point               `|"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      [Q] Exit Module                                          `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|_______________________________________________________________`|"
+		Write-Output "`n"
 		$Invalid = $false
 		$Choice = Read-Host ">                                            Select [1,2,Q]"
 		Switch($Choice) {
@@ -80,27 +80,27 @@ function RestartAsk {
 	Do {
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 		Clear-Host
-		Write-Host "`n"
-		Write-Host "`n"
-		Write-Host "                   _______________________________________________________________"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                            CCSTOPPER                          `|"
-		Write-Host "                  `|                        AcrobatFix Module                      `|"
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                   Acrobat patching complete!                  `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      The system needs to restart for changes to apply.        `|"
-		Write-Host "                  `|      ___________________________________________________      `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      [1] Restart now.                                         `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|      [2] Skip (You will need to manually restart later)       `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|                                                               `|"
-		Write-Host "                  `|_______________________________________________________________`|"
-		Write-Host "`n"
+		Write-Output "`n"
+		Write-Output "`n"
+		Write-Output "                   _______________________________________________________________"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                            CCSTOPPER                          `|"
+		Write-Output "                  `|                        AcrobatFix Module                      `|"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                   Acrobat patching complete!                  `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      The system needs to restart for changes to apply.        `|"
+		Write-Output "                  `|      ___________________________________________________      `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      [1] Restart now.                                         `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|      [2] Skip (You will need to manually restart later)       `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|                                                               `|"
+		Write-Output "                  `|_______________________________________________________________`|"
+		Write-Output "`n"
 		$Invalid = $false
 		$Choice = Read-Host ">                                            Select [1,2]: "
 		Switch($Choice) {
@@ -119,7 +119,7 @@ function RestartAsk {
 $IsAMTEnforced = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation").IsAMTEnforced
 if($IsAMTEnforced -eq 1) {
 	Clear-Host
-	Write-Host Acrobat has already been patched.
+	Write-Output "Acrobat has already been patched."
 	Pause
 	Exit
 } else {
@@ -127,7 +127,7 @@ if($IsAMTEnforced -eq 1) {
 	$IsNGLEnforced = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation").IsNGLEnforced
 	if($null -eq $IsNGLEnforced) {
 		Clear-Host
-		Write-Host The target registry key cannot be found. Cannot proceed with Acrobat fix.
+		Write-Output "The target registry key cannot be found. Cannot proceed with Acrobat fix."
 		Pause
 		Exit
 	} else {

@@ -29,13 +29,13 @@ $BlockedAddresses = @("ic.adobe.io", "52.6.155.20", "52.10.49.85", "23.22.30.141
 $HostFile = "$Env:SystemRoot\System32\drivers\etc\hosts"
 
 # if(!((Get-ItemProperty $HostFile).IsReadOnly)) {
-	# Write-Host Cannot write in host file because it is read-only.
+	# Write-Output "Cannot write in host file because it is read-only."
 	# Pause
     # Exit
 # }
 
 function WritingFailure {
-	Write-Host ERROR: Something went wrong and the script could not write in your hosts file.
+	Write-Output "ERROR: Something went wrong and the script could not write in your hosts file."
 	Pause
 	Exit
 }
@@ -69,7 +69,7 @@ if($NumberOfLinesAfterCommentedLine -le $BlockedAddresses.Length) {
 }
 
 ForEach($BlockedAddress in $BlockedAddresses) {
-    Write-Host Adding to the hosts file: $LocalAddress $BlockedAddress
+    Write-Output "Adding to the hosts file: $LocalAddress $BlockedAddress"
 
 	$Found = Select-String -Path $HostFile -Pattern $('^' + "$LocalAddress $BlockedAddress" + '$') -CaseSensitive -Quiet
     if($Found) {
@@ -95,7 +95,7 @@ ForEach($BlockedAddress in $BlockedAddresses) {
 }
 	
 if(Get-NetFirewallRule -DisplayName "CCStopper-CreditCardBlock" -ErrorAction SilentlyContinue) {
-    Write-Host Firewall rule exists!
+    Write-Output "Firewall rule exists!"
 } else {
 	New-NetFirewallRule -DisplayName "CCStopper-CreditCardBlock" -Direction Outbound -Program "${Env:ProgramFiles(x86)}\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe" -Action Block
 }
@@ -103,23 +103,23 @@ if(Get-NetFirewallRule -DisplayName "CCStopper-CreditCardBlock" -ErrorAction Sil
 Do {
 	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 	Clear-Host
-	Write-Host "`n"
-	Write-Host "`n"
-	Write-Host "                   _______________________________________________________________"
-	Write-Host "                  `|                                                               `| "
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                            CCSTOPPER                          `|"
-	Write-Host "                  `|                       InternetBlock Module                    `|"
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                       Patching complete!                      `|"
-	Write-Host "                  `|      ___________________________________________________      `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|      [Q] Exit Module                                          `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|                                                               `|"
-	Write-Host "                  `|_______________________________________________________________`|"
-	Write-Host "`n"          
+	Write-Output "`n"
+	Write-Output "`n"
+	Write-Output "                   _______________________________________________________________"
+	Write-Output "                  `|                                                               `| "
+	Write-Output "                  `|                                                               `|"
+	Write-Output "                  `|                            CCSTOPPER                          `|"
+	Write-Output "                  `|                       InternetBlock Module                    `|"
+	Write-Output "                  `|      ___________________________________________________      `|"
+	Write-Output "                  `|                                                               `|"
+	Write-Output "                  `|                       Patching complete!                      `|"
+	Write-Output "                  `|      ___________________________________________________      `|"
+	Write-Output "                  `|                                                               `|"
+	Write-Output "                  `|      [Q] Exit Module                                          `|"
+	Write-Output "                  `|                                                               `|"
+	Write-Output "                  `|                                                               `|"
+	Write-Output "                  `|_______________________________________________________________`|"
+	Write-Output "`n"
 	$Invalid = $false
 	$Choice = Read-Host ">                                            Select [Q]"
 	Switch($Choice) {
