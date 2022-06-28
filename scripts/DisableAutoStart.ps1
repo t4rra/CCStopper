@@ -3,6 +3,7 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
 	Exit
 }
 Set-Location $PSScriptRoot
+Clear-Host
 
 function Set-ConsoleWindow([int]$Width, [int]$Height) {
 	$WindowSize = $Host.UI.RawUI.WindowSize
@@ -61,11 +62,17 @@ function RestartAsk {
 	Write-Host "                  `|                                                               `|"
 	Write-Host "                  `|_______________________________________________________________`|"
 	Write-Host "`n"
-	$Choice = Read-Host ">                                            Select [Q]"
-	Clear-Host
-	Switch($Choice) {
-		Q { Exit }
-	}
+	Do {
+		$Invalid = $false
+		$Choice = Read-Host ">                                            Select [Q]"
+		Switch($Choice) {
+			Q { Exit }
+			Default {
+				$Invalid = $true
+				[Console]::Beep(500,100)
+			}
+		}
+	} Until (!($Invalid))
 }
 
 $Programs = @()
@@ -161,16 +168,23 @@ function MainScript {
 	Write-Host "                  `|                                                               `|"
 	Write-Host "                  `|_______________________________________________________________`|"
 	Write-Host "`n"
-	$Choice = Read-Host ">                                            Select [1,2,Q]"
-	Clear-Host
-	Switch($Choice) {
-		Q { Exit }
-		2 { EditReg }
-		1 {
-			Checkpoint-Computer -Description "Before CCStopper Disable Auto Start Script" -RestorePointType "MODIFY_SETTINGS"
-			EditReg
+	Do {
+		$Invalid = $false
+		$Choice = Read-Host ">                                            Select [1,2,Q]"
+		Switch($Choice) {
+			Q { Exit }
+			2 { EditReg }
+			1 {
+				Clear-Host
+				Checkpoint-Computer -Description "Before CCStopper Disable Auto Start Script" -RestorePointType "MODIFY_SETTINGS"
+				EditReg
+			}
+			Default {
+				$Invalid = $true
+				[Console]::Beep(500,100)
+			}
 		}
-	}
+	} Until (!($Invalid))
 }	
 
 foreach ($Program in $Programs) {
@@ -207,12 +221,18 @@ if($Data[0] -eq "03") {
 	Write-Host "                  `|                                                               `|"
 	Write-Host "                  `|_______________________________________________________________`|"
 	Write-Host "`n"
-	$Choice = Read-Host ">                                            Select [1,Q]: "
-	Clear-Host
-	Switch($Choice) {
-		Q { Exit }
-		1 { MainScript }
-	}
+	Do {
+		$Invalid = $false
+		$Choice = Read-Host ">                                            Select [1,Q]: "
+		Switch($Choice) {
+			Q { Exit }
+			1 { MainScript }
+			Default {
+				$Invalid = $true
+				[Console]::Beep(500,100)
+			}
+		}
+	} Until (!($Invalid))
 } else {
 	MainScript
 }

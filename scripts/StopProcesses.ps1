@@ -3,6 +3,7 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
 	Exit
 }
 Set-Location $PSScriptRoot
+Clear-Host
 
 # Stops Adobe Processes and Services, source: https://gist.github.com/carcheky/530fd85ffff6719486038542a8b5b997#gistcomment-3586740
 
@@ -21,3 +22,33 @@ Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "
 }
 
 Foreach($Process in $Processes) { Stop-Process $Process -Force | Out-Null }
+
+Clear-Host
+Write-Host "`n"
+Write-Host "`n"
+Write-Host "                   _______________________________________________________________"
+Write-Host "                  `|                                                               `| "
+Write-Host "                  `|                                                               `|"
+Write-Host "                  `|                            CCSTOPPER                          `|"
+Write-Host "                  `|                       StopProcesses Module                    `|"
+Write-Host "                  `|      ___________________________________________________      `|"
+Write-Host "                  `|                                                               `|"
+Write-Host "                  `|                Stopping adobe processes complete.             `|"
+Write-Host "                  `|      ___________________________________________________      `|"
+Write-Host "                  `|                                                               `|"
+Write-Host "                  `|      [Q] Exit Module                                          `|"
+Write-Host "                  `|                                                               `|"
+Write-Host "                  `|                                                               `|"
+Write-Host "                  `|_______________________________________________________________`|"
+Write-Host "`n"          
+Do {
+	$Invalid = $false
+	$Choice = Read-Host ">                                            Select [Q]"
+	Switch($Choice) {
+		Q { Exit }
+		Default {
+			$Invalid = $true
+			[Console]::Beep(500,100)
+		}
+	}
+} Until (!($Invalid))

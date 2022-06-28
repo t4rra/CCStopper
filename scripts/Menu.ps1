@@ -54,18 +54,30 @@ function MainMenu {
 	Write-Host "          `|                                                                               `|"
 	Write-Host "          `|_______________________________________________________________________________`|"
 	Write-Host "`n"
-	$Choice = Read-Host ">                                      Select [1,2,3,4,Q]"
-	Clear-Host
-	Switch($Choice) {
-		Q { Exit }
-		1 {
-			.\StopProcesses.ps1
-			MainMenu
+	Do {
+		$Invalid = $false
+		$Choice = Read-Host ">                                      Select [1,2,3,4,Q]"
+		Switch($Choice) {
+			Q { Exit }
+			1 {
+				.\StopProcesses.ps1
+				MainMenu
+			}
+			2 {
+				UtilityMenu
+			}
+			3 {
+				PatchesMenu
+			}
+			4 {
+				CreditMenu
+			}
+			Default {
+				$Invalid = $true
+				[Console]::Beep(500,100)
+			}
 		}
-		2 { UtilityMenu }
-		3 { PatchesMenu }
-		4 { CreditMenu }
-	}
+	} Until (!($Invalid))
 }
 
 function UtilityMenu {
@@ -99,27 +111,33 @@ function UtilityMenu {
 	Write-Host "          `|                                                                               `|"
 	Write-Host "          `|_______________________________________________________________________________`|"
 	Write-Host "`n"
-	$Choice = Read-Host ">                                      Select [1,2,3,4,Q]"
-	Clear-Host
-	Switch($Choice) {
-		Q { MainMenu }
-		1 {
-			.\DisableAutoStart.ps1
-			UtilityMenu
+	Do {
+		$Invalid = $false
+		$Choice = Read-Host ">                                      Select [1,2,3,4,Q]"
+		Switch($Choice) {
+			Q { MainMenu }
+			1 {
+				.\DisableAutoStart.ps1
+				UtilityMenu
+			}
+			2 {
+				.\HideCCFolder.ps1
+				UtilityMenu
+			}
+			3 {
+				.\BlockProcesses.ps1
+				UtilityMenu
+			}
+			4 {
+				.\InternetBlock.ps1
+				UtilityMenu
+			}
+			Default {
+				$Invalid = $true
+				[Console]::Beep(500,100)
+			}
 		}
-		2 {
-			.\HideCCFolder.ps1
-			UtilityMenu
-		}
-		3 {
-			.\BlockProcesses.ps1
-			UtilityMenu
-		}
-		4 {
-			.\InternetBlock.ps1
-			UtilityMenu
-		}
-	}
+	} Until (!($Invalid))
 }
 
 function PatchesMenu {
@@ -150,23 +168,29 @@ function PatchesMenu {
 	Write-Host "          `|                                                                               `|"
 	Write-Host "          `|_______________________________________________________________________________`|"
 	Write-Host "`n"
-	$Choice = Read-Host ">                                      Select [1,2,3,Q]"
-	Clear-Host
-	Switch($Choice) {
-		Q { MainMenu }
-		1 {
-			.\RemoveAGS.ps1
-			PatchesMenu
+	Do {
+		$Invalid = $false
+		$Choice = Read-Host ">                                      Select [1,2,3,Q]"
+		Switch($Choice) {
+			Q { MainMenu }
+			1 {
+				.\RemoveAGS.ps1
+				PatchesMenu
+			}
+			2 {
+				.\HideTrialBanner.ps1
+				PatchesMenu
+			}
+			3 {
+				.\AcrobatFix.ps1
+				PatchesMenu
+			}
+			Default {
+				$Invalid = $true
+				[Console]::Beep(500,100)
+			}
 		}
-		2 {
-			.\HideTrialBanner.ps1
-			PatchesMenu
-		}
-		3 {
-			.\AcrobatFix.ps1
-			PatchesMenu
-		}
-	}
+	} Until (!($Invalid))
 }
 
 function CreditMenu {
@@ -203,15 +227,21 @@ function CreditMenu {
 	Write-Host "          `|                                                                               `|"
 	Write-Host "          `|_______________________________________________________________________________`|"
 	Write-Host "`n"
-	$Choice = Read-Host ">                                      Select [1,Q]"
-	Clear-Host
-	Switch($Choice) {
-		Q { MainMenu }
-		1 {
-			Start-Process "https://github.com/eaaasun/CCStopper"
-			CreditMenu
+	Do {
+		$Invalid = $false
+		$Choice = Read-Host ">                                      Select [1,Q]"
+		Switch($Choice) {
+			Q { MainMenu }
+			1 {
+				Start-Process "https://github.com/eaaasun/CCStopper"
+				CreditMenu
+			}
+			Default {
+				$Invalid = $true
+				[Console]::Beep(500,100)
+			}
 		}
-	}
+	} Until (!($Invalid))
 }
 
 MainMenu

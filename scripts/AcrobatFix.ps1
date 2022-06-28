@@ -3,6 +3,7 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
 	Exit
 }
 Set-Location $PSScriptRoot
+Clear-Host
 
 function Set-ConsoleWindow([int]$Width, [int]$Height) {
 	$WindowSize = $Host.UI.RawUI.WindowSize
@@ -49,16 +50,23 @@ function MainScript {
 	Write-Host "                  `|                                                               `|"
 	Write-Host "                  `|_______________________________________________________________`|"
 	Write-Host "`n"
-	$Choice = Read-Host ">                                            Select [1,2,Q]"
-	Clear-Host
-	Switch($Choice) {
-		Q { Exit }
-		2 { EditReg }
-		1 {
-			Checkpoint-Computer -Description "Before CCStopper Acrobat Fix Script" -RestorePointType "MODIFY_SETTINGS"
-			EditReg
+	Do {
+		$Invalid = $false
+		$Choice = Read-Host ">                                            Select [1,2,Q]"
+		Switch($Choice) {
+			Q { Exit }
+			2 { EditReg }
+			1 {
+				Clear-Host
+				Checkpoint-Computer -Description "Before CCStopper Acrobat Fix Script" -RestorePointType "MODIFY_SETTINGS"
+				EditReg
+			}
+			Default {
+				$Invalid = $true
+				[Console]::Beep(500,100)
+			}
 		}
-	}
+	} Until (!($Invalid))
 }
 
 function EditReg {
@@ -92,12 +100,18 @@ function RestartAsk {
 	Write-Host "                  `|                                                               `|"
 	Write-Host "                  `|_______________________________________________________________`|"
 	Write-Host "`n"
-	$Choice = Read-Host ">                                            Select [1,2]: "
-	Clear-Host
-	Switch($Choice) {
-		2 { Exit }
-		1 { Restart-Computer }
-	}
+	Do {
+		$Invalid = $false
+		$Choice = Read-Host ">                                            Select [1,2]: "
+		Switch($Choice) {
+			2 { Exit }
+			1 { Restart-Computer }
+			Default {
+				$Invalid = $true
+				[Console]::Beep(500,100)
+			}
+		}
+	} Until (!($Invalid))
 }
 
 

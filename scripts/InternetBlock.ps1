@@ -3,6 +3,7 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
 	Exit
 }
 Set-Location $PSScriptRoot
+Clear-Host
 
 function Set-ConsoleWindow([int]$Width, [int]$Height) {
 	$WindowSize = $Host.UI.RawUI.WindowSize
@@ -117,8 +118,14 @@ Write-Host "                  `|                                                
 Write-Host "                  `|                                                               `|"
 Write-Host "                  `|_______________________________________________________________`|"
 Write-Host "`n"          
-$Choice = Read-Host ">                                            Select [Q]"
-Clear-Host
-Switch($Choice) {
-	Q { Exit }
-}
+Do {
+	$Invalid = $false
+	$Choice = Read-Host ">                                            Select [Q]"
+	Switch($Choice) {
+		Q { Exit }
+		Default {
+			$Invalid = $true
+			[Console]::Beep(500,100)
+		}
+	}
+} Until (!($Invalid))

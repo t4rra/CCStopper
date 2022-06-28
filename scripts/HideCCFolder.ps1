@@ -3,6 +3,7 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
 	Exit
 }
 Set-Location $PSScriptRoot
+Clear-Host
 
 function Set-ConsoleWindow([int]$Width, [int]$Height) {
 	$WindowSize = $Host.UI.RawUI.WindowSize
@@ -57,37 +58,43 @@ function RestartAsk {
 	Write-Host "                  `|                                                               `|"
 	Write-Host "                  `|_______________________________________________________________`|"
 	Write-Host "`n"
-	$Choice = Read-Host ">                                            Select [1,2]: "
-	Clear-Host
-	Switch($Choice) {
-		2 { Exit }
-		1 {
-			Clear-Host
+	Do {
+		$Invalid = $false
+		$Choice = Read-Host ">                                            Select [1,2]: "
+		Switch($Choice) {
+			2 { Exit }
+			1 {
+				Clear-Host
 
-			# Save open folders
-			$OpenFolders = @()
-			$Shell = New-Object -ComObject Shell.Application
-			$Shell.Windows() | ForEach-Object { $OpenFolders += $_.LocationURL }
+				# Save open folders
+				$OpenFolders = @()
+				$Shell = New-Object -ComObject Shell.Application
+				$Shell.Windows() | ForEach-Object { $OpenFolders += $_.LocationURL }
 
-			# Restart windows explorer
-			Stop-Process -Name "explorer" -Force
+				# Restart windows explorer
+				Stop-Process -Name "explorer" -Force
 
-			# Wait for explorer to be restarted
-			while((Get-Process -Name "explorer" -ErrorAction SilentlyContinue).Count -eq 0) { Start-Sleep -Milliseconds 100 }
+				# Wait for explorer to be restarted
+				while((Get-Process -Name "explorer" -ErrorAction SilentlyContinue).Count -eq 0) { Start-Sleep -Milliseconds 100 }
 
-			# Restore file explorer windows
-			$OpenFolders | ForEach-Object { Invoke-Item $([Uri]::UnescapeDataString(([System.Uri]$($_)).AbsolutePath)) } | Out-Null
+				# Restore file explorer windows
+				$OpenFolders | ForEach-Object { Invoke-Item $([Uri]::UnescapeDataString(([System.Uri]$($_)).AbsolutePath)) } | Out-Null
 
-			# Show the windows
-			$Handle = (Get-Process "explorer").MainWindowHandle
-			$Handle | ForEach-Object {
-				[Win32.NativeMethods]::SetForegroundWindow($_)
-				[Win32.NativeMethods]::ShowWindowAsync($_, 4)
+				# Show the windows
+				$Handle = (Get-Process "explorer").MainWindowHandle
+				$Handle | ForEach-Object {
+					[Win32.NativeMethods]::SetForegroundWindow($_)
+					[Win32.NativeMethods]::ShowWindowAsync($_, 4)
+				}
+
+				Exit
 			}
-
-			Exit
+			Default {
+				$Invalid = $true
+				[Console]::Beep(500,100)
+			}
 		}
-	}
+	} Until (!($Invalid))
 }
 
 function ShowFolder {
@@ -136,16 +143,23 @@ function MainScript {
 	Write-Host "                  `|                                                               `|"
 	Write-Host "                  `|_______________________________________________________________`|"
 	Write-Host "`n"
-	$Choice = Read-Host ">                                            Select [1,2,Q]"
-	Clear-Host
-	Switch($Choice) {
-		Q { Exit }
-		2 { EditReg }
-		1 {
-			Checkpoint-Computer -Description "Before CCStopper Hide CC Folder Script" -RestorePointType "MODIFY_SETTINGS"
-			EditReg
+	Do {
+		$Invalid = $false
+		$Choice = Read-Host ">                                            Select [1,2,Q]"
+		Switch($Choice) {
+			Q { Exit }
+			2 { EditReg }
+			1 {
+				Clear-Host
+				Checkpoint-Computer -Description "Before CCStopper Hide CC Folder Script" -RestorePointType "MODIFY_SETTINGS"
+				EditReg
+			}
+			Default {
+				$Invalid = $true
+				[Console]::Beep(500,100)
+			}
 		}
-	}
+	} Until (!($Invalid))
 }	
 
 $CLSID = (Get-Subkey -Key "HKCU:\SOFTWARE\Classes\CLSID" -SubkeyPattern "{0E270DAA-1BE6-48F2-AC49-*")
@@ -179,12 +193,18 @@ if($Data -eq 0) {
 	Write-Host "                  `|                                                               `|"
 	Write-Host "                  `|_______________________________________________________________`|"
 	Write-Host "`n"
-	$Choice = Read-Host ">                                            Select [1,Q]: "
-	Clear-Host
-	Switch($Choice) {
-		Q { Exit }
-		1 { MainScript }
-	}
+	Do {
+		$Invalid = $false
+		$Choice = Read-Host ">                                            Select [1,Q]: "
+		Switch($Choice) {
+			Q { Exit }
+			1 { MainScript }
+			Default {
+				$Invalid = $true
+				[Console]::Beep(500,100)
+			}
+		}
+	} Until (!($Invalid))
 } else {
 	MainScript
 }

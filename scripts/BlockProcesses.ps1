@@ -3,6 +3,7 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
 	Exit
 }
 Set-Location $PSScriptRoot
+Clear-Host
 
 function Set-ConsoleWindow([int]$Width, [int]$Height) {
 	$WindowSize = $Host.UI.RawUI.WindowSize
@@ -71,14 +72,21 @@ function Done {
 	Write-Host "                  `|                                                               `|"
 	Write-Host "                  `|_______________________________________________________________`|"
 	Write-Host "`n"
-	$Choice = Read-Host ">                                            Select [Q]"
-	Clear-Host
-	Switch($Choice) {
-		Q { Exit }
-	}
+	Do {
+		$Invalid = $false
+		$Choice = Read-Host ">                                            Select [Q]"
+		Switch($Choice) {
+			Q { Exit }
+			Default {
+				$Invalid = $true
+				[Console]::Beep(500,100)
+			}
+		}
+	} Until (!($Invalid))
 }
 
 function MainScript {
+	Clear-Host
 	Invoke-Expression -Command "$PSScriptRoot\StopProcesses.ps1"
 	Foreach($File in $Files) {
 		if((Test-Path -Path $File -PathType Leaf)) {
@@ -126,10 +134,16 @@ if($IsBlocked) {
 	Write-Host "                  `|                                                               `|"
 	Write-Host "                  `|_______________________________________________________________`|"
 	Write-Host "`n"
-	$Choice = Read-Host ">                                            Select [1,Q]"
-	Clear-Host
-	Switch($Choice) {
-		Q { Exit }
-		1 { MainScript }
-	}
+	Do {
+		$Invalid = $false
+		$Choice = Read-Host ">                                            Select [1,Q]"
+		Switch($Choice) {
+			Q { Exit }
+			1 { MainScript }
+			Default {
+				$Invalid = $true
+				[Console]::Beep(500,100)
+			}
+		}
+	} Until (!($Invalid))
 } elseif($IsNotBlocked) { MainScript }
