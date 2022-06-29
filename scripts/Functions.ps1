@@ -5,15 +5,15 @@ function ReadKey {
 
 	$Indent = 43 - $ChoiceNum
 	for ($i = 0; $i -le $Indent; $i++) {
-		write-host " " -NoNewLine
+		Write-Host " " -NoNewLine
 	}
-	write-host "Select [" -NoNewLine
+	Write-Host "Select [" -NoNewLine
 
-	for ($num = 1 ; $num -le $choiceNum ; $num++){
-		write-host "$num," -NoNewLine
+	for ($num = 1; $Num -le $ChoiceNum; $Num++){
+		Write-Host "$Num," -NoNewLine
 	}
 
-	write-host "Q]: " -NoNewLine
+	Write-Host "Q]: " -NoNewLine
 
 	$KeyPress = [System.Console]::ReadKey()
 	$global:Choice = $KeyPress.Key
