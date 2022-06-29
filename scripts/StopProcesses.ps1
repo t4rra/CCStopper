@@ -15,8 +15,40 @@ Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "
 	$Processes += ,$_
 	if($_.mainWindowTitle.Length) {
 		# Process has a window
-		$ContinueStopProcess = Read-Host "There are Adobe apps open. Do you want to continue? (y/n)"
-		if($ContinueStopProcess -ne "y") { Exit }
+		Do {
+			# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+			Clear-Host
+			Write-Output "`n"
+			Write-Output "`n"
+			Write-Output "                   _______________________________________________________________"
+			Write-Output "                  `|                                                               `| "
+			Write-Output "                  `|                                                               `|"
+			Write-Output "                  `|                            CCSTOPPER                          `|"
+			Write-Output "                  `|                       StopProcesses Module                    `|"
+			Write-Output "                  `|      ___________________________________________________      `|"
+			Write-Output "                  `|                                                               `|"
+			Write-Output "                  `|                   THERE ARE ADOBE APPS OPEN!                  `|"
+			Write-Output "                  `|    Do you want to continue? Unsaved documents that are open    |"
+			Write-Output "                  `|                  in adobe apps will be lost.                  `|"
+			Write-Output "                  `|      ___________________________________________________      `|"
+			Write-Output "                  `|                                                               `|"
+			Write-Output "                  `|      [1] Continue                                             `|"
+			Write-Output "                  `|                                                               `|"
+			Write-Output "                  `|      [Q] Exit Module                                          `|"
+			Write-Output "                  `|                                                               `|"
+			Write-Output "                  `|                                                               `|"
+			Write-Output "                  `|_______________________________________________________________`|"
+			Write-Output "`n"
+			ReadKey
+			Switch($Choice) {
+				Q { Exit }
+				1 { <# Continue #> }
+				Default {
+					$Invalid = $true
+
+				}
+			}
+		} Until (!($Invalid))
 	}
 }
 
