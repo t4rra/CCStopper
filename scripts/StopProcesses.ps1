@@ -42,7 +42,7 @@ Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "
 			ReadKey
 			Switch($Choice) {
 				Q { Exit }
-				1 { <# Continue #> }
+				1 { continue }
 				Default {
 					$Invalid = $true
 
