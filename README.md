@@ -23,13 +23,12 @@ Please don't run any code here, unless you know *exactly* what you're doing. If 
 
 - UI Change
   - Added submenus and changed inputs
-- Combined Credit Card Stop module and ServiceBlock module
-  - Thanks to [@sh32devnull](https://github.com/sh32devnull) for ServiceBlock module
+- Combined Credit Card Stop module and InternetBlock module
+  - Thanks to [@sh32devnull](https://github.com/sh32devnull)
   - Adds Adobe IPs to hosts file and blocks Adobe Desktop Service in firewall
 - Added DisableAutoStart, HideCCFolder, BlockProcesses, and HideTrialBanner modules
-  - Thanks to [@ItsProfessional](https://github.com/ItsProfessional) for all these modules
+  - Thanks to [@ItsProfessional](https://github.com/ItsProfessional)
 - Bug Fixes and Improvements
-  - Again, big thanks to contributors mentioned above for helping!
 - Documentation Update
 ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
 
@@ -80,13 +79,13 @@ A: This script needs those permissions to modify files and settings. The full so
 <details>
 <summary>Q: Is this a virus?</summary>
 
-A: Windows might say that it is a virus, but that is a false positive. As stated above, the full source code for this script is available for auditing.
+A: Windows might say that it is a virus, but that is a false positive. The full source code for this script is available for auditing.
 </details>
 
 <details>
 <summary>Q: I found a bug/issue! What do I do?</summary>
 
-A: Update to the latest version. If the issue persists, check the open issues and [the known issues](https://github.com/eaaasun/CCStopper/blob/main/README.md#known-issues) for any issues that I am aware of. If it's not there, open up an issue describing your problem and how to reproduce it. I'll work on it as soon as I can.
+A: Update to the latest version. If the issue persists, check the open/closed issues and [the known issues](https://github.com/eaaasun/CCStopper/blob/main/README.md#known-issues) for any issues that I am aware of. If it's not there, open up an issue describing your problem and how to reproduce it. I'll work on it as soon as I can.
 
 </details>
 
@@ -99,19 +98,19 @@ A: It is not currently available for MacOS, and I don't intend on porting it to 
 <details>
 <summary>Q: Will more features be added?</summary>
 
-A: Yes! They are all in the Future Features section below. Any help with the future features is greatly appreciated!
+A: Yes! They are all in the Future Features section below. Any help with that is greatly appreciated!
 </details>
 
 <details>
 <summary>Q: Will this affect Adobe apps in any negative way?</summary>
 
-A: No, it won't. If you do have Adobe apps (Photoshop, After Effects, etc.) open, it will close them if you decide to end Adobe processes. If you decide to block adobe processes some functionality of adobe apps might be lost, however 95% of functionality will remain. Other than that, everything should work normally. Please open an issue if this is not the case.
+A: No, it won't. If you do have Adobe apps (Photoshop, After Effects, etc.) open, it will close them if you decide to end Adobe processes. If you decide to block adobe processes some functionality of Adobe apps might be lost, however 95% of functionality will remain. Other than that, everything should work normally. Please open an issue if this is not the case.
 </details>
 
 <details>
 <summary>Q: Is there any way to support the project?</summary>
 
-A: Please donate your time! If you have batch scripting knowledge, please look through the Future Features section below and see what you can contribute. Financial donations are not accepted at the moment.
+A: The only thing you can donate is your time! If you have batch/powershell scripting knowledge, please look through the Future Features section below and see what you can contribute. 
 </details>
 
 ## Future Features
@@ -119,8 +118,6 @@ A: Please donate your time! If you have batch scripting knowledge, please look t
 
 - [ ] Patch Retention
   - Locks the patched file from GenP so that nothing can modify/delete it
-  - I'm stuck at setting a list of filepaths that the script can read off and patch. 
-- [ ] Backup documentation/scripts
 ## Known Issues
 > There are more issues in the [issues](https://github.com/eaaasun/CCStopper/issues) section; these are just the most common ones.
 
@@ -142,7 +139,7 @@ Fix: Run `Set-ExecutionPolicy RemoteSigned` in an administrator powershell windo
 
 ## Disclaimer/Notice
 
-**Disclaimer:** This script is in an early stage, and offered as-is. There will be bugs. I am not responsible for any damage or loss of data caused by these scripts. I am not affiliated with Adobe.
+**Disclaimer:** This script is in an early stage, and offered as-is. There will be bugs. I am not responsible for any damage, loss of data, or thermonuclear wars caused by these scripts. I am not affiliated with Adobe.
 
 **Notice:** Don't use this tool for piracy. It's illegal, and multi-billion dollar companies like Adobe _needs_ to profit off unreliable and overpriced software. Piracy _helps_ Adobe by increasing their market dominance. If you want to dethrone Adobe, use [alternatives](https://ass.easun.me).
 
