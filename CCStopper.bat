@@ -14,7 +14,13 @@ goto mainScript
 exit
 
 :mainScript
-:: Unblock files
-for %%a in (*.ps1) do (echo.>%%a:Zone.Identifier)
+for %%a in (*.ps1) do (
+	set /p "zoneIdentifier="<"%%a:Zone.Identifier"
+	:: Check if file is blocked
+	if defined zoneIdentifier (
+		:: Unblock files
+		echo.>%%a:Zone.Identifier
+	)
+)
 
 powershell -ExecutionPolicy RemoteSigned -File .\Menu.ps1
