@@ -34,7 +34,7 @@ function MainMenu {
 		Write-Output "          `|                                                                               `|"
 		Write-Output "          `|                                   CCSTOPPER                                   `|"
 		Write-Output "          `|                                Made by eaaasun                                `|"
-		Write-Output "          `|                                 v1.2.0-pre.1                                  `|"
+		Write-Output "          `|                                v1.2.0-pre.2_dev                               `|"
 		Write-Output "          `|      ___________________________________________________________________      `|"
 		Write-Output "          `|                                                                               `|"
 		Write-Output "          `|                                SAVE YOUR FILES!                               `|"
