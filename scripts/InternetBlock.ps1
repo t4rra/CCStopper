@@ -22,6 +22,7 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 $Host.UI.RawUI.WindowTitle = "CCStopper - Block Adobe Processes"
 # Set-ConsoleWindow -Width 73 -Height 42
 
+
 $CommentedLine = "`# BLOCK ADOBE"
 
 $LocalAddress = "0.0.0.0"
@@ -120,13 +121,12 @@ Do {
 	Write-Output "                  `|                                                               `|"
 	Write-Output "                  `|_______________________________________________________________`|"
 	Write-Output "`n"
-	$Invalid = $false
-	$Choice = Read-Host ">                                            Select [Q]"
+	ReadKey
 	Switch($Choice) {
 		Q { Exit }
 		Default {
 			$Invalid = $true
-			[Console]::Beep(500,100)
+
 		}
 	}
 } Until (!($Invalid))

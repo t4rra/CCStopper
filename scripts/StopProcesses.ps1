@@ -4,7 +4,6 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
 }
 Set-Location $PSScriptRoot
 Clear-Host
-
 # Stops Adobe Processes and Services, source: https://gist.github.com/carcheky/530fd85ffff6719486038542a8b5b997#gistcomment-3586740
 
 # Stop adobe services
@@ -43,13 +42,12 @@ Do {
 	Write-Output "                  `|                                                               `|"
 	Write-Output "                  `|_______________________________________________________________`|"
 	Write-Output "`n"
-	$Invalid = $false
-	$Choice = Read-Host ">                                            Select [Q]"
+	ReadKey
 	Switch($Choice) {
 		Q { Exit }
 		Default {
 			$Invalid = $true
-			[Console]::Beep(500,100)
+
 		}
 	}
 } Until (!($Invalid))

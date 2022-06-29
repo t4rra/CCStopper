@@ -1,4 +1,4 @@
-if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+if (!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
 	Start-Process -FilePath PowerShell -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" `"$($MyInvocation.MyCommand.UnboundArguments)`""
 	Exit
 }
@@ -11,7 +11,8 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 
 	try {
 		$Host.UI.RawUI.WindowSize = $WindowSize
-	} catch [System.Management.Automation.SetValueInvocationException] {
+	}
+	catch [System.Management.Automation.SetValueInvocationException] {
 		$MaxValue = ($_.Exception.Message | Select-String "\d+").Matches[0].Value
 		$WindowSize.Height = $MaxValue
 		$Host.UI.RawUI.WindowSize = $WindowSize
@@ -20,6 +21,7 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 
 $Host.UI.RawUI.WindowTitle = "CCStopper"
 # Set-ConsoleWindow -Width 73 -Height 42
+Import-Module .\Functions.ps1
 
 function MainMenu {
 	Do {
@@ -55,26 +57,25 @@ function MainMenu {
 		Write-Output "          `|                                                                               `|"
 		Write-Output "          `|_______________________________________________________________________________`|"
 		Write-Output "`n"
-		$Invalid = $false
-		$Choice = Read-Host ">                                      Select [1,2,3,4,Q]"
-		Switch($Choice) {
+		ReadKey 4
+		Switch ($Choice) {
 			Q { Exit }
-			1 {
+			D1 {
 				.\StopProcesses.ps1
 				MainMenu
 			}
-			2 {
+			D2 {
 				UtilityMenu
 			}
-			3 {
+			D3 {
 				PatchesMenu
 			}
-			4 {
+			D4 {
 				CreditMenu
 			}
 			Default {
 				$Invalid = $true
-				[Console]::Beep(500,100)
+				
 			}
 		}
 	} Until (!($Invalid))
@@ -82,7 +83,6 @@ function MainMenu {
 
 function UtilityMenu {
 	Do {
-		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 		Clear-Host
 		Write-Output "`n"
 		Write-Output "`n"
@@ -113,29 +113,28 @@ function UtilityMenu {
 		Write-Output "          `|                                                                               `|"
 		Write-Output "          `|_______________________________________________________________________________`|"
 		Write-Output "`n"
-		$Invalid = $false
-		$Choice = Read-Host ">                                      Select [1,2,3,4,Q]"
-		Switch($Choice) {
+		ReadKey 4
+		Switch ($Choice) {
 			Q { MainMenu }
-			1 {
+			D1 {
 				.\DisableAutoStart.ps1
 				UtilityMenu
 			}
-			2 {
+			D2 {
 				.\HideCCFolder.ps1
 				UtilityMenu
 			}
-			3 {
+			D3 {
 				.\BlockProcesses.ps1
 				UtilityMenu
 			}
-			4 {
+			D4 {
 				.\InternetBlock.ps1
 				UtilityMenu
 			}
 			Default {
 				$Invalid = $true
-				[Console]::Beep(500,100)
+				
 			}
 		}
 	} Until (!($Invalid))
@@ -143,7 +142,6 @@ function UtilityMenu {
 
 function PatchesMenu {
 	Do {
-		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 		Clear-Host
 		Write-Output "`n"
 		Write-Output "`n"
@@ -171,25 +169,24 @@ function PatchesMenu {
 		Write-Output "          `|                                                                               `|"
 		Write-Output "          `|_______________________________________________________________________________`|"
 		Write-Output "`n"
-		$Invalid = $false
-		$Choice = Read-Host ">                                      Select [1,2,3,Q]"
-		Switch($Choice) {
+		ReadKey 3
+		Switch ($Choice) {
 			Q { MainMenu }
-			1 {
+			D1 {
 				.\RemoveAGS.ps1
 				PatchesMenu
 			}
-			2 {
+			D2 {
 				.\HideTrialBanner.ps1
 				PatchesMenu
 			}
-			3 {
+			D3 {
 				.\AcrobatFix.ps1
 				PatchesMenu
 			}
 			Default {
 				$Invalid = $true
-				[Console]::Beep(500,100)
+				
 			}
 		}
 	} Until (!($Invalid))
@@ -197,7 +194,6 @@ function PatchesMenu {
 
 function CreditMenu {
 	Do {
-		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 		Clear-Host
 		Write-Output "`n"
 		Write-Output "`n"
@@ -231,17 +227,16 @@ function CreditMenu {
 		Write-Output "          `|                                                                               `|"
 		Write-Output "          `|_______________________________________________________________________________`|"
 		Write-Output "`n"
-		$Invalid = $false
-		$Choice = Read-Host ">                                      Select [1,Q]"
-		Switch($Choice) {
+		ReadKey 1
+		Switch ($Choice) {
 			Q { MainMenu }
-			1 {
+			D1 {
 				Start-Process "https://github.com/eaaasun/CCStopper"
 				CreditMenu
 			}
 			Default {
 				$Invalid = $true
-				[Console]::Beep(500,100)
+				
 			}
 		}
 	} Until (!($Invalid))

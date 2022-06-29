@@ -1,4 +1,4 @@
-if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+if (!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
 	Start-Process -FilePath PowerShell -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" `"$($MyInvocation.MyCommand.UnboundArguments)`""
 	Exit
 }
@@ -12,7 +12,8 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 
 	try {
 		$Host.UI.RawUI.WindowSize = $WindowSize
-	} catch [System.Management.Automation.SetValueInvocationException] {
+	}
+ catch [System.Management.Automation.SetValueInvocationException] {
 		$MaxValue = ($_.Exception.Message | Select-String "\d+").Matches[0].Value
 		$WindowSize.Height = $MaxValue
 		$Host.UI.RawUI.WindowSize = $WindowSize
@@ -21,6 +22,7 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 
 $Host.UI.RawUI.WindowTitle = "CCStopper - Disable Auto Start"
 # Set-ConsoleWindow -Width 73 -Height 42
+
 
 $Kernel32Definition = @'
 	[DllImport("kernel32")]
@@ -51,9 +53,10 @@ function RestartAsk {
 		Write-Output "                  `|                       DisableAutoStart Module                 `|"
 		Write-Output "                  `|      ___________________________________________________      `|"
 		Write-Output "                  `|                                                               `|"
-		if($AutostartDisabled) {
+		if ($AutostartDisabled) {
 			Write-Output "                  `|                Enabling Autostart Complete!                   `|"
-		} else {
+		}
+		else {
 			Write-Output "                  `|               Disabling Autostart Complete!                   `|"
 		}
 		Write-Output "                  `|      ___________________________________________________      `|"
@@ -63,13 +66,12 @@ function RestartAsk {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|_______________________________________________________________`|"
 		Write-Output "`n"
-		$Invalid = $false
-		$Choice = Read-Host ">                                            Select [Q]"
-		Switch($Choice) {
+		ReadKey
+		Switch ($Choice) {
 			Q { Exit }
 			Default {
 				$Invalid = $true
-				[Console]::Beep(500,100)
+	
 			}
 		}
 	} Until (!($Invalid))
@@ -77,8 +79,8 @@ function RestartAsk {
 
 $Programs = @()
 Get-Item "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" | ForEach-Object {
-   $Path = $_.PSPath
-   $_.Property | ForEach-Object {
+	$Path = $_.PSPath
+	$_.Property | ForEach-Object {
 		$Name = $_
 		$CommandLine = Get-ItemProperty -LiteralPath $Path -Name $Name | Select-Object -Expand $Name
 
@@ -91,7 +93,8 @@ Get-Item "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" | For
 			0..$ParsedArgCount | ForEach-Object {
 				$ParsedArgs += [System.Runtime.InteropServices.Marshal]::PtrToStringUni([System.Runtime.InteropServices.Marshal]::ReadIntPtr($ParsedArgsPtr, $_ * [IntPtr]::Size))
 			}
-		} Finally {
+		}
+		Finally {
 			$Kernel32::LocalFree($ParsedArgsPtr) | Out-Null
 		}
 		$PassedArgs2 = @()
@@ -100,11 +103,11 @@ Get-Item "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" | For
 			$PassedArgs2 += $ParsedArgs[$i]
 		}
 		$File = $PassedArgs2[0]
-		if(!(Test-Path -Path $File)) {
+		if (!(Test-Path -Path $File)) {
 			$File = $CommandLine
 		}
 
-		(Get-Item $File).VersionInfo | Where-Object {$_.CompanyName -match "Adobe" -or $File -match "Adobe"} | ForEach-Object {
+		(Get-Item $File).VersionInfo | Where-Object { $_.CompanyName -match "Adobe" -or $File -match "Adobe" } | ForEach-Object {
 			$Programs += $Name
 		}
 	}
@@ -116,7 +119,7 @@ function EnableAutostart {
 
 	# Enable the processes the same way task manager does it
 	foreach ($Program in $Programs) {
-		Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32" -Name $Program -Value ([byte[]](0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00))
+		Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32" -Name $Program -Value ([byte[]](0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00))
 	}
 }
 
@@ -126,15 +129,16 @@ function DisableAutoStart {
 
 	# Disable the processes the same way task manager does it
 	foreach ($Program in $Programs) {
-		Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32" -Name $Program -Value ([byte[]](0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00))
+		Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32" -Name $Program -Value ([byte[]](0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00))
 	}
 }
 
 function EditReg {
 	# Adds IsAMTEnforced with proper values, then deletes IsNGLEnfoced
-	if($AutostartDisabled -eq $true) {
+	if ($AutostartDisabled -eq $true) {
 		EnableAutostart
-	} else {
+	}
+ else {
 		DisableAutostart
 	}
 	RestartAsk
@@ -169,19 +173,18 @@ function MainScript {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|_______________________________________________________________`|"
 		Write-Output "`n"
-		$Invalid = $false
-		$Choice = Read-Host ">                                            Select [1,2,Q]"
-		Switch($Choice) {
+		ReadKey 2
+		Switch ($Choice) {
 			Q { Exit }
-			2 { EditReg }
-			1 {
+			D2 { EditReg }
+			D1 {
 				Clear-Host
 				Checkpoint-Computer -Description "Before CCStopper Disable Auto Start Script" -RestorePointType "MODIFY_SETTINGS"
 				EditReg
 			}
 			Default {
 				$Invalid = $true
-				[Console]::Beep(500,100)
+	
 			}
 		}
 	} Until (!($Invalid))
@@ -196,7 +199,7 @@ foreach ($Program in $Programs) {
 # Check if autostart is already disabled
 $AutostartDisabled = $false
 
-if($Data[0] -eq "03") {
+if ($Data[0] -eq "03") {
 	$AutostartDisabled = $true
 	Do {
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
@@ -223,17 +226,17 @@ if($Data[0] -eq "03") {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|_______________________________________________________________`|"
 		Write-Output "`n"
-		$Invalid = $false
-		$Choice = Read-Host ">                                            Select [1,Q]: "
-		Switch($Choice) {
+		ReadKey 1
+		Switch ($Choice) {
 			Q { Exit }
-			1 { MainScript }
+			D1 { MainScript }
 			Default {
 				$Invalid = $true
-				[Console]::Beep(500,100)
+	
 			}
 		}
 	} Until (!($Invalid))
-} else {
+}
+else {
 	MainScript
 }

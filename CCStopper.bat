@@ -1,6 +1,6 @@
 @echo off
 title CCStopper
-mode con: cols=99 lines=35
+mode con: cols=99 lines=38
 
 :: Asks for Administrator Permissions
 net session >nul 2>&1

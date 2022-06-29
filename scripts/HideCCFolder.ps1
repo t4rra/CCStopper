@@ -25,6 +25,7 @@ Add-Type -MemberDefinition $Sig -name NativeMethods -namespace Win32
 $Host.UI.RawUI.WindowTitle = "CCStopper - Hide Creative Cloud Folder"
 # Set-ConsoleWindow -Width 73 -Height 42
 
+
 function Get-Subkey([String]$Key, [String]$SubkeyPattern) {
 	return (Get-ChildItem $Key -Recurse | Where-Object {$_.PSChildName -Like "$SubkeyPattern"}).Name
 }
@@ -59,11 +60,10 @@ function RestartAsk {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|_______________________________________________________________`|"
 		Write-Output "`n"
-		$Invalid = $false
-		$Choice = Read-Host ">                                            Select [1,2]: "
+		ReadKey 2
 		Switch($Choice) {
-			2 { Exit }
-			1 {
+			D2 { Exit }
+			D1 {
 				Clear-Host
 
 				# Save open folders
@@ -91,7 +91,7 @@ function RestartAsk {
 			}
 			Default {
 				$Invalid = $true
-				[Console]::Beep(500,100)
+	
 			}
 		}
 	} Until (!($Invalid))
@@ -144,19 +144,18 @@ function MainScript {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|_______________________________________________________________`|"
 		Write-Output "`n"
-		$Invalid = $false
-		$Choice = Read-Host ">                                            Select [1,2,Q]"
+		ReadKey 2
 		Switch($Choice) {
 			Q { Exit }
-			2 { EditReg }
-			1 {
+			D2 { EditReg }
+			D1 {
 				Clear-Host
 				Checkpoint-Computer -Description "Before CCStopper Hide CC Folder Script" -RestorePointType "MODIFY_SETTINGS"
 				EditReg
 			}
 			Default {
 				$Invalid = $true
-				[Console]::Beep(500,100)
+	
 			}
 		}
 	} Until (!($Invalid))
@@ -195,14 +194,13 @@ if($Data -eq 0) {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|_______________________________________________________________`|"
 		Write-Output "`n"
-		$Invalid = $false
-		$Choice = Read-Host ">                                            Select [1,Q]: "
+		ReadKey 1
 		Switch($Choice) {
 			Q { Exit }
-			1 { MainScript }
+			D1 { MainScript }
 			Default {
 				$Invalid = $true
-				[Console]::Beep(500,100)
+	
 			}
 		}
 	} Until (!($Invalid))

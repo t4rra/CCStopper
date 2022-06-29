@@ -22,6 +22,7 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 $Host.UI.RawUI.WindowTitle = "CCStopper - Acrobat Fix"
 # Set-ConsoleWindow -Width 73 -Height 42
 
+
 function MainScript {
 	Do {
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
@@ -51,19 +52,18 @@ function MainScript {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|_______________________________________________________________`|"
 		Write-Output "`n"
-		$Invalid = $false
-		$Choice = Read-Host ">                                            Select [1,2,Q]"
+		ReadKey 2
 		Switch($Choice) {
 			Q { Exit }
-			2 { EditReg }
-			1 {
+			D2 { EditReg }
+			D1 {
 				Clear-Host
 				Checkpoint-Computer -Description "Before CCStopper Acrobat Fix Script" -RestorePointType "MODIFY_SETTINGS"
 				EditReg
 			}
 			Default {
 				$Invalid = $true
-				[Console]::Beep(500,100)
+	
 			}
 		}
 	} Until (!($Invalid))
@@ -101,14 +101,13 @@ function RestartAsk {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|_______________________________________________________________`|"
 		Write-Output "`n"
-		$Invalid = $false
-		$Choice = Read-Host ">                                            Select [1,2]: "
+		ReadKey 2
 		Switch($Choice) {
-			2 { Exit }
-			1 { Restart-Computer }
+			D2 { Exit }
+			D1 { Restart-Computer }
 			Default {
 				$Invalid = $true
-				[Console]::Beep(500,100)
+	
 			}
 		}
 	} Until (!($Invalid))
