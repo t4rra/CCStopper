@@ -5,20 +5,6 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
 Set-Location $PSScriptRoot
 Clear-Host
 
-function Set-ConsoleWindow([int]$Width, [int]$Height) {
-	$WindowSize = $Host.UI.RawUI.WindowSize
-	$WindowSize.Width = [Math]::Min($Width, $Host.UI.RawUI.BufferSize.Width)
-	$WindowSize.Height = $Height
-
-	try {
-		$Host.UI.RawUI.WindowSize = $WindowSize
-	} catch [System.Management.Automation.SetValueInvocationException] {
-		$MaxValue = ($_.Exception.Message | Select-String "\d+").Matches[0].Value
-		$WindowSize.Height = $MaxValue
-		$Host.UI.RawUI.WindowSize = $WindowSize
-	}
-}
-
 $Host.UI.RawUI.WindowTitle = "CCStopper - Block Adobe Processes"
 # Set-ConsoleWindow -Width 73 -Height 42
 

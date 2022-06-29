@@ -5,20 +5,6 @@ if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
 Set-Location $PSScriptRoot
 Clear-Host
 
-function Set-ConsoleWindow([int]$Width, [int]$Height) {
-	$WindowSize = $Host.UI.RawUI.WindowSize
-	$WindowSize.Width = [Math]::Min($Width, $Host.UI.RawUI.BufferSize.Width)
-	$WindowSize.Height = $Height
-
-	try {
-		$Host.UI.RawUI.WindowSize = $WindowSize
-	} catch [System.Management.Automation.SetValueInvocationException] {
-		$MaxValue = ($_.Exception.Message | Select-String "\d+").Matches[0].Value
-		$WindowSize.Height = $MaxValue
-		$Host.UI.RawUI.WindowSize = $WindowSize
-	}
-}
-
 $Sig = '[DllImport("user32.dll")] public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);'
 Add-Type -MemberDefinition $Sig -name NativeMethods -namespace Win32
 
