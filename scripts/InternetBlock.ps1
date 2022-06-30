@@ -1,5 +1,5 @@
 if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
-	Start-Process -FilePath PowerShell -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" `"$($MyInvocation.MyCommand.UnboundArguments)`""
+	Start-Process -FilePath $((Get-Process -Id $PID).Path) -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" `"$($MyInvocation.MyCommand.UnboundArguments)`""
 	Exit
 }
 Set-Location $PSScriptRoot
@@ -18,7 +18,7 @@ $HostFile = "$Env:SystemRoot\System32\drivers\etc\hosts"
 # if(!((Get-ItemProperty $HostFile).IsReadOnly)) {
 	# Write-Output "Cannot write in host file because it is read-only."
 	# Pause
-    # Exit
+	# Exit
 # }
 
 function WritingFailure {
@@ -35,7 +35,7 @@ try {
 } catch { WritingFailure }
 
 if(Test-Path variable:StartCounter) {
-    StartCounter = ""
+	StartCounter = ""
 }
 
 $NumberOfLinesAfterCommentedLine = 0
@@ -45,7 +45,7 @@ ForEach ($Line in (Get-Content -Path $HostFile)) {
 		$NumberOfLinesAfterCommentedLine += 1
 	}
 
-    if($Line -eq $CommentedLine) {
+	if($Line -eq $CommentedLine) {
 		$StartCounter = 1
 		$NumberOfLinesAfterCommentedLine = 0
 	}
@@ -56,10 +56,10 @@ if($NumberOfLinesAfterCommentedLine -le $BlockedAddresses.Length) {
 }
 
 ForEach($BlockedAddress in $BlockedAddresses) {
-    Write-Output "Adding to the hosts file: $LocalAddress $BlockedAddress"
+	Write-Output "Adding to the hosts file: $LocalAddress $BlockedAddress"
 
 	$Found = Select-String -Path $HostFile -Pattern $('^' + "$LocalAddress $BlockedAddress" + '$') -CaseSensitive -Quiet
-    if($Found) {
+	if($Found) {
 		try {
 			Set-Content -Value ((Select-String -Path $HostFile -Pattern $('^' + "$LocalAddress $BlockedAddress" + '$') -NotMatch -CaseSensitive).Line) -Path "$HostFile.tmp"
 		} catch { WritingFailure }
@@ -82,7 +82,7 @@ ForEach($BlockedAddress in $BlockedAddresses) {
 }
 	
 if(Get-NetFirewallRule -DisplayName "CCStopper-CreditCardBlock" -ErrorAction SilentlyContinue) {
-    Write-Output "Firewall rule exists!"
+	Write-Output "Firewall rule exists!"
 } else {
 	New-NetFirewallRule -DisplayName "CCStopper-CreditCardBlock" -Direction Outbound -Program "${Env:ProgramFiles(x86)}\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe" -Action Block
 }
