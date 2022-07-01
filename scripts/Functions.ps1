@@ -126,7 +126,7 @@ function Write-MenuLine([String]$Contents, [Switch]$Center = $true) {
 	if($NoStartMargin) { $Line.Insert(0, $MarginText) }
 	if($NoEndMargin) { $Line.Insert($Length-1, $MarginText) }
 
-	Write-Output "$Indent`|$MarginText$Line$MarginText`|"
+	Write-Output "$Indent`|$Line`|"
 
 	if(Test-Path variable:local:Extra) {
 		if($Center) {
