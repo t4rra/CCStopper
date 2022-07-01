@@ -69,7 +69,6 @@ Get-Item "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" | For
 		$CommandLine = Get-ItemProperty -LiteralPath $Path -Name $Name | Select-Object -Expand $Name
 
 		# If the value has arguments, strip them off
-		# if($File -match '"') { $File = $File.Substring($File.IndexOf('"')+1, $File.LastIndexOf('"')-1) }
 		$ParsedArgCount = 0
 		$ParsedArgsPtr = $Shell32::CommandLineToArgvW($CommandLine, [ref]$ParsedArgCount)
 		Try {
@@ -132,7 +131,6 @@ foreach ($Program in $Programs) {
 	$ByteArray = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32").$Program
 	$Data = ([System.BitConverter]::ToString([byte[]]$ByteArray)).Split('-')
 }
-#([byte[]](0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00))
 
 # Check if autostart is already disabled
 $AutostartDisabled = $false
