@@ -101,7 +101,7 @@ function UtilityMenu {
 		Switch ($Choice) {
 			Q { MainMenu }
 			D1 {
-				.\DisableAutoStart.ps1
+				.\DisableAutostart.ps1
 				UtilityMenu
 			}
 			D2 {

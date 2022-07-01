@@ -35,7 +35,7 @@ function RestartAsk {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                       DisableAutoStart Module                 `|"
+		Write-Output "                  `|                       DisableAutostart Module                 `|"
 		Write-Output "                  `|      ___________________________________________________      `|"
 		Write-Output "                  `|                                                               `|"
 		if ($AutostartDisabled) {
@@ -106,7 +106,7 @@ function EnableAutostart {
 	}
 }
 
-function DisableAutoStart {
+function DisableAutostart {
 	# Disable services auto-start
 	Get-Service -DisplayName Adobe* | Set-Service -StartupType Manual
 
@@ -146,7 +146,7 @@ if ($Data[0] -eq "03") {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                     DisableAutoStart Module                   `|"
+		Write-Output "                  `|                     DisableAutostart Module                   `|"
 		Write-Output "                  `|      ___________________________________________________      `|"
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                  AUTO START ALREADY DISABLED!                 `|"
