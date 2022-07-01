@@ -77,7 +77,6 @@ function RestartAsk {
 			}
 			Default {
 				$Invalid = $true
-	
 			}
 		}
 	} Until (!($Invalid))
@@ -140,7 +139,6 @@ if($Data -eq 0) {
 			D1 { RegBackup "Hide CC Folder" }
 			Default {
 				$Invalid = $true
-	
 			}
 		}
 	} Until (!($Invalid))

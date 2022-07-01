@@ -60,7 +60,6 @@ function MainMenu {
 			}
 			Default {
 				$Invalid = $true
-				
 			}
 		}
 	} Until (!($Invalid))
@@ -119,7 +118,6 @@ function UtilityMenu {
 			}
 			Default {
 				$Invalid = $true
-				
 			}
 		}
 	} Until (!($Invalid))
@@ -171,7 +169,6 @@ function PatchesMenu {
 			}
 			Default {
 				$Invalid = $true
-				
 			}
 		}
 	} Until (!($Invalid))
@@ -221,7 +218,6 @@ function CreditMenu {
 			}
 			Default {
 				$Invalid = $true
-				
 			}
 		}
 	} Until (!($Invalid))

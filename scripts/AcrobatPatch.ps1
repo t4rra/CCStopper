@@ -47,7 +47,6 @@ function RestartAsk {
 			D1 { Restart-Computer }
 			Default {
 				$Invalid = $true
-	
 			}
 		}
 	} Until (!($Invalid))

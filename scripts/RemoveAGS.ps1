@@ -64,7 +64,6 @@ Do {
 		Q { Exit }
 		Default {
 			$Invalid = $true
-			[Console]::Beep(500, 100)
 		}
 	}
 } Until (!($Invalid))

@@ -56,7 +56,6 @@ function RestartAsk {
 			Q { Exit }
 			Default {
 				$Invalid = $true
-	
 			}
 		}
 	} Until (!($Invalid))
@@ -171,7 +170,6 @@ if ($Data[0] -eq "03") {
 			D1 { RegBackup -Msg "Disable Autostart" }
 			Default {
 				$Invalid = $true
-	
 			}
 		}
 	} Until (!($Invalid))

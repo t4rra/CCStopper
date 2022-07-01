@@ -112,7 +112,6 @@ Do {
 		Q { Exit }
 		Default {
 			$Invalid = $true
-
 		}
 	}
 } Until (!($Invalid))
