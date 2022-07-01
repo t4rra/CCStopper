@@ -92,6 +92,9 @@ $MarginLength = $LineLength - ($Margin * 2)
 $BlankLine = ""
 1.."$LineLength" | ForEach-Object { $BlankLine += " " }
 
+$VerticalBorder = ""
+1.."$LineLength" | ForEach-Object { $VerticalBorder += "_" }
+
 $MarginText = ""
 1.."$Margin" | ForEach-Object { $MarginText += " " }
 
@@ -137,13 +140,8 @@ function Write-MenuLine([String]$Contents, [Switch]$Center = $true) {
 	}
 }
 
-function Write-BlankMenuLine {
-	Write-MenuLine -Contents $BlankLine
-}
-
-function Write-VerticalBorder {
-	Write-MenuLine -Contents "_______________________________________________________________"
-}
+function Write-BlankMenuLine { Write-MenuLine -Contents $BlankLine }
+function Write-VerticalBorder { Write-MenuLine -Contents $VerticalBorder }
 
 function ShowMenu($Module, $Header, $Description) {
 	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
