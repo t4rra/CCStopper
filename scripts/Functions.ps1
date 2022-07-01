@@ -108,6 +108,7 @@ function Write-MenuLine([String]$Contents, [Switch]$Center = $true) {
 		$Length = $Contents.Length
 	}
 
+	$Line = $Contents
 	if($Center) {
 		$Offset = $Length / 2
 		$OffsettedLength = $LineCenter - $Offset
@@ -116,8 +117,6 @@ function Write-MenuLine([String]$Contents, [Switch]$Center = $true) {
 		$Line = $Line.Remove($LineCenter, $Offset)
 		$Line = $Line.Remove($OffsettedLength+1, $Offset)
 		$Line = $Line.Insert($OffsettedLength+1, $Contents)
-	} else {
-		$Line = $Contents
 	}
 
 	$NoStartMargin = !($Line.StartsWith(($MarginText)))
