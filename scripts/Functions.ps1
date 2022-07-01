@@ -143,7 +143,7 @@ function Write-MenuLine([String]$Contents, [Switch]$Center = $true) {
 function Write-BlankMenuLine { Write-MenuLine -Contents $BlankLine }
 function Write-VerticalBorder { Write-MenuLine -Contents $VerticalBorder }
 
-function ShowMenu($Module, $Header, $Description) {
+function ShowMenu([String]$Module, [String]$Header, [String]$Description, [String]$Options) {
 	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 	Clear-Host
 	Write-Output "`n"
@@ -161,12 +161,12 @@ function ShowMenu($Module, $Header, $Description) {
 	Write-VerticalBorder
 	Write-BlankMenuLine
 
-	Write-MenuLine -Contents "[1] Restart now." -Center:$false
-	Write-BlankMenuLine
-	Write-MenuLine -Contents "[2] Skip (You will need to manually restart later)" -Center:$false
+	foreach($Option in $Options) {
+		$Num = $Options.IndexOf($Option) + 1
+		Write-MenuLine -Contents "[$Num] $Option" -Center:$false
+		Write-BlankMenuLine
+	}
 
-	Write-BlankMenuLine
-	Write-BlankMenuLine
 	Write-VerticalBorder
 	Write-Output "`n"
 }
