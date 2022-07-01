@@ -167,6 +167,9 @@ function ShowMenu([String]$Module, [String]$Header, [String]$Description, [Strin
 		Write-BlankMenuLine
 	}
 
+	Write-MenuLine -Contents "[Q] Exit" -Center:$false
+	Write-BlankMenuLine
+
 	Write-VerticalBorder
 	Write-Output "`n"
 }
