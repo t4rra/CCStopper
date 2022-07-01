@@ -81,7 +81,10 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 	}
 }
 
-$Indent = "                  "
+$IndentCount = 18
+$Indent = ""
+1.."$IndentCount" | ForEach-Object { $Indent += " " }
+
 $LineLength = 67
 $Margin = 6
 $MarginLength = $LineLength - ($Margin * 2)
