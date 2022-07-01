@@ -164,7 +164,6 @@ function ShowMenu($Module, $Header, $Description) {
 	Write-VerticalBorder
 	Write-BlankMenuLine
 
-
 	Write-MenuLine -Contents "[1] Restart now." -Center:$false
 	Write-BlankMenuLine
 	Write-MenuLine -Contents "[2] Skip (You will need to manually restart later)" -Center:$false
