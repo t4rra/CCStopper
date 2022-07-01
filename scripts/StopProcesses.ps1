@@ -1,4 +1,4 @@
-if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+if (!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
 	Start-Process -FilePath $((Get-Process -Id $PID).Path) -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" `"$($MyInvocation.MyCommand.UnboundArguments)`""
 	Exit
 }
@@ -11,9 +11,9 @@ Get-Service -DisplayName Adobe* | Stop-Service
 
 # Stop adobe processes
 $Processes = @()
-Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "Adobe"} | ForEach-Object {
-	$Processes += ,$_
-	if($_.mainWindowTitle.Length) {
+Get-Process * | Where-Object { $_.CompanyName -match "Adobe" -or $_.Path -match "Adobe" } | ForEach-Object {
+	$Processes += , $_
+	if ($_.mainWindowTitle.Length) {
 		# Process has a window
 		Do {
 			# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
@@ -40,18 +40,19 @@ Get-Process * | Where-Object {$_.CompanyName -match "Adobe" -or $_.Path -match "
 			Write-Output "                  `|_______________________________________________________________`|"
 			Write-Output "`n"
 			ReadKey
-			Switch($Choice) {
+			Switch ($Choice) {
 				Q { Exit }
 				1 { continue }
 				Default {
 					$Invalid = $true
+
 				}
 			}
 		} Until (!($Invalid))
 	}
 }
 
-Foreach($Process in $Processes) { Stop-Process $Process -Force | Out-Null }
+Foreach ($Process in $Processes) { Stop-Process $Process -Force | Out-Null }
 
 Do {
 	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
@@ -74,10 +75,11 @@ Do {
 	Write-Output "                  `|_______________________________________________________________`|"
 	Write-Output "`n"
 	ReadKey
-	Switch($Choice) {
+	Switch ($Choice) {
 		Q { Exit }
 		Default {
 			$Invalid = $true
+
 		}
 	}
 } Until (!($Invalid))

@@ -1,4 +1,4 @@
-if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+if (!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
 	Start-Process -FilePath $((Get-Process -Id $PID).Path) -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" `"$($MyInvocation.MyCommand.UnboundArguments)`""
 	Exit
 }
@@ -60,6 +60,7 @@ function MainMenu {
 			}
 			Default {
 				$Invalid = $true
+				
 			}
 		}
 	} Until (!($Invalid))
@@ -101,7 +102,7 @@ function UtilityMenu {
 		Switch ($Choice) {
 			Q { MainMenu }
 			D1 {
-				.\DisableAutostart.ps1
+				.\DisableAutoStart.ps1
 				UtilityMenu
 			}
 			D2 {
@@ -118,6 +119,7 @@ function UtilityMenu {
 			}
 			Default {
 				$Invalid = $true
+				
 			}
 		}
 	} Until (!($Invalid))
@@ -169,6 +171,7 @@ function PatchesMenu {
 			}
 			Default {
 				$Invalid = $true
+				
 			}
 		}
 	} Until (!($Invalid))
@@ -218,6 +221,7 @@ function CreditMenu {
 			}
 			Default {
 				$Invalid = $true
+				
 			}
 		}
 	} Until (!($Invalid))

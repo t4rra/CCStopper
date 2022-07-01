@@ -32,7 +32,7 @@ function RegBackup {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                       DisableAutoStart Module                 `|"
+		Write-Output "                  `|                     DisableAutoStart Module                   `|"
 		Write-Output "                  `|      ___________________________________________________      `|"
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                  THIS WILL EDIT THE REGISTRY!                 `|"

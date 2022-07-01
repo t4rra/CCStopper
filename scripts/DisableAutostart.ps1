@@ -1,4 +1,4 @@
-if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+if (!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
 	Start-Process -FilePath $((Get-Process -Id $PID).Path) -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" `"$($MyInvocation.MyCommand.UnboundArguments)`""
 	Exit
 }
@@ -35,7 +35,7 @@ function RestartAsk {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                       DisableAutostart Module                 `|"
+		Write-Output "                  `|                       DisableAutoStart Module                 `|"
 		Write-Output "                  `|      ___________________________________________________      `|"
 		Write-Output "                  `|                                                               `|"
 		if ($AutostartDisabled) {
@@ -56,6 +56,7 @@ function RestartAsk {
 			Q { Exit }
 			Default {
 				$Invalid = $true
+	
 			}
 		}
 	} Until (!($Invalid))
@@ -69,6 +70,7 @@ Get-Item "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" | For
 		$CommandLine = Get-ItemProperty -LiteralPath $Path -Name $Name | Select-Object -Expand $Name
 
 		# If the value has arguments, strip them off
+		# if($File -match '"') { $File = $File.Substring($File.IndexOf('"')+1, $File.LastIndexOf('"')-1) }
 		$ParsedArgCount = 0
 		$ParsedArgsPtr = $Shell32::CommandLineToArgvW($CommandLine, [ref]$ParsedArgCount)
 		Try {
@@ -106,7 +108,7 @@ function EnableAutostart {
 	}
 }
 
-function DisableAutostart {
+function DisableAutoStart {
 	# Disable services auto-start
 	Get-Service -DisplayName Adobe* | Set-Service -StartupType Manual
 
@@ -131,6 +133,7 @@ foreach ($Program in $Programs) {
 	$ByteArray = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32").$Program
 	$Data = ([System.BitConverter]::ToString([byte[]]$ByteArray)).Split('-')
 }
+#([byte[]](0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00))
 
 # Check if autostart is already disabled
 $AutostartDisabled = $false
@@ -146,7 +149,7 @@ if ($Data[0] -eq "03") {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                     DisableAutostart Module                   `|"
+		Write-Output "                  `|                     DisableAutoStart Module                   `|"
 		Write-Output "                  `|      ___________________________________________________      `|"
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                  AUTO START ALREADY DISABLED!                 `|"
@@ -168,6 +171,7 @@ if ($Data[0] -eq "03") {
 			D1 { RegBackup -Msg "Disable Autostart" }
 			Default {
 				$Invalid = $true
+	
 			}
 		}
 	} Until (!($Invalid))

@@ -1,4 +1,4 @@
-if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+if (!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
 	Start-Process -FilePath $((Get-Process -Id $PID).Path) -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" `"$($MyInvocation.MyCommand.UnboundArguments)`""
 	Exit
 }
@@ -13,7 +13,7 @@ $Host.UI.RawUI.WindowTitle = "CCStopper - Hide Creative Cloud Folder"
 
 
 function Get-Subkey([String]$Key, [String]$SubkeyPattern) {
-	return (Get-ChildItem $Key -Recurse | Where-Object {$_.PSChildName -Like "$SubkeyPattern"}).Name
+	return (Get-ChildItem $Key -Recurse | Where-Object { $_.PSChildName -Like "$SubkeyPattern" }).Name
 }
 
 function RestartAsk {
@@ -29,10 +29,11 @@ function RestartAsk {
 		Write-Output "                  `|                       HideCCFolder Module                     `|"
 		Write-Output "                  `|      ___________________________________________________      `|"
 		Write-Output "                  `|                                                               `|"
-		if($FolderHidden) {
-		Write-Output "                  `|               Restoring CCF in explorer complete!             `|"
-		} else {
-		Write-Output "                  `|                 Hiding CCF in explorer complete!              `|"
+		if ($FolderHidden) {
+			Write-Output "                  `|               Restoring CCF in explorer complete!             `|"
+		}
+		else {
+			Write-Output "                  `|                 Hiding CCF in explorer complete!              `|"
 		}
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|      Windows Explorer needs to restart for changes to         `|"
@@ -47,7 +48,7 @@ function RestartAsk {
 		Write-Output "                  `|_______________________________________________________________`|"
 		Write-Output "`n"
 		ReadKey 2
-		Switch($Choice) {
+		Switch ($Choice) {
 			D2 { Exit }
 			D1 {
 				Clear-Host
@@ -61,7 +62,7 @@ function RestartAsk {
 				Stop-Process -Name "explorer" -Force
 
 				# Wait for explorer to be restarted
-				while((Get-Process -Name "explorer" -ErrorAction SilentlyContinue).Count -eq 0) { Start-Sleep -Milliseconds 100 }
+				while ((Get-Process -Name "explorer" -ErrorAction SilentlyContinue).Count -eq 0) { Start-Sleep -Milliseconds 100 }
 
 				# Restore file explorer windows
 				$OpenFolders | ForEach-Object { Invoke-Item $([Uri]::UnescapeDataString(([System.Uri]$($_)).AbsolutePath)) } | Out-Null
@@ -77,6 +78,7 @@ function RestartAsk {
 			}
 			Default {
 				$Invalid = $true
+	
 			}
 		}
 	} Until (!($Invalid))
@@ -92,9 +94,10 @@ function HideFolder {
 }
 
 function EditReg {
-	if($folderHidden -eq $true) {
+	if ($folderHidden -eq $true) {
 		ShowFolder
-	} else {
+	}
+ else {
 		HideFolder
 	}
 	RestartAsk
@@ -106,7 +109,7 @@ $Data = (Get-ItemProperty -Path Registry::$CLSID)."System.IsPinnedToNameSpaceTre
 # Check if System.IsPinnedToNameSpaceTree is already disabled
 $FolderHidden = $false
 
-if($Data -eq 0) {
+if ($Data -eq 0) {
 	$FolderHidden = $true
 	Do {
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
@@ -134,14 +137,16 @@ if($Data -eq 0) {
 		Write-Output "                  `|_______________________________________________________________`|"
 		Write-Output "`n"
 		ReadKey 1
-		Switch($Choice) {
+		Switch ($Choice) {
 			Q { Exit }
 			D1 { RegBackup "Hide CC Folder" }
 			Default {
 				$Invalid = $true
+	
 			}
+	
 		}
 	} Until (!($Invalid))
-} else {
-	RegBackup "Hide CC Folder"
+}
+else {
 }
