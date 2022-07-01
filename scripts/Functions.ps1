@@ -9,7 +9,7 @@ function ReadKey {
 	}
 	Write-Host "Select [" -NoNewLine
 
-	for ($num = 1; $Num -le $ChoiceNum; $Num++){
+	for ($num = 1; $Num -le $ChoiceNum; $Num++) {
 		Write-Host "$Num," -NoNewLine
 	}
 
@@ -104,7 +104,7 @@ $LineCenter = ($LineLength / 2) - 1
 function Write-MenuLine([String]$Contents, [Switch]$Center = $true) {
 	Remove-Variable Extra -ErrorAction SilentlyContinue
 	$Length = $Contents.Length
-	if($Length -ge $MarginLength) {
+	if ($Length -ge $MarginLength) {
 		$ExtraAmount = $Length - $MarginLength
 		$local:Extra = $Contents.Substring($Length - $ExtraAmount)
 		$Contents = $Contents.Substring(0, $Length - $ExtraAmount)
@@ -112,29 +112,30 @@ function Write-MenuLine([String]$Contents, [Switch]$Center = $true) {
 	}
 
 	$Line = $Contents
-	if($Center) {
+	if ($Center) {
 		$Offset = $Length / 2
 		$OffsettedLength = $LineCenter - $Offset
 
 		$Line = $BlankLine
 		$Line = $Line.Remove($LineCenter, $Offset)
-		$Line = $Line.Remove($OffsettedLength+1, $Offset)
-		$Line = $Line.Insert($OffsettedLength+1, $Contents)
+		$Line = $Line.Remove($OffsettedLength + 1, $Offset)
+		$Line = $Line.Insert($OffsettedLength + 1, $Contents)
 	}
 
 	$NoStartMargin = !($Line.StartsWith(($MarginText)))
 	$NoEndMargin = !($Line.EndsWith(($MarginText)))
 
-	if($NoStartMargin -or $NoEndMargin) { $Line.Trim() }
-	if($NoStartMargin) { $Line.Insert(0, $MarginText) }
-	if($NoEndMargin) { $Line.Insert($Length-1, $MarginText) }
+	if ($NoStartMargin -or $NoEndMargin) { $Line.Trim() }
+	if ($NoStartMargin) { $Line.Insert(0, $MarginText) }
+	if ($NoEndMargin) { $Line.Insert($Length - 1, $MarginText) }
 
 	Write-Output "$Indent`|$Line`|"
 
-	if(Test-Path variable:local:Extra) {
-		if($Center) {
+	if (Test-Path variable:local:Extra) {
+		if ($Center) {
 			Write-MenuLine -Contents $local:Extra
-		} else {
+		}
+		else {
 			Write-MenuLine -Contents $local:Extra -Center:$false
 		}
 	}
@@ -161,7 +162,7 @@ function ShowMenu([String]$Module, [String]$Header, [String]$Description, [Strin
 	Write-VerticalBorder
 	Write-BlankMenuLine
 
-	foreach($Option in $Options) {
+	foreach ($Option in $Options) {
 		$Num = $Options.IndexOf($Option) + 1
 		Write-MenuLine -Contents "[$Num] $Option" -Center:$false
 		Write-BlankMenuLine
