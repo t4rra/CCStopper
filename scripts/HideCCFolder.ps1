@@ -115,52 +115,6 @@ function EditReg {
 	RestartAsk
 }
 
-function MainScript {
-	Do {
-		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-		Clear-Host
-		Write-Output "`n"
-		Write-Output "`n"
-		Write-Output "                   _______________________________________________________________"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                       HideCCFolder Module                     `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                  THIS WILL EDIT THE REGISTRY!                 `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      It is HIGHLY recommended to create a system restore      `|"
-		Write-Output "                  `|      point in case something goes wrong.                      `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [1] Make system restore point                            `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [2] Proceed without creating restore point               `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [Q] Exit Module                                          `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|_______________________________________________________________`|"
-		Write-Output "`n"
-		ReadKey 2
-		Switch($Choice) {
-			Q { Exit }
-			D2 { EditReg }
-			D1 {
-				Clear-Host
-				Checkpoint-Computer -Description "Before CCStopper Hide CC Folder Script" -RestorePointType "MODIFY_SETTINGS"
-				EditReg
-			}
-			Default {
-				$Invalid = $true
-	
-			}
-		}
-	} Until (!($Invalid))
-}
-
 $CLSID = (Get-Subkey -Key "HKCU:\SOFTWARE\Classes\CLSID" -SubkeyPattern "{0E270DAA-1BE6-48F2-AC49-*")
 $Data = (Get-ItemProperty -Path Registry::$CLSID)."System.IsPinnedToNameSpaceTree"
 
@@ -197,7 +151,7 @@ if($Data -eq 0) {
 		ReadKey 1
 		Switch($Choice) {
 			Q { Exit }
-			D1 { MainScript }
+			D1 { RegBackup "Hide CC Folder" }
 			Default {
 				$Invalid = $true
 	
@@ -205,5 +159,5 @@ if($Data -eq 0) {
 		}
 	} Until (!($Invalid))
 } else {
-	MainScript
+	RegBackup "Hide CC Folder"
 }

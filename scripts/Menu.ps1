@@ -181,7 +181,7 @@ function PatchesMenu {
 				PatchesMenu
 			}
 			D3 {
-				.\AcrobatFix.ps1
+				.\AcrobatPatch.ps1
 				PatchesMenu
 			}
 			Default {

@@ -19,55 +19,9 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 	}
 }
 
-$Host.UI.RawUI.WindowTitle = "CCStopper - Acrobat Fix"
+$Host.UI.RawUI.WindowTitle = "CCStopper - Acrobat Patch"
 # Set-ConsoleWindow -Width 73 -Height 42
 
-
-function MainScript {
-	Do {
-		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-		Clear-Host
-		Write-Output "`n"
-		Write-Output "`n"
-		Write-Output "                   _______________________________________________________________"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                        AcrobatFix Module                      `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                  THIS WILL EDIT THE REGISTRY!                 `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      It is HIGHLY recommended to create a system restore      `|"
-		Write-Output "                  `|      point in case something goes wrong.                      `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [1] Make system restore point                            `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [2] Proceed without creating restore point               `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [Q] Exit Module                                          `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|_______________________________________________________________`|"
-		Write-Output "`n"
-		ReadKey 2
-		Switch($Choice) {
-			Q { Exit }
-			D2 { EditReg }
-			D1 {
-				Clear-Host
-				Checkpoint-Computer -Description "Before CCStopper Acrobat Fix Script" -RestorePointType "MODIFY_SETTINGS"
-				EditReg
-			}
-			Default {
-				$Invalid = $true
-	
-			}
-		}
-	} Until (!($Invalid))
-}
 
 function EditReg {
 	# Adds IsAMTEnforced with proper values, then deletes IsNGLEnfoced
@@ -86,7 +40,7 @@ function RestartAsk {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                        AcrobatFix Module                      `|"
+		Write-Output "                  `|                       AcrobatPatch Module                     `|"
 		Write-Output "                  `|      ___________________________________________________      `|"
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                   Acrobat patching complete!                  `|"
@@ -130,6 +84,6 @@ if($IsAMTEnforced -eq 1) {
 		Pause
 		Exit
 	} else {
-		MainScript
+		RegBackup -Msg "Acrobat Patch"
 	}
 }

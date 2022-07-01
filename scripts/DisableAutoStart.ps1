@@ -144,52 +144,6 @@ function EditReg {
 	RestartAsk
 }
 
-function MainScript {
-	Do {
-		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-		Clear-Host
-		Write-Output "`n"
-		Write-Output "`n"
-		Write-Output "                   _______________________________________________________________"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                       DisableAutoStart Module                 `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                  THIS WILL EDIT THE REGISTRY!                 `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      It is HIGHLY recommended to create a system restore      `|"
-		Write-Output "                  `|      point in case something goes wrong.                      `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [1] Make system restore point                            `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [2] Proceed without creating restore point               `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [Q] Exit Module                                          `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|_______________________________________________________________`|"
-		Write-Output "`n"
-		ReadKey 2
-		Switch ($Choice) {
-			Q { Exit }
-			D2 { EditReg }
-			D1 {
-				Clear-Host
-				Checkpoint-Computer -Description "Before CCStopper Disable Auto Start Script" -RestorePointType "MODIFY_SETTINGS"
-				EditReg
-			}
-			Default {
-				$Invalid = $true
-	
-			}
-		}
-	} Until (!($Invalid))
-}
-
 foreach ($Program in $Programs) {
 	$ByteArray = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32").$Program
 	$Data = ([System.BitConverter]::ToString([byte[]]$ByteArray)).Split('-')
@@ -210,7 +164,7 @@ if ($Data[0] -eq "03") {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                       DisableAutoStart Module                 `|"
+		Write-Output "                  `|                     DisableAutoStart Module                   `|"
 		Write-Output "                  `|      ___________________________________________________      `|"
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                  AUTO START ALREADY DISABLED!                 `|"
@@ -229,7 +183,7 @@ if ($Data[0] -eq "03") {
 		ReadKey 1
 		Switch ($Choice) {
 			Q { Exit }
-			D1 { MainScript }
+			D1 { RegBackup -Msg "Disable Autostart" }
 			Default {
 				$Invalid = $true
 	
@@ -238,5 +192,5 @@ if ($Data[0] -eq "03") {
 	} Until (!($Invalid))
 }
 else {
-	MainScript
+	RegBackup -Msg "Disable Autostart"
 }
