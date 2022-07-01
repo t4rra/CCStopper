@@ -1,4 +1,4 @@
-if(!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+if (!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
 	Start-Process -FilePath $((Get-Process -Id $PID).Path) -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" `"$($MyInvocation.MyCommand.UnboundArguments)`""
 	Exit
 }
@@ -42,11 +42,12 @@ function RestartAsk {
 		Write-Output "                  `|_______________________________________________________________`|"
 		Write-Output "`n"
 		ReadKey 2
-		Switch($Choice) {
+		Switch ($Choice) {
 			D2 { Exit }
 			D1 { Restart-Computer }
 			Default {
 				$Invalid = $true
+	
 			}
 		}
 	} Until (!($Invalid))
@@ -55,20 +56,22 @@ function RestartAsk {
 
 # Check if IsNGLEnforced already replaced w/ IsAMTEnforced
 $IsAMTEnforced = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation").IsAMTEnforced
-if($IsAMTEnforced -eq 1) {
+if ($IsAMTEnforced -eq 1) {
 	Clear-Host
 	Write-Output "Acrobat has already been patched."
 	Pause
 	Exit
-} else {
+}
+else {
 	# Check if target path exists
 	$IsNGLEnforced = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation").IsNGLEnforced
-	if($null -eq $IsNGLEnforced) {
+	if ($null -eq $IsNGLEnforced) {
 		Clear-Host
 		Write-Output "The target registry key cannot be found. Cannot proceed with Acrobat fix."
 		Pause
 		Exit
-	} else {
+	}
+ else {
 		RegBackup -Msg "Acrobat Patch"
 	}
 }
