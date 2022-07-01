@@ -62,7 +62,6 @@ function RegBackup {
 			}
 			Default {
 				$Invalid = $true
-	
 			}
 		}
 	} Until (!($Invalid))
@@ -80,4 +79,97 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 		$WindowSize.Height = $MaxValue
 		$Host.UI.RawUI.WindowSize = $WindowSize
 	}
+}
+
+$Indent = "                  "
+$LineLength = 67
+$Margin = 6
+$MarginLength = $LineLength - ($Margin * 2)
+
+$BlankLine = ""
+1.."$LineLength" | ForEach-Object { $BlankLine += " " }
+
+$MarginText = ""
+1.."$Margin" | ForEach-Object { $MarginText += " " }
+
+
+$LineCenter = ($LineLength / 2) - 1
+
+function Write-MenuLine([String]$Contents, [Switch]$Center = $true) {
+	Remove-Variable Extra -ErrorAction SilentlyContinue
+	$Length = $Contents.Length
+	if($Length -ge $MarginLength) {
+		$ExtraAmount = $Length - $MarginLength
+		$local:Extra = $Contents.Substring($Length - $ExtraAmount)
+		$Contents = $Contents.Substring(0, $Length - $ExtraAmount)
+		$Length = $Contents.Length
+	}
+
+	if($Center) {
+		$Offset = $Length / 2
+		$OffsettedLength = $LineCenter - $Offset
+
+		$Line = $BlankLine
+		$Line = $Line.Remove($LineCenter, $Offset)
+		$Line = $Line.Remove($OffsettedLength+1, $Offset)
+		$Line = $Line.Insert($OffsettedLength+1, $Contents)
+	} else {
+		$Line = $Contents
+	}
+
+	$NoStartMargin = !($Line.StartsWith(($MarginText)))
+	$NoEndMargin = !($Line.EndsWith(($MarginText)))
+
+	if($NoStartMargin -or $NoEndMargin) { $Line.Trim() }
+	if($NoStartMargin) { $Line.Insert(0, $MarginText) }
+	if($NoEndMargin) { $Line.Insert($Length-1, $MarginText) }
+
+	Write-Output "$Indent`|$MarginText$Line$MarginText`|"
+
+	if(Test-Path variable:local:Extra) {
+		if($Center) {
+			Write-MenuLine -Contents $local:Extra
+		} else {
+			Write-MenuLine -Contents $local:Extra -Center:$false
+		}
+	}
+}
+
+function Write-BlankMenuLine {
+	Write-MenuLine -Contents $BlankLine
+}
+
+function Write-VerticalBorder {
+	Write-MenuLine -Contents "_______________________________________________________________"
+}
+
+function ShowMenu($Module, $Header, $Description) {
+	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+	Clear-Host
+	Write-Output "`n"
+	Write-Output "`n"
+	Write-VerticalBorder
+	Write-BlankMenuLine
+	Write-BlankMenuLine
+	Write-MenuLine -Contents "CCSTOPPER"
+	Write-MenuLine -Contents "$Module Module"
+	Write-VerticalBorder
+	Write-BlankMenuLine
+	Write-MenuLine -Contents $($Header.ToUpper())
+	Write-BlankMenuLine
+	Write-Output $Description
+	Write-VerticalBorder
+	Write-BlankMenuLine
+
+
+	Write-Output "$Indent`|      [1] Restart now.                                         `|"
+	Write-BlankMenuLine
+	Write-Output "$Indent`|      [2] Skip (You will need to manually restart later)       `|"
+
+
+
+	Write-BlankMenuLine
+	Write-BlankMenuLine
+	Write-VerticalBorder
+	Write-Output "`n"
 }
