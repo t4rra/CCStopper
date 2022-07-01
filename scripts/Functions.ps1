@@ -165,11 +165,9 @@ function ShowMenu($Module, $Header, $Description) {
 	Write-BlankMenuLine
 
 
-	Write-Output "$Indent`|      [1] Restart now.                                         `|"
+	Write-MenuLine -Contents "[1] Restart now." -Center:$false
 	Write-BlankMenuLine
-	Write-Output "$Indent`|      [2] Skip (You will need to manually restart later)       `|"
-
-
+	Write-MenuLine -Contents "[2] Skip (You will need to manually restart later)" -Center:$false
 
 	Write-BlankMenuLine
 	Write-BlankMenuLine
