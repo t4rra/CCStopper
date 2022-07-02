@@ -3,8 +3,8 @@ function ReadKey {
 		[int]$ChoiceNum
 	)
 
-	$Indent = 43 - $ChoiceNum
-	for ($i = 0; $i -le $Indent; $i++) {
+	$IndentText = 43 - $ChoiceNum
+	for ($i = 0; $i -le $IndentText; $i++) {
 		Write-Host " " -NoNewLine
 	}
 	Write-Host "Select [" -NoNewLine
@@ -81,96 +81,111 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 	}
 }
 
-$IndentCount = 18
-$Indent = ""
-1.."$IndentCount" | ForEach-Object { $Indent += " " }
+$IndentTextLength = 18
+$IndentText = ""
+1.."$IndentTextLength" | ForEach-Object { $IndentText += " " }
 
-$LineLength = 67
-$Margin = 6
-$MarginLength = $LineLength - ($Margin * 2)
+$TextLength = 67
+$TextLine = ""
+1.."$TextLength" | ForEach-Object { $TextLine += " " }
 
+$MarginLength = 6
+$MarginText = ""
+1.."$MarginLength" | ForEach-Object { $MarginText += " " }
+
+$OddMarginLength = 5
+$OddMarginText = ""
+1.."$OddMarginLength" | ForEach-Object { $OddMarginText += " " }
+
+$LineLength = $TextLength + ($MarginLength * 2)
 $BlankLine = ""
 1.."$LineLength" | ForEach-Object { $BlankLine += " " }
 
-$VerticalBorder = ""
-1.."$LineLength" | ForEach-Object { $VerticalBorder += "_" }
+$TopBorder = ""
+1.."$($LineLength+2)" | ForEach-Object { $TopBorder += "_" }
 
-$MarginText = ""
-1.."$Margin" | ForEach-Object { $MarginText += " " }
+$BottomBorder = ""
+1.."$LineLength" | ForEach-Object { $BottomBorder += "_" }
 
+$TextBorder = ""
+1.."$TextLength" | ForEach-Object { $TextBorder += "_" }
 
-$LineCenter = ($LineLength / 2) - 1
+$TextCenter = ($TextLength / 2) - 1
 
-function Write-MenuLine([String]$Contents, [Switch]$Center = $true) {
+function Write-MenuLine([String]$Contents, [Switch]$Center = $true, [Switch]$Margin = $true, [Switch]$UseTextLine = $true) {
 	Remove-Variable Extra -ErrorAction SilentlyContinue
 	$Length = $Contents.Length
-	if ($Length -ge $MarginLength) {
-		$ExtraAmount = $Length - $MarginLength
+	if ($Margin -and ($Length -gt $TextLength)) {
+		$ExtraAmount = $Length - $TextLength
 		$local:Extra = $Contents.Substring($Length - $ExtraAmount)
 		$Contents = $Contents.Substring(0, $Length - $ExtraAmount)
 		$Length = $Contents.Length
 	}
 
-	$Line = $Contents
-	if ($Center) {
-		$Offset = $Length / 2
-		$OffsettedLength = $LineCenter - $Offset
+	$Line = $TextLine
+	if(!($UseTextLine)) { $Line = $BlankLine }
 
-		$Line = $BlankLine
-		$Line = $Line.Remove($LineCenter, $Offset)
+	if ($Center) {
+		$Offset = [Math]::Floor($Length / 2)
+		$OffsettedLength = $TextCenter - $Offset
+
+		$Line = $Line.Remove($TextCenter, $Offset)
 		$Line = $Line.Remove($OffsettedLength + 1, $Offset)
 		$Line = $Line.Insert($OffsettedLength + 1, $Contents)
+	} else {
+		$Line = $Line.Remove(0, $Length)
+		$Line = $Line.Insert(0, $Contents)
 	}
 
-	$NoStartMargin = !($Line.StartsWith(($MarginText)))
-	$NoEndMargin = !($Line.EndsWith(($MarginText)))
+	if($Margin) {
+		$Line = $Line.Insert(0, $MarginText)
+		$EndMarginText = $MarginText
+		if($Length % 2 -ne 0) { $EndMarginText = $OddMarginText }
+		$Line = $Line.Insert($Line.Length, $EndMarginText)
+	}
 
-	if ($NoStartMargin -or $NoEndMargin) { $Line.Trim() }
-	if ($NoStartMargin) { $Line.Insert(0, $MarginText) }
-	if ($NoEndMargin) { $Line.Insert($Length - 1, $MarginText) }
-
-	Write-Output "$Indent`|$Line`|"
+	Write-Output "$IndentText`|$Line`|"
 
 	if (Test-Path variable:local:Extra) {
-		if ($Center) {
-			Write-MenuLine -Contents $local:Extra
-		}
-		else {
-			Write-MenuLine -Contents $local:Extra -Center:$false
-		}
+		$PSBoundParameters["Contents"] = "$local:Extra"
+		Write-MenuLine @PSBoundParameters
 	}
 }
 
-function Write-BlankMenuLine { Write-MenuLine -Contents $BlankLine }
-function Write-VerticalBorder { Write-MenuLine -Contents $VerticalBorder }
+function Write-BlankMenuLine { Write-MenuLine -Contents "" }
+function Write-TopBorder { Write-Output "$IndentText$TopBorder" }
+function Write-BottomBorder { Write-MenuLine -Contents $BottomBorder -Center:$false -Margin:$false -UseTextLine:$false }
+function Write-TextBorder { Write-MenuLine -Contents $TextBorder }
 
-function ShowMenu([String]$Module, [String]$Header, [String]$Description, [String]$Options) {
+function ShowMenu([String]$Module, [String]$Header, [String]$Description, [String[]]$Options) {
 	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 	Clear-Host
 	Write-Output "`n"
 	Write-Output "`n"
-	Write-VerticalBorder
+	Write-TopBorder
 	Write-BlankMenuLine
 	Write-BlankMenuLine
 	Write-MenuLine -Contents "CCSTOPPER"
 	Write-MenuLine -Contents "$Module Module"
-	Write-VerticalBorder
+	Write-TextBorder
 	Write-BlankMenuLine
 	Write-MenuLine -Contents $($Header.ToUpper())
 	Write-BlankMenuLine
-	Write-Output $Description
-	Write-VerticalBorder
+	Write-MenuLine -Contents $Description
+	Write-TextBorder
 	Write-BlankMenuLine
 
 	foreach ($Option in $Options) {
 		$Num = $Options.IndexOf($Option) + 1
 		Write-MenuLine -Contents "[$Num] $Option" -Center:$false
-		Write-BlankMenuLine
+		if($Option -ne $Options[-1]) { Write-BlankMenuLine }
 	}
 
+	Write-TextBorder
+	Write-BlankMenuLine
 	Write-MenuLine -Contents "[Q] Exit" -Center:$false
 	Write-BlankMenuLine
 
-	Write-VerticalBorder
+	Write-BottomBorder
 	Write-Output "`n"
 }
