@@ -158,7 +158,7 @@ function Write-TopBorder { Write-Output " $IndentText$TopBorder" }
 function Write-BottomBorder { Write-MenuLine -Contents $BottomBorder -Center:$false -Margin:$false -UseTextLine:$false }
 function Write-TextBorder { Write-MenuLine -Contents $TextBorder }
 
-function ShowMenu([string]$Module, [string]$Header, [string]$Description, [string[]]$Options) {
+function ShowMenu([string[]]$Subtitle, [string]$Header, [string]$Description, [string[]]$Options) {
 	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 	Clear-Host
 	Write-Output "`n"
@@ -167,7 +167,10 @@ function ShowMenu([string]$Module, [string]$Header, [string]$Description, [strin
 	Write-BlankMenuLine
 	Write-BlankMenuLine
 	Write-MenuLine -Contents "CCSTOPPER"
-	Write-MenuLine -Contents "$Module Module"
+	foreach ($Subtitle in $Subtitle) {
+		Write-MenuLine -Contents $Subtitle
+	}
+	# Write-MenuLine -Contents "$Module Module"
 	Write-TextBorder
 	Write-BlankMenuLine
 	Write-MenuLine -Contents $($Header.ToUpper())
