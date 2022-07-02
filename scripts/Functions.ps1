@@ -106,7 +106,7 @@ $BottomBorder = ""
 $TextBorder = ""
 1.."$TextLength" | ForEach-Object { $TextBorder += "_" }
 
-$TextCenter = ($TextLength / 2) - 1
+$TextCenter = [Math]::Floor(($TextLength / 2) - 1)
 
 function Write-MenuLine([string]$Contents, [switch]$Center = $true, [switch]$Margin = $true, [switch]$UseTextLine = $true) {
 	Remove-Variable Extra -ErrorAction SilentlyContinue
