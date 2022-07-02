@@ -38,7 +38,6 @@ foreach ($BlockItem in $BlockItems) {
 	$Acl.SetAccessRule($FileSystemAccessRule)
 	Set-Acl -Path $BlockItem -AclObject $Acl
 }
-pause 
 
 Do {
 	Clear-Host

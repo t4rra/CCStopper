@@ -8,7 +8,6 @@ Clear-Host
 $Host.UI.RawUI.WindowTitle = "CCStopper - Hide Trial Banner"
 # Set-ConsoleWindow -Width 73 -Height 42
 
-
 function Get-Subkey([String]$Key, [String]$SubkeyPattern) {
 	return (Get-ChildItem Registry::$Key -Recurse | Where-Object { $_.PSChildName -Like "$SubkeyPattern" }).Name
 }
@@ -66,7 +65,6 @@ Do {
 		Q { Exit }
 		Default {
 			$Invalid = $true
-
 		}
 	}
 } Until (!($Invalid))

@@ -8,7 +8,6 @@ Clear-Host
 $Host.UI.RawUI.WindowTitle = "CCStopper - Block Adobe Processes"
 # Set-ConsoleWindow -Width 73 -Height 42
 
-
 $CommentedLine = "`# BLOCK ADOBE"
 
 $LocalAddress = "0.0.0.0"
@@ -85,7 +84,7 @@ ForEach ($BlockedAddress in $BlockedAddresses) {
 	}
  catch { WritingFailure }
 }
-	
+
 if (Get-NetFirewallRule -DisplayName "CCStopper-CreditCardBlock" -ErrorAction SilentlyContinue) {
 	Write-Output "Firewall rule exists!"
 }
@@ -118,7 +117,6 @@ Do {
 		Q { Exit }
 		Default {
 			$Invalid = $true
-
 		}
 	}
 } Until (!($Invalid))

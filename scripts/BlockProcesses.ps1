@@ -7,8 +7,6 @@ Clear-Host
 
 $Host.UI.RawUI.WindowTitle = "CCStopper - Block Adobe Processes"
 # Set-ConsoleWindow -Width 73 -Height 42
-
-
 function Get-Subkey([String]$Key, [String]$SubkeyPattern) {
 	return (Get-ChildItem $Key -Recurse | Where-Object { $_.PSChildName -Like "$SubkeyPattern" }).Name
 }
@@ -67,7 +65,6 @@ function Done {
 			Q { Exit }
 			Default {
 				$Invalid = $true
-	
 			}
 		}
 	} Until (!($Invalid))
@@ -131,7 +128,6 @@ if ($IsBlocked) {
 			D1 { MainScript }
 			Default {
 				$Invalid = $true
-	
 			}
 		}
 	} Until (!($Invalid))

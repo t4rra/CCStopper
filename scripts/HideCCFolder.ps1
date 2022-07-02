@@ -11,7 +11,6 @@ Add-Type -MemberDefinition $Sig -name NativeMethods -namespace Win32
 $Host.UI.RawUI.WindowTitle = "CCStopper - Hide Creative Cloud Folder"
 # Set-ConsoleWindow -Width 73 -Height 42
 
-
 function Get-Subkey([String]$Key, [String]$SubkeyPattern) {
 	return (Get-ChildItem $Key -Recurse | Where-Object { $_.PSChildName -Like "$SubkeyPattern" }).Name
 }
@@ -78,7 +77,6 @@ function RestartAsk {
 			}
 			Default {
 				$Invalid = $true
-	
 			}
 		}
 	} Until (!($Invalid))
@@ -142,9 +140,7 @@ if ($Data -eq 0) {
 			D1 { RegBackup "Hide CC Folder" }
 			Default {
 				$Invalid = $true
-	
 			}
-	
 		}
 	} Until (!($Invalid))
 }

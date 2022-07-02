@@ -45,7 +45,6 @@ Get-Process * | Where-Object { $_.CompanyName -match "Adobe" -or $_.Path -match 
 				1 { continue }
 				Default {
 					$Invalid = $true
-
 				}
 			}
 		} Until (!($Invalid))
@@ -79,7 +78,6 @@ Do {
 		Q { Exit }
 		Default {
 			$Invalid = $true
-
 		}
 	}
 } Until (!($Invalid))

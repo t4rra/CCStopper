@@ -8,7 +8,6 @@ Clear-Host
 $Host.UI.RawUI.WindowTitle = "CCStopper - Acrobat Fix"
 # Set-ConsoleWindow -Width 73 -Height 42
 
-
 function EditReg {
 	# Adds IsAMTEnforced with proper values, then deletes IsNGLEnfoced
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation" -Name IsAMTEnforced -Value 1
@@ -47,7 +46,6 @@ function RestartAsk {
 			D1 { Restart-Computer }
 			Default {
 				$Invalid = $true
-	
 			}
 		}
 	} Until (!($Invalid))

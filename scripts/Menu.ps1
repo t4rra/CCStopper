@@ -60,7 +60,6 @@ function MainMenu {
 			}
 			Default {
 				$Invalid = $true
-				
 			}
 		}
 	} Until (!($Invalid))
@@ -102,7 +101,7 @@ function UtilityMenu {
 		Switch ($Choice) {
 			Q { MainMenu }
 			D1 {
-				.\DisableAutoStart.ps1
+				.\DisableAutostart.ps1
 				UtilityMenu
 			}
 			D2 {
@@ -119,7 +118,6 @@ function UtilityMenu {
 			}
 			Default {
 				$Invalid = $true
-				
 			}
 		}
 	} Until (!($Invalid))
@@ -171,7 +169,6 @@ function PatchesMenu {
 			}
 			Default {
 				$Invalid = $true
-				
 			}
 		}
 	} Until (!($Invalid))
@@ -221,7 +218,6 @@ function CreditMenu {
 			}
 			Default {
 				$Invalid = $true
-				
 			}
 		}
 	} Until (!($Invalid))

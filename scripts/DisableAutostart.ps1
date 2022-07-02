@@ -8,7 +8,6 @@ Clear-Host
 $Host.UI.RawUI.WindowTitle = "CCStopper - Disable Auto Start"
 # Set-ConsoleWindow -Width 73 -Height 42
 
-
 $Kernel32Definition = @'
 	[DllImport("kernel32")]
 	public static extern IntPtr GetCommandLineW();
@@ -35,7 +34,7 @@ function RestartAsk {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                       DisableAutoStart Module                 `|"
+		Write-Output "                  `|                       DisableAutostart Module                 `|"
 		Write-Output "                  `|      ___________________________________________________      `|"
 		Write-Output "                  `|                                                               `|"
 		if ($AutostartDisabled) {
@@ -56,7 +55,6 @@ function RestartAsk {
 			Q { Exit }
 			Default {
 				$Invalid = $true
-	
 			}
 		}
 	} Until (!($Invalid))
@@ -108,7 +106,7 @@ function EnableAutostart {
 	}
 }
 
-function DisableAutoStart {
+function DisableAutostart {
 	# Disable services auto-start
 	Get-Service -DisplayName Adobe* | Set-Service -StartupType Manual
 
@@ -149,7 +147,7 @@ if ($Data[0] -eq "03") {
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                     DisableAutoStart Module                   `|"
+		Write-Output "                  `|                     DisableAutostart Module                   `|"
 		Write-Output "                  `|      ___________________________________________________      `|"
 		Write-Output "                  `|                                                               `|"
 		Write-Output "                  `|                  AUTO START ALREADY DISABLED!                 `|"
@@ -171,7 +169,6 @@ if ($Data[0] -eq "03") {
 			D1 { RegBackup -Msg "Disable Autostart" }
 			Default {
 				$Invalid = $true
-	
 			}
 		}
 	} Until (!($Invalid))
