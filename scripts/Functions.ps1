@@ -15,6 +15,10 @@ function ReadKey([int]$ChoiceNum) {
 	$global:Choice = $KeyPress.Key
 }
 
+function Pause {
+	cmd /c pause
+}
+
 function RegBackup {
 	param (
 		$Msg
