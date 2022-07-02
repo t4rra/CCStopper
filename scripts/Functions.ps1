@@ -102,7 +102,7 @@ $BlankLine = ""
 1.."$LineLength" | ForEach-Object { $BlankLine += " " }
 
 $TopBorder = ""
-1.."$($LineLength+2)" | ForEach-Object { $TopBorder += "_" }
+1.."$($LineLength)" | ForEach-Object { $TopBorder += "_" }
 
 $BottomBorder = ""
 1.."$LineLength" | ForEach-Object { $BottomBorder += "_" }
@@ -154,7 +154,7 @@ function Write-MenuLine([string]$Contents, [switch]$Center = $true, [switch]$Mar
 }
 
 function Write-BlankMenuLine { Write-MenuLine -Contents "" }
-function Write-TopBorder { Write-Output "$IndentText$TopBorder" }
+function Write-TopBorder { Write-Output " $IndentText$TopBorder" }
 function Write-BottomBorder { Write-MenuLine -Contents $BottomBorder -Center:$false -Margin:$false -UseTextLine:$false }
 function Write-TextBorder { Write-MenuLine -Contents $TextBorder }
 
