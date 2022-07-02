@@ -119,7 +119,7 @@ function Write-MenuLine([string]$Contents, [switch]$Center = $true, [switch]$Mar
 	}
 
 	$Line = $TextLine
-	if(!($UseTextLine)) { $Line = $BlankLine }
+	if (!($UseTextLine)) { $Line = $BlankLine }
 
 	if ($Center) {
 		$Offset = [Math]::Floor($Length / 2)
@@ -128,15 +128,16 @@ function Write-MenuLine([string]$Contents, [switch]$Center = $true, [switch]$Mar
 		$Line = $Line.Remove($TextCenter, $Offset)
 		$Line = $Line.Remove($OffsettedLength + 1, $Offset)
 		$Line = $Line.Insert($OffsettedLength + 1, $Contents)
-	} else {
+	}
+ else {
 		$Line = $Line.Remove(0, $Length)
 		$Line = $Line.Insert(0, $Contents)
 	}
 
-	if($Margin) {
+	if ($Margin) {
 		$Line = $Line.Insert(0, $MarginText)
 		$EndMarginText = $MarginText
-		if($Length % 2 -ne 0) { $EndMarginText = $OddMarginText }
+		if ($Length % 2 -ne 0) { $EndMarginText = $OddMarginText }
 		$Line = $Line.Insert($Line.Length, $EndMarginText)
 	}
 
@@ -174,7 +175,7 @@ function ShowMenu([string]$Module, [string]$Header, [string]$Description, [strin
 	foreach ($Option in $Options) {
 		$Num = $Options.IndexOf($Option) + 1
 		Write-MenuLine -Contents "[$Num] $Option" -Center:$false
-		if($Option -ne $Options[-1]) { Write-BlankMenuLine }
+		if ($Option -ne $Options[-1]) { Write-BlankMenuLine }
 	}
 
 	Write-TextBorder
