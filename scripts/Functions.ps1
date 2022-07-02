@@ -1,10 +1,6 @@
-function ReadKey {
-	param (
-		[int]$ChoiceNum
-	)
-
-	$IndentText = 43 - $ChoiceNum
-	for ($i = 0; $i -le $IndentText; $i++) {
+function ReadKey([int]$ChoiceNum) {
+	$Indent = 43 - $ChoiceNum
+	for ($i = 0; $i -le $Indent; $i++) {
 		Write-Host " " -NoNewLine
 	}
 	Write-Host "Select [" -NoNewLine
@@ -112,7 +108,7 @@ $TextBorder = ""
 
 $TextCenter = ($TextLength / 2) - 1
 
-function Write-MenuLine([String]$Contents, [Switch]$Center = $true, [Switch]$Margin = $true, [Switch]$UseTextLine = $true) {
+function Write-MenuLine([string]$Contents, [switch]$Center = $true, [switch]$Margin = $true, [switch]$UseTextLine = $true) {
 	Remove-Variable Extra -ErrorAction SilentlyContinue
 	$Length = $Contents.Length
 	if ($Margin -and ($Length -gt $TextLength)) {
@@ -157,7 +153,7 @@ function Write-TopBorder { Write-Output "$IndentText$TopBorder" }
 function Write-BottomBorder { Write-MenuLine -Contents $BottomBorder -Center:$false -Margin:$false -UseTextLine:$false }
 function Write-TextBorder { Write-MenuLine -Contents $TextBorder }
 
-function ShowMenu([String]$Module, [String]$Header, [String]$Description, [String[]]$Options) {
+function ShowMenu([string]$Module, [string]$Header, [string]$Description, [string[]]$Options) {
 	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 	Clear-Host
 	Write-Output "`n"
