@@ -65,7 +65,7 @@ $TextBorder = ""
 
 $TextCenter = [Math]::Floor(($TextLength / 2) - 1)
 
-function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$Margin = $true, [switch]$UseTextLine = $true) {
+function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$Margin = $true, [switch]$UseTextLine = $true, [switch]$Borders = $true) {
 	Remove-Variable Extra -ErrorAction SilentlyContinue
 	$Length = $Contents.Length
 
@@ -102,7 +102,9 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$Margin = $t
 		$Line = $Line.Insert($Line.Length, $MarginText)
 	}
 
-	Write-Output "$IndentText`|$Line`|"
+	if($Borders) { $Border = "`|" } else { $Border = " " }
+
+	Write-Output "$IndentText$Border$Line$Border"
 
 	if (Test-Path variable:local:Extra) {
 		$PSBoundParameters["Contents"] = "$local:Extra"
@@ -111,7 +113,7 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$Margin = $t
 }
 
 function Write-BlankMenuLine { Write-MenuLine -Contents "" }
-function Write-TopBorder { Write-Output " $IndentText$TopBorder" }
+function Write-TopBorder { Write-MenuLine -Contents $TopBorder -Margin:$false -UseTextLine:$false -Borders:$false }
 function Write-BottomBorder { Write-MenuLine -Contents $BottomBorder -Margin:$false -UseTextLine:$false }
 function Write-TextBorder { Write-MenuLine -Contents $TextBorder }
 
