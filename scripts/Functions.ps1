@@ -19,53 +19,6 @@ function Pause {
 	cmd /c pause
 }
 
-function RegBackup {
-	param (
-		$Msg
-	)
-	Do {
-		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-		Clear-Host
-		Write-Output "`n"
-		Write-Output "`n"
-		Write-Output "                   _______________________________________________________________"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                     DisableAutoStart Module                   `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                  THIS WILL EDIT THE REGISTRY!                 `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      It is HIGHLY recommended to create a system restore      `|"
-		Write-Output "                  `|      point in case something goes wrong.                      `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [1] Make system restore point                            `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [2] Proceed without creating restore point               `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [Q] Exit Module                                          `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|_______________________________________________________________`|"
-		Write-Output "`n"
-		ReadKey 2
-		Switch ($Choice) {
-			Q { Exit }
-			D2 { EditReg }
-			D1 {
-				Clear-Host
-				Checkpoint-Computer -Description "Before CCStopper $Msg" -RestorePointType "MODIFY_SETTINGS"
-				EditReg
-			}
-			Default {
-				$Invalid = $true
-			}
-		}
-	} Until (!($Invalid))
-}
 function Set-ConsoleWindow([int]$Width, [int]$Height) {
 	$WindowSize = $Host.UI.RawUI.WindowSize
 	$WindowSize.Width = [Math]::Min($Width, $Host.UI.RawUI.BufferSize.Width)
@@ -81,7 +34,7 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 	}
 }
 
-$IndentTextLength = 18
+$IndentTextLength = 11
 $IndentText = ""
 1.."$IndentTextLength" | ForEach-Object { $IndentText += " " }
 
@@ -112,7 +65,7 @@ $TextBorder = ""
 
 $TextCenter = [Math]::Floor(($TextLength / 2) - 1)
 
-function Write-MenuLine([string]$Contents, [switch]$Center = $true, [switch]$Margin = $true, [switch]$UseTextLine = $true) {
+function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$Margin = $true, [switch]$UseTextLine = $true) {
 	Remove-Variable Extra -ErrorAction SilentlyContinue
 	$Length = $Contents.Length
 	if ($Margin -and ($Length -gt $TextLength)) {
@@ -155,10 +108,10 @@ function Write-MenuLine([string]$Contents, [switch]$Center = $true, [switch]$Mar
 
 function Write-BlankMenuLine { Write-MenuLine -Contents "" }
 function Write-TopBorder { Write-Output " $IndentText$TopBorder" }
-function Write-BottomBorder { Write-MenuLine -Contents $BottomBorder -Center:$false -Margin:$false -UseTextLine:$false }
+function Write-BottomBorder { Write-MenuLine -Contents $BottomBorder -Margin:$false -UseTextLine:$false }
 function Write-TextBorder { Write-MenuLine -Contents $TextBorder }
 
-function ShowMenu([string[]]$Subtitle, [string]$Header, [string]$Description, [string[]]$Options) {
+function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$Description, [string[]]$Options) {
 	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 	Clear-Host
 	Write-Output "`n"
@@ -166,14 +119,14 @@ function ShowMenu([string[]]$Subtitle, [string]$Header, [string]$Description, [s
 	Write-TopBorder
 	Write-BlankMenuLine
 	Write-BlankMenuLine
-	Write-MenuLine -Contents "CCSTOPPER"
+	Write-MenuLine -Contents "CCSTOPPER" -Center
 	foreach ($Subtitle in $Subtitle) {
-		Write-MenuLine -Contents $Subtitle
+		Write-MenuLine -Contents $Subtitle -Center
 	}
 	# Write-MenuLine -Contents "$Module Module"
 	Write-TextBorder
 	Write-BlankMenuLine
-	Write-MenuLine -Contents $($Header.ToUpper())
+	Write-MenuLine -Contents $($Header.ToUpper()) -Center
 	Write-BlankMenuLine
 	Write-MenuLine -Contents $Description
 	Write-TextBorder
@@ -181,15 +134,37 @@ function ShowMenu([string[]]$Subtitle, [string]$Header, [string]$Description, [s
 
 	foreach ($Option in $Options) {
 		$Num = $Options.IndexOf($Option) + 1
-		Write-MenuLine -Contents "[$Num] $Option" -Center:$false
+		Write-MenuLine -Contents "[$Num] $Option"
 		if ($Option -ne $Options[-1]) { Write-BlankMenuLine }
 	}
 
 	Write-TextBorder
 	Write-BlankMenuLine
-	Write-MenuLine -Contents "[Q] Exit" -Center:$false
+	if ($Back) { Write-MenuLine -Contents "[Q] Back" } else { Write-MenuLine -Contents "[Q] Exit" }
 	Write-BlankMenuLine
 
 	Write-BottomBorder
 	Write-Output "`n"
+}
+
+function RegBackup {
+	param (
+		$Msg
+	)
+	Do {
+		ShowMenu -Back -Subtitle "$Msg Module" -Header "THIS WILL EDIT THE REGISTRY" -Description "It is HIGHLY recommended to create a system restore point in case something goes wrong." -Options "Make system restore point", "Proceed without creating restore point"
+		ReadKey 2
+		Switch ($Choice) {
+			Q { Exit }
+			D2 { EditReg }
+			D1 {
+				Clear-Host
+				Checkpoint-Computer -Description "Before CCStopper $Msg" -RestorePointType "MODIFY_SETTINGS"
+				EditReg
+			}
+			Default {
+				$Invalid = $true
+			}
+		}
+	} Until (!($Invalid))
 }
