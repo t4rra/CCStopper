@@ -1,15 +1,13 @@
 function ReadKey([int]$ChoiceNum) {
 	$Indent = 43 - $ChoiceNum
-	for ($i = 0; $i -le $Indent; $i++) {
-		Write-Host " " -NoNewLine
-	}
-	Write-Host "Select [" -NoNewLine
+	$IndentText = ""
+	0.."$Indent" | ForEach-Object { $IndentText +=  " " }
 
-	for ($num = 1; $Num -le $ChoiceNum; $Num++) {
-		Write-Host "$Num," -NoNewLine
-	}
+	$Nums = ""
+	1.."$ChoiceNum" | ForEach-Object { $Nums +=  "$Num," }
+	$Nums += "Q"
 
-	Write-Host "Q]: " -NoNewLine
+	[Console]::Out.Write($IndentText + "Select [$Nums]: ")
 
 	$KeyPress = [System.Console]::ReadKey()
 	$global:Choice = $KeyPress.Key
@@ -159,7 +157,9 @@ function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$
 
 	Write-TextBorder
 	Write-BlankMenuLine
-	if ($Back) { Write-MenuLine -Contents "[Q] Back" } else { Write-MenuLine -Contents "[Q] Exit" }
+
+	if ($Back) { $Exit = "Back" } else { $Exit = "Exit" }
+	Write-MenuLine -Contents "[Q] $Exit"
 	Write-BlankMenuLine
 
 	Write-BottomBorder
