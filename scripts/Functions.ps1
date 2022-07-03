@@ -133,61 +133,64 @@ function Write-TopBorder { Write-MenuLine -Contents $TopBorder -NoMargin -NoBord
 function Write-BottomBorder { Write-MenuLine -Contents $BottomBorder -NoMargin }
 function Write-TextBorder { Write-MenuLine -Contents $TextBorder }
 
-function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$Description, [string[]]$Options) {
-	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-	Clear-Host
-	Write-Output "`n"
-	Write-Output "`n"
-	Write-TopBorder
-	Write-BlankMenuLine
-	Write-BlankMenuLine
-	Write-MenuLine -Contents "CCSTOPPER" -Center
-	foreach ($Subtitle in $Subtitle) {
-		Write-MenuLine -Contents $Subtitle -Center
-	}
-	Write-TextBorder
-	Write-BlankMenuLine
-	Write-MenuLine -Contents $($Header.ToUpper()) -Center
-	Write-BlankMenuLine
-	Write-MenuLine -Contents $Description
-	Write-TextBorder
-	Write-BlankMenuLine
-
-	foreach ($Option in $Options) {
-		$Num = $Options.IndexOf($Option) + 1
-		Write-MenuLine -Contents "[$Num] $Option"
-		if ($Option -ne $Options[-1]) { Write-BlankMenuLine }
-	}
-
-	Write-TextBorder
-	Write-BlankMenuLine
-
-	if ($Back) { $Exit = "Back" } else { $Exit = "Exit" }
-	Write-MenuLine -Contents "[Q] $Exit"
-	Write-BlankMenuLine
-
-	Write-BottomBorder
-	Write-Output "`n"
-}
-
-function RegBackup {
-	param (
-		$Msg
-	)
+function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$Description, $Options) {
 	Do {
-		ShowMenu -Back -Subtitle "$Msg Module" -Header "THIS WILL EDIT THE REGISTRY" -Description "It is HIGHLY recommended to create a system restore point in case something goes wrong." -Options "Make system restore point", "Proceed without creating restore point"
-		ReadKey 2
-		Switch ($Choice) {
-			Q { Exit }
-			D2 { EditReg }
-			D1 {
-				Clear-Host
-				Checkpoint-Computer -Description "Before CCStopper $Msg" -RestorePointType "MODIFY_SETTINGS"
-				EditReg
-			}
-			Default {
-				$Invalid = $true
-			}
+		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+		Clear-Host
+		Write-Output "`n"
+		Write-Output "`n"
+		Write-TopBorder
+		Write-BlankMenuLine
+		Write-BlankMenuLine
+		Write-MenuLine -Contents "CCSTOPPER" -Center
+		foreach ($Subtitle in $Subtitle) {
+			Write-MenuLine -Contents $Subtitle -Center
+		}
+		Write-TextBorder
+		Write-BlankMenuLine
+		Write-MenuLine -Contents $($Header.ToUpper()) -Center
+		Write-BlankMenuLine
+		Write-MenuLine -Contents $Description
+		Write-TextBorder
+		Write-BlankMenuLine
+
+		foreach ($Option in $Options) {
+			$Name = $Option[0]
+			$Num = $Options.IndexOf($Option) + 1
+			Write-MenuLine -Contents "[$Num] $Name"
+			if ($Option -ne $Options[-1]) { Write-BlankMenuLine }
+		}
+		if($null -eq $Invalid) { $Invalid = $true }
+
+		Write-TextBorder
+		Write-BlankMenuLine
+
+		if ($Back) { $Exit = "Back" } else { $Exit = "Exit" }
+		Write-MenuLine -Contents "[Q] $Exit"
+		Write-BlankMenuLine
+
+		Write-BottomBorder
+		Write-Output "`n"
+
+		ReadKey $($Options.Length)
+		if($Choice -eq "Q") { Exit }
+
+		foreach ($Option in $Options) {
+			$Invalid = $false
+			$ScriptBlock = $Option[1]
+			$Num = $Options.IndexOf($Option) + 1
+			if($Choice -eq "D$Num") { Invoke-Command -ScriptBlock $ScriptBlock }
 		}
 	} Until (!($Invalid))
+}
+
+function RegBackup([string]$Msg) {
+	ShowMenu -Back -Subtitle "$Msg Module" -Header "THIS WILL EDIT THE REGISTRY!" -Description "It is HIGHLY recommended to create a system restore point in case something goes wrong." -Options @(
+		@("Make system restore point", {
+			Clear-Host
+			Checkpoint-Computer -Description "Before CCStopper $Msg" -RestorePointType "MODIFY_SETTINGS"
+			EditReg
+		}),
+		@("Proceed without creating restore point", { EditReg })
+	)
 }
