@@ -63,11 +63,17 @@ $TextBorder = ""
 
 $TextCenter = [Math]::Floor(($TextLength / 2) - 1)
 
-function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$Margin = $true, [switch]$UseTextLine = $true, [switch]$Borders = $true) {
+function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$NoMargin, [switch]$NoBorders) {
 	Remove-Variable Extra -ErrorAction SilentlyContinue
 	$Length = $Contents.Length
 
-	if($Margin) { $OriginalLength = $TextLength } else { $OriginalLength = $LineLength }
+	if($NoMargin) {
+		$OriginalLength = $LineLength
+		$Line = $BlankLine
+	} else {
+		$OriginalLength = $TextLength
+		$Line = $TextLine
+	}
 
 	$FullContentsArray = $Contents.Split(' ')
 	$ContentsArray = @()
@@ -89,9 +95,6 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$Margin = $t
 		$Extra = [String]::Join(' ', $ExtraArray)
 	}
 
-	$Line = $TextLine
-	if (!($UseTextLine)) { $Line = $BlankLine }
-
 	if ($Center) {
 		$Offset = [Math]::Floor($Length / 2)
 		$OffsettedLength = $TextCenter - $Offset
@@ -105,16 +108,17 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$Margin = $t
 		$Line = $Line.Insert(0, $Contents)
 	}
 
-	if($Margin -and ($Line.Length -gt $TextLength)) {
-		$Line = $Line.Substring(0, $Line.Length-1)
-	}
 
-	if ($Margin) {
+	if (!($NoMargin)) {
+		if($Line.Length -gt $TextLength) {
+			$Line = $Line.Substring(0, $Line.Length-1)
+		}
+
 		$Line = $Line.Insert(0, $MarginText)
 		$Line = $Line.Insert($Line.Length, $MarginText)
 	}
 
-	if($Borders) { $Border = "`|" } else { $Border = " " }
+	if(!($NoBorders)) { $Border = "`|" } else { $Border = " " }
 
 	Write-Output "$IndentText$Border$Line$Border"
 
@@ -125,8 +129,8 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$Margin = $t
 }
 
 function Write-BlankMenuLine { Write-MenuLine -Contents "" }
-function Write-TopBorder { Write-MenuLine -Contents $TopBorder -Margin:$false -UseTextLine:$false -Borders:$false }
-function Write-BottomBorder { Write-MenuLine -Contents $BottomBorder -Margin:$false -UseTextLine:$false }
+function Write-TopBorder { Write-MenuLine -Contents $TopBorder -NoMargin -NoBorders }
+function Write-BottomBorder { Write-MenuLine -Contents $BottomBorder -NoMargin }
 function Write-TextBorder { Write-MenuLine -Contents $TextBorder }
 
 function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$Description, [string[]]$Options) {
