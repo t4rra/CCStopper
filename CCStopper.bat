@@ -6,7 +6,6 @@ mode con: cols=99 lines=38
 net session >nul 2>&1
 if %errorlevel% neq 0 goto elevate
 cd /d "%~dp0\scripts"
-set "Path=%Path%;%CD%;"
 goto mainScript
 
 :elevate
