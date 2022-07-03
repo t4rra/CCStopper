@@ -93,7 +93,7 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$Margin = $t
 		$Line = $Line.Insert(0, $Contents)
 	}
 
-	if($Line.Length -gt $TextLength -and $Line.Length -lt $LineLength) {
+	if($Margin -and ($Line.Length -gt $TextLength)) {
 		$Line = $Line.Substring(0, $Line.Length-1)
 	}
 
