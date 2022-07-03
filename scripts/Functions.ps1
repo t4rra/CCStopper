@@ -68,7 +68,9 @@ $TextCenter = [Math]::Floor(($TextLength / 2) - 1)
 function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$Margin = $true, [switch]$UseTextLine = $true) {
 	Remove-Variable Extra -ErrorAction SilentlyContinue
 	$Length = $Contents.Length
-	if ($Margin -and ($Length -gt $TextLength)) {
+
+	if($Margin) { $OriginalLength = $TextLength } else { $OriginalLength = $LineLength }
+	if ($Length -gt $OriginalLength) {
 		$ExtraAmount = $Length - $TextLength
 		$local:Extra = $Contents.Substring($Length - $ExtraAmount)
 		$Contents = $Contents.Substring(0, $Length - $ExtraAmount)
