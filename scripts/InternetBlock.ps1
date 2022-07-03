@@ -85,11 +85,39 @@ ForEach ($BlockedAddress in $BlockedAddresses) {
  catch { WritingFailure }
 }
 
-if (Get-NetFirewallRule -DisplayName "CCStopper-CreditCardBlock" -ErrorAction SilentlyContinue) {
-	Write-Output "Firewall rule exists!"
+
+
+
+$Files = @("${Env:ProgramFiles(x86)}\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe", "$Env:ProgramFiles\Common Files\Adobe\Adobe Desktop Common\NGL\adobe_licensing_wf.exe", "$Env:ProgramFiles\Common Files\Adobe\Adobe Desktop Common\NGL\adobe_licensing_wf_helper.exe")
+
+$IsNotBlocked = $false
+$IsBlocked = $false
+
+# Check if files are already blocked
+foreach ($File in $Files) {
+	$Exists = Test-Path -Path $File -PathType Leaf
+	if ($Exists) {
+		(Get-Acl $File).Access | ForEach-Object {
+			if (Get-NetFirewallRule -DisplayName "CCStopper-InternetBlock" -ErrorAction SilentlyContinue) {
+				$IsBlocked = $true
+			}
+			else {
+				$IsNotBlocked = $true
+			}
+		}
+	}
 }
-else {
-	New-NetFirewallRule -DisplayName "CCStopper-CreditCardBlock" -Direction Outbound -Program "${Env:ProgramFiles(x86)}\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe" -Action Block
+
+
+foreach ($File in $Files) {
+	if ((Test-Path -Path $File -PathType Leaf)) {
+		if ($IsBlocked) {
+			Remove-NetFirewallRule -DisplayName "CCStopper-InternetBlock"
+		}
+		elseif ($IsNotBlocked) {
+			New-NetFirewallRule -DisplayName "CCStopper-InternetBlock" -Direction Outbound -Program $File -Action Block
+		}
+	}
 }
 
 Do {
@@ -104,7 +132,12 @@ Do {
 	Write-Output "                  `|                       InternetBlock Module                    `|"
 	Write-Output "                  `|      ___________________________________________________      `|"
 	Write-Output "                  `|                                                               `|"
-	Write-Output "                  `|                       Patching complete!                      `|"
+	if ($IsBlocked) {
+		Write-Output "                  `|                   Unblocking internet complete!               `|"
+	}
+	elseif ($IsNotBlocked) {
+		Write-Output "                  `|                    Blocking internet complete!                `|"
+	}
 	Write-Output "                  `|      ___________________________________________________      `|"
 	Write-Output "                  `|                                                               `|"
 	Write-Output "                  `|      [Q] Exit Module                                          `|"

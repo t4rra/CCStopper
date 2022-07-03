@@ -20,7 +20,7 @@ $IsNotBlocked = $false
 $IsBlocked = $false
 
 # Check if files are already blocked
-Foreach ($File in $Files) {
+foreach ($File in $Files) {
 	$Exists = Test-Path -Path $File -PathType Leaf
 	if ($Exists) {
 		(Get-Acl $File).Access | ForEach-Object {
@@ -73,7 +73,7 @@ function Done {
 function MainScript {
 	Clear-Host
 	.\StopProcesses.ps1
-	Foreach ($File in $Files) {
+	foreach ($File in $Files) {
 		if ((Test-Path -Path $File -PathType Leaf)) {
 			$Acl = Get-Acl -Path $File
 			Set-Acl -Path $File -AclObject $Acl # Reorder ACL to canonical order to prevent errors
