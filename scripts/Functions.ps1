@@ -4,7 +4,7 @@ function ReadKey([int]$ChoiceNum) {
 	0.."$Indent" | ForEach-Object { $IndentText +=  " " }
 
 	$Nums = ""
-	1.."$ChoiceNum" | ForEach-Object { $Nums +=  "$Num," }
+	1.."$ChoiceNum" | ForEach-Object { $Nums +=  "$_," }
 	$Nums += "Q"
 
 	[Console]::Out.Write($IndentText + "Select [$Nums]: ")
@@ -61,9 +61,15 @@ $BottomBorder = ""
 $TextBorder = ""
 1.."$TextLength" | ForEach-Object { $TextBorder += "_" }
 
+$GapLength = 5
+$Gap = ""
+1.."$GapLength" | ForEach-Object { $Gap += " " }
+
 $TextCenter = [Math]::Floor(($TextLength / 2) - 1)
 
-function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$NoMargin, [switch]$NoBorders) {
+$Border = "`|"
+
+function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$NoMargin, [switch]$NoBorders, [string]$NextExtra) {
 	Remove-Variable Extra -ErrorAction SilentlyContinue
 	$Length = $Contents.Length
 
@@ -92,7 +98,7 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$NoMargin, [
 
 	$ExtraArray = $FullContentsArray | Where-Object { $ContentsArray -notcontains $_ }
 	if($ExtraArray) {
-		$Extra = [String]::Join(' ', $ExtraArray)
+		$local:Extra = [String]::Join(' ', $ExtraArray)
 	}
 
 	if ($Center) {
@@ -118,12 +124,14 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$NoMargin, [
 		$Line = $Line.Insert($Line.Length, $MarginText)
 	}
 
-	if(!($NoBorders)) { $Border = "`|" } else { $Border = " " }
+	if(!($NoBorders)) { $BorderX = $Border } else { $BorderX = " " }
+	$Result = $IndentText + $BorderX + $Line + $BorderX
 
-	Write-Output "$IndentText$Border$Line$Border"
+	Write-Output "$Result"
 
 	if (Test-Path variable:local:Extra) {
-		$PSBoundParameters["Contents"] = "$local:Extra"
+		if (!([String]::IsNullOrEmpty($NextExtra))) { $local:Extra = $NextExtra + $local:Extra }
+		$PSBoundParameters["Contents"] = $local:Extra
 		Write-MenuLine @PSBoundParameters
 	}
 }
@@ -154,10 +162,38 @@ function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$
 		Write-TextBorder
 		Write-BlankMenuLine
 
+		$NameLengths = @()
 		foreach ($Option in $Options) {
-			$Name = $Option[0]
+			$Name = $Option[0][0]
 			$Num = $Options.IndexOf($Option) + 1
-			Write-MenuLine -Contents "[$Num] $Name"
+			$NumText = "[$Num]"
+			$Result = $NumText + " " + $Name
+			$NameLengths += ,$Result.Length
+		}
+		$LargestNameLength = ($NameLengths | Measure-Object -Maximum).Maximum
+
+		foreach ($Option in $Options) {
+			$Name = $Option[0][0]
+			$Description = $Option[0][1]
+			$Num = $Options.IndexOf($Option) + 1
+			$NumText = "[$Num]"
+			$Result = $NumText + " " + $Name
+			if(!([String]::IsNullOrEmpty($Description))) {
+				0.."$($LargestNameLength-1)" | Where-Object { $_ -ge $Result.Length } | ForEach-Object { $Result += " " }
+
+				$NextExtra = ""
+				0.."$($Result.Length-1)" | ForEach-Object { $NextExtra += " " }
+
+				$NextExtra += $Gap + $Border + " "
+				$Result += $Gap + $Border + " "
+
+				$Result += $Description
+			}
+
+			$Parameters = @{ Contents = $Result }
+			if(Test-Path variable:NextExtra) { $Parameters.Add("NextExtra", $NextExtra) }
+
+			Write-MenuLine @Parameters
 			if ($Option -ne $Options[-1]) { Write-BlankMenuLine }
 		}
 		if($null -eq $Invalid) { $Invalid = $true }
@@ -186,11 +222,11 @@ function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$
 
 function RegBackup([string]$Msg) {
 	ShowMenu -Back -Subtitle "$Msg Module" -Header "THIS WILL EDIT THE REGISTRY!" -Description "It is HIGHLY recommended to create a system restore point in case something goes wrong." -Options @(
-		@("Make system restore point", {
+		@(@("Make system restore point"), {
 			Clear-Host
 			Checkpoint-Computer -Description "Before CCStopper $Msg" -RestorePointType "MODIFY_SETTINGS"
 			EditReg
 		}),
-		@("Proceed without creating restore point", { EditReg })
+		@(@("Proceed without creating restore point"), { EditReg })
 	)
 }
