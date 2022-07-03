@@ -4,7 +4,9 @@ function ReadKey([int]$ChoiceNum) {
 	0.."$Indent" | ForEach-Object { $IndentText +=  " " }
 
 	$Nums = ""
-	1.."$ChoiceNum" | ForEach-Object { $Nums +=  "$_," }
+	for ($Num = 1; $Num -le $ChoiceNum; $Num++) {
+		$Nums += "$Num,"
+	}
 	$Nums += "Q"
 
 	[Console]::Out.Write($IndentText + "Select [$Nums]: ")
