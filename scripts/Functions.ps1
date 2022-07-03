@@ -70,11 +70,25 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$Margin = $t
 	$Length = $Contents.Length
 
 	if($Margin) { $OriginalLength = $TextLength } else { $OriginalLength = $LineLength }
-	if ($Length -gt $OriginalLength) {
-		$ExtraAmount = $Length - $TextLength
-		$local:Extra = $Contents.Substring($Length - $ExtraAmount)
-		$Contents = $Contents.Substring(0, $Length - $ExtraAmount)
+
+	$FullContentsArray = $Contents.Split(' ')
+	$ContentsArray = @()
+	$Temp = @()
+	foreach ($Word in $FullContentsArray) {
+		$Temp += ,$Word
+		$Contents = [String]::Join(' ', $Temp)
 		$Length = $Contents.Length
+
+		if ($Length -gt $OriginalLength) { break }
+		$ContentsArray = $Temp
+	}
+
+	$Contents = [String]::Join(' ', $ContentsArray)
+	$Length = $Contents.Length
+
+	$ExtraArray = $FullContentsArray | Where-Object { $ContentsArray -notcontains $_ }
+	if($ExtraArray) {
+		$Extra = [String]::Join(' ', $ExtraArray)
 	}
 
 	$Line = $TextLine
@@ -129,7 +143,6 @@ function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$
 	foreach ($Subtitle in $Subtitle) {
 		Write-MenuLine -Contents $Subtitle -Center
 	}
-	# Write-MenuLine -Contents "$Module Module"
 	Write-TextBorder
 	Write-BlankMenuLine
 	Write-MenuLine -Contents $($Header.ToUpper()) -Center
