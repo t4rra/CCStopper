@@ -91,11 +91,13 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$Margin = $t
 		$Line = $Line.Insert(0, $Contents)
 	}
 
+	if($Line.Length -gt $TextLength -and $Line.Length -lt $LineLength) {
+		$Line = $Line.Substring(0, $Line.Length-1)
+	}
+
 	if ($Margin) {
 		$Line = $Line.Insert(0, $MarginText)
-		$EndMarginText = $MarginText
-		if ($Length % 2 -ne 0) { $EndMarginText = $OddMarginText }
-		$Line = $Line.Insert($Line.Length, $EndMarginText)
+		$Line = $Line.Insert($Line.Length, $MarginText)
 	}
 
 	Write-Output "$IndentText`|$Line`|"
