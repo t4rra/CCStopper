@@ -98,7 +98,7 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$NoMargin, [
 	$Contents = [String]::Join(' ', $ContentsArray)
 	$Length = $Contents.Length
 
-	$ExtraArray = $FullContentsArray | Where-Object { $ContentsArray -notcontains $_ }
+	$ExtraArray = $FullContentsArray | Select-Object -Skip $ContentsArray.Length
 	if($ExtraArray) {
 		$local:Extra = [String]::Join(' ', $ExtraArray)
 	}
