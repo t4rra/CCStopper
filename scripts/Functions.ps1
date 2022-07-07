@@ -217,7 +217,7 @@ function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$
 			$Invalid = $false
 			$ScriptBlock = $Option.Code
 			$Num = $Options.IndexOf($Option) + 1
-			if($Choice -eq "D$Num") { Invoke-Command -ScriptBlock $ScriptBlock }
+			if($Choice -eq "D$Num") { Invoke-Command -ScriptBlock $ScriptBlock } else { $Invalid = $true }
 		}
 	} Until (!($Invalid))
 }
