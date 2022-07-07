@@ -145,7 +145,6 @@ function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 		Clear-Host
 		Write-Output "`n"
-		Write-Output "`n"
 		Write-TopBorder
 		Write-BlankMenuLine
 		Write-BlankMenuLine
