@@ -152,6 +152,9 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 		Write-BlankMenuLine
 		Write-MenuLine -Contents "CCSTOPPER" -Center
 		if ($VerCredit) {
+			if ($Subtitles) {
+				$Subtitles += ""
+			}
 			$Subtitles += "Made by eaaasun"
 			$Subtitles += $Version
 		}
