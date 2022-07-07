@@ -232,7 +232,7 @@ function RegBackup([string]$Module) {
 			Description = ""
 			Code = {
 				Clear-Host
-				Checkpoint-Computer -Description "Before CCStopper $Msg" -RestorePointType "MODIFY_SETTINGS"
+				Checkpoint-Computer -Description "Before CCStopper $Module" -RestorePointType "MODIFY_SETTINGS"
 				EditReg
 			}
 		},
