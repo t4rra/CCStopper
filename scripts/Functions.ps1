@@ -54,11 +54,8 @@ $LineLength = $TextLength + ($MarginLength * 2)
 $BlankLine = ""
 1.."$LineLength" | ForEach-Object { $BlankLine += " " }
 
-$TopBorder = ""
-1.."$($LineLength)" | ForEach-Object { $TopBorder += "_" }
-
-$BottomBorder = ""
-1.."$LineLength" | ForEach-Object { $BottomBorder += "_" }
+$VerticalBorder = ""
+1.."$LineLength" | ForEach-Object { $VerticalBorder += "_" }
 
 $TextBorder = ""
 1.."$TextLength" | ForEach-Object { $TextBorder += "_" }
@@ -139,8 +136,8 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$NoMargin, [
 }
 
 function Write-BlankMenuLine { Write-MenuLine -Contents "" }
-function Write-TopBorder { Write-MenuLine -Contents $TopBorder -NoMargin -NoBorders }
-function Write-BottomBorder { Write-MenuLine -Contents $BottomBorder -NoMargin }
+function Write-TopBorder { Write-MenuLine -Contents $VerticalBorder -NoMargin -NoBorders }
+function Write-BottomBorder { Write-MenuLine -Contents $VerticalBorder -NoMargin }
 function Write-TextBorder { Write-MenuLine -Contents $TextBorder }
 
 function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$Description, [hashtable[]]$Options) {
