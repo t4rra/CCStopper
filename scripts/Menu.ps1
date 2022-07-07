@@ -9,60 +9,91 @@ $Host.UI.RawUI.WindowTitle = "CCStopper"
 Import-Module .\Functions.ps1
 
 function MainMenu {
-	Do {
-		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-		Clear-Host
-		Write-Output "`n"
-		Write-Output "`n"
-		Write-Output "           _______________________________________________________________________________"
-		Write-Output "          `|                                                                               `|"
-		Write-Output "          `|                                                                               `|"
-		Write-Output "          `|                                   CCSTOPPER                                   `|"
-		Write-Output "          `|                                Made by eaaasun                                `|"
-		Write-Output "          `|                                v1.2.0-pre.2_dev                               `|"
-		Write-Output "          `|      ___________________________________________________________________      `|"
-		Write-Output "          `|                                                                               `|"
-		Write-Output "          `|                                SAVE YOUR FILES!                               `|"
-		Write-Output "          `|      ___________________________________________________________________      `|"
-		Write-Output "          `|                                                                               `|"
-		Write-Output "          `|      [1] Stop Processes    `|  Stops all Adobe Processes.                      `|"
-		Write-Output "          `|                            `|                                                  `|"
-		Write-Output "          `|      [2] Utilities Menu    `|  Disable auto start, hide Creative Cloud         `|"
-		Write-Output "          `|                            `|  folder, block unnecessary background            `|"
-		Write-Output "          `|                            `|  processes and internet access (fixes            `|"
-		Write-Output "          `|                            `|  credit card prompt).                            `|"
-		Write-Output "          `|                            `|                                                  `|"
-		Write-Output "          `|      [3] Patches Menu      `|  Patch: Genuine Checker, Trial Banner,           `|"
-		Write-Output "          `|                            `|  Acrobat                                         `|"
-		Write-Output "          `|                            `|                                                  `|"
-		Write-Output "          `|      [4] Credit/Repo       `|  Credits, Github Repo                            `|"
-		Write-Output "          `|      _________________________________________________________________        `|"
-		Write-Output "          `|                                                                               `|"
-		Write-Output "          `|      [Q] Exit                                                                 `|"
-		Write-Output "          `|                                                                               `|"
-		Write-Output "          `|_______________________________________________________________________________`|"
-		Write-Output "`n"
-		ReadKey 4
-		Switch ($Choice) {
-			Q { Exit }
-			D1 {
+	ShowMenu -Subtitle "Made by eaaasun", "v1.2.0-pre.2_dev" -Header "SAVE YOUR FILES!" -Options @(
+		@{
+			Name = "Stop Processes"
+			Description = "Stops all Adobe Processes"
+			Code = {
 				.\StopProcesses.ps1
 				MainMenu
 			}
-			D2 {
+		},
+		@{
+			Name = "Utilities Menu"
+			Description = "Disable autostart, hide Creative Cloud folder, block unnessessary background processes and internet access (fixes credit card prompt)."
+			Code = {
 				UtilityMenu
 			}
-			D3 {
+		},
+		@{
+			Name = "Patches Menu"
+			Description = "Patch: Genuine Checker, Trial Banner, Acrobat"
+			Code = {
 				PatchesMenu
 			}
-			D4 {
+		},
+		@{
+			Name = "Credit/Repo"
+			Description = "Credits, Github Repo"
+			Code = {
 				CreditMenu
 			}
-			Default {
-				$Invalid = $true
-			}
 		}
-	} Until (!($Invalid))
+	)
+	# Do {
+	# 	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+	# 	Clear-Host
+	# 	Write-Output "`n"
+	# 	Write-Output "`n"
+	# 	Write-Output "           _______________________________________________________________________________"
+	# 	Write-Output "          `|                                                                               `|"
+	# 	Write-Output "          `|                                                                               `|"
+	# 	Write-Output "          `|                                   CCSTOPPER                                   `|"
+	# 	Write-Output "          `|                                Made by eaaasun                                `|"
+	# 	Write-Output "          `|                                v1.2.0-pre.2_dev                               `|"
+	# 	Write-Output "          `|      ___________________________________________________________________      `|"
+	# 	Write-Output "          `|                                                                               `|"
+	# 	Write-Output "          `|                                SAVE YOUR FILES!                               `|"
+	# 	Write-Output "          `|      ___________________________________________________________________      `|"
+	# 	Write-Output "          `|                                                                               `|"
+	# 	Write-Output "          `|      [1] Stop Processes    `|  Stops all Adobe Processes.                      `|"
+	# 	Write-Output "          `|                            `|                                                  `|"
+	# 	Write-Output "          `|      [2] Utilities Menu    `|  Disable auto start, hide Creative Cloud         `|"
+	# 	Write-Output "          `|                            `|  folder, block unnecessary background            `|"
+	# 	Write-Output "          `|                            `|  processes and internet access (fixes            `|"
+	# 	Write-Output "          `|                            `|  credit card prompt).                            `|"
+	# 	Write-Output "          `|                            `|                                                  `|"
+	# 	Write-Output "          `|      [3] Patches Menu      `|  Patch: Genuine Checker, Trial Banner,           `|"
+	# 	Write-Output "          `|                            `|  Acrobat                                         `|"
+	# 	Write-Output "          `|                            `|                                                  `|"
+	# 	Write-Output "          `|      [4] Credit/Repo       `|  Credits, Github Repo                            `|"
+	# 	Write-Output "          `|      _________________________________________________________________        `|"
+	# 	Write-Output "          `|                                                                               `|"
+	# 	Write-Output "          `|      [Q] Exit                                                                 `|"
+	# 	Write-Output "          `|                                                                               `|"
+	# 	Write-Output "          `|_______________________________________________________________________________`|"
+	# 	Write-Output "`n"
+	# 	ReadKey 4
+	# 	Switch ($Choice) {
+	# 		Q { Exit }
+	# 		D1 {
+	# 			.\StopProcesses.ps1
+	# 			MainMenu
+	# 		}
+	# 		D2 {
+	# 			UtilityMenu
+	# 		}
+	# 		D3 {
+	# 			PatchesMenu
+	# 		}
+	# 		D4 {
+	# 			CreditMenu
+	# 		}
+	# 		Default {
+	# 			$Invalid = $true
+	# 		}
+	# 	}
+	# } Until (!($Invalid))
 }
 
 function UtilityMenu {
