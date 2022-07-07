@@ -168,21 +168,18 @@ function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$
 
 		$NameLengths = @()
 		foreach ($Option in $Options) {
-			$Name = $Option.Name
 			$Num = $Options.IndexOf($Option) + 1
 			$NumText = "[$Num]"
-			$Result = $NumText + " " + $Name
+			$Result = $NumText + " " + $Option.Name
 			$NameLengths += ,$Result.Length
 		}
 		$LargestNameLength = ($NameLengths | Measure-Object -Maximum).Maximum
 
 		foreach ($Option in $Options) {
-			$Name = $Option.Name
-			$Description = $Option.Description
 			$Num = $Options.IndexOf($Option) + 1
 			$NumText = "[$Num]"
-			$Result = $NumText + " " + $Name
-			if(!([String]::IsNullOrEmpty($Description))) {
+			$Result = $NumText + " " + $Option.Name
+			if(!([String]::IsNullOrEmpty($Option.Description))) {
 				0.."$($LargestNameLength-1)" | Where-Object { $_ -ge $Result.Length } | ForEach-Object { $Result += " " }
 
 				$NextExtra = ""
@@ -191,7 +188,7 @@ function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$
 				$NextExtra += $Gap + $Border + " "
 				$Result += $Gap + $Border + " "
 
-				$Result += $Description
+				$Result += $Option.Description
 			}
 
 			$Parameters = @{ Contents = $Result }
