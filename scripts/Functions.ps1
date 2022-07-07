@@ -178,7 +178,7 @@ function ShowMenu([switch]$Back, [string[]]$Subtitles, [string]$Header, [string]
 			$Num = $Options.IndexOf($Option) + 1
 			$NumText = "[$Num]"
 			$Result = $NumText + " " + $Option.Name
-			if(!([String]::IsNullOrEmpty($Option.Description))) {
+			if($Option.ContainsKey("Description")) {
 				0.."$($LargestNameLength-1)" | Where-Object { $_ -ge $Result.Length } | ForEach-Object { $Result += " " }
 
 				$NextExtra = ""
@@ -224,7 +224,6 @@ function RegBackup([string]$Module) {
 	ShowMenu -Back -Subtitle "$Module Module" -Header "THIS WILL EDIT THE REGISTRY!" -Description "It is HIGHLY recommended to create a system restore point in case something goes wrong." -Options @(
 		@{
 			Name = "Make system restore point"
-			Description = ""
 			Code = {
 				Clear-Host
 				Checkpoint-Computer -Description "Before CCStopper $Module" -RestorePointType "MODIFY_SETTINGS"
@@ -233,7 +232,6 @@ function RegBackup([string]$Module) {
 		},
 		@{
 			Name = "Proceed without creating restore point"
-			Description = ""
 			Code = { EditReg }
 		}
 	)
