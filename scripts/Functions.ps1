@@ -225,8 +225,8 @@ function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$
 	} Until (!($Invalid))
 }
 
-function RegBackup([string]$Msg) {
-	ShowMenu -Back -Subtitle "$Msg Module" -Header "THIS WILL EDIT THE REGISTRY!" -Description "It is HIGHLY recommended to create a system restore point in case something goes wrong." -Options @(
+function RegBackup([string]$Module) {
+	ShowMenu -Back -Subtitle "$Module Module" -Header "THIS WILL EDIT THE REGISTRY!" -Description "It is HIGHLY recommended to create a system restore point in case something goes wrong." -Options @(
 		@{
 			Name = "Make system restore point"
 			Description = ""
