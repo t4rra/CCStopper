@@ -156,7 +156,7 @@ function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$
 		Write-TextBorder
 		Write-BlankMenuLine
 		Write-MenuLine -Contents $($Header.ToUpper()) -Center
-		if(Test-Path variable:Description) {
+		if(!([String]::IsNullOrEmpty($Description))) {
 			Write-BlankMenuLine
 			Write-MenuLine -Contents $Description
 		}
