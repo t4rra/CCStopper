@@ -198,7 +198,7 @@ function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$
 			if(Test-Path variable:NextExtra) { $Parameters.Add("NextExtra", $NextExtra) }
 
 			Write-MenuLine @Parameters
-			if ($Option -ne $Options[-1]) { Write-BlankMenuLine }
+			if ($Option -ne $Options[-1]) { Write-MenuLine -Contents $NextExtra }
 		}
 		if($null -eq $Invalid) { $Invalid = $true }
 
