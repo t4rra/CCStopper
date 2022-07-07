@@ -140,7 +140,7 @@ function Write-TopBorder { Write-MenuLine -Contents $VerticalBorder -NoMargin -N
 function Write-BottomBorder { Write-MenuLine -Contents $VerticalBorder -NoMargin }
 function Write-TextBorder { Write-MenuLine -Contents $TextBorder }
 
-function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$Description, [hashtable[]]$Options) {
+function ShowMenu([switch]$Back, [string[]]$Subtitles, [string]$Header, [string]$Description, [hashtable[]]$Options) {
 	Do {
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 		Clear-Host
@@ -149,7 +149,7 @@ function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$
 		Write-BlankMenuLine
 		Write-BlankMenuLine
 		Write-MenuLine -Contents "CCSTOPPER" -Center
-		foreach ($Subtitle in $Subtitle) {
+		foreach ($Subtitle in $Subtitles) {
 			Write-MenuLine -Contents $Subtitle -Center
 		}
 		Write-TextBorder
