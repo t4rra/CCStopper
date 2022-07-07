@@ -227,11 +227,19 @@ function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$
 
 function RegBackup([string]$Msg) {
 	ShowMenu -Back -Subtitle "$Msg Module" -Header "THIS WILL EDIT THE REGISTRY!" -Description "It is HIGHLY recommended to create a system restore point in case something goes wrong." -Options @(
-		@(@("Make system restore point"), {
-			Clear-Host
-			Checkpoint-Computer -Description "Before CCStopper $Msg" -RestorePointType "MODIFY_SETTINGS"
-			EditReg
-		}),
-		@(@("Proceed without creating restore point"), { EditReg })
+		@{
+			Name = "Make system restore point"
+			Description = ""
+			Code = {
+				Clear-Host
+				Checkpoint-Computer -Description "Before CCStopper $Msg" -RestorePointType "MODIFY_SETTINGS"
+				EditReg
+			}
+		},
+		@{
+			Name = "Proceed without creating restore point"
+			Description = ""
+			Code = { EditReg }
+		}
 	)
 }
