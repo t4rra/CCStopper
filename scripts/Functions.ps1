@@ -143,7 +143,7 @@ function Write-TopBorder { Write-MenuLine -Contents $TopBorder -NoMargin -NoBord
 function Write-BottomBorder { Write-MenuLine -Contents $BottomBorder -NoMargin }
 function Write-TextBorder { Write-MenuLine -Contents $TextBorder }
 
-function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$Description, $Options) {
+function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$Description, [hashtable[]]$Options) {
 	Do {
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 		Clear-Host
@@ -161,12 +161,15 @@ function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$
 		Write-MenuLine -Contents $($Header.ToUpper()) -Center
 		Write-BlankMenuLine
 		Write-MenuLine -Contents $Description
-		Write-TextBorder
-		Write-BlankMenuLine
+
+		if($Options.Length -gt 0) {
+			Write-TextBorder
+			Write-BlankMenuLine
+		}
 
 		$NameLengths = @()
 		foreach ($Option in $Options) {
-			$Name = $Option[0][0]
+			$Name = $Option.Name
 			$Num = $Options.IndexOf($Option) + 1
 			$NumText = "[$Num]"
 			$Result = $NumText + " " + $Name
@@ -175,8 +178,8 @@ function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$
 		$LargestNameLength = ($NameLengths | Measure-Object -Maximum).Maximum
 
 		foreach ($Option in $Options) {
-			$Name = $Option[0][0]
-			$Description = $Option[0][1]
+			$Name = $Option.Name
+			$Description = $Option.Description
 			$Num = $Options.IndexOf($Option) + 1
 			$NumText = "[$Num]"
 			$Result = $NumText + " " + $Name
@@ -215,7 +218,7 @@ function ShowMenu([switch]$Back, [string[]]$Subtitle, [string]$Header, [string]$
 
 		foreach ($Option in $Options) {
 			$Invalid = $false
-			$ScriptBlock = $Option[1]
+			$ScriptBlock = $Option.Code
 			$Num = $Options.IndexOf($Option) + 1
 			if($Choice -eq "D$Num") { Invoke-Command -ScriptBlock $ScriptBlock }
 		}
