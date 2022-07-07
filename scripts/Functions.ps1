@@ -145,7 +145,6 @@ function Write-TextBorder { Write-MenuLine -Contents $TextBorder }
 function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [string]$Header, [string]$Description, [hashtable[]]$Options, [string]$AppendCode) {
 	Do {
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-		Clear-Variable -Name "Subtitles"
 		Clear-Host
 		Write-Output "`n"
 		Write-TopBorder
@@ -158,6 +157,7 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 			}
 			$Subtitles += "Made by eaaasun"
 			$Subtitles += $Version
+			$VerCredit = $false
 		}
 		foreach ($Subtitle in $Subtitles) {
 			Write-MenuLine -Contents $Subtitle -Center
