@@ -142,9 +142,10 @@ function Write-TopBorder { Write-MenuLine -Contents $VerticalBorder -NoMargin -N
 function Write-BottomBorder { Write-MenuLine -Contents $VerticalBorder -NoMargin }
 function Write-TextBorder { Write-MenuLine -Contents $TextBorder }
 
-function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [string]$Header, [string]$Description, [hashtable[]]$Options) {
+function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [string]$Header, [string]$Description, [hashtable[]]$Options, [string]$AppendCode) {
 	Do {
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
+		Clear-Variable -Name "Subtitles"
 		Clear-Host
 		Write-Output "`n"
 		Write-TopBorder
@@ -218,11 +219,14 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 		Write-Output "`n"
 
 		ReadKey $($Options.Length)
-		if($Choice -eq "Q") { Exit }
+		if($Choice -eq "Q") { 
+			if ($Back) { return $false } else { exit }
+		}
 
 		foreach ($Option in $Options) {
 			$Invalid = $false
 			$ScriptBlock = $Option.Code
+			$ScriptBlock += $AppendCode
 			$Num = $Options.IndexOf($Option) + 1
 			if($Choice -eq "D$Num") { Invoke-Command -ScriptBlock $ScriptBlock } else { $Invalid = $true }
 		}
