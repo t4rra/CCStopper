@@ -1,5 +1,5 @@
-Import-Module .\Functions.ps1
-Init -Title "InternetBlock"
+Import-Module $PSScriptRoot\Functions.ps1
+Init -Title "Internet Block"
 
 # Set-ConsoleWindow -Width 73 -Height 42
 

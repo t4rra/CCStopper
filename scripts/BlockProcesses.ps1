@@ -1,12 +1,6 @@
-if (!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
-	Start-Process -FilePath $((Get-Process -Id $PID).Path) -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" `"$($MyInvocation.MyCommand.UnboundArguments)`""
-	Exit
-}
-Set-Location $PSScriptRoot
-Clear-Host
+Import-Module $PSScriptRoot\Functions.ps1
+Init -Title "Block Adobe Processes"
 
-$Host.UI.RawUI.WindowTitle = "CCStopper - Block Adobe Processes"
-# Set-ConsoleWindow -Width 73 -Height 42
 function Get-Subkey([String]$Key, [String]$SubkeyPattern) {
 	return (Get-ChildItem $Key -Recurse | Where-Object { $_.PSChildName -Like "$SubkeyPattern" }).Name
 }

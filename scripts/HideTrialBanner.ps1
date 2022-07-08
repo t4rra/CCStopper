@@ -1,4 +1,4 @@
-Import-Module .\Functions.ps1
+Import-Module $PSScriptRoot\Functions.ps1
 Init -Title "Hide Trial Banner"
 
 # Set-ConsoleWindow -Width 73 -Height 42

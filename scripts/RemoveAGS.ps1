@@ -1,6 +1,5 @@
-Import-Module .\Functions.ps1
+Import-Module $PSScriptRoot\Functions.ps1
 Init -Title "Remove AGS"
-# Set-ConsoleWindow -Width 73 -Height 42
 
 $AGCCFolder = "${Env:ProgramFiles(x86)}\Common Files\Adobe\AdobeGCClient"
 $AGVApp = "${Env:ProgramFiles(x86)}\Adobe\Adobe Creative Cloud\Utils\AdobeGenuineValidator.exe" 

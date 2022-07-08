@@ -24,14 +24,13 @@ function Init([string]$Title) {
 	}
 	Set-Location $PSScriptRoot
 	Clear-Host
-	
-	if ($Title) {
-	$Host.UI.RawUI.WindowTitle = "CCStopper - $Title"	
-	} else {
-		$Host.UI.RawUI.WindowTitle = "CCStopper"	
-	}
-}
 
+	$WindowTitle = "CCStopper"
+	if ($Title) { $WindowTitle += " - $Title" }
+	$Host.UI.RawUI.WindowTitle = $WindowTitle
+
+	# Set-ConsoleWindow -Width 73 -Height 42
+}
 
 function Pause {
 	cmd /c pause

@@ -1,4 +1,4 @@
-Import-Module .\Functions.ps1
+Import-Module $PSScriptRoot\Functions.ps1
 Init -Title $Version
 
 $Sig = '[DllImport("user32.dll")] public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);'
