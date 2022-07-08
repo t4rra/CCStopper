@@ -16,9 +16,9 @@ $HostFile = ".\hosts.txt"
 # $HostFile = "$Env:SystemRoot\System32\drivers\etc\hosts"
 
 # if(!((Get-ItemProperty $HostFile).IsReadOnly)) {
-# Write-Output "Cannot write in host file because it is read-only."
-# Pause
-# Exit
+# 	Write-Output "Cannot write in host file because it is read-only."
+# 	Pause
+# 	Exit
 # }
 
 function WritingFailure {
@@ -27,6 +27,7 @@ function WritingFailure {
 	Exit
 }
 
+# Add newline at the end of file if does not already exist
 try {
 	$Content = [IO.File]::ReadAllText($HostFile)
 	if ($Content -NotMatch '(?<=\r\n)\z') {
@@ -35,51 +36,49 @@ try {
 }
 catch { WritingFailure }
 
-if (Test-Path variable:StartCounter) {
-	StartCounter = ""
+if ($StartCounter) {
+	$StartCounter = $false
 }
 
 $NumberOfLinesAfterCommentedLine = 0
 
-ForEach ($Line in (Get-Content -Path $HostFile)) {
-	if (Test-Path variable:StartCounter) {
+foreach ($Line in (Get-Content -Path $HostFile)) {
+	if ($StartCounter) {
 		$NumberOfLinesAfterCommentedLine += 1
 	}
 
 	if ($Line -eq $CommentedLine) {
-		$StartCounter = 1
+		$StartCounter = $true
 		$NumberOfLinesAfterCommentedLine = 0
 	}
 }
 
 if ($NumberOfLinesAfterCommentedLine -le $BlockedAddresses.Length) {
-	$CommentedEntry = 1
+	$CommentedEntry = $true
 }
 
-ForEach ($BlockedAddress in $BlockedAddresses) {
-	Write-Output "Adding to the hosts file: $LocalAddress $BlockedAddress"
-
+foreach ($BlockedAddress in $BlockedAddresses) {
 	$Found = Select-String -Path $HostFile -Pattern $('^' + "$LocalAddress $BlockedAddress" + '$') -CaseSensitive -Quiet
 	if ($Found) {
 		try {
+			Write-Output "Removing from the hosts file: $LocalAddress $BlockedAddress"
 			Set-Content -Value ((Select-String -Path $HostFile -Pattern $('^' + "$LocalAddress $BlockedAddress" + '$') -NotMatch -CaseSensitive).Line) -Path $HostFile
+		} catch { WritingFailure }
+	} else {
+		Write-Output "Adding to the hosts file: $LocalAddress $BlockedAddress"
+		if (!$CommentedEntry) {
+			$CommentedEntry = $true
+			try {
+				Add-Content -Value $CommentedLine -Path $HostFile
+				Add-Content -Value ([Environment]::NewLine) -Path $HostFile
+			}
+			catch { WritingFailure }
 		}
-		catch { WritingFailure }
-	}
 
-	if (!(Test-Path variable:CommentedEntry)) {
-		$CommentedEntry = 1
 		try {
-			Add-Content -Value $CommentedLine -Path "$HostFile"
-			Add-Content -Value ([Environment]::NewLine) -Path $HostFile
-		}
-		catch { WritingFailure }
+			Add-Content -Value "$LocalAddress $BlockedAddress" -Path $HostFile
+		} catch { WritingFailure }
 	}
-
-	try {
-		Add-Content -Value "$LocalAddress $BlockedAddress" -Path $HostFile
-	}
- catch { WritingFailure }
 }
 
 $Files = @("${Env:ProgramFiles(x86)}\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe", "$Env:ProgramFiles\Common Files\Adobe\Adobe Desktop Common\NGL\adobe_licensing_wf.exe", "$Env:ProgramFiles\Common Files\Adobe\Adobe Desktop Common\NGL\adobe_licensing_wf_helper.exe")
@@ -102,13 +101,11 @@ foreach ($File in $Files) {
 	}
 }
 
-
 foreach ($File in $Files) {
 	if ((Test-Path -Path $File -PathType Leaf)) {
 		if ($IsBlocked) {
 			Remove-NetFirewallRule -DisplayName "CCStopper-InternetBlock"
-		}
-		elseif ($IsNotBlocked) {
+		} elseif($IsNotBlocked) {
 			New-NetFirewallRule -DisplayName "CCStopper-InternetBlock" -Direction Outbound -Program $File -Action Block
 		}
 	}
