@@ -30,7 +30,7 @@ try {
 	$Content = [IO.File]::ReadAllText($HostFile)
 	if ($Content -NotMatch '(?<=\r\n)\z') {
 		Add-Content -Value ([Environment]::NewLine) -Path $HostFile
-	} 
+	}
 }
 catch { WritingFailure }
 
@@ -61,11 +61,7 @@ ForEach ($BlockedAddress in $BlockedAddresses) {
 	$Found = Select-String -Path $HostFile -Pattern $('^' + "$LocalAddress $BlockedAddress" + '$') -CaseSensitive -Quiet
 	if ($Found) {
 		try {
-			Set-Content -Value ((Select-String -Path $HostFile -Pattern $('^' + "$LocalAddress $BlockedAddress" + '$') -NotMatch -CaseSensitive).Line) -Path "$HostFile.tmp"
-		}
-		catch { WritingFailure }
-		try {
-			Move-Item -Path "$HostFile.tmp" -Destination $HostFile -Force
+			Set-Content -Value ((Select-String -Path $HostFile -Pattern $('^' + "$LocalAddress $BlockedAddress" + '$') -NotMatch -CaseSensitive).Line) -Path $HostFile
 		}
 		catch { WritingFailure }
 	}
