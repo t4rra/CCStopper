@@ -35,39 +35,7 @@ foreach ($File in $Files) {
 }
 
 function Done {
-	Do {
-		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-		Clear-Host
-		Write-Output "`n"
-		Write-Output "`n"
-		Write-Output "                   _______________________________________________________________"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                           CCSTOPPER                           `|"
-		Write-Output "                  `|                     BlockProcesses Module                     `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		if ($IsBlocked) {
-			Write-Output "                  `|                      Unblocked processes!                     `|"
-		}
-		elseif ($IsNotBlocked) {
-			Write-Output "                  `|              Blocking adobe processes complete!               `|"
-		}
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [Q] Exit Module                                          `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|_______________________________________________________________`|"
-		Write-Output "`n"
-		ReadKey
-		Switch ($Choice) {
-			Q { Exit }
-			Default {
-				$Invalid = $true
-			}
-		}
-	} Until (!($Invalid))
+	ShowMenu -Subtitles "BlockProcesses Module" if ($IsBlocked) { -Header "Unblocked processes!" } elseif ($IsNotBlocked) { -Header "Blocking Adobe processes complete!" }
 }
 
 function MainScript {

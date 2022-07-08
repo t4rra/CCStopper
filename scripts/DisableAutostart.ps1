@@ -25,39 +25,7 @@ $Shell32Definition = @'
 $Shell32 = Add-Type -MemberDefinition $Shell32Definition -Name 'Shell32' -Namespace 'Win32' -PassThru
 
 function RestartAsk {
-	Do {
-		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-		Clear-Host
-		Write-Output "`n"
-		Write-Output "`n"
-		Write-Output "                   _______________________________________________________________"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                       DisableAutostart Module                 `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		if ($AutostartDisabled) {
-			Write-Output "                  `|                Enabling Autostart Complete!                   `|"
-		}
-		else {
-			Write-Output "                  `|               Disabling Autostart Complete!                   `|"
-		}
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [Q] Exit Module                                          `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|_______________________________________________________________`|"
-		Write-Output "`n"
-		ReadKey
-		Switch ($Choice) {
-			Q { Exit }
-			Default {
-				$Invalid = $true
-			}
-		}
-	} Until (!($Invalid))
+	ShowMenu -Subtitles "DisableAutostart Module" if ($AutostartDisabled) { -Header "Enabling Autostart Complete!" } else { -Header "Disabling Autostart Complete!" }
 }
 
 $Programs = @()
