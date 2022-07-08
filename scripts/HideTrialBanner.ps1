@@ -4,7 +4,7 @@ Init -Title "Hide Trial Banner"
 # Set-ConsoleWindow -Width 73 -Height 42
 
 function Get-Subkey([String]$Key, [String]$SubkeyPattern) {
-	return (Get-ChildItem Registry::$Key -Recurse | Where-Object { $_.PSChildName -Like "$SubkeyPattern" }).Name
+   return (Get-ChildItem Registry::$Key -Recurse | Where-Object { $_.PSChildName -Like "$SubkeyPattern" }).Name
 }
 
 $PSAppLocation = (Get-ItemProperty -Path Registry::$(Get-Subkey -Key "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall" -SubkeyPattern "PHSP*")).InstallLocation

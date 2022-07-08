@@ -5,31 +5,31 @@ Init -Title $Version
 function MainMenu {
 	ShowMenu -VerCredit -Header "SAVE YOUR FILES!" -Options @(
 		@{
-			Name = "Stop Processes"
+			Name        = "Stop Processes"
 			Description = "Stops all Adobe Processes"
-			Code = {
+			Code        = {
 				.\StopProcesses.ps1
 				MainMenu
 			}
 		},
 		@{
-			Name = "Utilities Menu"
+			Name        = "Utilities Menu"
 			Description = "Disable autostart, hide Creative Cloud folder, block unnessessary background processes and internet access (fixes credit card prompt)."
-			Code = {
+			Code        = {
 				UtilityMenu
 			}
 		},
 		@{
-			Name = "Patches Menu"
+			Name        = "Patches Menu"
 			Description = "Patch: Genuine Checker, Trial Banner, Acrobat"
-			Code = {
+			Code        = {
 				PatchesMenu
 			}
 		},
 		@{
-			Name = "Credit/Repo"
+			Name        = "Credit/Repo"
 			Description = "Credits, Github Repo"
-			Code = {
+			Code        = {
 				CreditMenu
 			}
 		}
@@ -39,30 +39,30 @@ function MainMenu {
 function UtilityMenu {
 	ShowMenu -Back -Header "UTILITIES" -Options @(
 		@{
-			Name = "Internet Block"
+			Name        = "Internet Block"
 			Description = "Blocks Adobe apps from accessing the internet and credit card prompt. All functionality should be unaffected."
-			Code = {
+			Code        = {
 				.\InternetBlock.ps1
 			}
 		},
 		@{
-			Name = "Hide CC Folder"
+			Name        = "Hide CC Folder"
 			Description = "Hide Creative Cloud folder in Windows Explorer."
-			Code = {
+			Code        = {
 				.\HideCCFolder.ps1
 			}
 		},
 		@{
-			Name = "Disable Autostart"
+			Name        = "Disable Autostart"
 			Description = "Prevent Adobe serivces/processes from starting on boot."
-			Code = {
+			Code        = {
 				.\DisableAutostart.ps1
 			}
 		},
 		@{
-			Name = "Block Processes"
+			Name        = "Block Processes"
 			Description = "Block unnecessary Adobe process files from launching."
-			Code = {
+			Code        = {
 			}
 		}
 	)
@@ -71,23 +71,23 @@ function UtilityMenu {
 function PatchesMenu {
 	ShowMenu -Back -Header "PATCHES" -Options @(
 		@{
-			Name = "Genuine Checker"
+			Name        = "Genuine Checker"
 			Description = "Deletes and locks the Genuine Checker folder."
-			Code = {
+			Code        = {
 				.\RemoveAGS.ps1
 			}
 		},
-	@{
-			Name = "Trial Banner"
+		@{
+			Name        = "Trial Banner"
 			Description = "Removes the trial banner found in apps."
-			Code = {
+			Code        = {
 				.\HideTrialBanner.ps1
 			}
 		},
 		@{
-			Name = "Acrobat"
+			Name        = "Acrobat"
 			Description = "Edits registry to patch Acrobat. NOTE: stop Adobe Processes, patch genuine checker, and patch Acrobat with genP before running this patch."
-			Code = {
+			Code        = {
 				.\AcrobatPatch.ps1
 			}
 		}

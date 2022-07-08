@@ -3,7 +3,7 @@ $Version = "v1.2.0-pre.2_dev"
 function ReadKey([int]$ChoiceNum) {
 	$Indent = 43 - $ChoiceNum
 	$IndentText = ""
-	0.."$Indent" | ForEach-Object { $IndentText +=  " " }
+	0.."$Indent" | ForEach-Object { $IndentText += " " }
 
 	$Nums = ""
 	for ($Num = 1; $Num -le $ChoiceNum; $Num++) {
@@ -26,8 +26,9 @@ function Init([string]$Title) {
 	Clear-Host
 	
 	if ($Title) {
-	$Host.UI.RawUI.WindowTitle = "CCStopper - $Title"	
-	} else {
+		$Host.UI.RawUI.WindowTitle = "CCStopper - $Title"	
+	}
+ else {
 		$Host.UI.RawUI.WindowTitle = "CCStopper"	
 	}
 }
@@ -90,10 +91,11 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$NoMargin, [
 	Remove-Variable Extra -ErrorAction SilentlyContinue
 	$Length = $Contents.Length
 
-	if($NoMargin) {
+	if ($NoMargin) {
 		$OriginalLength = $LineLength
 		$Line = $BlankLine
-	} else {
+	}
+ else {
 		$OriginalLength = $TextLength
 		$Line = $TextLine
 	}
@@ -102,7 +104,7 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$NoMargin, [
 	$ContentsArray = @()
 	$Temp = @()
 	foreach ($Word in $FullContentsArray) {
-		$Temp += ,$Word
+		$Temp += , $Word
 		$Contents = [String]::Join(' ', $Temp)
 		$Length = $Contents.Length
 
@@ -114,7 +116,7 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$NoMargin, [
 	$Length = $Contents.Length
 
 	$ExtraArray = $FullContentsArray | Select-Object -Skip $ContentsArray.Length
-	if($ExtraArray) {
+	if ($ExtraArray) {
 		$local:Extra = [String]::Join(' ', $ExtraArray)
 	}
 
@@ -133,15 +135,15 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$NoMargin, [
 
 
 	if (!($NoMargin)) {
-		if($Line.Length -gt $TextLength) {
-			$Line = $Line.Substring(0, $Line.Length-1)
+		if ($Line.Length -gt $TextLength) {
+			$Line = $Line.Substring(0, $Line.Length - 1)
 		}
 
 		$Line = $Line.Insert(0, $MarginText)
 		$Line = $Line.Insert($Line.Length, $MarginText)
 	}
 
-	if(!($NoBorders)) { $BorderX = $Border } else { $BorderX = " " }
+	if (!($NoBorders)) { $BorderX = $Border } else { $BorderX = " " }
 	$Result = $IndentText + $BorderX + $Line + $BorderX
 
 	Write-Output "$Result"
@@ -181,14 +183,14 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 		Write-TextBorder
 		Write-BlankMenuLine
 		Write-MenuLine -Contents $($Header.ToUpper()) -Center
-		if(!([String]::IsNullOrEmpty($Description))) {
+		if (!([String]::IsNullOrEmpty($Description))) {
 			Write-BlankMenuLine
 			foreach ($TxtBlock in $Description) {
 				Write-MenuLine -Contents $TxtBlock
 			}
 		}
 
-		if($Options.Length -gt 0) {
+		if ($Options.Length -gt 0) {
 			Write-TextBorder
 			Write-BlankMenuLine
 		}
@@ -198,7 +200,7 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 			$Num = $Options.IndexOf($Option) + 1
 			$NumText = "[$Num]"
 			$Result = $NumText + " " + $Option.Name
-			$NameLengths += ,$Result.Length
+			$NameLengths += , $Result.Length
 		}
 		$LargestNameLength = ($NameLengths | Measure-Object -Maximum).Maximum
 
@@ -206,7 +208,7 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 			$Num = $Options.IndexOf($Option) + 1
 			$NumText = "[$Num]"
 			$Result = $NumText + " " + $Option.Name
-			if($Option.ContainsKey("Description")) {
+			if ($Option.ContainsKey("Description")) {
 				0.."$($LargestNameLength-1)" | Where-Object { $_ -ge $Result.Length } | ForEach-Object { $Result += " " }
 
 				$NextExtra = ""
@@ -219,12 +221,12 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 			}
 
 			$Parameters = @{ Contents = $Result }
-			if(Test-Path variable:NextExtra) { $Parameters.Add("NextExtra", $NextExtra) }
+			if (Test-Path variable:NextExtra) { $Parameters.Add("NextExtra", $NextExtra) }
 
 			Write-MenuLine @Parameters
 			if ($Option -ne $Options[-1]) { Write-MenuLine -Contents $NextExtra }
 		}
-		if($null -eq $Invalid) { $Invalid = $true }
+		if ($null -eq $Invalid) { $Invalid = $true }
 
 		Write-TextBorder
 		Write-BlankMenuLine
@@ -237,7 +239,7 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 		Write-Output "`n"
 
 		ReadKey $($Options.Length)
-		if($Choice -eq "Q") { 
+		if ($Choice -eq "Q") { 
 			if ($Back) { MainMenu } else { exit }
 		}
 
@@ -245,7 +247,7 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 			$Invalid = $false
 			$ScriptBlock = $Option.Code
 			$Num = $Options.IndexOf($Option) + 1
-			if($Choice -eq "D$Num") { Invoke-Command -ScriptBlock $ScriptBlock } else { $Invalid = $true }
+			if ($Choice -eq "D$Num") { Invoke-Command -ScriptBlock $ScriptBlock } else { $Invalid = $true }
 		}
 	} Until (!($Invalid))
 }

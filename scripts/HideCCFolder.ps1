@@ -15,7 +15,7 @@ function RestartAsk {
 		@{
 			Name = "Restart Now"
 			Code = {
-					Clear-Host
+				Clear-Host
 				# Save open folders
 				$OpenFolders = @()
 				$Shell = New-Object -ComObject Shell.Application
