@@ -58,8 +58,10 @@ foreach ($BlockedAddress in $BlockedAddresses) {
 		try {
 			Write-Output "Removing from the hosts file: $LocalAddress $BlockedAddress"
 			Set-Content -Value ((Select-String -Path $HostFile -Pattern $('^' + "$LocalAddress $BlockedAddress" + '$') -NotMatch -CaseSensitive).Line) -Path $HostFile
-		} catch { WritingFailure }
-	} else {
+		}
+		catch { WritingFailure }
+	}
+ else {
 		Write-Output "Adding to the hosts file: $LocalAddress $BlockedAddress"
 		if (!$CommentedEntry) {
 			$CommentedEntry = $true
@@ -72,7 +74,8 @@ foreach ($BlockedAddress in $BlockedAddresses) {
 
 		try {
 			Add-Content -Value "$LocalAddress $BlockedAddress" -Path $HostFile
-		} catch { WritingFailure }
+		}
+		catch { WritingFailure }
 	}
 }
 
@@ -100,7 +103,8 @@ foreach ($File in $Files) {
 	if ((Test-Path -Path $File -PathType Leaf)) {
 		if ($IsBlocked) {
 			Remove-NetFirewallRule -DisplayName "CCStopper-InternetBlock"
-		} elseif($IsNotBlocked) {
+		}
+		elseif ($IsNotBlocked) {
 			New-NetFirewallRule -DisplayName "CCStopper-InternetBlock" -Direction Outbound -Program $File -Action Block
 		}
 	}
