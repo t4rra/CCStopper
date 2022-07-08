@@ -57,7 +57,6 @@ if ($NumberOfLinesAfterCommentedLine -le $BlockedAddresses.Length) {
 }
 
 foreach ($BlockedAddress in $BlockedAddresses) {
-
 	$Found = Select-String -Path $HostFile -Pattern $('^' + "$LocalAddress $BlockedAddress" + '$') -CaseSensitive -Quiet
 	if ($Found) {
 		try {
