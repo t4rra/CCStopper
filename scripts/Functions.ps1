@@ -26,10 +26,10 @@ function Init([string]$Title) {
 	Clear-Host
 	
 	if ($Title) {
-		$Host.UI.RawUI.WindowTitle = "CCStopper - $Title"	
+		$Host.UI.RawUI.WindowTitle = "CCStopper - $Title"
 	}
  else {
-		$Host.UI.RawUI.WindowTitle = "CCStopper"	
+		$Host.UI.RawUI.WindowTitle = "CCStopper"
 	}
 }
 
