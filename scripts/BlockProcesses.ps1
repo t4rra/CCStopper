@@ -97,39 +97,13 @@ function MainScript {
 }
 
 if ($IsBlocked) {
-	Do {
-		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-		Clear-Host
-		Write-Output "`n"
-		Write-Output "`n"
-		Write-Output "                   _______________________________________________________________"
-		Write-Output "                  `|                                                               `| "
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                           CCSTOPPER                           `|"
-		Write-Output "                  `|                     BlockProcesses Module                     `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|             ADOBE PROCESSES ARE ALREADY BLOCKED!              `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|          Would you like to restore those processes?           `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [1] Restore Adobe processes                              `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [Q] Exit Module                                          `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|_______________________________________________________________`|"
-		Write-Output "`n"
-		ReadKey 1
-		Switch ($Choice) {
-			Q { Exit }
-			D1 { MainScript }
-			Default {
-				$Invalid = $true
+	ShowMenu -Back -Subtitles "BlockProcesses Module" -Header "ADOBE PROCESSES ARE ALREADY BLOCKED!" -Description "Would you like to restore those processes?" -Options @(
+		@{
+			Name = "Restore Adobe processes"
+			Code = {
+				MainScript
 			}
 		}
-	} Until (!($Invalid))
+	)
 }
 elseif ($IsNotBlocked) { MainScript }

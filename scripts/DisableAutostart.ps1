@@ -138,40 +138,14 @@ $AutostartDisabled = $false
 
 if ($Data[0] -eq "03") {
 	$AutostartDisabled = $true
-	Do {
-		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-		Clear-Host
-		Write-Output "`n"
-		Write-Output "`n"
-		Write-Output "                   _______________________________________________________________"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                     DisableAutostart Module                   `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                  AUTO START ALREADY DISABLED!                 `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                Would you like enable auto start?              `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [1] Enable Auto start                                    `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [Q] Exit Module                                          `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|_______________________________________________________________`|"
-		Write-Output "`n"
-		ReadKey 1
-		Switch ($Choice) {
-			Q { Exit }
-			D1 { RegBackup -Msg "Disable Autostart" }
-			Default {
-				$Invalid = $true
+	ShowMenu -Back -Subtitles "DisableAutostart Module" -Header "AUTOSTART IS ALREADY DISABLED!" -Description "Would you like to enable autostart?" -Options @(
+		@{
+			Name = "Enable autostart"
+			Code = {
+				RegBackup -Msg "Disable Autostart"
 			}
 		}
-	} Until (!($Invalid))
+	)
 }
 else {
 	RegBackup -Msg "Disable Autostart"

@@ -109,40 +109,12 @@ $FolderHidden = $false
 
 if ($Data -eq 0) {
 	$FolderHidden = $true
-	Do {
-		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-		Clear-Host
-		Write-Output "`n"
-		Write-Output "`n"
-		Write-Output "                   _______________________________________________________________"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                        HideCCFolder Module                    `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|          CREATIVE CLOUD FILES FOLDER ALREADY HIDDEN!          `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      Would you like to restore the folder's visibility?       `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [1] Restore Creative Cloud Files folder                  `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [Q] Exit Module                                          `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|_______________________________________________________________`|"
-		Write-Output "`n"
-		ReadKey 1
-		Switch ($Choice) {
-			Q { Exit }
-			D1 { RegBackup "Hide CC Folder" }
-			Default {
-				$Invalid = $true
+	ShowMenu -Back -Subtitles "HideCCFolder Module" -Header "CREATIVE CLOUD FOLDER IS ALREADY HIDDEN!" -Description "Would you like to restore the folder's visibility?" -Options @(
+		@{
+			Name = "Restore Creative Cloud Files folder"
+			Code = {
+				RegBackup "Hide CC Folder"
 			}
 		}
-	} Until (!($Invalid))
-}
-else {
+	)
 }

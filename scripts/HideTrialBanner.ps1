@@ -39,32 +39,6 @@ $StylePaths | ForEach-Object {
 # Delete Language Packs
 $ErrorActionPreference = 'silentlycontinue'
 Remove-Item "$LocalePath" -Force -Recurse
+pause
 
-Do {
-	# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-	Clear-Host
-	Write-Output "`n"
-	Write-Output "`n"
-	Write-Output "                   _______________________________________________________________"
-	Write-Output "                  `|                                                               `| "
-	Write-Output "                  `|                                                               `|"
-	Write-Output "                  `|                            CCSTOPPER                          `|"
-	Write-Output "                  `|                      HideTrialBanner Module                   `|"
-	Write-Output "                  `|      ___________________________________________________      `|"
-	Write-Output "                  `|                                                               `|"
-	Write-Output "                  `|                  Hiding Trial Banner complete!                `|"
-	Write-Output "                  `|      ___________________________________________________      `|"
-	Write-Output "                  `|                                                               `|"
-	Write-Output "                  `|      [Q] Exit Module                                          `|"
-	Write-Output "                  `|                                                               `|"
-	Write-Output "                  `|                                                               `|"
-	Write-Output "                  `|_______________________________________________________________`|"
-	Write-Output "`n"
-	ReadKey
-	Switch ($Choice) {
-		Q { Exit }
-		Default {
-			$Invalid = $true
-		}
-	}
-} Until (!($Invalid))
+ShowMenu -Back -Subtitles "HideTrialBanner Module" -Header "Hiding trial banner complete!"

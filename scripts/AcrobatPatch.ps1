@@ -16,39 +16,14 @@ function EditReg {
 }
 
 function RestartAsk {
-	Do {
-		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
-		Clear-Host
-		Write-Output "`n"
-		Write-Output "`n"
-		Write-Output "                   _______________________________________________________________"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                            CCSTOPPER                          `|"
-		Write-Output "                  `|                       AcrobatPatch Module                     `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                   Acrobat patching complete!                  `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      The system needs to restart for changes to apply.        `|"
-		Write-Output "                  `|      ___________________________________________________      `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [1] Restart now.                                         `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|      [2] Skip (You will need to manually restart later)       `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|                                                               `|"
-		Write-Output "                  `|_______________________________________________________________`|"
-		Write-Output "`n"
-		ReadKey 2
-		Switch ($Choice) {
-			D2 { Exit }
-			D1 { Restart-Computer }
-			Default {
-				$Invalid = $true
+	ShowMenu -Back -Subtitles "AcrobatPatch Module" -Header "Acrobat patching complete!" -Description "The system needs to restart for changes to apply." -Options @(
+		@{
+			Name = "Restart now"
+			Code = {
+				Restart-Computer
 			}
 		}
-	} Until (!($Invalid))
+	)
 }
 
 

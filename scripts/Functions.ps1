@@ -17,6 +17,22 @@ function ReadKey([int]$ChoiceNum) {
 	$global:Choice = $KeyPress.Key
 }
 
+function Init([string]$Title) {
+	if (!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+		Start-Process -FilePath $((Get-Process -Id $PID).Path) -Verb Runas -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`" `"$($MyInvocation.MyCommand.UnboundArguments)`""
+		Exit
+	}
+	Set-Location $PSScriptRoot
+	Clear-Host
+	
+	if ($Title) {
+	$Host.UI.RawUI.WindowTitle = "CCStopper - $Title"	
+	} else {
+		$Host.UI.RawUI.WindowTitle = "CCStopper"	
+	}
+}
+
+
 function Pause {
 	cmd /c pause
 }
@@ -142,7 +158,7 @@ function Write-TopBorder { Write-MenuLine -Contents $VerticalBorder -NoMargin -N
 function Write-BottomBorder { Write-MenuLine -Contents $VerticalBorder -NoMargin }
 function Write-TextBorder { Write-MenuLine -Contents $TextBorder }
 
-function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [string]$Header, [string]$Description, [hashtable[]]$Options, [string]$AppendCode) {
+function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [string]$Header, [string[]]$Description, [hashtable[]]$Options) {
 	Do {
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 		Clear-Host
@@ -167,7 +183,9 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 		Write-MenuLine -Contents $($Header.ToUpper()) -Center
 		if(!([String]::IsNullOrEmpty($Description))) {
 			Write-BlankMenuLine
-			Write-MenuLine -Contents $Description
+			foreach ($TxtBlock in $Description) {
+				Write-MenuLine -Contents $TxtBlock
+			}
 		}
 
 		if($Options.Length -gt 0) {
@@ -220,13 +238,12 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 
 		ReadKey $($Options.Length)
 		if($Choice -eq "Q") { 
-			if ($Back) { return $false } else { exit }
+			if ($Back) { MainMenu } else { exit }
 		}
 
 		foreach ($Option in $Options) {
 			$Invalid = $false
 			$ScriptBlock = $Option.Code
-			$ScriptBlock += $AppendCode
 			$Num = $Options.IndexOf($Option) + 1
 			if($Choice -eq "D$Num") { Invoke-Command -ScriptBlock $ScriptBlock } else { $Invalid = $true }
 		}

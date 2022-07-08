@@ -39,30 +39,4 @@ foreach ($BlockItem in $BlockItems) {
 	Set-Acl -Path $BlockItem -AclObject $Acl
 }
 
-Do {
-	Clear-Host
-	Write-Output "`n"
-	Write-Output "`n"
-	Write-Output "                   _______________________________________________________________"
-	Write-Output "                  `|                                                               `| "
-	Write-Output "                  `|                                                               `|"
-	Write-Output "                  `|                            CCSTOPPER                          `|"
-	Write-Output "                  `|                         RemoveAGS Module                      `|"
-	Write-Output "                  `|      ___________________________________________________      `|"
-	Write-Output "                  `|                                                               `|"
-	Write-Output "                  `|                     Removing AGS complete!                    `|"
-	Write-Output "                  `|      ___________________________________________________      `|"
-	Write-Output "                  `|                                                               `|"
-	Write-Output "                  `|      [Q] Exit Module                                          `|"
-	Write-Output "                  `|                                                               `|"
-	Write-Output "                  `|                                                               `|"
-	Write-Output "                  `|_______________________________________________________________`|"
-	Write-Output "`n"
-	ReadKey
-	Switch ($Choice) {
-		Q { Exit }
-		Default {
-			$Invalid = $true
-		}
-	}
-} Until (!($Invalid))
+ShowMenu -Back -Subtitles "RemoveAGS Module" -Header "Removing AGS complete!"
