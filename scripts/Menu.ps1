@@ -62,6 +62,7 @@ function UtilityMenu {
 			Name        = "Block Processes"
 			Description = "Block unnecessary Adobe process files from launching."
 			Code        = {
+				.\BlockProcesses.ps1
 			}
 		}
 	)
@@ -112,52 +113,6 @@ function CreditMenu {
 			}
 		}
 	)
-	# Do {
-	# 	Clear-Host
-	# 	Write-Output "`n"
-	# 	Write-Output "`n"
-	# 	Write-Output "           _______________________________________________________________________________"
-	# 	Write-Output "          `|                                                                               `|"
-	# 	Write-Output "          `|                                                                               `|"
-	# 	Write-Output "          `|                                    CCSTOPPER                                  `|"
-	# 	Write-Output "          `|      ___________________________________________________________________      `|"
-	# 	Write-Output "          `|                                                                               `|"
-	# 	Write-Output "          `|                                     CREDITS                                   `|"
-	# 	Write-Output "          `|      ___________________________________________________________________      `|"
-	# 	Write-Output "          `|                                                                               `|"
-	# 	Write-Output "          `|      None of this could have been possible without the people                 `|"
-	# 	Write-Output "          `|      contributing to, testing, and supporting this script.                    `|"
-	# 	Write-Output "          `|                                                                               `|"
-	# 	Write-Output "          `|      @eaaasun              `|  Creator/maintainer                              `|"
-	# 	Write-Output "          `|                            `|                                                  `|"
-	# 	Write-Output "          `|      @ItsProfessional      `|  Contributor                                     `|"
-	# 	Write-Output "          `|      @shdevnull            `|                                                  `|"
-	# 	Write-Output "          `|      @ZEN1X                `|                                                  `|"
-	# 	Write-Output "          `|                            `|                                                  `|"
-	# 	Write-Output "          `|      GenP Discord/Reddit   `|  Patch information and development help.         `|"
-	# 	Write-Output "          `|                            `|                                                  `|"
-	# 	Write-Output "          `|      You!                  `|  Reporting bugs and supporting the               `|"
-	# 	Write-Output "          `|                            `|  project!                                        `|"
-	# 	Write-Output "          `|      _________________________________________________________________        `|"
-	# 	Write-Output "          `|                                                                               `|"
-	# 	Write-Output "          `|      [1] Github Repo                                                          `|"
-	# 	Write-Output "          `|                                                                               `|"
-	# 	Write-Output "          `|      [Q] Back                                                                 `|"
-	# 	Write-Output "          `|                                                                               `|"
-	# 	Write-Output "          `|_______________________________________________________________________________`|"
-	# 	Write-Output "`n"
-	# 	ReadKey 1
-	# 	Switch ($Choice) {
-	# 		Q { MainMenu }
-	# 		D1 {
-	# 			Start-Process "https://github.com/eaaasun/CCStopper"
-	# 			CreditMenu
-	# 		}
-	# 		Default {
-	# 			$Invalid = $true
-	# 		}
-	# 	}
-	# } Until (!($Invalid))
 }
 
 MainMenu
