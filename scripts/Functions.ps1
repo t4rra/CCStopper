@@ -45,8 +45,7 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 
 	try {
 		$Host.UI.RawUI.WindowSize = $WindowSize
-	}
-	catch [System.Management.Automation.SetValueInvocationException] {
+	} catch [System.Management.Automation.SetValueInvocationException] {
 		$MaxValue = ($_.Exception.Message | Select-String "\d+").Matches[0].Value
 		$WindowSize.Height = $MaxValue
 		$Host.UI.RawUI.WindowSize = $WindowSize
@@ -94,8 +93,7 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$NoMargin, [
 	if ($NoMargin) {
 		$OriginalLength = $LineLength
 		$Line = $BlankLine
-	}
- else {
+	} else {
 		$OriginalLength = $TextLength
 		$Line = $TextLine
 	}
@@ -127,8 +125,7 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$NoMargin, [
 		$Line = $Line.Remove($TextCenter, $Offset)
 		$Line = $Line.Remove($OffsettedLength + 1, $Offset)
 		$Line = $Line.Insert($OffsettedLength + 1, $Contents)
-	}
- else {
+	} else {
 		$Line = $Line.Remove(0, $Length)
 		$Line = $Line.Insert(0, $Contents)
 	}
@@ -161,7 +158,7 @@ function Write-BottomBorder { Write-MenuLine -Contents $VerticalBorder -NoMargin
 function Write-TextBorder { Write-MenuLine -Contents $TextBorder }
 
 function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [string]$Header, [string[]]$Description, [hashtable[]]$Options) {
-	Do {
+	do {
 		# Thanks https://github.com/massgravel/Microsoft-Activation-Scripts for the UI
 		Clear-Host
 		Write-Output "`n"
@@ -249,7 +246,7 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 			$Num = $Options.IndexOf($Option) + 1
 			if ($Choice -eq "D$Num") { Invoke-Command -ScriptBlock $ScriptBlock } else { $Invalid = $true }
 		}
-	} Until (!($Invalid))
+	} until (!($Invalid))
 }
 
 function RegBackup([string]$Module) {

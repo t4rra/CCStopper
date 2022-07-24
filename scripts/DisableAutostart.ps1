@@ -32,15 +32,12 @@ Get-Item "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" | For
 		# if($File -match '"') { $File = $File.Substring($File.IndexOf('"')+1, $File.LastIndexOf('"')-1) }
 		$ParsedArgCount = 0
 		$ParsedArgsPtr = $Shell32::CommandLineToArgvW($CommandLine, [ref]$ParsedArgCount)
-		Try {
+		try {
 			$ParsedArgs = @();
 			0..$ParsedArgCount | ForEach-Object {
 				$ParsedArgs += [System.Runtime.InteropServices.Marshal]::PtrToStringUni([System.Runtime.InteropServices.Marshal]::ReadIntPtr($ParsedArgsPtr, $_ * [IntPtr]::Size))
 			}
-		}
-		Finally {
-			$Kernel32::LocalFree($ParsedArgsPtr) | Out-Null
-		}
+		} finally { $Kernel32::LocalFree($ParsedArgsPtr) | Out-Null }
 		$PassedArgs2 = @()
 		# -lt to skip the last item, which is a NULL ptr
 		for ($I = 0; $I -lt $ParsedArgCount; $I += 1) {
@@ -81,8 +78,7 @@ function EditReg {
 	# Adds IsAMTEnforced with proper values, then deletes IsNGLEnfoced
 	if ($AutostartDisabled -eq $true) {
 		EnableAutostart
-	}
- else {
+	} else {
 		DisableAutostart
 	}
 	RestartAsk
@@ -107,7 +103,6 @@ if ($Data[0] -eq "03") {
 			}
 		}
 	)
-}
-else {
+} else {
 	RegBackup -Msg "Disable Autostart"
 }

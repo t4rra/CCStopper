@@ -27,8 +27,7 @@ try {
 	if ($Content -NotMatch '(?<=\r\n)\z') {
 		Add-Content -Value ([Environment]::NewLine) -Path $HostFile
 	}
-}
-catch { WritingFailure }
+} catch { WritingFailure }
 
 if ($StartCounter) {
 	$StartCounter = $false
@@ -57,24 +56,20 @@ foreach ($BlockedAddress in $BlockedAddresses) {
 		try {
 			Write-Output "Removing from the hosts file: $LocalAddress $BlockedAddress"
 			Set-Content -Value ((Select-String -Path $HostFile -Pattern $('^' + "$LocalAddress $BlockedAddress" + '$') -NotMatch -CaseSensitive).Line) -Path $HostFile
-		}
-		catch { WritingFailure }
-	}
- else {
+		} catch { WritingFailure }
+	} else {
 		Write-Output "Adding to the hosts file: $LocalAddress $BlockedAddress"
 		if (!$CommentedEntry) {
 			$CommentedEntry = $true
 			try {
 				Add-Content -Value $CommentedLine -Path $HostFile
 				Add-Content -Value ([Environment]::NewLine) -Path $HostFile
-			}
-			catch { WritingFailure }
+			} catch { WritingFailure }
 		}
 
 		try {
 			Add-Content -Value "$LocalAddress $BlockedAddress" -Path $HostFile
-		}
-		catch { WritingFailure }
+		} catch { WritingFailure }
 	}
 }
 
@@ -90,8 +85,7 @@ foreach ($File in $Files) {
 		(Get-Acl $File).Access | ForEach-Object {
 			if (Get-NetFirewallRule -DisplayName "CCStopper-InternetBlock" -ErrorAction SilentlyContinue) {
 				$IsBlocked = $true
-			}
-			else {
+			} else {
 				$IsNotBlocked = $true
 			}
 		}
@@ -102,8 +96,7 @@ foreach ($File in $Files) {
 	if ((Test-Path -Path $File -PathType Leaf)) {
 		if ($IsBlocked) {
 			Remove-NetFirewallRule -DisplayName "CCStopper-InternetBlock"
-		}
-		elseif ($IsNotBlocked) {
+		} elseif ($IsNotBlocked) {
 			New-NetFirewallRule -DisplayName "CCStopper-InternetBlock" -Direction Outbound -Program $File -Action Block
 		}
 	}

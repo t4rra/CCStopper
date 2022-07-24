@@ -33,7 +33,6 @@ function RestartAsk {
 					[Win32.NativeMethods]::ShowWindowAsync($_, 4)
 				}
 				Exit
-
 			}
 		}
 	)
@@ -51,8 +50,7 @@ function HideFolder {
 function EditReg {
 	if ($folderHidden -eq $true) {
 		ShowFolder
-	}
- else {
+	} else {
 		HideFolder
 	}
 	RestartAsk

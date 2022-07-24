@@ -24,7 +24,6 @@ $Style_TrialEnded = '{"background-color":"#d7373f"}'
 (Get-Content $StylePath) | Out-File -encoding ASCII '$StylePath.bak'
 
 # Replace contents
-
 $StylePaths = @($StylePath, $StylePath1, $StylePath2)
 $StylePaths | ForEach-Object {
    (Get-Content "$_" -Raw) -replace $Style_TrialExpiresBanner, $Style_None | Set-Content $_
@@ -34,6 +33,5 @@ $StylePaths | ForEach-Object {
 # Delete Language Packs
 $ErrorActionPreference = 'silentlycontinue'
 Remove-Item "$LocalePath" -Force -Recurse
-pause
 
 ShowMenu -Back -Subtitles "HideTrialBanner Module" -Header "Hiding trial banner complete!"

@@ -27,8 +27,7 @@ if ($IsAMTEnforced -eq 1) {
 	Write-Output "Acrobat has already been patched."
 	Pause
 	Exit
-}
-else {
+} else {
 	# Check if target path exists
 	$IsNGLEnforced = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation").IsNGLEnforced
 	if ($null -eq $IsNGLEnforced) {
@@ -36,8 +35,7 @@ else {
 		Write-Output "The target registry key cannot be found. Cannot proceed with Acrobat fix."
 		Pause
 		Exit
-	}
- else {
+	} else {
 		RegBackup -Msg "Acrobat Patch"
 	}
 }

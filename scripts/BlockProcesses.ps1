@@ -20,8 +20,7 @@ foreach ($File in $Files) {
 		(Get-Acl $File).Access | ForEach-Object {
 			if (($_.AccessControlType -eq "Deny") -and ($_.FileSystemRights -eq "FullControl") -and ($_.IdentityReference -eq "BUILTIN\Administrators")) {
 				$IsBlocked = $true
-			}
-			else {
+			} else {
 				$IsNotBlocked = $true
 			}
 		}
@@ -47,8 +46,7 @@ function MainScript {
 				# Create new empty ACL, removing all inherited ACLs
 				$NewAcl = New-Object System.Security.AccessControl.FileSecurity
 				Set-Acl -Path $File -AclObject $NewAcl
-			}
-			elseif ($IsNotBlocked) {
+			} elseif ($IsNotBlocked) {
 				$FileSystemAccessRule = New-Object -TypeName System.Security.AccessControl.FileSystemAccessRule -ArgumentList @("BUILTIN\Administrators", "FullControl", "Deny")
 				$Acl.SetAccessRule($FileSystemAccessRule)
 				Set-Acl -Path $File -AclObject $Acl
@@ -67,5 +65,4 @@ if ($IsBlocked) {
 			}
 		}
 	)
-}
-elseif ($IsNotBlocked) { MainScript }
+} elseif ($IsNotBlocked) { MainScript }
