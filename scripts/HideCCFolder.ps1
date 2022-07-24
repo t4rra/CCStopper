@@ -15,17 +15,19 @@ function RestartAsk {
 		@{
 			Name = "Restart Now"
 			Code = {
-				Clear-Host
 				# Save open folders
 				$OpenFolders = @()
 				$Shell = New-Object -ComObject Shell.Application
 				$Shell.Windows() | ForEach-Object { $OpenFolders += $_.LocationURL }
-				# Restart windows explorer
+				# Restart Windows Explorer
 				Stop-Process -Name "explorer" -Force
+
 				# Wait for explorer to be restarted
 				while ((Get-Process -Name "explorer" -ErrorAction SilentlyContinue).Count -eq 0) { Start-Sleep -Milliseconds 100 }
+
 				# Restore file explorer windows
 				$OpenFolders | ForEach-Object { Invoke-Item $([Uri]::UnescapeDataString(([System.Uri]$($_)).AbsolutePath)) } | Out-Null
+
 				# Show the windows
 				$Handle = (Get-Process "explorer").MainWindowHandle
 				$Handle | ForEach-Object {
@@ -48,11 +50,7 @@ function HideFolder {
 }
 
 function EditReg {
-	if ($folderHidden -eq $true) {
-		ShowFolder
-	} else {
-		HideFolder
-	}
+	if ($FolderHidden -eq $true) { ShowFolder } else { HideFolder }
 	RestartAsk
 }
 
@@ -68,7 +66,7 @@ if ($Data -eq 0) {
 		@{
 			Name = "Restore Creative Cloud Files folder"
 			Code = {
-				RegBackup "Hide CC Folder"
+				RegBackup -Msg "HideCCFolder"
 			}
 		}
 	)
