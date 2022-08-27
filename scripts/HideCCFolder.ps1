@@ -1,9 +1,6 @@
 Import-Module $PSScriptRoot\Functions.ps1
 Init -Title $Version
 
-$Sig = '[DllImport("user32.dll")] public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);'
-Add-Type -MemberDefinition $Sig -name NativeMethods -namespace Win32
-
 # Set-ConsoleWindow -Width 73 -Height 42
 
 function Get-Subkey([String]$Key, [String]$SubkeyPattern) {
@@ -11,7 +8,12 @@ function Get-Subkey([String]$Key, [String]$SubkeyPattern) {
 }
 
 function RestartAsk {
-	ShowMenu -Subtitles "HideCCFolder Module" if ($FolderHidden) { -Header "Restored CCF!" } else { -Header "Hidden CCF!" } -Description "Windows Explorer needs to restart for changes to apply. Things will flash; please don't worry." -Options @(
+	if ($Data -eq 0) {
+		$RestartMSG = "Restored Creative Cloud Folder!"
+	} else {
+		$RestartMSG = "Hidden Creative CLoud Folder!"
+	}
+	ShowMenu -Subtitles "HideCCFolder Module" -Header $RestartMSG -Description "Windows Explorer needs to restart for changes to apply. Things will flash; please don't worry." -Options @(
 		@{
 			Name = "Restart Now"
 			Code = {
@@ -40,34 +42,29 @@ function RestartAsk {
 	)
 }
 
-function ShowFolder {
+function SetFolder([String]$Value) {
 	# Shows CCF in file explorer
-	Set-ItemProperty -Path Registry::$CLSID -Name System.IsPinnedToNameSpaceTree -Value 1
-}
-function HideFolder {
-	# Hides CCF in file explorer
-	Set-ItemProperty -Path Registry::$CLSID -Name System.IsPinnedToNameSpaceTree -Value 0
-}
-
-function EditReg {
-	if ($FolderHidden -eq $true) { ShowFolder } else { HideFolder }
-	RestartAsk
+	Set-ItemProperty -Path Registry::$CLSID -Name System.IsPinnedToNameSpaceTree -Value $Value
 }
 
 $CLSID = (Get-Subkey -Key "HKCU:\SOFTWARE\Classes\CLSID" -SubkeyPattern "{0E270DAA-1BE6-48F2-AC49-*")
 $Data = (Get-ItemProperty -Path Registry::$CLSID)."System.IsPinnedToNameSpaceTree"
 
-# Check if System.IsPinnedToNameSpaceTree is already disabled
-$FolderHidden = $false
-
 if ($Data -eq 0) {
-	$FolderHidden = $true
-	ShowMenu -Back -Subtitles "HideCCFolder Module" -Header "CREATIVE CLOUD FOLDER IS ALREADY HIDDEN!" -Description "Would you like to restore the folder's visibility?" -Options @(
+	# folder hidden already
+	ShowMenu -Back -Subtitles "HideCCFolder Module" -Header "Creative Cloud folder is already hidden!" -Description "Would you like to restore the folder's visibility?" -Options @(
 		@{
 			Name = "Restore Creative Cloud Files folder"
 			Code = {
-				RegBackup -Msg "HideCCFolder"
+				RegBackup -Module "HideCCFolder"
+				SetFolder 1
+				RestartAsk
 			}
 		}
 	)
+}
+else {
+	RegBackup -Module "HideCCFolder"
+	SetFolder 0
+	RestartAsk
 }

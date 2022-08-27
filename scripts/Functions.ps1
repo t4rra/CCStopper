@@ -151,7 +151,6 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$NoMargin, [
 		Write-MenuLine @PSBoundParameters
 	}
 }
-
 function Write-BlankMenuLine { Write-MenuLine -Contents "" }
 function Write-TopBorder { Write-MenuLine -Contents $VerticalBorder -NoMargin -NoBorders }
 function Write-BottomBorder { Write-MenuLine -Contents $VerticalBorder -NoMargin }
