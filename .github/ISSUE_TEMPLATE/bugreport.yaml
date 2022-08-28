@@ -15,14 +15,14 @@ body:
       placeholder: "CCStopper caused the heat death of the universe because it didn't block an Adobe server that sent a death ray to my house!"
     validations:
       required: true
- - type: textarea
+  - type: textarea
     id: expected-result
     attributes:
       label: Expected Result?
       placeholder: "Closes Adobe's background processes."
     validations:
       required: true
- - type: textarea
+  - type: textarea
     id: version
     attributes:
       label: Version?
@@ -30,7 +30,7 @@ body:
       placeholder: "v2.8.12_pre.2"
     validations:
       required: true
- - type: textarea
+  - type: textarea
     id: windows-ver
     attributes:
       label: Windows Version?
