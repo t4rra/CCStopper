@@ -21,5 +21,4 @@ Report vulnerabilities at:
 Please include all relavant information. We will do our best to acknowledge your report within 24 hours and follow-up with more detail within 96 hours.
 Timeframes will vary as each situation is different. Thank you for understanding.
 
-## Disclosure
 The vulnerability will be made public once a patch is released.
