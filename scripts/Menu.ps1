@@ -45,6 +45,13 @@ function UtilityMenu {
 			}
 		},
 		@{
+			Name        = "Credit Card Trial Block"
+			Description = "yadda yadda idk lol."
+			Code        = {
+				.\CreditCardBlock.ps1
+			}
+		},
+		@{
 			Name        = "Hide CC Folder"
 			Description = "Hide Creative Cloud folder in Windows Explorer."
 			Code        = {
