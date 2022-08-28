@@ -22,7 +22,7 @@ body:
       placeholder: "Closes Adobe's background processes."
     validations:
       required: true
-  - type: textarea
+  - type: input
     id: version
     attributes:
       label: Version?
@@ -30,7 +30,7 @@ body:
       placeholder: "v2.8.12_pre.2"
     validations:
       required: true
-  - type: textarea
+  - type: input
     id: windows-ver
     attributes:
       label: Windows Version?
