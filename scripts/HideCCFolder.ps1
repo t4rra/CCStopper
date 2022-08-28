@@ -1,7 +1,11 @@
 Import-Module $PSScriptRoot\Functions.ps1
-Init -Title $Version
+Init -Title "Hide CC Folder"
 
 # Set-ConsoleWindow -Width 73 -Height 42
+
+# import library to restore open explorer windows
+$Sig = '[DllImport("user32.dll")] public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);'
+Add-Type -MemberDefinition $Sig -name NativeMethods -namespace Win32
 
 function Get-Subkey([String]$Key, [String]$SubkeyPattern) {
 	return (Get-ChildItem $Key -Recurse | Where-Object { $_.PSChildName -Like "$SubkeyPattern" }).Name
