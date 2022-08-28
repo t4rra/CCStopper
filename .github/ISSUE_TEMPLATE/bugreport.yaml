@@ -11,7 +11,7 @@ body:
     id: what-happened
     attributes:
       label: What happened?
-      description: "Please include as much detail as possible."
+      description: Please include as much detail as possible.
       placeholder: "CCStopper caused the heat death of the universe because it didn't block an Adobe server that sent a death ray to my house!"
     validations:
       required: true
