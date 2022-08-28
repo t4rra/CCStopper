@@ -35,6 +35,6 @@ body:
     attributes:
       label: Windows Version?
       description: "Which Windows version(s) are you experiencing this bug in? Development/testing are done in Windows 10, so other versions may not work."
-      placeholder: "CCStopper caused the heat death of the universe!"
+      placeholder: "Windows 10 21H1"
     validations:
       required: true
