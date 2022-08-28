@@ -6,12 +6,35 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report! Please make sure that you are on the latest version (unless this is part of the issue).
+        Thanks for taking the time to fill out this bug report!
   - type: textarea
     id: what-happened
     attributes:
       label: What happened?
-      description: Please include your expected outcome and actual outcome.
+      description: "Please include as much detail as possible."
+      placeholder: "CCStopper caused the heat death of the universe because it didn't block an Adobe server that sent a death ray to my house!"
+    validations:
+      required: true
+ - type: textarea
+    id: expected-result
+    attributes:
+      label: Expected Result?
+      placeholder: "Closes Adobe's background processes."
+    validations:
+      required: true
+ - type: textarea
+    id: version
+    attributes:
+      label: Version?
+      description: "To make things as frictionless as possible, plesae copy the exact release tag [here](https://github.com/eaaasun/CCStopper/releases).
+      placeholder: "v2.8.12_pre.2"
+    validations:
+      required: true
+ - type: textarea
+    id: windows-ver
+    attributes:
+      label: Windows Version?
+      description: "Which Windows version(s) are you experiencing this bug in? Development/testing are done in Windows 10, so other versions may not work."
       placeholder: "CCStopper caused the heat death of the universe!"
     validations:
       required: true
