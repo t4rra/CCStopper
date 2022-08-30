@@ -39,16 +39,9 @@ function UtilityMenu {
 	ShowMenu -Back -Header "UTILITIES" -Options @(
 		@{
 			Name        = "Internet Block"
-			Description = "Blocks Adobe apps from accessing the internet and credit card prompt. All functionality should be unaffected."
+			Description = "Blocks unnessesary Adobe apps from accessing."
 			Code        = {
 				.\InternetBlock.ps1
-			}
-		},
-		@{
-			Name        = "Credit Card Trial Block"
-			Description = "yadda yadda idk lol."
-			Code        = {
-				.\CreditCardBlock.ps1
 			}
 		},
 		@{
@@ -82,6 +75,13 @@ function PatchesMenu {
 			Description = "Deletes and locks the Genuine Checker folder."
 			Code        = {
 				.\RemoveAGS.ps1
+			}
+		},
+		@{
+			Name        = "Credit Card Trial Block"
+			Description = "Patches credit card trial popup."
+			Code        = {
+				.\CreditCardBlock.ps1
 			}
 		},
 		@{
