@@ -20,16 +20,14 @@ foreach ($File in $Files) {
 	$FirewallRuleName = "CCStopper-InternetBlock_$($Files.IndexOf($File))"
 	if (Test-Path $File.Path) {
 		# file exists
-		if (Get-NetFirewallRule -DisplayName "KDE Connect" -ErrorAction SilentlyContinue) {
-			if ($?) {
-				# firewall rule exists
-				write-host "firewall rule exists"
-				# $File.Check = $True
-			} else {
-				# firewall rule does not exist, but file does
-				write-host "firewall rule does not exist"
-				# $File.Check = "file"
-			}
+		Get-NetFirewallRule -DisplayName $FirewallRuleName -ErrorAction SilentlyContinue
+		if ($?) {
+			# firewall rule exists
+			$File.Check = $True
+		}
+		else {
+			# firewall rule does not exist, but file does
+			$File.Check = "file"
 		}
 	}
  else {
@@ -38,12 +36,25 @@ foreach ($File in $Files) {
 	}
 }
 
+$Files
+pause
+
 function FirewallAction([switch]$Remove) {
 	foreach ($File in $Files) {
+		$FirewallRuleName = "CCStopper-InternetBlock_$($Files.IndexOf($File))"
 		if ($File.Check -and $Remove) {
 			# if file and firewall rule exist, and if remove flag is true, remove firewall rule
 			Remove-NetFirewallRule -DisplayName $FirewallRuleName
 			break
+		}
+		elseif (!($File.Check)) {
+			ShowMenu -Back -Subtitles "InternetBlock Module" -Header "Error! File not found!" -Description "Target files could not be found. If the trial prompts are still displayed, please open an issue on the Github repo."
+		}
+		elseif ($File.Check -eq "file") {
+			write-host "we back in da firewall action function about to add the rule"
+			pause
+			# if file exists but no firewall rule, create firewall rule
+			New-NetFirewallRule -DisplayName $FirewallRuleName -Direction Outbound -Program $File.Path -Action Block
 		}
 		elseif ($File.Check) {
 			ShowMenu -Back -Subtitles "InternetBlock Module" -Header "Firewall Rules Already Set!" -Description "Would you like to remove all existing rules?" -Options @(
@@ -55,18 +66,8 @@ function FirewallAction([switch]$Remove) {
 				}
 			)
 		}
-		elseif ($FileStatus -eq "file") {
-			write-host "we back in da firewall action function about to add the rule"
-			pause
-			# if file exists but no firewall rule, create firewall rule
-			New-NetFirewallRule -DisplayName $FirewallRuleName -Direction Outbound -Program $File -Action Block
-		}
-		elseif (!($FileStatus)) {
-			ShowMenu -Back -Subtitles "InternetBlock Module" -Header "Error! File not found!" -Description "Target files could not be found. If the trial prompts are still displayed, please open an issue on the Github repo."
-		}
 	}
 	# end menus
-
 }
 
 FirewallAction
