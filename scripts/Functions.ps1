@@ -19,7 +19,7 @@ function ReadKey([int]$ChoiceNum) {
 
 function Init([string]$Title) {
 	if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-		if([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
+		if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
 			Start-Process -FilePath $((Get-Process -Id $PID).Path) -Verb Runas -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`" `"$args $($PSBoundParameters.Values)`""
 			Exit
 		}
@@ -45,7 +45,8 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 
 	try {
 		$Host.UI.RawUI.WindowSize = $WindowSize
-	} catch [System.Management.Automation.SetValueInvocationException] {
+	}
+ catch [System.Management.Automation.SetValueInvocationException] {
 		$MaxValue = ($_.Exception.Message | Select-String "\d+").Matches[0].Value
 		$WindowSize.Height = $MaxValue
 		$Host.UI.RawUI.WindowSize = $WindowSize
@@ -93,7 +94,8 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$NoMargin, [
 	if ($NoMargin) {
 		$OriginalLength = $LineLength
 		$Line = $BlankLine
-	} else {
+	}
+ else {
 		$OriginalLength = $TextLength
 		$Line = $TextLine
 	}
@@ -125,7 +127,8 @@ function Write-MenuLine([string]$Contents, [switch]$Center, [switch]$NoMargin, [
 		$Line = $Line.Remove($TextCenter, $Offset)
 		$Line = $Line.Remove($OffsettedLength + 1, $Offset)
 		$Line = $Line.Insert($OffsettedLength + 1, $Contents)
-	} else {
+	}
+ else {
 		$Line = $Line.Remove(0, $Length)
 		$Line = $Line.Insert(0, $Contents)
 	}
@@ -236,7 +239,13 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 
 		ReadKey $($Options.Length)
 		if ($Choice -eq "Q") { 
-			if ($Back) { MainMenu } else { exit }
+			if ($Back) { 
+				Init -Title $Version
+				MainMenu 
+   }
+			else {
+				exit 
+   }
 		}
 
 		foreach ($Option in $Options) {
