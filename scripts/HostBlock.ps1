@@ -2,7 +2,7 @@ Import-Module $PSScriptRoot\Functions.ps1
 Init -Title "Hosts Block"
 
 # Set-ConsoleWindow -Width 73 -Height 42
-# todo: remove blank line left by adding blocked addresses, fix bug where after adding and removing hosts addresses it will always 
+# todo: remove blank line left by adding blocked addresses 
 
 $CommentedLine = "`# CCStopper Adobe Block List"
 
