@@ -3,15 +3,15 @@ Init -Title "Credit Card Prompt Block"
 
 $Files = @(
 	@{
-		Path  = "${Env:ProgramFiles(x86)}\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe"
+		Path  = "${Env:ProgramFiles(x86)}\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exxe"
 		Check = $False
 	},
 	@{ 
-		Path  = "$Env:ProgramFiles\Common Files\Adobe\Adobe Desktop Common\NGL\adobe_licensing_wf.exe"
+		Path  = "$Env:ProgramFiles\Common Files\Adobe\Adobe Desktop Common\NGL\adobe_licensing_wf.exxe"
 		Check = $False
 	},
 	@{
-		Path  = "$Env:ProgramFiles\Common Files\Adobe\Adobe Desktop Common\NGL\adobe_licensing_wf_helper.exe"
+		Path  = "$Env:ProgramFiles\Common Files\Adobe\Adobe Desktop Common\NGL\adobe_licensing_wf_helper.exxe"
 		Check = $False
 	})
 
@@ -39,27 +39,29 @@ foreach ($File in $Files) {
 function FirewallAction([switch]$Remove) {
 	foreach ($File in $Files) {
 		$FirewallRuleName = "CCStopper-InternetBlock_$($Files.IndexOf($File))"
-		if ($File.Check -and $Remove) {
-			# if file and firewall rule exist, and if remove flag is true, remove firewall rule
-			Remove-NetFirewallRule -DisplayName $FirewallRuleName
-			exit
-		}
-		elseif ($File.Check) {
-			ShowMenu -Back -Subtitles "InternetBlock Module" -Header "Firewall Rules Already Set!" -Description "Would you like to remove all existing rules?" -Options @(
-				@{
-					Name = "Remove Rules"
-					Code = {
-						FirewallAction -Remove
-					}
+		switch ($File.Check) {
+			$True {
+				if ($Remove) {
+					# if file and firewall rule exist, and if remove flag is true, remove firewall rule
+					Remove-NetFirewallRule -DisplayName $FirewallRuleName
+				} else {
+					ShowMenu -Back -Subtitles "InternetBlock Module" -Header "Firewall Rules Already Set!" -Description "Would you like to remove all existing rules?" -Options @(
+						@{
+							Name = "Remove Rules"
+							Code = {
+								FirewallAction -Remove
+							}
+						}
+					)
 				}
-			)
-		}
-		elseif (!($File.Check)) {
-			ShowMenu -Back -Subtitles "InternetBlock Module" -Header "Error! File not found!" -Description "Target files could not be found. If the trial prompts are still displayed, please open an issue on the Github repo."
-		}
-		elseif ($File.Check -eq "file") {
-			# if file exists but no firewall rule, create firewall rule
-			New-NetFirewallRule -DisplayName $FirewallRuleName -Direction Outbound -Program $File.Path -Action Block
+			}
+			"file" {
+				# if file exists but no firewall rule, create firewall rule
+				New-NetFirewallRule -DisplayName $FirewallRuleName -Direction Outbound -Program $File.Path -Action Block
+			}
+			$False {
+				ShowMenu -Back -Subtitles "InternetBlock Module" -Header "Error! File not found!" -Description "Target files could not be found. If the trial prompts are still displayed, please open an issue on the Github repo."
+			}
 		}
 	}
 	# end menus
