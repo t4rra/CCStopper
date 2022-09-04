@@ -2,8 +2,6 @@ Import-Module $PSScriptRoot\Functions.ps1
 Init -Title "Hosts Block"
 
 # Set-ConsoleWindow -Width 73 -Height 42
-# todo: remove blank line left by adding blocked addresses 
-
 $CommentedLine = "`# CCStopper Adobe Block List"
 
 $LocalAddress = "0.0.0.0"
@@ -12,6 +10,12 @@ $BlockedAddresses = @("ic.adobe.io", "52.6.155.20", "52.10.49.85", "23.22.30.141
 $HostsFile = "C:\Users\Easun\Desktop\testhosts.txt"
 
 # check if host file 1) exists, 2) is writable 3) has blocked addresses already
+
+function RemoveEndBlankLine {
+	# remove empty line at end of file - https://www.reddit.com/r/PowerShell/comments/68sa4e/comment/dh0wyxp/?utm_source=share&utm_medium=web2x&context=3
+	$Newtext = (Get-Content -Path $HostsFile -Raw) -replace "(?s)`r`n\s*$"
+	[system.io.file]::WriteAllText($HostsFile, $Newtext)	
+}
 
 if (Test-Path $HostsFile) {
 	# check for write permissions - https://stackoverflow.com/a/22943669
@@ -30,38 +34,37 @@ if (Test-Path $HostsFile) {
 	}
 
 	#check if blocked addresses are already in hosts file
-	$StringSearchCount = $null
 	foreach ($Address in $BlockedAddresses) {
-		$StringSearch = Select-String -Path $HostsFile -Pattern $("$LocalAddress $BlockedAddress") -CaseSensitive -Quiet
-		if ($StringSearch) {
-			$StringSearchCount++
-		}
+		$StringSearch = Select-String -Path $HostsFile -Pattern $("$LocalAddressqqqqqqqq $BlockedAddress") -CaseSensitive -Quiet
 	}
-	if ($StringSearchCount) {
-		ShowMenu -Back -Subtitles "HostBlock Module" -Header "Blocked addresses already in hosts file!" -Description "Found $StringSearchCount out of $($BlockedAddresses.Count) blocked addresses in hosts file. Would you like to remove them?" -Options @(
+	if ($StringSearch) {
+		ShowMenu -Back -Subtitles "HostBlock Module" -Header "Blocked addresses already in hosts file!" -Description "Would you like to remove them?" -Options @(
 			@{
-				Name = "Remove $StringSearchCount addresses from hosts file"
+				Name = "Remove addresses from hosts file"
 				Code = {
 					# remove blocked addresses+comment from hosts file
 					foreach ($Address in $BlockedAddresses) {
 						Set-Content -Value ((Select-String -Path $HostsFile -Pattern $("$LocalAddress $BlockedAddress") -NotMatch -CaseSensitive).Line) -Path $HostsFile
 					}
-					Set-Content -Value ((Select-String -Path $HostsFile -Pattern $(`n) -NotMatch -CaseSensitive).Line) -Path $HostsFile
 					Set-Content -Value ((Select-String -Path $HostsFile -Pattern $("$CommentedLine") -NotMatch -CaseSensitive).Line) -Path $HostsFile
+					Set-Content -Value ((Select-String -Path $HostsFile -Pattern $(`r) -NotMatch).Line) -Path $HostsFile
+					RemoveEndBlankLine
 					ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully removed blocked lines from hosts file!"
 				}
 			}
 		)
 	}
  else {
-		# add blank and comment line to hosts file
-		Add-Content -Path $HostsFile -Value `n
-		Add-Content -Path $HostsFile -Value $CommentedLine
-
+		RemoveEndBlankLine
 		# add blocked addresses to hosts file
 		foreach ($Address in $BlockedAddresses) {
-			Add-Content -Path $HostsFile -Value "$LocalAddress $Address"
+			$WriteOut += "`r`n$LocalAddress $Address"
 		}
+		Add-Content -Path $HostsFile -Value "`r"
+		Add-Content -Path $HostsFile -Value "$CommentedLine"
+		RemoveEndBlankLine
+		Add-Content -Path $HostsFile -Value $WriteOut
+		RemoveEndBlankLine
 		ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully added blocked lines in hosts file!"
 	}
 }
@@ -69,6 +72,3 @@ else {
 	ShowMenu -Back -Subtitles "HostBlock Module" -Header "Hosts file not found!" -Description "Hosts file could not be found.", "", "If your hosts file exists and you see this error, open an issue on Github and include the target hosts file path:", "$HostsFile"
 
 }
-
-
-
