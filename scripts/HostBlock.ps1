@@ -2,6 +2,7 @@ Import-Module $PSScriptRoot\Functions.ps1
 Init -Title "Hosts Block"
 
 # Set-ConsoleWindow -Width 73 -Height 42
+# todo: remove blank line left by adding blocked addresses, fix bug where after adding and removing hosts addresses it will always 
 
 $CommentedLine = "`# CCStopper Adobe Block List"
 
@@ -29,6 +30,7 @@ if (Test-Path $HostsFile) {
 	}
 
 	#check if blocked addresses are already in hosts file
+	$StringSearchCount = $null
 	foreach ($Address in $BlockedAddresses) {
 		$StringSearch = Select-String -Path $HostsFile -Pattern $("$LocalAddress $BlockedAddress") -CaseSensitive -Quiet
 		if ($StringSearch) {
@@ -44,7 +46,7 @@ if (Test-Path $HostsFile) {
 					foreach ($Address in $BlockedAddresses) {
 						Set-Content -Value ((Select-String -Path $HostsFile -Pattern $("$LocalAddress $BlockedAddress") -NotMatch -CaseSensitive).Line) -Path $HostsFile
 					}
-					Set-Content -Value ((Select-String -Path $HostsFile -Pattern $("`n") -NotMatch -CaseSensitive).Line) -Path $HostsFile
+					Set-Content -Value ((Select-String -Path $HostsFile -Pattern $(`n) -NotMatch -CaseSensitive).Line) -Path $HostsFile
 					Set-Content -Value ((Select-String -Path $HostsFile -Pattern $("$CommentedLine") -NotMatch -CaseSensitive).Line) -Path $HostsFile
 					ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully removed blocked lines from hosts file!"
 				}
