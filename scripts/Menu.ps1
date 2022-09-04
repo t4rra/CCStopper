@@ -2,6 +2,7 @@ Import-Module $PSScriptRoot\Functions.ps1
 Init -Title $Version
 
 function MainMenu {
+	Init -Title $Version
 	ShowMenu -VerCredit -Header "SAVE YOUR FILES!" -Options @(
 		@{
 			Name        = "Stop Processes"
@@ -41,7 +42,7 @@ function UtilityMenu {
 			Name        = "Internet Block"
 			Description = "Blocks unnessesary Adobe apps from accessing."
 			Code        = {
-				.\InternetBlock.ps1
+				.\HostBlock.ps1
 			}
 		},
 		@{
