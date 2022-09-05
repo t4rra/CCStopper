@@ -13,7 +13,8 @@ $Files = @(
 	@{
 		Path  = "$Env:ProgramFiles\Common Files\Adobe\Adobe Desktop Common\NGL\adobe_licensing_wf_helper.exe"
 		Check = $False
-	})
+	}
+)
 
 # run checks for file
 foreach ($File in $Files) {
@@ -22,16 +23,16 @@ foreach ($File in $Files) {
 		# file exists
 		Get-NetFirewallRule -DisplayName $FirewallRuleName -ErrorAction SilentlyContinue
 		if ($?) {
-			# firewall rule exists
+			# Firewall rule exists
 			$File.Check = $True
 		}
 		else {
-			# firewall rule does not exist, but file does
+			# Firewall rule does not exist; file exists
 			$File.Check = "file"
 		}
 	}
  else {
-		# file does not exist
+		# File does not exist
 		$File.Check = $False
 	}
 }
@@ -43,22 +44,20 @@ function FirewallAction([switch]$Remove) {
 		switch ($File.Check) {
 			$True {
 				if ($Remove) {
-					# if file and firewall rule exist, and if remove flag is true, remove firewall rule
+					# If file and firewall rule exist, and if remove flag is true, remove firewall rule
 					Remove-NetFirewallRule -DisplayName $FirewallRuleName
 					$EndHeaderMSG = "Firewall rules removed!"
 				} else {
 					ShowMenu -Back -Subtitles "InternetBlock Module" -Header "Firewall Rules Already Set!" -Description "Would you like to remove all existing rules?" -Options @(
 						@{
 							Name = "Remove Rules"
-							Code = {
-								FirewallAction -Remove
-							}
+							Code = { FirewallAction -Remove }
 						}
 					)
 				}
 			}
 			"file" {
-				# if file exists but no firewall rule, create firewall rule
+				# If file exists; Firewall rule does not exist, create firewall rule
 				New-NetFirewallRule -DisplayName $FirewallRuleName -Direction Outbound -Program $File.Path -Action Block
 				$EndHeaderMSG = "Firewall rules created!"
 			}
@@ -67,7 +66,6 @@ function FirewallAction([switch]$Remove) {
 			}
 		}
 	}
-	# end menus
 	ShowMenu -Back -Subtitles "InternetBlock Module" -Header $EndHeaderMSG -Description "Operation has been completed successfully."
 }
 

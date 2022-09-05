@@ -12,15 +12,15 @@ $HostsFile = "C:\Users\Easun\Desktop\testhosts.txt"
 # check if host file 1) exists, 2) is writable 3) has blocked addresses already
 
 function RemoveEndBlankLine {
-	# remove empty line at end of file - https://www.reddit.com/r/PowerShell/comments/68sa4e/comment/dh0wyxp/?utm_source=share&utm_medium=web2x&context=3
+	# Source: https://www.reddit.com/r/PowerShell/comments/68sa4e/comment/dh0wyxp/?utm_source=share&utm_medium=web2x&context=3
 	$Newtext = (Get-Content -Path $HostsFile -Raw) -replace "(?s)`r`n\s*$"
-	[system.io.file]::WriteAllText($HostsFile, $Newtext)	
+	[System.IO.File]::WriteAllText($HostsFile, $Newtext)	
 }
 
 if (Test-Path $HostsFile) {
-	# check for write permissions - https://stackoverflow.com/a/22943669
+	# Source: https://stackoverflow.com/a/22943669
 	try {
-		[io.file]::OpenWrite($HostsFile).close()
+		[IO.File]::OpenWrite($HostsFile).close()
 	}
 	catch {
 		ShowMenu -Back -Subtitles "HostBlock Module" -Header "Cannot write to hosts file!" -Description "Would you like to grant permissions to write to the hosts file? This may impact the security of your system." -Options @(
@@ -33,7 +33,7 @@ if (Test-Path $HostsFile) {
 		)
 	}
 
-	#check if blocked addresses are already in hosts file
+	# Check if blocked addresses are already in hosts file
 	foreach ($Address in $BlockedAddresses) {
 		$StringSearch = Select-String -Path $HostsFile -Pattern $("$LocalAddressqqqqqqqq $BlockedAddress") -CaseSensitive -Quiet
 	}
@@ -42,7 +42,7 @@ if (Test-Path $HostsFile) {
 			@{
 				Name = "Remove addresses from hosts file"
 				Code = {
-					# remove blocked addresses+comment from hosts file
+					# Remove blocked addresses and the comment
 					foreach ($Address in $BlockedAddresses) {
 						Set-Content -Value ((Select-String -Path $HostsFile -Pattern $("$LocalAddress $BlockedAddress") -NotMatch -CaseSensitive).Line) -Path $HostsFile
 					}
@@ -56,7 +56,7 @@ if (Test-Path $HostsFile) {
 	}
  else {
 		RemoveEndBlankLine
-		# add blocked addresses to hosts file
+		# Add blocked addresses to hosts file
 		foreach ($Address in $BlockedAddresses) {
 			$WriteOut += "`r`n$LocalAddress $Address"
 		}
@@ -70,5 +70,4 @@ if (Test-Path $HostsFile) {
 }
 else {
 	ShowMenu -Back -Subtitles "HostBlock Module" -Header "Hosts file not found!" -Description "Hosts file could not be found.", "", "If your hosts file exists and you see this error, open an issue on Github and include the target hosts file path:", "$HostsFile"
-
 }

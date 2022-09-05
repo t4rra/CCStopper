@@ -88,7 +88,6 @@ foreach ($Program in $Programs) {
 	$ByteArray = (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run32").$Program
 	$Data = ([System.BitConverter]::ToString([byte[]]$ByteArray)).Split('-')
 }
-#([byte[]](0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00))
 
 # Check if autostart is already disabled
 $AutostartDisabled = $false

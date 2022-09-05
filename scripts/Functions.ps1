@@ -53,14 +53,17 @@ function Set-ConsoleWindow([int]$Width, [int]$Height) {
 	}
 }
 
+# The indent before the vertical borders
 $IndentTextLength = 11
 $IndentText = ""
 1.."$IndentTextLength" | ForEach-Object { $IndentText += " " }
 
+# The maximum length of text in a line
 $TextLength = 67
 $TextLine = ""
 1.."$TextLength" | ForEach-Object { $TextLine += " " }
 
+# The margin (amount of spaces) that are adjacent to the vertical borders
 $MarginLength = 6
 $MarginText = ""
 1.."$MarginLength" | ForEach-Object { $MarginText += " " }
@@ -69,6 +72,7 @@ $OddMarginLength = 5
 $OddMarginText = ""
 1.."$OddMarginLength" | ForEach-Object { $OddMarginText += " " }
 
+# The text and margin combined
 $LineLength = $TextLength + ($MarginLength * 2)
 $BlankLine = ""
 1.."$LineLength" | ForEach-Object { $BlankLine += " " }

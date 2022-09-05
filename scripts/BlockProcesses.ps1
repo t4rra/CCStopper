@@ -7,7 +7,7 @@ function Get-Subkey([String]$Key, [String]$SubkeyPattern) {
 
 $PSAppLocation = (Get-ItemProperty -Path Registry::$(Get-Subkey -Key "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall" -SubkeyPattern "PHSP*")).InstallLocation
 
-# Thanks to Verix#2020, from GenP Discord.
+# Thanks to Verix, from GenP Discord.
 $Files = @("${Env:ProgramFiles(x86)}\Adobe\Adobe Sync\CoreSync\CoreSync.exe", "$Env:ProgramFiles\Adobe\Adobe Creative Cloud Experience\CCXProcess.exe", "${Env:ProgramFiles(x86)}\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe", "$Env:ProgramFiles\Common Files\Adobe\Creative Cloud Libraries\CCLibrary.exe", "$PSAppLocation\LogTransport2.exe", "${Env:ProgramFiles(x86)}\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe")
 
 $IsNotBlocked = $false
@@ -60,9 +60,7 @@ if ($IsBlocked) {
 	ShowMenu -Back -Subtitles "BlockProcesses Module" -Header "ADOBE PROCESSES ARE ALREADY BLOCKED!" -Description "Would you like to restore those processes?" -Options @(
 		@{
 			Name = "Restore Adobe processes"
-			Code = {
-				MainScript
-			}
+			Code = { MainScript }
 		}
 	)
 } elseif ($IsNotBlocked) { MainScript }

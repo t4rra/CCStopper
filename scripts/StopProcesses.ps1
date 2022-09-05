@@ -15,13 +15,11 @@ Get-Process * | Where-Object { $_.CompanyName -match "Adobe" -or $_.Path -match 
 		ShowMenu -Back -Subtitles "StopProcesses Module" -Header "THERE ARE ADOBE APPS OPEN!" -Description "Do you want to continue? Unsaved documents in Adobe apps will be lost" -Options @(
 			@{
 				Name = "Continue"
-				Code = {
-					continue
-				}
+				Code = { continue }
 			}
 		)
 	}
 }
 
 Foreach ($Process in $Processes) { Stop-Process $Process -Force | Out-Null }
-ShowMenu -Back -Subtitles "StopProcesses Module" -Header "Stopping Adobe processes complete!" 
+ShowMenu -Back -Subtitles "StopProcesses Module" -Header "Stopping Adobe processes complete!"

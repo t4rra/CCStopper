@@ -14,7 +14,7 @@ function Revert {
 }
 
 function EditReg {
-	if ($Patched -eq $true) { Patch } else { Revert }
+	if ($Patched) { Patch } else { Revert }
 	RestartAsk
 }
 
@@ -27,7 +27,7 @@ function RestartAsk {
 	)
 }
 
-# Check if IsNGLEnforced already replaced w/ IsAMTEnforced
+# Check if IsNGLEnforced already replaced with IsAMTEnforced
 $IsAMTEnforced = (Get-ItemProperty -Path "HKLM:\SOFTWARE\WOW6432Node\Adobe\Adobe Acrobat\DC\Activation").IsAMTEnforced
 if ($IsAMTEnforced -eq 1) {
 	$Patched = $true
