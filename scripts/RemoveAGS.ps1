@@ -6,7 +6,7 @@ $AGVApp = "${Env:ProgramFiles(x86)}\Adobe\Adobe Creative Cloud\Utils\AdobeGenuin
 
 $BlockItems = $AGVApp, $AGCCFolder
 
-# Disables AGSSerivce from starting up, then stops it
+# Disable AGSSerivce from starting up and stop it
 Foreach ($Service in @("AGSService", "AGMService")) {
 	Get-Service -DisplayName $Service | Set-Service -StartupType Disabled
 	Get-Service -DisplayName $Service | Stop-Service

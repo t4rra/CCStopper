@@ -25,6 +25,7 @@ function RestartAsk {
 				$OpenFolders = @()
 				$Shell = New-Object -ComObject Shell.Application
 				$Shell.Windows() | ForEach-Object { $OpenFolders += $_.LocationURL }
+
 				# Restart Windows Explorer
 				Stop-Process -Name "explorer" -Force
 
