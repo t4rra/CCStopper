@@ -58,7 +58,11 @@ function FirewallAction([switch]$Remove) {
 			}
 			"file" {
 				# If file exists; Firewall rule does not exist, create firewall rule
-				New-NetFirewallRule -DisplayName $FirewallRuleName -Direction Outbound -Program $File.Path -Action Block
+				try {
+					New-NetFirewallRule -DisplayName $FirewallRuleName -Direction Outbound -Program $File.Path -Action Block
+				} catch {
+					ShowMenu -Back -Subtitles "InternetBlock Module" -Header "Error! Creating firewall rule failed!" -Description "Antivirus programs are known to interfere with this patch. Please check if that is the case, and try again."
+				}
 				$EndHeaderMSG = "Firewall rules created!"
 			}
 			$False {
