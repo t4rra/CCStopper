@@ -13,89 +13,65 @@ function MainMenu {
 			}
 		},
 		@{
-			Name        = "Utilities Menu"
-			Description = "Disable autostart, hide Creative Cloud folder, block unnessessary background processes and internet access (fixes credit card prompt)."
-			Code        = { UtilityMenu }
+			Name        = "Internet Patches"
+			Description = "Credit card/hosts patches"
+			Code        = { 
+				ShowMenu -Back -VerCredit -Header "INTERNET PATCHES" -Description "Run modules again to remove patches." -Options @(
+					@{
+						Name        = "Credit Card Trial"
+						Description = "Patches credit card trial popup through Windows firewall."
+						Code        = { .\CreditCardBlock.ps1 }
+					},
+					@{
+						Name        = "Add to Hosts"
+						Description = "Blocks unnessesary Adobe servers in the hosts file."
+						Code        = { .\HostBlock.ps1 }
+					}
+				)
+			
+			}
 		},
 		@{
-			Name        = "Patches Menu"
-			Description = "Patch: Genuine Checker, Trial Banner, Acrobat"
-			Code        = { PatchesMenu }
+			Name        = "System Patches"
+			Description = ""
+			Code        = { 
+				ShowMenu -Back -VerCredit -Header "SYSTEM PATCHES" -Description "Run modules again to remove patches." -Options @(
+					@{
+						Name        = "Genuine Checker"
+						Description = "Deletes and locks the Genuine Checker folder."
+						Code        = { .\RemoveAGS.ps1 }
+					},
+					@{
+						Name        = "Hide CC Folder"
+						Description = "Hides Creative Cloud folder in Windows Explorer."
+						Code        = { .\HideCCFolder.ps1 }
+					}
+				)
+			
+			}
 		},
 		@{
 			Name        = "Credit/Repo"
 			Description = "Credits, Github Repo"
-			Code        = { CreditMenu }
-		}
-	)
-}
-
-function UtilityMenu {
-	ShowMenu -Back -Header "UTILITIES" -Options @(
-		@{
-			Name        = "Host Block"
-			Description = "Blocks unnessesary Adobe apps from accessing the internet."
-			Code        = { .\HostBlock.ps1 }
-		},
-		@{
-			Name        = "Hide CC Folder"
-			Description = "Hide Creative Cloud folder in Windows Explorer."
-			Code        = { .\HideCCFolder.ps1 }
-		},
-		@{
-			Name        = "Disable Autostart"
-			Description = "Prevent Adobe serivces/processes from starting on boot."
-			Code        = { .\DisableAutostart.ps1 }
-		},
-		@{
-			Name        = "Block Processes"
-			Description = "Block unnecessary Adobe process files from launching."
-			Code        = { .\BlockProcesses.ps1 }
-		}
-	)
-}
-
-function PatchesMenu {
-	ShowMenu -Back -Header "PATCHES" -Options @(
-		@{
-			Name        = "Genuine Checker"
-			Description = "Deletes and locks the Genuine Checker folder."
-			Code        = { .\RemoveAGS.ps1 }
-		},
-		@{
-			Name        = "Credit Card Trial Block"
-			Description = "Patches credit card trial popup."
-			Code        = { .\CreditCardBlock.ps1 }
-		},
-		@{
-			Name        = "Trial Banner"
-			Description = "Removes the trial banner found in apps."
-			Code        = { .\HideTrialBanner.ps1 }
-		},
-		@{
-			Name        = "Acrobat"
-			Description = "Edits registry to patch Acrobat. NOTE: stop Adobe Processes, patch genuine checker, and patch Acrobat with genP before running this patch."
-			Code        = { .\AcrobatPatch.ps1 }
-		}
-	)
-}
-
-function CreditMenu {
-	ShowMenu -Back -Header "CREDITS" -Description "This project would be impossible without the people contributing to, testing, and supporting it.",
-	"",
-	"Creator/maintainer:",
-	"@eaaasun",
-	"",
-	"Contributors:",
-	"@ItsProfessional, @shdevnull, @ZEN1X",
-	"",
-	"Reporting bugs, supporting the project:",
-	"You!" -Options @(
-		@{
-			Name = "Github Repo"
-			Code = {
-				Start-Process "https://github.com/eaaasun/CCStopper"
-				Pause
+			Code        = { 
+				ShowMenu -Back -Header "CREDITS" -Description "This project would be impossible without the people contributing to, testing, and supporting it.",
+				"",
+				"Creator/maintainer:",
+				"@eaaasun",
+				"",
+				"Contributors:",
+				"@ItsProfessional, @shdevnull, @ZEN1X",
+				"",
+				"Reporting bugs, supporting the project:",
+				"You!" -Options @(
+					@{
+						Name = "Github Repo"
+						Code = {
+							Start-Process "https://github.com/eaaasun/CCStopper"
+							Pause
+						}
+					}
+				)			
 			}
 		}
 	)
