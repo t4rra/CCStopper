@@ -244,7 +244,6 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 		ReadKey $($Options.Length)
 		if ($Choice -eq "Q") { 
 			if ($Back) { 
-				Init -Title $Version
 				MainMenu
    }
 			else {
