@@ -17,15 +17,17 @@ Please don't run any code here, unless you know *exactly* what you're doing. If 
 
 **Current Version (stable):** v1.1.3
 
-**Current Version (development):** v1.2.0-dev
+**Current Version (development):** v1.2.0-pre.2-dev
 
 ## v1.2.0 Changelog
 
 - UI Change
-  - Added submenus and changed inputs
-- Combined Credit Card Stop module and InternetBlock module
+  - Added submenus and changed inputs, new system for creating menus
+- Powershell Rewrite
+  - Everything is in Powershell now!
+- Added Hosts Patch
   - Thanks to [@sh32devnull](https://github.com/sh32devnull)
-  - Adds Adobe IPs to hosts file and blocks Adobe Desktop Service in firewall
+  - Adds Adobe IPs to hosts file to block them
 - Added DisableAutoStart, HideCCFolder, BlockProcesses, and HideTrialBanner modules
   - Thanks to [@ItsProfessional](https://github.com/ItsProfessional)
 - Bug Fixes and Improvements
