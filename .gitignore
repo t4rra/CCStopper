@@ -1,2 +1,3 @@
-/scripts/patchRetentionSettings/
-/scripts/patchRetention.bat
+.vscode
+CCStopper*.zip
+/Release
