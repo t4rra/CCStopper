@@ -41,6 +41,16 @@ function ReplaceItem($Item) {
 	Set-Acl -Path $Item -AclObject $Acl
 }
 
+function RestoreItem($Item) {
+	$Acl = Get-Acl -Path $Item
+	Set-Acl -Path $Item -AclObject $Acl # Reorder ACL to canonical order to prevent errors
+	$Acl.Access | ForEach-Object{$acl.RemoveAccessRule($_)}
+	Set-Acl -Path $Item -AclObject $Acl
+	Remove-Item $Item
+	$ItemBak = $Item + ".bak"
+	Rename-Item $ItemBak $Item
+}
+
 # what happens if no file is found: continue until all files are scanned, then proceed w/ the ones that exist
 
 foreach ($BlockItem in $BlockItems) {
@@ -55,7 +65,6 @@ foreach ($BlockItem in $BlockItems) {
 		}
 	} else {
 		$BlockItem.Check = $False
-		# ShowMenu -Subtitles "RemoveAGS Module" -Header "Target files not found!" -Description "One or more target items could not be found."
 	}
 }
 
@@ -65,14 +74,17 @@ switch ($BlockItem.Check){
 			@{
 				Name = "Restore original files"
 				Code = {
-					
+					foreach($BlockItem in $BlockItems){
+						RestoreItem($BlockItem.Path) | Out-Null
+					}
 				}
 			}
 		)
 	}
-
+	$False {
+		ShowMenu -Subtitles "RemoveAGS Module" -Header "Target files not found!" -Description "One or more target items could not be found. This may not be a problem. If the files aren't there, they won't work."
+	}
 }
-
 
 # Disable AGSSerivce from starting up and stop it
 Foreach ($Service in @("AGSService", "AGMService")) {
