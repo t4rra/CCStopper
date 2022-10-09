@@ -28,8 +28,8 @@ Please don't run any code here, unless you know *exactly* what you're doing. If 
   - Added `functions.ps1` file, helps with code reuse
 - Reversibility in modules
   - If you used the RemoveAGS module before this version, it will not be reversible.  
-- Added Hosts Patch
-  - Thanks [@sh32devnull](https://github.com/sh32devnull)
+- Separated Hosts Patch from Credit Card Patch
+  - Thanks [@sh32devnull](https://github.com/sh32devnull) for Hosts Patch
 - Added HideCCFolder, DisableAutoStart, and BlockProcesses modules
   - Thanks [@ItsProfessional](https://github.com/ItsProfessional)
 - Included "extra" variant
