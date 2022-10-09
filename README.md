@@ -3,7 +3,7 @@
 Kills Adobe's pesky background apps and more!
 ## Table of Contents <!-- omit in toc -->
 
-- [v1.2.0_pre.1 Changelog](#v120_pre1-changelog)
+- [v1.2.0-pre.2 Changelog](#v120-pre2-changelog)
 - [v1.1.3 Changelog](#v113-changelog)
 - [Instructions](#instructions)
 - [Menu Options](#menu-options)
@@ -14,21 +14,26 @@ Kills Adobe's pesky background apps and more!
 
 **Stable Version:** v1.1.3
 
-**Current Version (pre-release):** v1.2.0
+**Current Version (pre-release):** v1.2.0-pre.2
 
-## v1.2.0_pre.1 Changelog
+## v1.2.0-pre.2 Changelog
 
 - UI Change
-  - Added submenus and changed inputs
-- Combined Credit Card Stop module and ServiceBlock module
-  - Thanks to [@sh32devnull](https://github.com/sh32devnull) for ServiceBlock module
-  - Adds Adobe IPs to hosts file and blocks Adobe Desktop Service in firewall
-- Added DisableAutoStart, HideCCFolder, BlockProcesses, and HideTrialBanner modules
-  - Thanks to [@ItsProfessional](https://github.com/ItsProfessional) for all these modules
+  - Added submenus and changed inputs, new system for creating menus
+- Powershell Rewrite
+  - Everything is in Powershell!
+  - Added `functions.ps1` file, helps with code reuse
+- Reversibility in modules
+  - If you used the RemoveAGS module before this version, it will not be reversible.  
+- Separated Hosts Patch from Credit Card Patch
+  - Thanks [@sh32devnull](https://github.com/sh32devnull) for Hosts Patch
+- Added HideCCFolder, DisableAutoStart, and BlockProcesses modules
+  - Thanks [@ItsProfessional](https://github.com/ItsProfessional)
+- Included "extra" variant
+  - Includes DisableAutoStart and BlockProcesses modules. For the final 1.2.0 release, these modules (and `AcrobatPatch.ps1`) will no longer be included nor supported.
 - Bug Fixes and Improvements
-  - Again, big thanks to contributors mentioned above for helping!
-- Documentation Update (this readme won't reflect changes, go to the development branch for full updated documentation)
-###### Download 1.2.0_pre.1 [here](https://github.com/eaaasun/CCStopper/releases/tag/v1.2.0_pre.1)
+- Documentation Update (this readme won't reflect changes, go to the [development branch](https://github.com/eaaasun/CCStopper/tree/development) for full updated documentation)
+###### Download 1.2.0-pre.2 [here](https://github.com/eaaasun/CCStopper/releases/tag/v1.2.0-pre.2) <!-- omit in toc -->
 
 ## v1.1.3 Changelog
 
