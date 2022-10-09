@@ -1,6 +1,6 @@
 @echo off
 title CCStopper
-mode con: cols=102 lines=36
+mode con: cols=102 lines=38
 
 :: Asks for Administrator Permissions
 net session >nul 2>&1
@@ -22,4 +22,4 @@ for %%a in (*.ps1) do (
 	)
 )
 
-powershell -ExecutionPolicy RemoteSigned -File .\Menu.ps1
+powershell -ExecutionPolicy RemoteSigned -File .\Menu_Extra.ps1
