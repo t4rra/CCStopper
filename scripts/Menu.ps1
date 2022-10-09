@@ -24,7 +24,7 @@ function MainMenu {
 					},
 					@{
 						Name        = "Add to Hosts"
-						Description = "Blocks unnessesary Adobe servers in the hosts file."
+						Description = "Blocks unnecessary Adobe servers in the hosts file."
 						Code        = { .\HostBlock.ps1 }
 					}
 				)
@@ -33,12 +33,12 @@ function MainMenu {
 		},
 		@{
 			Name        = "System Patches"
-			Description = ""
+			Description = "Genuine checker and hide CC folder in explorer"
 			Code        = { 
 				ShowMenu -Back -VerCredit -Header "SYSTEM PATCHES" -Description "Run modules again to remove patches." -Options @(
 					@{
 						Name        = "Genuine Checker"
-						Description = "Deletes and locks the Genuine Checker folder."
+						Description = "Replaces and locks the Genuine Checker folder."
 						Code        = { .\RemoveAGS.ps1 }
 					},
 					@{
