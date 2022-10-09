@@ -25,14 +25,15 @@ Please don't run any code here, unless you know *exactly* what you're doing. If 
   - Added submenus and changed inputs, new system for creating menus
 - Powershell Rewrite
   - Everything is in Powershell!
-  - Added `functions.ps1` file
+  - Added `functions.ps1` file, helps with code reuse
 - Reversibility in modules
-- Split Hosts Patch/Firewall Patch
+  - If you used the RemoveAGS module before this version, it will not be reversible.  
+- Added Hosts Patch
   - Thanks [@sh32devnull](https://github.com/sh32devnull)
 - Added HideCCFolder, DisableAutoStart, and BlockProcesses modules
   - Thanks [@ItsProfessional](https://github.com/ItsProfessional)
 - Included "extra" variant
-  - Includes DisableAutoStart and BlockProcesses modules. For the final 1.2.0 release, these modules will no longer be included or supported.
+  - Includes DisableAutoStart and BlockProcesses modules. For the final 1.2.0 release, these modules (and `AcrobatPatch.ps1`) will no longer be included nor supported.
 - Bug Fixes and Improvements
 - Documentation Update
 ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->

@@ -1,15 +1,13 @@
 Import-Module $PSScriptRoot\Functions.ps1
 Init -Title "Remove AGS"
 
-# $AGCCFolder = "${Env:ProgramFiles(x86)}\Common Files\Adobe\AdobeGCClient"
-# $AGVApp = "${Env:ProgramFiles(x86)}\Adobe\Adobe Creative Cloud\Utils\AdobeGenuineValidator.exe" 
 $BlockItems = @(
 	@{
-		Path  = "${Env:ProgramFiles(x86)}\Adobe\Adobe Creative Cloud\Utils\AdobeLigmaValidator.exe"
+		Path  = "${Env:ProgramFiles(x86)}\Adobe\Adobe Creative Cloud\Utils\AdobeGenuineValidator.exe"
 		Check = $False
 	},
 	@{
-		Path  = "${Env:ProgramFiles(x86)}\Common Files\Adobe\AdobeLigmaClient"
+		Path  = "${Env:ProgramFiles(x86)}\Common Files\Adobe\AdobeGCClient"
 		Check = $False
 	}
 )
