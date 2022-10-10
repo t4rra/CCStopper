@@ -2,9 +2,10 @@
 
 Stops Adobe's pesky background apps and more 😉
 
-**Latest stable:** v1.1.3
-
-**Latest dev:** v1.2.0-pre.2-dev
+| Variant     | Ver. Num    |
+|-------------|-------------|
+| Stable      | v1.1.3      |
+| Prerelease  | 1.2.0-pre.2 |
 
 ## THIS IS THE DEVELOPMENT VERSION! <!-- omit in toc -->
 
