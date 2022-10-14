@@ -2,7 +2,7 @@
 
 Stops Adobe's pesky background apps and more 😉
 
-| Variant     | Ver. Num    |
+| Released Variant     | Ver. Num    |
 |-------------|-------------|
 | Stable      | v1.1.3      |
 | Prerelease  | 1.2.0-pre.2 |
@@ -12,7 +12,7 @@ Stops Adobe's pesky background apps and more 😉
 Please don't run any code here, unless you know *exactly* what you're doing. If you do, please consider contributing.
 
 ## Table of Contents <!-- omit in toc -->
-- [v1.2.0-pre.2 Changelog](#v120-pre2-changelog)
+- [v1.2.0 Changelog](#v120-changelog)
 - [Installation](#installation)
 - [Features](#features)
 - [FAQ](#faq)
@@ -20,7 +20,7 @@ Please don't run any code here, unless you know *exactly* what you're doing. If 
 - [Known Issues](#known-issues)
 - [Disclaimer/Notice](#disclaimernotice)
 
-## v1.2.0-pre.2 Changelog
+## v1.2.0 Changelog
 
 - UI Change
   - Added submenus and changed inputs, new system for creating menus
@@ -31,10 +31,8 @@ Please don't run any code here, unless you know *exactly* what you're doing. If 
   - If you used the RemoveAGS module before this version, it will not be reversible.  
 - Separated Hosts Patch from Credit Card Patch
   - Thanks [@sh32devnull](https://github.com/sh32devnull) for Hosts Patch
-- Added HideCCFolder, DisableAutoStart, and BlockProcesses modules
+- Added HideCCFolder module
   - Thanks [@ItsProfessional](https://github.com/ItsProfessional)
-- Included "extra" variant
-  - Includes DisableAutoStart and BlockProcesses modules. For the final 1.2.0 release, these modules (and `AcrobatPatch.ps1`) will no longer be included nor supported.
 - Bug Fixes and Improvements
 - Documentation Update
 ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
@@ -43,7 +41,7 @@ Please don't run any code here, unless you know *exactly* what you're doing. If 
 ## Installation
 
 1. Get the latest [release](https://github.com/eaaasun/CCStopper/releases/latest)
-2. Extract the ZIP file (This is important, CCStopper will not work without the additional scripts in the additional folders)
+2. Extract the ZIP file (This is important, CCStopper will not work without the additional scripts in the additional folders. Also, antivirus may block it from running in the downloads folder.)
 3. Run CCStopper.bat
 4. Select an option
 5. Prevent profit (for Adobe)
@@ -57,6 +55,7 @@ Please don't run any code here, unless you know *exactly* what you're doing. If 
   - Add to Hosts - Blocks unnecessary Adobe servers in the hosts file.
 - System Patches
   - Genuine Checker - Replaces and locks Genuine Checker files.
+  - Hide CCFolder - Hides the Creative Cloud folder in Windows Explorer.
 
 ## FAQ
 <details>
@@ -95,24 +94,14 @@ Please don't run any code here, unless you know *exactly* what you're doing. If 
 </details>
 
 ## Future Features
-Please visit the [project board](https://github.com/users/eaaasun/projects/2) to see what features are planned. If you have a suggestion, please open a discussion [here](https://github.com/eaaasun/CCStopper/discussions/new?category=feature-request).
+> Please visit the [project board](https://github.com/users/eaaasun/projects/2) to see what features are planned. If you have a suggestion, please open a discussion [here](https://github.com/eaaasun/CCStopper/discussions/new?category=feature-request).
 
 ## Known Issues
-> There are more issues in the [issues](https://github.com/eaaasun/CCStopper/issues) section; these are just the most common ones.
-
-**Issue:** Error message: `The execution of scripts is disabled on this system. Please see "Get-Help about_signing" for more details.` or selecting the "Genuine Checker" patch gives no results.
-
-Fix: Run `Set-ExecutionPolicy RemoteSigned` in an administrator powershell window, or manually execute the `StopProcesses.ps1` script in the scripts folder once (you can use CCStopper running the script for the first time manually). [Thanks /u/getblownaparte for bringing this issue up](https://www.reddit.com/user/getblownaparte/)
-
----
-
-**Issue:** Error message: `The argument '.\scripts\StopProcesses.ps1' to the -File parameter does not exist. Provide the path to an existing file as an argument to the -File parameter.` and no apps are closed.
-
-**Fix:** Update to the latest version of the script.
+> Check the [issues](https://github.com/eaaasun/CCStopper/issues) page for the latest issues. The [project board](https://github.com/users/eaaasun/projects/2) has a verified list of bugs, so it may not be up to date.
 
 ## Disclaimer/Notice
 
-**Disclaimer:** This script is in an early stage, and offered as-is. There will be bugs. I am not responsible for any damage, loss of data, or thermonuclear wars caused by these scripts. I am not affiliated with Adobe.
+**Disclaimer:** This script is in an early stage, and offered as-is. There will be *many* bugs. I am not responsible for any damage, loss of data, or thermonuclear wars caused by these scripts. I am not affiliated with Adobe.
 
 **Notice:** Don't use this tool for piracy. It's illegal, and multi-billion dollar companies like Adobe _need_ to profit off unreliable and overpriced software. Piracy _helps_ Adobe by increasing their market dominance. If you want to dethrone Adobe, use [alternatives](https://ass.easun.me).
 
