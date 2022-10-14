@@ -68,7 +68,7 @@ function MainMenu {
 						Name = "Github Repo"
 						Code = {
 							Start-Process "https://github.com/eaaasun/CCStopper"
-							Pause
+							MainMenu
 						}
 					}
 				)			
