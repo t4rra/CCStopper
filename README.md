@@ -2,14 +2,10 @@
 
 Stops Adobe's pesky background apps and more 😉
 
+### Version
 | Released Variant     | Ver. Num    |
 |-------------|-------------|
-| Stable      | v1.1.3      |
-| Prerelease  | 1.2.0-pre.2 |
-
-## THIS IS THE DEVELOPMENT VERSION! <!-- omit in toc -->
-
-Please don't run any code here, unless you know *exactly* what you're doing. If you do, please consider contributing.
+| Stable      | v1.2.0      |
 
 ## Table of Contents <!-- omit in toc -->
 - [v1.2.0 Changelog](#v120-changelog)
@@ -47,7 +43,9 @@ Please don't run any code here, unless you know *exactly* what you're doing. If 
 5. Prevent profit (for Adobe)
 
 ## Features
-> Please do not list options by number if you are creating a guide that uses CCStopper. To reduce confusion, use the names of the options. Thank you.
+> Please do not list options by number if you are creating a guide or asking a question that uses CCStopper. To reduce confusion, use the names of the options. Thank you.
+
+> All patches are reversible by running the same patch again.
 
 - Stop running Adobe background processes
 - Internet Patches
