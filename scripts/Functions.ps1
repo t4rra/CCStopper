@@ -243,12 +243,12 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 
 		ReadKey $($Options.Length)
 		if ($Choice -eq "Q") { 
-			if ($Back) { 
+			if ($Exit -eq "Back") { 
 				MainMenu
    }
 			else {
-				exit 
-   }
+				stop-process -Id $PID
+			}
 		}
 
 		foreach ($Option in $Options) {
