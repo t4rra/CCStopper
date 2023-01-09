@@ -51,19 +51,22 @@ function MainMenu {
 			}
 		},
 		@{
-			Name        = "Credit/Repo"
-			Description = "Credits, Github Repo"
+			Name        = "Other"
+			Description = "Check For Updates, Credits/Github Repo"
 			Code        = { 
 				ShowMenu -Back -Header "CREDITS" -Description "This project would be impossible without the people contributing to, testing, and supporting it.",
 				"",
-				"Creator/maintainer:",
-				"@eaaasun",
+				"Creator/maintainer: @eaaasun",
 				"",
 				"Contributors:",
 				"@ItsProfessional, @shdevnull, @ZEN1X",
 				"",
-				"Reporting bugs, supporting the project:",
-				"You!" -Options @(
+				"Reporting bugs, supporting the project: You!" -Options @(
+					@{
+						Name = "Check/Apply Updates"
+						Description = "Checks for and applies updates to CCStopper."
+						Code = { .\Updater.ps1 }
+					},
 					@{
 						Name = "Github Repo"
 						Code = {

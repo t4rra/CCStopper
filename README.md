@@ -1,11 +1,13 @@
 # CCStopper <!-- omit in toc --> 
-
 Stops Adobe's pesky background apps and more 😉
+## ⚠️ THIS IS THE DEVELOPMENT VERSION ⚠️ <!-- omit in toc --> 
+> Please don't run any code unless you know *exactly* what you're doing. If you do happen to know, consider contributing!
 
 ### Version
 | Released Variant     | Ver. Num    |
 |-------------|-------------|
 | Stable      | v1.2.0      |
+| Dev      | v1.2.1_dev      |
 
 ## Table of Contents <!-- omit in toc -->
 - [v1.2.0 Changelog](#v120-changelog)
