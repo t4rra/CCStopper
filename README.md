@@ -18,6 +18,10 @@ Stops Adobe's pesky background apps and more 😉
 - [Known Issues](#known-issues)
 - [Disclaimer/Notice](#disclaimernotice)
 
+## v1.2.1_dev Proposed Changes
+- [x] Fixes multiple exit inputs to exit bug
+- [ ] Update checker 
+
 ## v1.2.0 Changelog
 
 - UI Change
