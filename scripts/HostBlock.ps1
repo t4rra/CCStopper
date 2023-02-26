@@ -60,7 +60,6 @@ if (Test-Path $HostsFile) {
 		foreach ($Address in $BlockedAddresses) {
 			[System.IO.File]::AppendAllText($HostsFile, "`r`n$LocalAddress $Address")
 		}
-		# RemoveEndBlankLine
 		ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully added blocked lines in hosts file!"
 	}
 }
