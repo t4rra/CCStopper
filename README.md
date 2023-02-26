@@ -1,26 +1,28 @@
 # CCStopper <!-- omit in toc --> 
 Stops Adobe's pesky background apps and more 😉
 ## ⚠️ THIS IS THE DEVELOPMENT VERSION ⚠️ <!-- omit in toc --> 
-> Please don't run any code unless you know *exactly* what you're doing. If you do happen to know, consider contributing!
+> Please don't run any code unless you know *exactly* what you're doing. The documentation will be incomplete/inaccurate. If you do happen to know what you're doing, consider contributing!
 
 ### Version
-| Released Variant     | Ver. Num    |
+| Release     | Version    |
 |-------------|-------------|
 | Stable      | v1.2.0      |
-| Dev      | v1.2.1_dev      |
+| Dev      | v1.2.1      |
 
 ## Table of Contents <!-- omit in toc -->
+- [v1.2.1 Proposed Changes/todo](#v121-proposed-changestodo)
 - [v1.2.0 Changelog](#v120-changelog)
 - [Installation](#installation)
 - [Features](#features)
 - [FAQ](#faq)
 - [Future Features](#future-features)
+- [Alternate Distributions/Modifications](#alternate-distributionsmodifications)
 - [Known Issues](#known-issues)
 - [Disclaimer/Notice](#disclaimernotice)
 
-## v1.2.1_dev Proposed Changes
+## v1.2.1 Proposed Changes/todo
 - [x] Fixes multiple exit inputs to exit bug
-- [ ] Update checker 
+- [ ] Update hosts/firewall blocks
 
 ## v1.2.0 Changelog
 
@@ -49,7 +51,7 @@ Stops Adobe's pesky background apps and more 😉
 5. Prevent profit (for Adobe)
 
 ## Features
-> Please do not list options by number if you are creating a guide or asking a question that uses CCStopper. To reduce confusion, use the names of the options. Thank you.
+> Please do not list options by number (i.e. "select option 1, then run option 3") if you are creating a guide or asking a question that uses CCStopper. To reduce confusion, use the names of the options. Thank you.
 
 > All patches are reversible by running the same patch again.
 
@@ -98,10 +100,13 @@ Stops Adobe's pesky background apps and more 😉
 </details>
 
 ## Future Features
-> Please visit the [project board](https://github.com/users/eaaasun/projects/2) to see what features are planned. If you have a suggestion, please open a discussion [here](https://github.com/eaaasun/CCStopper/discussions/new?category=feature-request).
+> I work on new features in the dev branch. Most of the time, I'll include a section in the README with proposed changes. (there used to be a project board but i was too lazy to update it)
+
+## Alternate Distributions/Modifications
+I have no problems with this and enjoy seeing what people do with my code! Please make that your fork complies with this repository's license, and that the user knows it's not an official release. Also, if you make any improvements, please consider making a pull request!
 
 ## Known Issues
-> Check the [issues](https://github.com/eaaasun/CCStopper/issues) page for the latest issues. The [project board](https://github.com/users/eaaasun/projects/2) has a verified list of bugs, so it may not be up to date.
+> Check the [issues](https://github.com/eaaasun/CCStopper/issues) page for the latest issues. I try to respond to all of them ASAP, but this is a side project and I like to touch grass too.
 
 ## Disclaimer/Notice
 
