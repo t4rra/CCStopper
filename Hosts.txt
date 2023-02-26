@@ -1,5 +1,4 @@
-TESTING.CCSTOPPER.REMOTECHANGE
-TESTING.CCSTOPPER.REMOTEADDITION
+TESTING.CCSTOPPER.COOLTEST
 ic.adobe.io
 52.6.155.20
 52.10.49.85
@@ -88,4 +87,4 @@ lmlicenses.wip4.adobe.com
 na2m-pr.licenses.adobe.com
 wwis-dubc1-vip60.adobe.com
 workflow-ui-prod.licensingstack.com
-5zgzzv92gn.adobe.io
+5zgzzv92gn.adobe.CCSTOPPERTEST
