@@ -22,7 +22,7 @@ Stops Adobe's pesky background apps and more 😉
 
 ## v1.2.1 Proposed Changes/todo
 - [x] Fixes multiple exit inputs to exit bug
-- [ ] Update hosts/firewall blocks
+- [x] Update hosts/firewall blocks
 
 ## v1.2.0 Changelog
 
