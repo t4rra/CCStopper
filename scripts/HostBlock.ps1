@@ -8,6 +8,14 @@ $LocalAddress = "0.0.0.0"
 $HostsFile = "$Env:SystemRoot\System32\drivers\etc\hosts"
 $BlockedAddresses = ArrayFromText -Source ".\data\Hosts.txt" -IsLocal
 
+# Check if github is reachable
+$GHConnected = Test-Connection -ComputerName github.com -Count 1 -Quiet
+# Check if avaliable update
+if ($GHConnected) {
+	$remoteBlockedAddresses = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/CCStopper/CCStopper/master/data/Hosts.txt" -UseBasicParsing
+}
+$UpdateAvaliable = (Compare-Object $remoteBlockedAddresses $BlockedAddresses -SyncWindow 0) -and $GHConnected
+
 
 function addToHosts {
 	$BlockedAddresses = ArrayFromText -Source "$PSScriptRoot\data\Hosts.txt" -IsLocal
@@ -78,16 +86,7 @@ if (Test-Path $HostsFile) {
 	}
  else {
 		# blocked addresses not in hosts file
-		# check for update
-		$remoteBlockedAddresses = ArrayFromText -Source "https://raw.githubusercontent.com/eaaasun/CCStopper/data/Hosts.txt"
-		Write-Host "Checking for update..."
-		if (!(Compare-Object $remoteBlockedAddresses $BlockedAddresses -SyncWindow 0)) {
-			# no update available
-			addToHosts
-			ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully added blocked lines in hosts file!"	
-		}
-		else {
-			# update available
+		if ($UpdateAvaliable) {
 			ShowMenu -Back -Subtitles "HostBlock Module" -Header "Hosts update available!" -Description "" -Options @(
 				@{
 					Name = "Update blocklist and apply to hosts file"
@@ -95,8 +94,20 @@ if (Test-Path $HostsFile) {
 						updateHosts 
 						ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully added blocked lines in hosts file!"	
 					}
+				},
+				@{
+					Name = "Ignore update and apply to hosts file"
+					Code = {
+						addToHosts 
+						ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully added blocked lines in hosts file!"	
+					}
 				}
+
 			)
+		}
+		else {
+			addToHosts
+			ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully added blocked lines in hosts file!"	
 		}
 	}
 }
