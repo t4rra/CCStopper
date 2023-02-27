@@ -1,4 +1,19 @@
-$Version = "v1.2.0"
+$Version = "v1.2.1"
+
+function ArrayFromText {
+    param(
+        [string]$Source,
+        [switch]$IsLocal
+    )
+
+    # Read the content of the source, either local or remote
+    $content = if ($IsLocal) { Get-Content $Source } else { (Invoke-WebRequest $Source -Headers @{"Cache-Control"="no-cache"}).Content }
+
+    # Split into an array and filter out empty lines and whitespace
+    $content.Split("`n", [StringSplitOptions]::RemoveEmptyEntries) `
+            | Where-Object { $_ -ne '' } `
+            | ForEach-Object { $_.Trim() }
+}
 
 function ReadKey([int]$ChoiceNum) {
 	$Indent = 43 - $ChoiceNum
@@ -30,27 +45,6 @@ function Init([string]$Title) {
 	$WindowTitle = "CCStopper"
 	if ($Title) { $WindowTitle += " - $Title" }
 	$Host.UI.RawUI.WindowTitle = $WindowTitle
-
-	# Set-ConsoleWindow -Width 73 -Height 42
-}
-
-function Pause {
-	cmd /c pause
-}
-
-function Set-ConsoleWindow([int]$Width, [int]$Height) {
-	$WindowSize = $Host.UI.RawUI.WindowSize
-	$WindowSize.Width = [Math]::Min($Width, $Host.UI.RawUI.BufferSize.Width)
-	$WindowSize.Height = $Height
-
-	try {
-		$Host.UI.RawUI.WindowSize = $WindowSize
-	}
- catch [System.Management.Automation.SetValueInvocationException] {
-		$MaxValue = ($_.Exception.Message | Select-String "\d+").Matches[0].Value
-		$WindowSize.Height = $MaxValue
-		$Host.UI.RawUI.WindowSize = $WindowSize
-	}
 }
 
 # The indent before the vertical borders
@@ -243,12 +237,12 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 
 		ReadKey $($Options.Length)
 		if ($Choice -eq "Q") { 
-			if ($Back) { 
+			if ($Exit -eq "Back") { 
 				MainMenu
    }
 			else {
-				exit 
-   }
+				stop-process -Id $PID
+			}
 		}
 
 		foreach ($Option in $Options) {

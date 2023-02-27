@@ -1,3 +1,4 @@
 .vscode
 CCStopper*.zip
-/Release
+makezip.ps1
+~*

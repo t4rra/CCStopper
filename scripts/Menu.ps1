@@ -14,13 +14,13 @@ function MainMenu {
 		},
 		@{
 			Name        = "Internet Patches"
-			Description = "Credit card/hosts patches"
+			Description = "Firewall/hosts patches"
 			Code        = { 
 				ShowMenu -Back -VerCredit -Header "INTERNET PATCHES" -Description "Run modules again to remove patches." -Options @(
 					@{
-						Name        = "Credit Card Trial"
+						Name        = "Firewall Blocks"
 						Description = "Patches credit card trial popup through Windows firewall."
-						Code        = { .\CreditCardBlock.ps1 }
+						Code        = { .\FirewallBlock.ps1 }
 					},
 					@{
 						Name        = "Add to Hosts"
@@ -51,19 +51,17 @@ function MainMenu {
 			}
 		},
 		@{
-			Name        = "Credit/Repo"
-			Description = "Credits, Github Repo"
+			Name        = "Other"
+			Description = "Credits/Github Repo"
 			Code        = { 
 				ShowMenu -Back -Header "CREDITS" -Description "This project would be impossible without the people contributing to, testing, and supporting it.",
 				"",
-				"Creator/maintainer:",
-				"@eaaasun",
+				"Creator/maintainer: @eaaasun",
 				"",
 				"Contributors:",
 				"@ItsProfessional, @shdevnull, @ZEN1X",
 				"",
-				"Reporting bugs, supporting the project:",
-				"You!" -Options @(
+				"Reporting bugs, supporting the project: You!" -Options @(
 					@{
 						Name = "Github Repo"
 						Code = {

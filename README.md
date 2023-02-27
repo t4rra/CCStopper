@@ -1,36 +1,30 @@
 # CCStopper <!-- omit in toc --> 
-
 Stops Adobe's pesky background apps and more 😉
 
 ### Version
-| Released Variant     | Ver. Num    |
+| Release     | Version    |
 |-------------|-------------|
-| Stable      | v1.2.0      |
+| Stable      | v1.2.1      |
 
 ## Table of Contents <!-- omit in toc -->
-- [v1.2.0 Changelog](#v120-changelog)
+- [v1.2.1 Changelog](#v121-changelog)
 - [Installation](#installation)
 - [Features](#features)
 - [FAQ](#faq)
-- [Future Features](#future-features)
+- [New Features](#new-features)
+- [Alternate Distributions/Modifications](#alternate-distributionsmodifications)
 - [Known Issues](#known-issues)
 - [Disclaimer/Notice](#disclaimernotice)
 
-## v1.2.0 Changelog
-
-- UI Change
-  - Added submenus and changed inputs, new system for creating menus
-- Powershell Rewrite
-  - Everything is in Powershell!
-  - Added `functions.ps1` file, helps with code reuse
-- Reversibility in modules
-  - If you used the RemoveAGS module before this version, it will not be reversible.  
-- Separated Hosts Patch from Credit Card Patch
-  - Thanks [@sh32devnull](https://github.com/sh32devnull) for Hosts Patch
-- Added HideCCFolder module
-  - Thanks [@ItsProfessional](https://github.com/ItsProfessional)
-- Bug Fixes and Improvements
+## v1.2.1 Changelog
+- Fixed multiple exit inputs to exit bug
+- Updated hosts block
+  - Added an updater; it will update from hosts.txt from the data branch
+  - removes the need to update CCStopper as a whole to update the hosts blocklist
+- Renamed the credit card trial patch to "Firewall Blocks"
 - Documentation Update
+  - Removed project board (too lazy to update it)
+  - Removed discussions (again, too lazy to check it, use the issues section instead)
 ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
 
 
@@ -43,13 +37,13 @@ Stops Adobe's pesky background apps and more 😉
 5. Prevent profit (for Adobe)
 
 ## Features
-> Please do not list options by number if you are creating a guide or asking a question that uses CCStopper. To reduce confusion, use the names of the options. Thank you.
+> Please do not list options by number (i.e. "select option 1, then run option 3") if you are creating a guide or asking a question that uses CCStopper. To reduce confusion, use the names of the options. Thank you.
 
 > All patches are reversible by running the same patch again.
 
 - Stop running Adobe background processes
 - Internet Patches
-  - Credit Card Trial - Creates firewall rule to block the credit card prompt. See [issue #42](https://github.com/eaaasun/CCStopper/issues/42) if it does not work.
+  - Firewall Block - Creates firewall rule to block the credit card prompt. See [issue #42](https://github.com/eaaasun/CCStopper/issues/42) if it does not work.
   - Add to Hosts - Blocks unnecessary Adobe servers in the hosts file.
 - System Patches
   - Genuine Checker - Replaces and locks Genuine Checker files.
@@ -70,7 +64,7 @@ Stops Adobe's pesky background apps and more 😉
 <details>
 <summary>I found a bug/issue! What do I do?</summary>
 
-> Before submitting an issue, update to the latest version and check [the known issues](https://github.com/eaaasun/CCStopper/blob/main/README.md#known-issues) and existing issues. Please read through the issue form before submitting so the bug can be patched ASAP.
+> Before submitting an issue, update to the latest version and check [the issues page](https://github.com/eaaasun/CCStopper/issues) to see if your issue is there. Please read through the issue form before submitting so the bug can be patched ASAP.
 </details>
 
 <details>
@@ -82,7 +76,7 @@ Stops Adobe's pesky background apps and more 😉
 <details>
 <summary>Will more features be added?</summary>
 
-> Yes! They are in the Future Features section below. Open a discussion [here](https://github.com/eaaasun/CCStopper/discussions/new?category=feature-request) to suggest a feature.
+> Yes! If I am actively working on features, they will be listed in the [dev branch](https://github.com/eaaasun/ccstopper/tree/dev). Open an issue [here](https://github.com/eaaasun/CCStopper/discussions/new?category=feature-request) to suggest a feature.
 </details>
 
 <details>
@@ -91,11 +85,14 @@ Stops Adobe's pesky background apps and more 😉
 > Please donate your time! If you have Powershell/Batch knowledge, contribute to the project! If not, finding bugs and suggesting features is just as helpful!
 </details>
 
-## Future Features
-> Please visit the [project board](https://github.com/users/eaaasun/projects/2) to see what features are planned. If you have a suggestion, please open a discussion [here](https://github.com/eaaasun/CCStopper/discussions/new?category=feature-request).
+## New Features
+> I work on new features in the dev branch. Most of the time, I'll include a section in the README with proposed changes. (there used to be a project board but i was too lazy to update it)
+
+## Alternate Distributions/Modifications
+I have no problems with this and enjoy seeing what people do with my code! Please make sure that your fork complies with this repository's license, and that the user knows it's not a modified release. Also, if you make any improvements, please consider making a pull request!
 
 ## Known Issues
-> Check the [issues](https://github.com/eaaasun/CCStopper/issues) page for the latest issues. The [project board](https://github.com/users/eaaasun/projects/2) has a verified list of bugs, so it may not be up to date.
+> Check the [issues](https://github.com/eaaasun/CCStopper/issues) page for the latest issues. I try to respond to all of them ASAP, but this is a side project and I like to touch grass too.
 
 ## Disclaimer/Notice
 

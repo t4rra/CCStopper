@@ -1,5 +1,5 @@
 Import-Module $PSScriptRoot\Functions.ps1
-Init -Title "Credit Card Prompt Block"
+Init -Title "Firewall Block"
 
 $Files = @(
 	@{

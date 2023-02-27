@@ -68,7 +68,7 @@ foreach ($BlockItem in $BlockItems) {
 
 switch ($BlockItem.Check){
 	"backupped" {
-		ShowMenu -Subtitles "RemoveAGS Module" -Header "Already applied patch!" -Description "Would you like to restore original files?" -Options @(
+		ShowMenu -Back -Subtitles "RemoveAGS Module" -Header "Already applied patch!" -Description "Would you like to restore original files?" -Options @(
 			@{
 				Name = "Restore original files"
 				Code = {
@@ -80,7 +80,7 @@ switch ($BlockItem.Check){
 		)
 	}
 	$False {
-		ShowMenu -Subtitles "RemoveAGS Module" -Header "Target files not found!" -Description "One or more target items could not be found. This may not be a problem. If the files aren't there, they won't work."
+		ShowMenu -Back -Subtitles "RemoveAGS Module" -Header "Target files not found!" -Description "One or more target items could not be found. This may not be a problem. If the files aren't there, they won't work."
 	}
 }
 
@@ -91,4 +91,4 @@ Foreach ($Service in @("AGSService", "AGMService")) {
 	Stop-Process -Name $Service -Force | Out-Null
 }
 
-ShowMenu -Subtitles "RemoveAGS Module" -Header "Removing AGS complete!"
+ShowMenu -Back -Subtitles "RemoveAGS Module" -Header "Removing AGS complete!"
