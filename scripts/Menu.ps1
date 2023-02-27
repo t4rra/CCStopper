@@ -18,9 +18,9 @@ function MainMenu {
 			Code        = { 
 				ShowMenu -Back -VerCredit -Header "INTERNET PATCHES" -Description "Run modules again to remove patches." -Options @(
 					@{
-						Name        = "Credit Card Trial"
+						Name        = "Firewall Trial"
 						Description = "Patches credit card trial popup through Windows firewall."
-						Code        = { .\CreditCardBlock.ps1 }
+						Code        = { .\FirewallBlock.ps1 }
 					},
 					@{
 						Name        = "Add to Hosts"

@@ -1,20 +1,7 @@
 Import-Module $PSScriptRoot\Functions.ps1
-Init -Title "Credit Card Prompt Block"
+Import-Module $PSScriptRoot\data\Firewall.ps1
 
-$Files = @(
-	@{
-		Path  = "${Env:ProgramFiles(x86)}\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe"
-		Check = $False
-	},
-	@{ 
-		Path  = "$Env:ProgramFiles\Common Files\Adobe\Adobe Desktop Common\NGL\adobe_licensing_wf.exe"
-		Check = $False
-	},
-	@{
-		Path  = "$Env:ProgramFiles\Common Files\Adobe\Adobe Desktop Common\NGL\adobe_licensing_wf_helper.exe"
-		Check = $False
-	}
-)
+Init -Title "Firewall Block"
 
 # run checks for file
 foreach ($File in $Files) {
