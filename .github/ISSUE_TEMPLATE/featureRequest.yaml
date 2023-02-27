@@ -1,0 +1,25 @@
+name: Feature Request
+description: Want to see something added to CCStopper?
+title: ""
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have something that could benefit CCStopper? If you already have code, open a pull request! If not, that's OK!
+  - type: textarea
+    id: feature-request
+    attributes:
+      label: What do you want to see added?
+      description: Please include as much detail as possible.
+      placeholder: "CCStopper should plant flowers in my garden because the petals will block Adobe's death rays."
+    validations:
+      required: true
+  - type: textarea
+    id: feature-request
+    attributes:
+      label: How could this be accomplished?
+      description: (Optional) Please include as much detail as possible.
+      placeholder: "There's a neat module from Live Corp that hooks into their robot gardeners and makes them plant flowers."
+    validations:
+      required: false
