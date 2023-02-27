@@ -73,7 +73,14 @@ if (Test-Path $HostsFile) {
 	}
 	if ($StringSearch) {
 		# blocked addresses already in hosts file
-		ShowMenu -Back -Subtitles "HostBlock Module" -Header "Blocked addresses already in hosts file!" -Description "Found existing Adobe blocking hosts entries. Would you like to remove them?" -Options @(
+		if ($UpdateAvaliable) {
+			$HeaderMSG = "Update avaliable!"
+			$DescMSG = "Would you like to update?"
+		} else {
+			$HeaderMSG = "Blocked addresses already in hosts file!"
+			$DescMSG = "Would you like to remove them?"
+		}
+		ShowMenu -Back -Subtitles "HostBlock Module" -Header $HeaderMSG -Description $DescMSG -Options @(
 			@{
 				Name = "Remove addresses from hosts file"
 				Code = {
@@ -81,18 +88,27 @@ if (Test-Path $HostsFile) {
 					ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully removed blocked lines from hosts file!"
 
 				}
+			} 
+			if ($UpdateAvaliable) {
+				, @{
+					Name = "Update blocklist and apply to hosts file"
+					Code = {
+						updateHosts 
+						ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully updated hosts file!"	
+					}
+				}
 			}
 		)
 	}
  else {
 		# blocked addresses not in hosts file
 		if ($UpdateAvaliable) {
-			ShowMenu -Back -Subtitles "HostBlock Module" -Header "Hosts update available!" -Description "" -Options @(
+			ShowMenu -Back -Subtitles "HostBlock Module" -Header "Hosts update available!" -Description "Would you like to update?" -Options @(
 				@{
 					Name = "Update blocklist and apply to hosts file"
 					Code = {
 						updateHosts 
-						ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully added blocked lines in hosts file!"	
+						ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully updated/added blocked lines in hosts file!"	
 					}
 				},
 				@{
