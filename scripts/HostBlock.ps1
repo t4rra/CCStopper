@@ -12,7 +12,7 @@ $BlockedAddresses = ArrayFromText -Source ".\data\Hosts.txt" -IsLocal
 $GHConnected = Test-Connection -ComputerName github.com -Count 1 -Quiet
 # Check if avaliable update
 if ($GHConnected) {
-	$remoteBlockedAddresses = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/CCStopper/CCStopper/master/data/Hosts.txt" -UseBasicParsing
+	$remoteBlockedAddresses = ArrayFromText -Source "https://raw.githubusercontent.com/eaaasun/CCStopper/data/Hosts.txt"
 }
 $UpdateAvaliable = (Compare-Object $remoteBlockedAddresses $BlockedAddresses -SyncWindow 0) -and $GHConnected
 
