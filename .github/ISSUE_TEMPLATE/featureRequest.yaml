@@ -1,6 +1,6 @@
 name: Feature Request
 description: Want to see something added to CCStopper?
-title: ""
+title: "[Feature]:"
 labels: ["enhancement"]
 body:
   - type: markdown
@@ -16,7 +16,7 @@ body:
     validations:
       required: true
   - type: textarea
-    id: feature-request
+    id: methods
     attributes:
       label: How could this be accomplished?
       description: (Optional) Please include as much detail as possible.
