@@ -14,6 +14,7 @@ Stops Adobe's pesky background apps and more 😉
 - [Installation](#installation)
 - [Features](#features)
 - [FAQ](#faq)
+- [Adding Entries to Hosts Blocklist](#adding-entries-to-hosts-blocklist)
 - [New Features](#new-features)
 - [Alternate Distributions/Modifications](#alternate-distributionsmodifications)
 - [Known Issues](#known-issues)
@@ -88,14 +89,16 @@ Stops Adobe's pesky background apps and more 😉
 > Please donate your time! If you have Powershell/Batch knowledge, contribute to the project! If not, finding bugs and suggesting features is just as helpful!
 </details>
 
+## Adding Entries to Hosts Blocklist
+The `data` branch of CCStopper contains a `hosts.txt` file that has a list of addresses that CCStopper will block. If you think an address from adobe should be blocked, open a pull request with the address added to the bottom of the list. 
 ## New Features
-> I work on new features in the dev branch. Most of the time, I'll include a section in the README with proposed changes. (there used to be a project board but i was too lazy to update it)
+I work on new features in the dev branch. Most of the time, I'll include a section in the README with proposed changes. (there used to be a project board but i was too lazy to update it)
 
 ## Alternate Distributions/Modifications
 I have no problems with this and enjoy seeing what people do with my code! Please make sure that your fork complies with this repository's license, and that the user knows it's not a modified release. Also, if you make any improvements, please consider making a pull request!
 
 ## Known Issues
-> Check the [issues](https://github.com/eaaasun/CCStopper/issues) page for the latest issues. I try to respond to all of them ASAP, but this is a side project and I like to touch grass too.
+Check the [issues](https://github.com/eaaasun/CCStopper/issues) page for the latest issues. I try to respond to all of them ASAP, but this is a side project and I like to touch grass too.
 
 ## Disclaimer/Notice
 

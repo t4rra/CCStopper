@@ -8,9 +8,9 @@ body:
       value: |
         > ⚠ We are aware that the Credit Card Prompt patch may not be working for some people. Please check that 1) the entry is in Windows Firewall, 2) no antivirus/other firewall is interfering with Windows Firewall.
         
-        > If the issue presists, please go [here](https://github.com/eaaasun/CCStopper/issues/42) and provide us your region/country. We suspect it's because of a regional patch from Adobe.
+        > If the issue presists, please go [here](https://github.com/eaaasun/CCStopper/issues/42) and log your problems there.
         
-        Thanks for taking the time to fill out this bug report! 
+        Thanks for taking the time to fill out this bug report! Please update to the latest version as it may fix your bug.
   - type: textarea
     id: what-happened
     attributes:
@@ -38,7 +38,7 @@ body:
     id: windows-ver
     attributes:
       label: Windows Version?
-      description: Which Windows version(s) are you experiencing this bug in? Development/testing are done in Windows 10, so other versions may not work.
-      placeholder: "Windows 10 21H1"
+      description: Which Windows version(s) are you experiencing this bug in? Development/testing are done in Windows 11, so other versions may not work.
+      placeholder: "Windows 11 22H2"
     validations:
-      required: true
+      required: false
