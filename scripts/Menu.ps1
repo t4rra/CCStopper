@@ -14,11 +14,11 @@ function MainMenu {
 		},
 		@{
 			Name        = "Internet Patches"
-			Description = "Credit card/hosts patches"
+			Description = "Firewall/hosts patches"
 			Code        = { 
 				ShowMenu -Back -VerCredit -Header "INTERNET PATCHES" -Description "Run modules again to remove patches." -Options @(
 					@{
-						Name        = "Firewall Trial"
+						Name        = "Firewall Blocks"
 						Description = "Patches credit card trial popup through Windows firewall."
 						Code        = { .\FirewallBlock.ps1 }
 					},
@@ -52,7 +52,7 @@ function MainMenu {
 		},
 		@{
 			Name        = "Other"
-			Description = "Check For Updates, Credits/Github Repo"
+			Description = "Credits/Github Repo"
 			Code        = { 
 				ShowMenu -Back -Header "CREDITS" -Description "This project would be impossible without the people contributing to, testing, and supporting it.",
 				"",
@@ -62,11 +62,6 @@ function MainMenu {
 				"@ItsProfessional, @shdevnull, @ZEN1X",
 				"",
 				"Reporting bugs, supporting the project: You!" -Options @(
-					@{
-						Name = "Check/Apply Updates"
-						Description = "Checks for and applies updates to CCStopper."
-						Code = { .\Updater.ps1 }
-					},
 					@{
 						Name = "Github Repo"
 						Code = {

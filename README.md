@@ -24,6 +24,7 @@ Stops Adobe's pesky background apps and more 😉
 - Updated hosts block
   - Added an updater; it will update from hosts.txt from the data branch
   - removes the need to update CCStopper as a whole to update the hosts blocklist
+- Renamed the credit card trial patch to "Firewall Blocks"
 - Documentation Update
   - Removed project board (too lazy to update it)
   - Removed discussions (again, too lazy to check it, use the issues section instead)
@@ -45,7 +46,7 @@ Stops Adobe's pesky background apps and more 😉
 
 - Stop running Adobe background processes
 - Internet Patches
-  - Credit Card Trial - Creates firewall rule to block the credit card prompt. See [issue #42](https://github.com/eaaasun/CCStopper/issues/42) if it does not work.
+  - Firewall Block - Creates firewall rule to block the credit card prompt. See [issue #42](https://github.com/eaaasun/CCStopper/issues/42) if it does not work.
   - Add to Hosts - Blocks unnecessary Adobe servers in the hosts file.
 - System Patches
   - Genuine Checker - Replaces and locks Genuine Checker files.
