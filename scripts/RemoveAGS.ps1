@@ -80,7 +80,7 @@ switch ($BlockItem.Check){
 		)
 	}
 	$False {
-		ShowMenu -Back -Subtitles "RemoveAGS Module" -Header "Target files not found!" -Description "One or more target items could not be found. This may not be a problem. If the files aren't there, they won't work."
+		ShowMenu -Back -Subtitles "RemoveAGS Module" -Header "Genuine Checker not found!" -Description "Genuine Checker files could not be found. This may not be a problem. If the files aren't there, they won't work."
 	}
 }
 
