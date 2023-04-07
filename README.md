@@ -4,10 +4,10 @@ Stops Adobe's pesky background apps and more 😉
 ### Version
 | Release     | Version    |
 |-------------|-------------|
-| Stable      | v1.2.1      |
+| Stable      | v1.2.2      |
 
 ## Table of Contents <!-- omit in toc -->
-- [v1.2.1 Changelog](#v121-changelog)
+- [v1.2.2 Changelog](#v122-changelog)
 - [Installation](#installation)
 - [Features](#features)
 - [FAQ](#faq)
@@ -17,15 +17,10 @@ Stops Adobe's pesky background apps and more 😉
 - [Known Issues](#known-issues)
 - [Disclaimer/Notice](#disclaimernotice)
 
-## v1.2.1 Changelog
-- Fixed multiple exit inputs to exit bug
-- Updated hosts block
-  - Added an updater; it will update from hosts.txt from the data branch
-  - removes the need to update CCStopper as a whole to update the hosts blocklist
-- Renamed the credit card trial patch to "Firewall Blocks"
-- Documentation Update
-  - Removed project board (too lazy to update it)
-  - Removed discussions (again, too lazy to check it, use the issues section instead)
+## v1.2.2 Changelog
+- Updated user messages in `RemoveAGS.ps1` to be more descriptive
+- Firewall names are more descriptive
+  - to update them, run the `Firewall Block` option again. 
 ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
 
 
@@ -47,7 +42,7 @@ Stops Adobe's pesky background apps and more 😉
   - Firewall Block - Creates firewall rule to block the credit card prompt. See [issue #42](https://github.com/eaaasun/CCStopper/issues/42) if it does not work.
   - Add to Hosts - Blocks unnecessary Adobe servers in the hosts file.
 - System Patches
-  - Genuine Checker - Replaces and locks Genuine Checker files.
+  - Genuine Checker - Locks Genuine Checker files.
   - Hide CCFolder - Hides the Creative Cloud folder in Windows Explorer.
 
 ## FAQ
