@@ -90,7 +90,7 @@ Stops Adobe's pesky background apps and more 😉
 </details>
 
 ## Adding Entries to Hosts Blocklist
-The `data` branch of CCStopper contains a `hosts.txt` file that has a list of addresses that CCStopper will block. If you think an address from adobe should be blocked, open a pull request with the address added to the bottom of the list. 
+The `data` branch of CCStopper contains a `hosts.txt` file that has a list of addresses that CCStopper will block. If you think an address from adobe should be blocked, open a pull request with the address added to the bottom of the list. Also state why the address should be added to the hosts block.
 ## New Features
 I work on new features in the dev branch. Most of the time, I'll include a section in the README with proposed changes. (there used to be a project board but i was too lazy to update it)
 
