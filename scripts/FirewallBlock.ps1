@@ -5,14 +5,17 @@ $Files = @(
 	@{
 		Path  = "${Env:ProgramFiles(x86)}\Common Files\Adobe\Adobe Desktop Common\ADS\Adobe Desktop Service.exe"
 		Check = $False
+		Tag = "desktop-service"
 	},
 	@{ 
 		Path  = "$Env:ProgramFiles\Common Files\Adobe\Adobe Desktop Common\NGL\adobe_licensing_wf.exe"
 		Check = $False
+		Tag = "licensing"
 	},
 	@{
 		Path  = "$Env:ProgramFiles\Common Files\Adobe\Adobe Desktop Common\NGL\adobe_licensing_wf_helper.exe"
 		Check = $False
+		Tag = "licensing-helper"
 	}
 )
 
@@ -40,7 +43,7 @@ foreach ($File in $Files) {
 function FirewallAction([switch]$Remove) {
 	$EndHeaderMSG = $Null
 	foreach ($File in $Files) {
-		$FirewallRuleName = "CCStopper-InternetBlock_$($Files.IndexOf($File))"
+		$FirewallRuleName = "CCStopper-InternetBlock_$($File.Tag)"
 		switch ($File.Check) {
 			$True {
 				if ($Remove) {
