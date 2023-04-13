@@ -1,5 +1,5 @@
 # ⚠️ THIS IS THE DATA BRANCH ⚠️ 
-> Values for hosts/firewall blocks live here. That means they can be updated without a new update to CCStopper as a whole. 
+> Values for the hosts file live here. That means they can be updated without a new update to CCStopper as a whole. 
 
 > WILL WORK WITH 1.2.1+
 
