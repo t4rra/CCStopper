@@ -87,6 +87,8 @@ The `data` branch of CCStopper contains a `hosts.txt` file that has a list of ad
 I work on new features in the dev branch. Most of the time, I'll include a section in the README with proposed changes. (there used to be a project board but i was too lazy to update it)
 
 ## Alternate Distributions/Modifications
+> I cannot offer any support for CCStopper unless it's a release from this repository.
+
 I have no problems with this and enjoy seeing what people do with my code! Please make sure that your fork complies with this repository's license, and that the user knows it's not a modified release. Also, if you make any improvements, please consider making a pull request!
 
 ## Known Issues
