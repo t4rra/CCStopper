@@ -59,7 +59,7 @@ function FirewallAction([switch]$Remove) {
 					$EndHeaderMSG = "Firewall rules removed!"
 				}
 				else {
-					ShowMenu -Back -Subtitles "InternetBlock Module" -Header "Firewall Rules Already Set!" -Description "Would you like to remove all existing rules?" -Options @(
+					ShowMenu -Back -Subtitles "FirewallBlock Module" -Header "Firewall Rules Already Set!" -Description "Would you like to remove all existing rules?" -Options @(
 						@{
 							Name = "Remove Rules"
 							Code = { FirewallAction -Remove }
@@ -73,16 +73,16 @@ function FirewallAction([switch]$Remove) {
 					New-NetFirewallRule -DisplayName $FirewallRuleName -Direction Outbound -Program $File.Path -Action Block
 				}
 				catch {
-					ShowMenu -Back -Subtitles "InternetBlock Module" -Header "Error! Creating firewall rule failed!" -Description "Antivirus programs are known to interfere with this patch. Please check if that is the case, and try again."
+					ShowMenu -Back -Subtitles "FirewallBlock Module" -Header "Error! Creating firewall rule failed!" -Description "Antivirus programs are known to interfere with this patch. Please check if that is the case, and try again."
 				}
 				$EndHeaderMSG = "Firewall rules created!"
 			}
 			$False {
-				ShowMenu -Back -Subtitles "InternetBlock Module" -Header "Error! File not found!" -Description "Target files could not be found. If the trial prompts are still displayed, please open an issue on the Github repo."
+				ShowMenu -Back -Subtitles "FirewallBlock Module" -Header "Error! File not found!" -Description "Files that need to be blocked in the firewall could not be found. If the trial prompts are still displayed, please check issue #67 first, then open an issue on the Github repo."
 			}
 		}
 	}
-	ShowMenu -Back -Subtitles "InternetBlock Module" -Header $EndHeaderMSG -Description "Operation has been completed successfully."
+	ShowMenu -Back -Subtitles "FirewallBlock Module" -Header $EndHeaderMSG -Description "Operation has been completed successfully."
 }
 
 FirewallAction
