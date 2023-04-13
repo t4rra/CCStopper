@@ -4,10 +4,11 @@ Stops Adobe's pesky background apps and more 😉
 ### Version
 | Release     | Version    |
 |-------------|-------------|
-| Stable      | v1.2.2      |
+| Stable      | v1.2.2-hotfix.1      |
 
 ## Table of Contents <!-- omit in toc -->
 - [v1.2.2 Changelog](#v122-changelog)
+  - [hotfix.1 Changelog](#hotfix1-changelog)
 - [Installation](#installation)
 - [Features](#features)
 - [FAQ](#faq)
@@ -21,6 +22,10 @@ Stops Adobe's pesky background apps and more 😉
 - Updated user messages in `RemoveAGS.ps1` to be more descriptive
 - Firewall names are more descriptive
   - to update them, run the `Firewall Block` option again. 
+
+### hotfix.1 Changelog
+- Removed mentions of "InternetBlock" in menus of `FirewallBlock.ps1`
+  - Firewall rules will still show "InternetBlock" in the name, can't change because backwards compatibility
 ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
 
 
