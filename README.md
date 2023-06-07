@@ -1,16 +1,14 @@
 # CCStopper <!-- omit in toc --> 
 Stops Adobe's pesky background apps and more 😉
-## ⚠️ THIS IS THE DEVELOPMENT VERSION ⚠️ <!-- omit in toc --> 
-> Please don't run any code unless you know *exactly* what you're doing. The documentation will be incomplete/inaccurate. If you do happen to know what you're doing, consider contributing!
 
 ### Version
 | Release     | Version    |
 |-------------|-------------|
-| Stable      | v1.2.2      |
-| Dev         | v1.2.2      |
+| Stable      | v1.2.2-hotfix.1      |
 
 ## Table of Contents <!-- omit in toc -->
 - [v1.2.2 Changelog](#v122-changelog)
+  - [hotfix.1 Changelog](#hotfix1-changelog)
 - [Installation](#installation)
 - [Features](#features)
 - [FAQ](#faq)
@@ -24,6 +22,10 @@ Stops Adobe's pesky background apps and more 😉
 - Updated user messages in `RemoveAGS.ps1` to be more descriptive
 - Firewall names are more descriptive
   - to update them, run the `Firewall Block` option again. 
+
+### hotfix.1 Changelog
+- Removed mentions of "InternetBlock" in menus of `FirewallBlock.ps1`
+  - Firewall rules will still show "InternetBlock" in the name, can't change because backwards compatibility
 ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
 
 
@@ -90,6 +92,8 @@ The `data` branch of CCStopper contains a `hosts.txt` file that has a list of ad
 I work on new features in the dev branch. Most of the time, I'll include a section in the README with proposed changes. (there used to be a project board but i was too lazy to update it)
 
 ## Alternate Distributions/Modifications
+> I cannot offer any support for CCStopper unless it's a release from this repository.
+
 I have no problems with this and enjoy seeing what people do with my code! Please make sure that your fork complies with this repository's license, and that the user knows it's not a modified release. Also, if you make any improvements, please consider making a pull request!
 
 ## Known Issues

@@ -1,4 +1,4 @@
-$Version = "v1.2.2"
+$Version = "v1.2.2-hotfix.1"
 
 function ArrayFromText {
     param(

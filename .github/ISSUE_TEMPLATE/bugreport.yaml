@@ -6,9 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        > ⚠ We are aware that the Credit Card Prompt patch may not be working for some people. Please check that 1) the entry is in Windows Firewall, 2) no antivirus/other firewall is interfering with Windows Firewall.
-        
-        > If the issue presists, please go [here](https://github.com/eaaasun/CCStopper/issues/42) and log your problems there.
+        > ⚠ I can't offer support for forks/alternate distributions of CCStopper! Don't open an issue with CCStopper if you didn't download it from this repository.
         
         Thanks for taking the time to fill out this bug report! Please update to the latest version as it may fix your bug.
   - type: textarea
@@ -30,7 +28,7 @@ body:
     id: version
     attributes:
       label: Version?
-      description: To make things as frictionless as possible, plesae copy the exact release tag [here](https://github.com/eaaasun/CCStopper/releases).
+      description: To make things as frictionless as possible, plesae copy the exact release tag [here](https://github.com/eaaasun/CCStopper/releases). 
       placeholder: "v2.8.12_pre.2"
     validations:
       required: true
