@@ -10,7 +10,7 @@ Stops Adobe's pesky background apps and more 😉
 | Release     | Version    |
 |-------------|-------------|
 | Stable      | v1.2.2-hotfix.1      |
-| Dev      | v1.2.3      |
+| Dev      | v1.2.3-pre.1      |
 
 ## Table of Contents <!-- omit in toc -->
 - [v1.2.3 Changelog \[under development\]](#v123-changelog-under-development)
