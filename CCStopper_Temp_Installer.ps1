@@ -3,6 +3,7 @@ $ErrorActionPreference = "Stop"
 $isAdmin = [bool]([Security.Principal.WindowsIdentity]::GetCurrent().Groups -match 'S-1-5-32-544')
 if (-not $isAdmin) {
 	Write-Warning "Please run this command as administrator"
+	pause
 	Exit 1
 }
 
