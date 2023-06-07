@@ -1,5 +1,5 @@
 # FUNCTIONS START
-$Version = "v1.2.3"
+$Version = "v1.2.3-pre.1"
 
 function ArrayFromText {
 	param(
@@ -168,7 +168,7 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 		Write-TopBorder
 		Write-BlankMenuLine
 		Write-BlankMenuLine
-		Write-MenuLine -Contents "CCSTOPPER" -Center
+		Write-MenuLine -Contents "CCSTOPPER_AIO" -Center
 		if ($VerCredit) {
 			if ($Subtitles) {
 				$Subtitles += ""
