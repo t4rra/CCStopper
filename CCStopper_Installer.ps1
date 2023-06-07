@@ -12,6 +12,15 @@ if (-not $isAdmin) {
 $CCStopperAIOURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/CCStopper_AIO.ps1"
 $CCStopperLogoURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/CCStopper%20logo.ico"
 
+function uninstall {
+	Remove-Item -Path "$env:ProgramFiles\CCStopper" -Recurse -Force
+	# delete desktop icon
+	$ShortcutPath = "$env:USERPROFILE\Desktop\CCStopper.lnk"
+	if (Test-Path $ShortcutPath) {
+		Remove-Item $ShortcutPath
+	}
+}
+
 # check if CCStopper folder exists and files are inside, if so, ask if user wants to reinstall or uninstall
 if (Test-Path "$env:ProgramFiles\CCStopper\CCStopper_AIO.ps1") {
 	Write-Host "CCStopper is already installed!"
@@ -20,12 +29,11 @@ if (Test-Path "$env:ProgramFiles\CCStopper\CCStopper_AIO.ps1") {
 		Write-Host "Do you want to reinstall or uninstall CCStopper? (R/U)"
 		$Reinstall = Read-Host
 		if ($Reinstall -eq "R" -or $Reinstall -eq "r") {
-			Remove-Item -Path "$env:ProgramFiles\CCStopper" -Recurse -Force
+			uninstall
 			break
 		}
 		elseif ($Reinstall -eq "U" -or $Reinstall -eq "u") {
-			Remove-Item -Path "$env:ProgramFiles\CCStopper" -Recurse -Force
-			Write-Host "CCStopper uninstalled!"
+			uninstall
 			Pause
 			exit
 		}
