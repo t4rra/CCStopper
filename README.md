@@ -1,12 +1,19 @@
 # CCStopper <!-- omit in toc --> 
 Stops Adobe's pesky background apps and more 😉
 
+> ## ⚠️This is the development version of CCStopper!⚠️ <!-- omit in toc -->
+> Don't run code from this branch unless you know exactly what you're doing. Consider contributing if you do!
+
+
+
 ### Version
 | Release     | Version    |
 |-------------|-------------|
 | Stable      | v1.2.2-hotfix.1      |
+| Dev      | v1.2.3      |
 
 ## Table of Contents <!-- omit in toc -->
+- [v1.2.3 Changelog \[under development\]](#v123-changelog-under-development)
 - [v1.2.2 Changelog](#v122-changelog)
   - [hotfix.1 Changelog](#hotfix1-changelog)
 - [Installation](#installation)
@@ -17,6 +24,13 @@ Stops Adobe's pesky background apps and more 😉
 - [Alternate Distributions/Modifications](#alternate-distributionsmodifications)
 - [Known Issues](#known-issues)
 - [Disclaimer/Notice](#disclaimernotice)
+
+## v1.2.3 Changelog [under development]
+- AIO version of CCStopper 
+  - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
+  - run `irm https://[url]/AIO | iex` for one-time use
+  - run `irm https://[url]/install | iex` to install and use offline
+  - 
 
 ## v1.2.2 Changelog
 - Updated user messages in `RemoveAGS.ps1` to be more descriptive
