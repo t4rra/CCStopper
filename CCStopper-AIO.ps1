@@ -46,6 +46,8 @@ function Init([string]$Title) {
 	$WindowTitle = "CCStopper_AIO"
 	if ($Title) { $WindowTitle += " - $Title" }
 	$Host.UI.RawUI.WindowTitle = $WindowTitle
+
+	# reset color/font settings
 }
 
 # The indent before the vertical borders

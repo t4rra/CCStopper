@@ -30,7 +30,7 @@ Stops Adobe's pesky background apps and more 😉
   - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
   - run `irm https://[url]/AIO | iex` for one-time use
   - run `irm https://[url]/install | iex` to install and use offline
-  - 
+- Hosts file module improved to write/remove addresses more reliably 
 
 ## v1.2.2 Changelog
 - Updated user messages in `RemoveAGS.ps1` to be more descriptive

@@ -21,4 +21,4 @@ for %%a in (*.ps1) do (
 		echo.>%%a:Zone.Identifier
 	)
 )
-powershell -ExecutionPolicy RemoteSigned -File .\Menu.ps1
+powershell -ExecutionPolicy RemoteSigned -File .\CCStopper-AIO.ps1
