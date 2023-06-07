@@ -11,7 +11,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 Set-Location $PSScriptRoot
 Clear-Host
 
-$CCStopperAIOURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/CCStopper-AIO.ps1"
+$CCStopperAIOURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/CCStopper_AIO.ps1"
 
 # check if CCStopper folder exists and files are inside, if so, ask if user wants to reinstall or uninstall
 if (Test-Path "$env:ProgramFiles\CCStopper\CCStopper_AIO.ps1") {
