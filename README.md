@@ -14,9 +14,9 @@ Stops Adobe's pesky background apps and more 😉
 
 ## Table of Contents <!-- omit in toc -->
 - [v1.2.3 Changelog \[under development\]](#v123-changelog-under-development)
-- [v1.2.2 Changelog](#v122-changelog)
-  - [hotfix.1 Changelog](#hotfix1-changelog)
 - [Installation](#installation)
+  - [One-Line Install/Run](#one-line-installrun)
+  - [Traditional Way](#traditional-way)
 - [Features](#features)
 - [FAQ](#faq)
 - [Adding Entries to Hosts Blocklist](#adding-entries-to-hosts-blocklist)
@@ -28,23 +28,22 @@ Stops Adobe's pesky background apps and more 😉
 ## v1.2.3 Changelog [under development]
 - AIO version of CCStopper 
   - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
-  - run `irm https://[url]/AIO | iex` for one-time use
-  - run `irm https://[url]/install | iex` to install and use offline
+  - see [below](#one-line-installrun) for commands
 - Hosts file module improved to write/remove addresses more reliably 
-
-## v1.2.2 Changelog
-- Updated user messages in `RemoveAGS.ps1` to be more descriptive
-- Firewall names are more descriptive
-  - to update them, run the `Firewall Block` option again. 
-
-### hotfix.1 Changelog
-- Removed mentions of "InternetBlock" in menus of `FirewallBlock.ps1`
-  - Firewall rules will still show "InternetBlock" in the name, can't change because backwards compatibility
 ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
 
 
 ## Installation
 
+### One-Line Install/Run
+<!-- table -->
+| Purpose | Command |
+|-------------|-------------|
+| One-Time Run      | `irm https://ccstopper.netlify.app/AIO \| iex`      |
+| Install       | `irm https://ccstopper.netlify.app/install \| iex`      |
+
+
+### Traditional Way
 1. Get the latest [release](https://github.com/eaaasun/CCStopper/releases/latest)
 2. Extract the ZIP file (This is important, CCStopper will not work without the additional scripts in the additional folders. Also, antivirus may block it from running in the downloads folder.)
 3. Run CCStopper.bat

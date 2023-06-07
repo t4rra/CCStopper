@@ -1,5 +1,5 @@
 # FUNCTIONS START
-$Version = "v1.2.2-hotfix.1"
+$Version = "v1.2.3"
 
 function ArrayFromText {
 	param(
