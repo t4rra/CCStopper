@@ -11,7 +11,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 Set-Location $PSScriptRoot
 Clear-Host
 
-$CCStopperAIOURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/CCStopper-AIO.ps1"
+$CCStopperAIOURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/CCStopper_AIO.ps1"
 
 # download CCStopper into temp folders
 $TempFolder = "$env:TEMP\CCStopper"
