@@ -38,7 +38,7 @@ if (Test-Path "$env:ProgramFiles\CCStopper\CCStopper_AIO.ps1") {
 			uninstall
 			Write-Host "CCStopper uninstalled!"
 			Pause
-			exit
+			return
 		}
 		else {
 			Write-Host "Invalid input, please try again."
