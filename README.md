@@ -26,7 +26,8 @@ Stops Adobe's pesky background apps and more 😉
 - [Disclaimer/Notice](#disclaimernotice)
 
 ## v1.2.3 Changelog [under development]
-- AIO version of CCStopper 
+- Combined everything into one file
+- One-line install/run 
   - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
   - see [below](#one-line-installrun) for commands
 - Hosts file module improved to write/remove addresses more reliably 
@@ -42,12 +43,12 @@ Stops Adobe's pesky background apps and more 😉
 |-------------|-------------|
 | `irm https://ccstopper.netlify.app/run \| iex`      |  Runs CCStopper once.      |
 | `irm https://ccstopper.netlify.app/shortcut \| iex`      |  Creates desktop shortcut that runs the command above. Needs internet to work, but always up-to-date.      |
-| `irm https://ccstopper.netlify.app/offline \| iex`      |  Installs CCStopper and creates a desktop shortcut. Works offline, however it won't automatically update.      |
+| `irm https://ccstopper.netlify.app/install \| iex`      |  Installs CCStopper and creates a desktop shortcut. Works offline, however it won't automatically update.      |
 
 
 #### Manual Install
 1. Get the latest [release](https://github.com/eaaasun/CCStopper/releases/latest)
-2. Extract the ZIP file (This is important, CCStopper will not work without the additional scripts in the additional folders. Also, antivirus may block it from running in the downloads folder.)
+2. Extract the ZIP file (This is important, CCStopper may not work without additional files.)
 3. Run CCStopper.bat
 4. Select an option
 5. Prevent profit (for Adobe)
