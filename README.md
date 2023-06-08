@@ -4,8 +4,6 @@ Stops Adobe's pesky background apps and more 😉
 > ## ⚠️This is the development version of CCStopper!⚠️ <!-- omit in toc -->
 > Don't run code from this branch unless you know exactly what you're doing. Consider contributing if you do!
 
-
-
 ### Version
 | Release     | Version |
 |-------------|-------------|
@@ -33,7 +31,10 @@ Stops Adobe's pesky background apps and more 😉
 - One-line install/run 
   - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
   - see [below](#one-line-installrun) for commands
-- Hosts file module improved to write/remove addresses more reliably 
+- The hosts file module write/remove addresses in a different way, more reliable
+- New module for patching the creative cloud app 
+  - credit to AbsentForeskin on the genP discord
+  - requires restart after patching
 - Created logo for shortcut icons (its very original trust)
 
 ## v1.2.2 Changelog
@@ -78,6 +79,7 @@ Stops Adobe's pesky background apps and more 😉
   - Firewall Block - Creates firewall rule to block the credit card prompt. See [issue #42](https://github.com/eaaasun/CCStopper/issues/42) if it does not work.
   - Add to Hosts - Blocks unnecessary Adobe servers in the hosts file.
 - System Patches
+  - Creative Cloud App - Replaces the 'start trial' button in the Creative Cloud app.
   - Genuine Checker - Locks Genuine Checker files.
   - Hide CCFolder - Hides the Creative Cloud folder in Windows Explorer.
 

@@ -289,7 +289,6 @@ function MainMenu {
 				# Stops Adobe Processes and Services, source: https://gist.github.com/carcheky/530fd85ffff6719486038542a8b5b997#gistcomment-3586740
 
 				# Stop adobe services
-				Get-Service -DisplayName Adobe* | Stop-Service
 
 				# Stop adobe processes
 				$Processes = @()
@@ -306,6 +305,7 @@ function MainMenu {
 					}
 				}
 
+				Get-Service -DisplayName Adobe* | Stop-Service
 				Foreach ($Process in $Processes) { Stop-Process $Process -Force | Out-Null }
 				ShowMenu -Back -Subtitles "StopProcesses Module" -Header "Stopping Adobe processes complete!"
 			}
@@ -531,7 +531,8 @@ function MainMenu {
 								New-Item -Path ".\data\Hosts.txt" -ItemType File
 								if ($GHConnected) {
 									$remoteBlockedAddresses | Out-File "$PSScriptRoot\data\Hosts.txt"
-								} else {
+								}
+								else {
 									$LocalHostsList | Out-File "$PSScriptRoot\data\Hosts.txt"
 								}
 							}
@@ -678,9 +679,72 @@ function MainMenu {
 		},
 		@{
 			Name        = "System Patches"
-			Description = "Genuine checker and hide CC folder in explorer"
+			Description = "Creative Cloud app, Genuine checker, CC Folder patches"
 			Code        = { 
 				ShowMenu -Back -VerCredit -Header "SYSTEM PATCHES" -Description "Run modules again to remove patches." -Options @(
+					@{
+						Name        = "Creative Cloud App"
+						Description = "Replaces the 'start trial' button in the Creative Cloud app. WILL CLOSE ALL ADOBE PROCESSES."
+						Code        = {
+							Init -Title "Patch CC App"
+							# thanks genp discord							
+							# check if backup exists
+							$AppsPanelBL = "${env:Programfiles(x86)}\Common Files\Adobe\Adobe Desktop Common\AppsPanel\AppsPanelBL.dll"
+							$AppsPanelBackup = "$AppsPanelBL.bak"
+							# stop adobe desktop app process
+							$Processes = @()
+							Get-Process * | Where-Object { $_.CompanyName -match "Adobe" -or $_.Path -match "Adobe" } | ForEach-Object {
+								$Processes += , $_
+							}
+							Foreach ($Process in $Processes) { Stop-Process $Process -Force | Out-Null }
+
+							Get-Service -DisplayName Adobe* | Stop-Service
+							if (Test-Path $AppsPanelBackup) {
+								# backup exists, ask if user wants to restore
+								ShowMenu -Back -Subtitles "Patch CC App" -Header "Backup found!" -Description "Would you like to restore the backup?" -Options @(
+									@{
+										Name = "Restore backup"
+										Code = {
+											# restore backup
+											Remove-Item $AppsPanelBL
+											Rename-Item $AppsPanelBackup -NewName "AppsPanelBL.dll"
+											ShowMenu -Back -Subtitles "Patch Desktop App" -Header "Successfully restored backup!" -Description "You may need to restart your system for changes to apply."
+										}
+									}
+								)
+							}
+							else {
+								# backup doesn't exist, create backup and patch app
+								# create backup
+								Copy-Item $AppsPanelBL -Destination $AppsPanelBackup
+
+
+								$bytes = [System.IO.File]::ReadAllBytes($AppsPanelBL)
+								$bytes[1092204] = 0xfe
+								$bytes[1190497] = 0xfe
+								$bytes[1953393] = 0xfe
+								$bytes[2110587] = 0xfe
+								$bytes[2112012] = 0xfe
+								$bytes[2112527] = 0xfe
+								$bytes[2113327] = 0xfe
+								$bytes[2234425] = 0xc6
+								$bytes[2234426] = 0x40
+								$bytes[2234435] = 0xc6
+								$bytes[2234436] = 0x40
+								$bytes[2234445] = 0xc6
+								$bytes[2234446] = 0x40
+								$bytes[2391429] = 0xc6
+								$bytes[2391430] = 0x40
+								$bytes[2391439] = 0xc6
+								$bytes[2391440] = 0x40
+								$bytes[2391449] = 0xc6
+								$bytes[2391450] = 0x40
+								[System.IO.File]::WriteAllBytes($AppsPanelBL, $bytes)
+								ShowMenu -Back -Subtitles "Patch Desktop App" -Header "Successfully patched desktop app!" -Description "You may need to restart your system for changes to apply."
+						
+							}
+						}
+					},
 					@{
 						Name        = "Genuine Checker"
 						Description = "Replaces and locks the Genuine Checker folder."
@@ -898,7 +962,7 @@ cmd.exe /c $modeCommand | Out-Null
 
 # Import the PSReadline module if not already imported
 if (-not (Get-Module -Name PSReadline -ErrorAction SilentlyContinue)) {
-    Import-Module PSReadline
+	Import-Module PSReadline
 }
 
 MainMenu
