@@ -168,7 +168,7 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 		Write-TopBorder
 		Write-BlankMenuLine
 		Write-BlankMenuLine
-		Write-MenuLine -Contents "CCSTOPPER_AIO" -Center
+		Write-MenuLine -Contents "CCSTOPPER" -Center
 		if ($VerCredit) {
 			if ($Subtitles) {
 				$Subtitles += ""
