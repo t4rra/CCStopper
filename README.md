@@ -12,9 +12,7 @@ Stops Adobe's pesky background apps and more 😉
 | Dev      | v1.3.0-pre.1      |
 
 ## Table of Contents <!-- omit in toc -->
-- [v1.3.0 Changelog \[pre-release\]](#v130-changelog-pre-release)
-- [v1.2.2 Changelog](#v122-changelog)
-    - [hotfix.1 Changelog](#hotfix1-changelog)
+- [v1.3.0-pre.1 Changelog](#v130-pre1-changelog)
 - [Installation](#installation)
   - [One-Line Install/Run - v1.3.0+ Only](#one-line-installrun---v130-only)
   - [Manual Install](#manual-install)
@@ -26,7 +24,7 @@ Stops Adobe's pesky background apps and more 😉
 - [Known Issues](#known-issues)
 - [Disclaimer/Notice](#disclaimernotice)
 
-## v1.3.0 Changelog [pre-release]
+## v1.3.0-pre.1 Changelog
 - Combined everything into one file
 - One-line install/run 
   - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
@@ -38,14 +36,6 @@ Stops Adobe's pesky background apps and more 😉
   - requires restart after patching
 - Created logo for shortcut icons (its very original trust)
 
-## v1.2.2 Changelog
-- Updated user messages in `RemoveAGS.ps1` to be more descriptive
-- Firewall names are more descriptive
-  - to update them, run the `Firewall Block` option again. 
-
-#### hotfix.1 Changelog
-- Removed mentions of "InternetBlock" in menus of `FirewallBlock.ps1`
-  - Firewall rules will still show "InternetBlock" in the name, can't change because backwards compatibility
 ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
 
 
