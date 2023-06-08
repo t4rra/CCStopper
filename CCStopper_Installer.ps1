@@ -63,7 +63,14 @@ $Shortcut = $WScriptShell.CreateShortcut($ShortcutPath)
 $Shortcut.TargetPath = "powershell.exe"
 $Shortcut.Arguments = "-command ""& '$env:ProgramFiles\CCStopper\CCStopper_AIO.ps1'"""
 $Shortcut.IconLocation = "$env:ProgramFiles\CCStopper\CCStopper_icon.ico"
+
 $Shortcut.Save()
+
+# thanks https://www.reddit.com/r/PowerShell/comments/7xa4sk/programmatically_create_shortcuts_w_run_as_admin/
+$bytes = [System.IO.File]::ReadAllBytes("$ShortcutPath")
+$bytes[0x15] = $bytes[0x15] -bor 0x20
+[System.IO.File]::WriteAllBytes("$ShortcutPath", $bytes)
+
 
 Write-Host "Desktop shortcut created!"
 
