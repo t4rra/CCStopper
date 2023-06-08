@@ -54,7 +54,7 @@ Stops Adobe's pesky background apps and more 😉
 |-------------|-------------| -------------|
 | `irm https://ccstopper.netlify.app/run \| iex`      |  Runs CCStopper once.      | No |
 | `irm https://ccstopper.netlify.app/shortcut \| iex`      |  Creates desktop shortcut that runs the command above. Needs internet to work, but always up-to-date.      | Yes |
-| `irm https://ccstopper.netlify.app/install \| iex`      |  Installs CCStopper and creates a desktop shortcut. Works offline, however it won't automatically update.      | Yes |
+| `irm https://ccstopper.netlify.app/install \| iex`      |  Installs CCStopper and creates a desktop shortcut. Works offline, however it won't automatically update. To uninstall, run this command again.     | Yes |
 
 
 #### Manual Install
