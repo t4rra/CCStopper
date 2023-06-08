@@ -13,11 +13,13 @@ $CCStopperAIOURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/CCSt
 $CCStopperLogoURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/runFromWeb/icon.ico"
 
 function uninstall {
+	Write-Host "Removing Folder..."
 	Remove-Item -Path "$env:ProgramFiles\CCStopper" -Recurse -Force
 	# delete desktop icon
 	$ShortcutPath = "$env:USERPROFILE\Desktop\CCStopper.lnk"
 	if (Test-Path $ShortcutPath) {
 		Remove-Item $ShortcutPath
+		Write-Host "Removing Desktop Shortcut..."
 	}
 }
 
@@ -34,6 +36,7 @@ if (Test-Path "$env:ProgramFiles\CCStopper\CCStopper_AIO.ps1") {
 		}
 		elseif ($Reinstall -eq "U" -or $Reinstall -eq "u") {
 			uninstall
+			Write-Host "CCStopper uninstalled!"
 			Pause
 			exit
 		}
