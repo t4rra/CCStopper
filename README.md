@@ -10,14 +10,15 @@ Stops Adobe's pesky background apps and more 😉
 | Release     | Version    |
 |-------------|-------------|
 | Stable      | v1.2.2-hotfix.1      |
-| Dev      | v1.2.3-pre.1      |
+| Web      | v1.3.0-pre.1      |
+| Dev      | v1.3.0-pre.1      |
 
 ## Table of Contents <!-- omit in toc -->
-- [v1.2.3 Changelog \[pre-release\]](#v123-changelog-pre-release)
+- [v1.3.0 Changelog \[pre-release\]](#v130-changelog-pre-release)
 - [v1.2.2 Changelog](#v122-changelog)
-  - [hotfix.1 Changelog](#hotfix1-changelog)
+    - [hotfix.1 Changelog](#hotfix1-changelog)
 - [Installation](#installation)
-    - [One-Line Install/Run](#one-line-installrun)
+    - [One-Line Install/Run - v1.3.0+ Only](#one-line-installrun---v130-only)
     - [Manual Install](#manual-install)
 - [Features](#features)
 - [FAQ](#faq)
@@ -27,19 +28,20 @@ Stops Adobe's pesky background apps and more 😉
 - [Known Issues](#known-issues)
 - [Disclaimer/Notice](#disclaimernotice)
 
-## v1.2.3 Changelog [pre-release]
+## v1.3.0 Changelog [pre-release]
 - Combined everything into one file
 - One-line install/run 
   - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
   - see [below](#one-line-installrun) for commands
 - Hosts file module improved to write/remove addresses more reliably 
+- Created logo for shortcut icons (its very original trust)
 
 ## v1.2.2 Changelog
 - Updated user messages in `RemoveAGS.ps1` to be more descriptive
 - Firewall names are more descriptive
   - to update them, run the `Firewall Block` option again. 
 
-### hotfix.1 Changelog
+#### hotfix.1 Changelog
 - Removed mentions of "InternetBlock" in menus of `FirewallBlock.ps1`
   - Firewall rules will still show "InternetBlock" in the name, can't change because backwards compatibility
 ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
@@ -47,7 +49,7 @@ Stops Adobe's pesky background apps and more 😉
 
 ## Installation
 
-#### One-Line Install/Run
+#### One-Line Install/Run - v1.3.0+ Only
 > ⚠️ By using the commands below, you're running remote code that can be compromised/broken anytime. Everything is open-source, but it's still more risky. Proceed with caution. ⚠️
 <!-- table -->
 | Command | Description | Run as admin? |
