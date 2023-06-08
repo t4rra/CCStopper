@@ -37,7 +37,6 @@ if (Test-Path "$env:ProgramFiles\CCStopper\CCStopper_AIO.ps1") {
 		elseif ($Reinstall -eq "U" -or $Reinstall -eq "u") {
 			uninstall
 			Write-Host "CCStopper uninstalled!"
-			Pause
 			return
 		}
 		else {
@@ -81,4 +80,3 @@ Write-Host "Desktop shortcut created!"
 
 Write-Host ""
 Write-Host "CCStopper has been installed!"
-Pause
