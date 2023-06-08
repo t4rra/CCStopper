@@ -31,7 +31,8 @@ Stops Adobe's pesky background apps and more 😉
 - One-line install/run 
   - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
   - see [below](#one-line-installrun) for commands
-- The hosts file module write/remove addresses in a different way, more reliable
+- The hosts file module write/remove addresses in a different way
+  - it *should* migrate old entries, but it hasn't been extensively tested
 - New module for patching the creative cloud app 
   - credit to AbsentForeskin on the genP discord
   - requires restart after patching
@@ -55,7 +56,7 @@ Stops Adobe's pesky background apps and more 😉
 
 #### Powershell Commands <!-- omit in toc -->
 
-| Command | Description | Run as admin? |
+| Powershell Command | Description | Run as admin? |
 |-------------|-------------|:-------------:|
 | `irm https://ccstopper.netlify.app/run \| iex`      |  Runs CCStopper once.      | No |
 | `irm https://ccstopper.netlify.app/shortcut \| iex`      |  Creates desktop shortcut that runs the command above.  | Yes |
