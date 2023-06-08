@@ -27,7 +27,7 @@ $ShortcutPath = "$env:USERPROFILE\Desktop\CCStopper (Online).lnk"
 $WScriptShell = New-Object -ComObject WScript.Shell
 $Shortcut = $WScriptShell.CreateShortcut($ShortcutPath)
 $Shortcut.TargetPath = "powershell.exe"
-$Shortcut.Arguments = '-command "irm https://ccstopper.netlify.app/aio | iex"'
+$Shortcut.Arguments = '-command "irm https://ccstopper.netlify.app/run | iex"'
 $Shortcut.IconLocation = "$env:ProgramFiles\CCStopper\icon.ico"
 
 $Shortcut.Save()
