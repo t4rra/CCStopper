@@ -5,8 +5,11 @@ Stops Adobe's pesky background apps and more 😉
 | Release     | Version    |
 |-------------|-------------|
 | Stable      | v1.2.2-hotfix.1      |
+| Web      | v1.3.0-pre.1      |
+| Dev      | v1.3.0-pre.1      |
 
 ## Table of Contents <!-- omit in toc -->
+- [v1.3.0-pre.1 Changelog](#v130-pre1-changelog)
 - [v1.2.2 Changelog](#v122-changelog)
   - [hotfix.1 Changelog](#hotfix1-changelog)
 - [Installation](#installation)
@@ -18,6 +21,18 @@ Stops Adobe's pesky background apps and more 😉
 - [Known Issues](#known-issues)
 - [Disclaimer/Notice](#disclaimernotice)
 
+## v1.3.0-pre.1 Changelog
+> [Visit the dev readme for updated documentation](https://github.com/eaaasun/CCStopper/tree/dev). 
+- Combined everything into one file
+- One-line install/run 
+  - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
+  - see [below](#one-line-installrun) for commands
+- The hosts file module write/remove addresses in a different way
+  - it *should* migrate old entries, but it hasn't been extensively tested
+- New module for patching the creative cloud app 
+  - credit to AbsentForeskin on the genP discord
+  - requires restart after patching
+- Created logo for shortcut icons (its very original trust)
 ## v1.2.2 Changelog
 - Updated user messages in `RemoveAGS.ps1` to be more descriptive
 - Firewall names are more descriptive
