@@ -7,7 +7,7 @@ Stops Adobe's pesky background apps and more 😉
 
 
 ### Version
-| Release     | Version    |
+| Release     | Version |
 |-------------|-------------|
 | Stable      | v1.2.2-hotfix.1      |
 | Web      | v1.3.0-pre.1      |
@@ -18,8 +18,8 @@ Stops Adobe's pesky background apps and more 😉
 - [v1.2.2 Changelog](#v122-changelog)
     - [hotfix.1 Changelog](#hotfix1-changelog)
 - [Installation](#installation)
-    - [One-Line Install/Run - v1.3.0+ Only](#one-line-installrun---v130-only)
-    - [Manual Install](#manual-install)
+  - [One-Line Install/Run - v1.3.0+ Only](#one-line-installrun---v130-only)
+  - [Manual Install](#manual-install)
 - [Features](#features)
 - [FAQ](#faq)
 - [Adding Entries to Hosts Blocklist](#adding-entries-to-hosts-blocklist)
@@ -49,17 +49,19 @@ Stops Adobe's pesky background apps and more 😉
 
 ## Installation
 
-#### One-Line Install/Run - v1.3.0+ Only
-> ⚠️ By using the commands below, you're running remote code that can be compromised/broken anytime. Everything is open-source, but it's still more risky. Proceed with caution. ⚠️
-<!-- table -->
+### One-Line Install/Run - v1.3.0+ Only
+> ⚠️ By using the commands below, you're running remote code that can be compromised/broken anytime. Everything is open-source, but it's still more risky than a manual installation. Proceed with caution. ⚠️
+
+#### Powershell Commands <!-- omit in toc -->
+
 | Command | Description | Run as admin? |
-|-------------|-------------| -------------|
+|-------------|-------------|:-------------:|
 | `irm https://ccstopper.netlify.app/run \| iex`      |  Runs CCStopper once.      | No |
-| `irm https://ccstopper.netlify.app/shortcut \| iex`      |  Creates desktop shortcut that runs the command above. Needs internet to work, but always up-to-date.      | Yes |
-| `irm https://ccstopper.netlify.app/install \| iex`      |  Installs CCStopper and creates a desktop shortcut. Works offline, however it won't automatically update. To uninstall, run this command again.     | Yes |
+| `irm https://ccstopper.netlify.app/shortcut \| iex`      |  Creates desktop shortcut that runs the command above.  | Yes |
+| `irm https://ccstopper.netlify.app/install \| iex`      |  Installs CCStopper and creates a desktop shortcut. Works offline, however it won't automatically update. To uninstall/reinstall, run this command again.     | Yes |
 
 
-#### Manual Install
+### Manual Install
 1. Get the latest [release](https://github.com/eaaasun/CCStopper/releases/latest)
 2. Extract the ZIP file (This is important, CCStopper may not work without additional files.)
 3. Run CCStopper.bat
