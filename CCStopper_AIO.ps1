@@ -887,4 +887,5 @@ function MainMenu {
 	)
 }
 
+$host.UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size(102, 36)
 MainMenu
