@@ -10,7 +10,7 @@ if (-not $isAdmin) {
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
 $CCStopperAIOURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/CCStopper_AIO.ps1"
-$CCStopperLogoURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/logo.ico"
+$CCStopperLogoURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/runFromWeb/logo.ico"
 
 function uninstall {
 	Remove-Item -Path "$env:ProgramFiles\CCStopper" -Recurse -Force
