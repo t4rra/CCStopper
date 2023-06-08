@@ -37,7 +37,7 @@ Stops Adobe's pesky background apps and more 😉
 
 ### One-Line Install/Run
 <!-- table -->
-| Description | Command |
+| Command | Description |
 |-------------|-------------|
 | `irm https://ccstopper.netlify.app/aio \| iex`      |  Runs CCStopper once.      |
 | `irm https://ccstopper.netlify.app/install \| iex`      |  Installs CCStopper and creates a desktop shortcut.      |
