@@ -887,5 +887,14 @@ function MainMenu {
 	)
 }
 
-$host.UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size(102, 36)
+$modeCommand = "mode con: cols=102 lines=36"
+
+# Execute the mode.com command
+cmd.exe /c $modeCommand | Out-Null
+
+# Import the PSReadline module if not already imported
+if (-not (Get-Module -Name PSReadline -ErrorAction SilentlyContinue)) {
+    Import-Module PSReadline
+}
+
 MainMenu
