@@ -10,7 +10,7 @@ if (-not $isAdmin) {
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
 $CCStopperAIOURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/CCStopper_AIO.ps1"
-$CCStopperLogoURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/CCStopper%20logo.ico"
+$CCStopperLogoURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/logo.ico"
 
 function uninstall {
 	Remove-Item -Path "$env:ProgramFiles\CCStopper" -Recurse -Force
@@ -52,7 +52,7 @@ if (!(Test-Path "$env:ProgramFiles\CCStopper")) {
 
 # Download CCStopper into it
 Invoke-WebRequest -Uri $CCStopperAIOURL -OutFile "$env:ProgramFiles\CCStopper\CCStopper_AIO.ps1" -UseBasicParsing
-Invoke-WebRequest -Uri $CCStopperLogoURL -OutFile "$env:ProgramFiles\CCStopper\CCStopper_icon.ico" -UseBasicParsing
+Invoke-WebRequest -Uri $CCStopperLogoURL -OutFile "$env:ProgramFiles\CCStopper\icon.ico" -UseBasicParsing
 
 
 Write-Host "CCStopper downloaded to $env:ProgramFiles\CCStopper"
@@ -64,7 +64,7 @@ $WScriptShell = New-Object -ComObject WScript.Shell
 $Shortcut = $WScriptShell.CreateShortcut($ShortcutPath)
 $Shortcut.TargetPath = "powershell.exe"
 $Shortcut.Arguments = "-command ""& '$env:ProgramFiles\CCStopper\CCStopper_AIO.ps1'"""
-$Shortcut.IconLocation = "$env:ProgramFiles\CCStopper\CCStopper_icon.ico"
+$Shortcut.IconLocation = "$env:ProgramFiles\CCStopper\icon.ico"
 
 $Shortcut.Save()
 

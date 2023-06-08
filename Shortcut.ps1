@@ -9,7 +9,7 @@ if (-not $isAdmin) {
 # Enable TLSv1.2 for compatibility with older clients
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$CCStopperLogoURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/CCStopper%20logo.ico"
+$CCStopperLogoURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/logo.ico"
 
 # Create CCStopper program folder if it doesn't already exist
 if (!(Test-Path "$env:ProgramFiles\CCStopper")) {
@@ -17,7 +17,7 @@ if (!(Test-Path "$env:ProgramFiles\CCStopper")) {
 }
 
 # Download CCStopper logo into it
-Invoke-WebRequest -Uri $CCStopperLogoURL -OutFile "$env:ProgramFiles\CCStopper\CCStopper_icon.ico" -UseBasicParsing
+Invoke-WebRequest -Uri $CCStopperLogoURL -OutFile "$env:ProgramFiles\CCStopper\icon.ico" -UseBasicParsing
 
 Write-Host "CCStopper icon downloaded to $env:ProgramFiles\CCStopper"
 Write-Host ""
@@ -28,7 +28,7 @@ $WScriptShell = New-Object -ComObject WScript.Shell
 $Shortcut = $WScriptShell.CreateShortcut($ShortcutPath)
 $Shortcut.TargetPath = "powershell.exe"
 $Shortcut.Arguments = '-command "irm https://ccstopper.netlify.app/aio | iex"'
-$Shortcut.IconLocation = "$env:ProgramFiles\CCStopper\CCStopper_icon.ico"
+$Shortcut.IconLocation = "$env:ProgramFiles\CCStopper\icon.ico"
 
 $Shortcut.Save()
 

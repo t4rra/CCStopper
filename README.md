@@ -40,7 +40,7 @@ Stops Adobe's pesky background apps and more 😉
 <!-- table -->
 | Command | Description |
 |-------------|-------------|
-| `irm https://ccstopper.netlify.app/aio \| iex`      |  Runs CCStopper once.      |
+| `irm https://ccstopper.netlify.app/run \| iex`      |  Runs CCStopper once.      |
 | `irm https://ccstopper.netlify.app/shortcut \| iex`      |  Creates desktop shortcut that runs the command above. Needs internet to work, but always up-to-date.      |
 | `irm https://ccstopper.netlify.app/offline \| iex`      |  Installs CCStopper and creates a desktop shortcut. Works offline, however it won't automatically update.      |
 
