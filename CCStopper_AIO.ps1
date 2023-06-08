@@ -529,7 +529,11 @@ function MainMenu {
 							if (!(Test-Path ".\data\Hosts.txt")) {
 								New-Item -Path ".\data" -ItemType Directory
 								New-Item -Path ".\data\Hosts.txt" -ItemType File
-								$LocalHostsList | Out-File "$PSScriptRoot\data\Hosts.txt"
+								if ($GHConnected) {
+									$remoteBlockedAddresses | Out-File "$PSScriptRoot\data\Hosts.txt"
+								} else {
+									$LocalHostsList | Out-File "$PSScriptRoot\data\Hosts.txt"
+								}
 							}
 							$BlockedAddresses = ArrayFromText -Source ".\data\Hosts.txt" -IsLocal
 							$UpdateAvaliable = (Compare-Object $remoteBlockedAddresses $BlockedAddresses -SyncWindow 0) -and $GHConnected
