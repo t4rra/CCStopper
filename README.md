@@ -29,6 +29,8 @@ Stops Adobe's pesky background apps and more 😉
   - see [below](#one-line-installrun) for commands
 - The hosts file module write/remove addresses in a different way
   - it *should* migrate old entries, but it hasn't been extensively tested
+  - ***known bug***: if the [hosts list](https://github.com/eaaasun/CCStopper/blob/data/Hosts.txt) has a new entry and system's hosts file don't have the new entry, CCStopper will only give option to remove entries from hosts file. this doesn't apply if ccstopper is installed (via one-line command or zip file)
+  - ***fix***: if the hosts block stops working try removing and then adding the hosts block back. 
 - New module for patching the creative cloud app 
   - credit to AbsentForeskin on the genP discord
   - requires restart after patching
