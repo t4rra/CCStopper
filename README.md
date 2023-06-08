@@ -28,7 +28,7 @@ Stops Adobe's pesky background apps and more 😉
 - Combined everything into one file
 - One-line install/run 
   - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
-  - see [below](#one-line-installrun) for commands
+  - see [below](#one-line-installrun---v130-only) for commands
 - The hosts file module write/remove addresses in a different way
   - it *should* migrate old entries, but it hasn't been extensively tested
 - New module for patching the creative cloud app 
