@@ -36,7 +36,7 @@ Stops Adobe's pesky background apps and more 😉
 ## Installation
 
 #### One-Line Install/Run
-> Make sure to run the commands as administrator.
+> Run as admin for installing or creating a desktop shortcut.
 <!-- table -->
 | Command | Description |
 |-------------|-------------|
