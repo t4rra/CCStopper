@@ -15,8 +15,8 @@ Stops Adobe's pesky background apps and more 😉
 ## Table of Contents <!-- omit in toc -->
 - [v1.2.3 Changelog \[under development\]](#v123-changelog-under-development)
 - [Installation](#installation)
-  - [One-Line Install/Run](#one-line-installrun)
-  - [Manual Install](#manual-install)
+    - [One-Line Install/Run](#one-line-installrun)
+    - [Manual Install](#manual-install)
 - [Features](#features)
 - [FAQ](#faq)
 - [Adding Entries to Hosts Blocklist](#adding-entries-to-hosts-blocklist)
@@ -35,15 +35,17 @@ Stops Adobe's pesky background apps and more 😉
 
 ## Installation
 
-### One-Line Install/Run
+#### One-Line Install/Run
+> Make sure to run the commands as administrator.
 <!-- table -->
 | Command | Description |
 |-------------|-------------|
 | `irm https://ccstopper.netlify.app/aio \| iex`      |  Runs CCStopper once.      |
-| `irm https://ccstopper.netlify.app/install \| iex`      |  Installs CCStopper and creates a desktop shortcut.      |
+| `irm https://ccstopper.netlify.app/shortcut \| iex`      |  Creates desktop shortcut that runs the command above. Needs internet to work, but always up-to-date.      |
+| `irm https://ccstopper.netlify.app/offline \| iex`      |  Installs CCStopper and creates a desktop shortcut. Works offline, however it won't automatically update.      |
 
 
-### Manual Install
+#### Manual Install
 1. Get the latest [release](https://github.com/eaaasun/CCStopper/releases/latest)
 2. Extract the ZIP file (This is important, CCStopper will not work without the additional scripts in the additional folders. Also, antivirus may block it from running in the downloads folder.)
 3. Run CCStopper.bat

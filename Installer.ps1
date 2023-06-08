@@ -45,8 +45,10 @@ if (Test-Path "$env:ProgramFiles\CCStopper\CCStopper_AIO.ps1") {
 
 
 
-# Create CCStopper program folder
-New-Item -Path "$env:ProgramFiles\CCStopper" -ItemType Directory -Force | Out-Null
+# Create CCStopper program folder if it doesn't exist
+if (!(Test-Path "$env:ProgramFiles\CCStopper")) {
+	New-Item -Path "$env:ProgramFiles\CCStopper" -ItemType Directory -Force | Out-Null
+}
 
 # Download CCStopper into it
 Invoke-WebRequest -Uri $CCStopperAIOURL -OutFile "$env:ProgramFiles\CCStopper\CCStopper_AIO.ps1" -UseBasicParsing
