@@ -8,8 +8,8 @@ Stops Adobe's pesky background apps and more 😉
 | Release     | Version |
 |-------------|-------------|
 | Stable      | v1.2.2-hotfix.1      |
-| Web      | v1.2.3-pre.1      |
-| Dev      | v1.2.3-pre.1      |
+| Web      | v1.2.3-pre.1 (formerly v1.3.0-pre.1)     |
+| Dev      | v1.2.3-pre.1 (formerly v1.3.0-pre.1)     |
 
 ## Table of Contents <!-- omit in toc -->
 - [v1.2.3-pre.1 Changelog](#v123-pre1-changelog)
@@ -25,6 +25,7 @@ Stops Adobe's pesky background apps and more 😉
 - [Disclaimer/Notice](#disclaimernotice)
 
 ## v1.2.3-pre.1 Changelog
+> formerly `v1.3.0-pre.1`, I changed the version to better reflect the amount of new features
 - Combined everything into one file
 - One-line install/run 
   - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
