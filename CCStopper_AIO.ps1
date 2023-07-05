@@ -1,5 +1,5 @@
 # FUNCTIONS START
-$Version = "v1.3.0-pre.1"
+$Version = "v1.2.3-pre.1"
 
 function ArrayFromText {
 	param(
