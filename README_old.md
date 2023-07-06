@@ -1,39 +1,31 @@
 # CCStopper <!-- omit in toc --> 
 Stops Adobe's pesky background apps and more 😉
 
+> ## ⚠️This is the development version of CCStopper!⚠️ <!-- omit in toc -->
+> Don't run code from this branch unless you know exactly what you're doing. Consider contributing if you do!
+
+### Version
+| Release     | Version |
+|-------------|-------------|
+| Stable      | v1.2.2-hotfix.1      |
+| Web      | v1.3.0-pre.1      |
+| Dev      | v1.3.0-pre.1      |
+
 ## Table of Contents <!-- omit in toc -->
-- [Install/Run](#installrun)
-- [v1.3.0-pre.2 Changelog](#v130-pre2-changelog)
+- [v1.3.0-pre.1 Changelog](#v130-pre1-changelog)
+- [Installation](#installation)
+  - [One-Line Install/Run - v1.3.0+ Only](#one-line-installrun---v130-only)
+  - [Manual Install](#manual-install)
 - [Features](#features)
 - [FAQ](#faq)
-- [Issues](#issues)
-- [Contributing](#contributing)
-  - [Alternate Distributions/Modifications](#alternate-distributionsmodifications)
-  - [Adding Entries to Hosts Blocklist](#adding-entries-to-hosts-blocklist)
+- [Adding Entries to Hosts Blocklist](#adding-entries-to-hosts-blocklist)
+- [New Features](#new-features)
+- [Alternate Distributions/Modifications](#alternate-distributionsmodifications)
+- [Known Issues](#known-issues)
 - [Disclaimer/Notice](#disclaimernotice)
 
-
-## Install/Run
-### One Line - v1.3.0+ Only <!-- omit in toc -->
-> ⚠️ By using the commands below, you're running remote code that can be compromised/broken anytime. Everything is open-source, but it's still more risky than a manual installation. Proceed with caution. ⚠️
-
-#### Powershell Commands <!-- omit in toc -->
-
-| Powershell Command | Description | Run as admin? |
-|-------------|-------------|:-------------:|
-| `irm https://ccstopper.netlify.app/run \| iex`      |  Runs CCStopper once.      | No |
-| `irm https://ccstopper.netlify.app/shortcut \| iex`      |  Creates desktop shortcut that runs the command above.  | Yes |
-| `irm https://ccstopper.netlify.app/install \| iex`      |  Installs CCStopper and creates a desktop shortcut. Works offline, however it won't automatically update. To uninstall/reinstall, run this command again.     | Yes |
-
-
-### Manual Install <!-- omit in toc -->
-1. Get the latest [release](https://github.com/eaaasun/CCStopper/releases/latest)
-2. Extract the ZIP file (This is important, CCStopper may not work without additional files.)
-3. Run CCStopper.bat
-4. Select an option
-5. Prevent profit (for Adobe)
-
-## v1.3.0-pre.2 Changelog
+## v1.3.0-pre.1 Changelog
+- Combined everything into one file
 - One-line install/run 
   - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
   - see [below](#one-line-installrun) for commands
@@ -45,6 +37,28 @@ Stops Adobe's pesky background apps and more 😉
 - Created logo for shortcut icons (its very original trust)
 
 ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
+
+
+## Installation
+
+### One-Line Install/Run - v1.3.0+ Only
+> ⚠️ By using the commands below, you're running remote code that can be compromised/broken anytime. Everything is open-source, but it's still more risky than a manual installation. Proceed with caution. ⚠️
+
+#### Powershell Commands <!-- omit in toc -->
+
+| Powershell Command | Description | Run as admin? |
+|-------------|-------------|:-------------:|
+| `irm https://ccstopper.netlify.app/run \| iex`      |  Runs CCStopper once.      | No |
+| `irm https://ccstopper.netlify.app/shortcut \| iex`      |  Creates desktop shortcut that runs the command above.  | Yes |
+| `irm https://ccstopper.netlify.app/install \| iex`      |  Installs CCStopper and creates a desktop shortcut. Works offline, however it won't automatically update. To uninstall/reinstall, run this command again.     | Yes |
+
+
+### Manual Install
+1. Get the latest [release](https://github.com/eaaasun/CCStopper/releases/latest)
+2. Extract the ZIP file (This is important, CCStopper may not work without additional files.)
+3. Run CCStopper.bat
+4. Select an option
+5. Prevent profit (for Adobe)
 
 ## Features
 > Please do not list options by number (i.e. "select option 1, then run option 3") if you are creating a guide or asking a question that uses CCStopper. To reduce confusion, use the names of the options. Thank you.
@@ -96,18 +110,18 @@ Stops Adobe's pesky background apps and more 😉
 > Please donate your time! If you have Powershell/Batch knowledge, contribute to the project! If not, finding bugs and suggesting features is just as helpful!
 </details>
 
-## Issues
-Found a bug? Something not working? Please open an issue! Please read through the issue form, and check for existing/closed issues before submitting.
+## Adding Entries to Hosts Blocklist
+The `data` branch of CCStopper contains a `hosts.txt` file that has a list of addresses that CCStopper will block. If you think an address from adobe should be blocked, open a pull request with the address added to the bottom of the list. Also state why the address should be added to the hosts block.
+## New Features
+I work on new features in the dev branch. Most of the time, I'll include a section in the README with proposed changes. (there used to be a project board but i was too lazy to update it)
 
-## Contributing
-> Want to support this project? Please donate your time! If you have Powershell/Batch knowledge, contribute to the project! If not, finding bugs and suggesting features is just as helpful!
-### Alternate Distributions/Modifications
+## Alternate Distributions/Modifications
 > I cannot offer any support for CCStopper unless it's a release from this repository.
 
 I have no problems with this and enjoy seeing what people do with my code! Please make sure that your fork complies with this repository's license, and that the user knows it's not a modified release. Also, if you make any improvements, please consider making a pull request!
 
-### Adding Entries to Hosts Blocklist
-The `data` branch of CCStopper contains a `hosts.txt` file that has a list of addresses that CCStopper will block. If you think an address from adobe should be blocked, open a pull request with the address added to the bottom of the list. Also state why the address should be added to the hosts block.
+## Known Issues
+Check the [issues](https://github.com/eaaasun/CCStopper/issues) page for the latest issues. I try to respond to all of them ASAP, but this is a side project and I like to touch grass too.
 
 ## Disclaimer/Notice
 
