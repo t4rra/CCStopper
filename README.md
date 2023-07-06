@@ -3,7 +3,7 @@ Stops Adobe's pesky background apps and more 😉
 
 ## Table of Contents <!-- omit in toc -->
 - [Install/Run](#installrun)
-- [v1.3.0-pre.2 Changelog](#v130-pre2-changelog)
+- [v1.2.3-pre.2 Changelog](#v123-pre2-changelog)
 - [Features](#features)
 - [FAQ](#faq)
 - [Issues](#issues)
@@ -14,7 +14,7 @@ Stops Adobe's pesky background apps and more 😉
 
 
 ## Install/Run
-### One Line - v1.3.0+ Only <!-- omit in toc -->
+### One Line - v1.2.3+ Only <!-- omit in toc -->
 > ⚠️ By using the commands below, you're running remote code that can be compromised/broken anytime. Everything is open-source, but it's still more risky than a manual installation. Proceed with caution. ⚠️
 
 #### Powershell Commands <!-- omit in toc -->
@@ -33,7 +33,7 @@ Stops Adobe's pesky background apps and more 😉
 4. Select an option
 5. Prevent profit (for Adobe)
 
-## v1.3.0-pre.2 Changelog
+## v1.2.3-pre.2 Changelog
 - One-line install/run 
   - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
   - see [below](#one-line-installrun) for commands
@@ -104,7 +104,7 @@ Found a bug? Something not working? Please open an issue! Please read through th
 ### Alternate Distributions/Modifications
 > I cannot offer any support for CCStopper unless it's a release from this repository.
 
-I have no problems with this and enjoy seeing what people do with my code! Please make sure that your fork complies with this repository's license, and that the user knows it's not a modified release. Also, if you make any improvements, please consider making a pull request!
+I have no problems with this and enjoy seeing what people do with my code! Please make sure that your fork complies with this repository's license, and that the user knows it's a fork of CCStopper. Also, if you make any improvements, please consider making a pull request!
 
 ### Adding Entries to Hosts Blocklist
 The `data` branch of CCStopper contains a `hosts.txt` file that has a list of addresses that CCStopper will block. If you think an address from adobe should be blocked, open a pull request with the address added to the bottom of the list. Also state why the address should be added to the hosts block.
