@@ -213,7 +213,7 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 		Write-TextBorder
 		Write-BlankMenuLine
 
-		if ($Back) { $Exit = "Back" } else { $Exit = "Exit" }
+		if ($Back) { $Exit = "Main Menu" } else { $Exit = "Exit" }
 		Write-MenuLine -Contents "[Q] $Exit"
 		Write-BlankMenuLine
 
@@ -222,7 +222,7 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 
 		ReadKey $($Options.Length)
 		if ($Choice -eq "Q") { 
-			if ($Exit -eq "Back") { 
+			if ($Exit -eq "Main Menu") { 
 				MainMenu
    }
 			else {
