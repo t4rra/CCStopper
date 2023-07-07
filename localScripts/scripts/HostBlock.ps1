@@ -1,5 +1,5 @@
 Import-Module $PSScriptRoot\Functions.ps1
-Init -Title "Hosts Patch"
+Init -Title "Hosts Block"
 
 $StartCommentedLine = "`# START CCStopper Block List - DO NOT EDIT THIS LINE"
 $EndCommentedLine = "`# END CCStopper Block List - DO NOT EDIT THIS LINE"
@@ -59,12 +59,12 @@ function OperationCompleted([string]$Operation) {
 	if ($ChangedPerms) {
 		icacls $HostsFile /remove "Administrators:(w)"
 	}
-	ShowMenu -Back -Subtitle "Hosts Patch Module" -Header "$Operation"
+	ShowMenu -Back -Subtitle "Hosts Block Module" -Header "$Operation"
 }
 
 if ($CurrentHostsList) {
 	if ($UpdateAvaliable) {
-		ShowMenu -Back -Subtitle "Hosts Patch Module" -Header "Hosts block list out of sync!" -Description "The current blocked addresses are out of sync with the latest blocked addresses." -Options @(
+		ShowMenu -Back -Subtitle "Hosts Block Module" -Header "Hosts block list out of sync!" -Description "The current blocked addresses are out of sync with the latest blocked addresses." -Options @(
 			@{
 				Name = "Sync Addresses"
 				Code = {
@@ -74,7 +74,7 @@ if ($CurrentHostsList) {
 				}
 			}, 
 			@{
-				Name = "Remove Hosts Patch"
+				Name = "Remove Hosts Block"
 				Code = {
 					RemoveBlockList
 					OperationCompleted -Operation "Hosts block list removed!"
@@ -83,9 +83,9 @@ if ($CurrentHostsList) {
 		)
 	}
  else {
-		ShowMenu -Back -Subtitle "Hosts Patch Module" -Header "Hosts block list exists!" -Description "Would you like to remove it?" -Options @(
+		ShowMenu -Back -Subtitle "Hosts Block Module" -Header "Hosts block list exists!" -Description "Would you like to remove it?" -Options @(
 			@{
-				Name = "Remove Hosts Patch"
+				Name = "Remove Hosts Block"
 				Code = {
 					RemoveBlockList
 					OperationCompleted -Operation "Hosts block list removed!"
@@ -96,7 +96,7 @@ if ($CurrentHostsList) {
 }
 else {
 	if ($Offline) {
-		ShowMenu -Back -Subtitle "Hosts Patch Module" -Header "Cannot connect to Github!" -Description "You may be offline or Github may be down."
+		ShowMenu -Back -Subtitle "Hosts Block Module" -Header "Cannot connect to Github!" -Description "You may be offline or Github may be down."
 	}
  else {
 		AddBlockList
