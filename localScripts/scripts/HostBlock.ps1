@@ -1,162 +1,95 @@
 Import-Module $PSScriptRoot\Functions.ps1
-Init -Title "Hosts Block"
+Init -Title "Hosts Patch"
 
 $StartCommentedLine = "`# START CCStopper Block List - DO NOT EDIT THIS LINE"
 $EndCommentedLine = "`# END CCStopper Block List - DO NOT EDIT THIS LINE"
 
 $LocalAddress = "0.0.0.0"
 $HostsFile = "$Env:SystemRoot\System32\drivers\etc\hosts"
+$RemoteURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/localScripts/scripts/data/Hosts.txt"
 
-# Check if github is reachable
-$GHConnected = Test-Connection -ComputerName github.com -Count 1 -Quiet
-# Check if avaliable update
-if ($GHConnected) {
-	$remoteBlockedAddresses = ArrayFromText -Source "https://raw.githubusercontent.com/eaaasun/CCStopper/data/Hosts.txt"
+# check if hosts file is writable
+try {
+	$stream = [System.IO.File]::OpenWrite($HostsFile)
+	$stream.Close()
+	$ChangedPerms = $false
+}
+catch {
+	icacls $HostsFile /grant "Administrators:(w)"
+	$ChangedPerms = $true
 }
 
-# Check if /data/hosts is avaliable, if not make it
-if (!(Test-Path ".\data\Hosts.txt")) {
-	New-Item -Path ".\data" -ItemType Directory
-	New-Item -Path ".\data\Hosts.txt" -ItemType File
-	if ($GHConnected) {
-		$remoteBlockedAddresses | Out-File "$PSScriptRoot\data\Hosts.txt"
-	}
-	else {
-		$LocalHostsList | Out-File "$PSScriptRoot\data\Hosts.txt"
-	}
-}
-$BlockedAddresses = ArrayFromText -Source ".\data\Hosts.txt" -IsLocal
-$UpdateAvaliable = (Compare-Object $remoteBlockedAddresses $BlockedAddresses -SyncWindow 0) -and $GHConnected
+# get hosts file and filter for blocked addresses from CCStopper there
+$CurrentHostsList = [System.IO.File]::ReadAllText((Get-Item $HostsFile).FullName) | Select-String -Pattern "(?s)$StartCommentedLine(.*?)$EndCommentedLine" -AllMatches | ForEach-Object { $_.Matches.Value.Trim() }
 
-# legacy migration
-# # check if "# CCStopper Adobe Block List" line exists
-if (Select-String -Path $HostsFile -Pattern "`# CCStopper Adobe Block List") {
-	# loop through each item in localhostslist and check if it exists in hosts file, delete the line if it does
-	$OriginalHosts = [System.IO.File]::ReadAllText($(Get-Item($HostsFile)).FullName)
-	$Unwanted += "`# CCStopper Adobe Block List"
+try {
+	$BlockedAddresses = (Invoke-WebRequest $RemoteURL -Headers @{"Cache-Control" = "no-cache" }).Content.Split("`n", [StringSplitOptions]::RemoveEmptyEntries) | Where-Object { $_ -ne '' } | ForEach-Object { $_.Trim() }
+	# create formatted list of addresses
+	$NewHostsList = "$StartCommentedLine`r`n"
 	foreach ($Address in $BlockedAddresses) {
-		# find match in hosts file, if so remove it if not skip
-		if (Select-String -Path $HostsFile -Pattern "$LocalAddress $Address") {
-			$Unwanted += "`r`n$LocalAddress $Address"
-		}
+		$NewHostsList += "$LocalAddress $Address`r`n"
 	}
-	$NewText = $OriginalHosts -split $Unwanted, 0, 'simplematch' -join ''
-	[System.IO.File]::WriteAllText($HostsFile, $NewText)
+	$NewHostsList += "$EndCommentedLine"
+	$NewHostsList = $NewHostsList.Trim()
+	# compare current hosts list with new hosts list
+	$UpdateAvaliable = (Compare-Object $CurrentHostsList $NewHostsList -SyncWindow 0)
+}
+catch {
+	ShowMenu -Subtitle "Hosts Patch Module" -Header "Cannot connect to Github!" -Description "You may be offline or Github may be down."
 }
 
+function RemoveBlockList {
+	# remove block list from hosts file
+	$RemovedBlockListFile = [System.IO.File]::ReadAllText((Get-Item $HostsFile).FullName) -replace $CurrentHostsList, ""
+	[System.IO.File]::WriteAllText((Get-Item $HostsFile).FullName, $RemovedBlockListFile)
+}
 
+function AddBlockList {
+	# add block list to hosts file
+	$NewBlockListFile = [System.IO.File]::ReadAllText((Get-Item $HostsFile).FullName) + "`r`n" + $NewHostsList
+	[System.IO.File]::WriteAllText((Get-Item $HostsFile).FullName, $NewBlockListFile)
+}
 
-
-function addToHosts {
-	$BlockedAddresses = ArrayFromText -Source "$PSScriptRoot\data\Hosts.txt" -IsLocal
-	[System.IO.File]::AppendAllText($HostsFile, "`r`n$StartCommentedLine")
-	RemoveEndBlankLine
-	# Add blocked addresses to hosts file
-	foreach ($Address in $BlockedAddresses) {
-		[System.IO.File]::AppendAllText($HostsFile, "`r`n$LocalAddress $Address")
+function OperationCompleted([string]$Operation) {
+	if ($ChangedPerms) {
+		icacls $HostsFile /remove "Administrators:(w)"
 	}
-	[System.IO.File]::AppendAllText($HostsFile, "`r`n$EndCommentedLine")
+	ShowMenu -Back -Subtitle "Hosts Patch Module" -Header "$Operation"
 }
 
-function removeFromHosts {
-	# Source: https://social.technet.microsoft.com/Forums/en-US/8a4393f1-9ca6-46d3-933c-07217fa12695/string-replace-error-in-powershell
-	$OriginalHosts = [System.IO.File]::ReadAllText($(Get-Item($HostsFile)).FullName)
-	# add all lines of text between start and end commented lines to $Unwanted
-	$pattern = "(?s)$StartCommentedLine(.*?)$EndCommentedLine"
-	$Unwanted = $OriginalHosts | Select-String -Pattern $pattern -AllMatches | ForEach-Object { $_.Matches.Value }
-	$NewText = $OriginalHosts -split $Unwanted, 0, 'simplematch' -join ''
-	[System.IO.File]::WriteAllText($HostsFile, $NewText)
-	RemoveEndBlankLine
-}
-
-function updateHosts {
-	removeFromHosts
-	$remoteBlockedAddresses | Out-File "$PSScriptRoot\data\Hosts.txt"
-	addToHosts
-}
-
-function RemoveEndBlankLine {
-	# Source: https://www.reddit.com/r/PowerShell/comments/68sa4e/comment/dh0wyxp/?utm_source=share&utm_medium=web2x&context=3
-	$Newtext = (Get-Content -Path $HostsFile -Raw) -replace "(?s)`r`n\s*$"
-	[System.IO.File]::WriteAllText($HostsFile, $Newtext)	
-}
-
-if (Test-Path $HostsFile) {
-	# Source: https://stackoverflow.com/a/22943669
-	try {
-		[IO.File]::OpenWrite($HostsFile).close()
-	}
-	catch {
-		ShowMenu -Back -Subtitles "HostBlock Module" -Header "Cannot write to hosts file!" -Description "Would you like to grant permissions to write to the hosts file? This may impact the security of your system." -Options @(
+if ($CurrentHostsList) {
+	if ($UpdateAvaliable) {
+		ShowMenu -Back -Subtitle "Hosts Patch Module" -Header "Hosts block list out of sync!" -Description "The current blocked addresses are out of sync with the latest blocked addresses." -Options @(
 			@{
-				Name = "Grant write permissions for hosts file"
+				Name = "Sync Addresses"
 				Code = {
-					icacls $HostsFile /grant "Everyone:(w)"
+					RemoveBlockList
+					AddBlockList
+					OperationCompleted -Operation "Hosts block list synced!"
+				}
+			}, 
+			@{
+				Name = "Remove Hosts Patch"
+				Code = {
+					RemoveBlockList
+					OperationCompleted -Operation "Hosts block list removed!"
+				}
+			}		
+		)
+	}
+ else {
+		ShowMenu -Back -Subtitle "Hosts Patch Module" -Header "Hosts block list exists!" -Description "Would you like to remove it?" -Options @(
+			@{
+				Name = "Remove Hosts Patch"
+				Code = {
+					RemoveBlockList
+					OperationCompleted -Operation "Hosts block list removed!"
 				}
 			}
 		)
 	}
-
-	$StringSearch = Select-String -Path $HostsFile -Pattern $("$StartCommentedLine") -CaseSensitive -Quiet
-
-	if ($StringSearch) {
-		# blocked addresses already in hosts file
-		if ($UpdateAvaliable) {
-			$HeaderMSG = "Update avaliable!"
-			$DescMSG = "Would you like to update?"
-		}
-		else {
-			$HeaderMSG = "Blocked addresses already in hosts file!"
-			$DescMSG = "Would you like to remove them?"
-		}
-		ShowMenu -Back -Subtitles "HostBlock Module" -Header $HeaderMSG -Description $DescMSG -Options @(
-			@{
-				Name = "Remove addresses from hosts file"
-				Code = {
-					removeFromHosts
-					ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully removed blocked lines from hosts file!"
-
-				}
-			} 
-			if ($UpdateAvaliable) {
-				, @{
-					Name = "Update blocklist and apply to hosts file"
-					Code = {
-						updateHosts 
-						ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully updated hosts file!"	
-					}
-				}
-			}
-		)
-	}
-	else {
-		# blocked addresses not in hosts file
-		if ($UpdateAvaliable) {
-			ShowMenu -Back -Subtitles "HostBlock Module" -Header "Hosts update available!" -Description "Would you like to update?" -Options @(
-				@{
-					Name = "Ignore update and apply to hosts file"
-					Code = {
-						addToHosts 
-						ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully added blocked lines in hosts file!"	
-					}
-				},
-				@{
-					Name = "Update blocklist and apply to hosts file"
-					Code = {
-						updateHosts 
-						ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully updated/added blocked lines in hosts file!"	
-					}
-				}
-
-			)
-		}
-		else {
-			addToHosts
-			ShowMenu -Back -Subtitles "HostBlock Module" -Header "Successfully added blocked lines in hosts file!"	
-		}			
- }
-
 }
 else {
-	ShowMenu -Back -Subtitles "HostBlock Module" -Header "Hosts file not found!" -Description "Hosts file could not be found.", "", "If your hosts file exists and you see this error, open an issue on Github and include the target hosts file path:", "$HostsFile"
+	AddBlockList
+	OperationCompleted -Operation "Hosts block list added!"
 }

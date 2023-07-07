@@ -1,19 +1,4 @@
-$Version = "v1.2.2-hotfix.1"
-
-function ArrayFromText {
-    param(
-        [string]$Source,
-        [switch]$IsLocal
-    )
-
-    # Read the content of the source, either local or remote
-    $content = if ($IsLocal) { Get-Content $Source } else { (Invoke-WebRequest $Source -Headers @{"Cache-Control"="no-cache"}).Content }
-
-    # Split into an array and filter out empty lines and whitespace
-    $content.Split("`n", [StringSplitOptions]::RemoveEmptyEntries) `
-            | Where-Object { $_ -ne '' } `
-            | ForEach-Object { $_.Trim() }
-}
+$Version = "v1.2.3-pre.2"
 
 function ReadKey([int]$ChoiceNum) {
 	$Indent = 43 - $ChoiceNum
