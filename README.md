@@ -1,6 +1,3 @@
-# ⚠️ THIS IS THE DATA BRANCH ⚠️ 
-> Values for the hosts file live here. That means they can be updated without a new update to CCStopper as a whole. 
+> values for the hosts block live here. Please PR aganist this branch when adding new links to the hosts file
 
-> WILL WORK WITH 1.2.1+
-
-# [CCSTOPPER MAIN BRANCH](https://github.com/eaaasun/ccstopper)
+### devHosts.txt is just for testing, please don't PR aganist it
