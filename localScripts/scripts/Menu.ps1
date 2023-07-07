@@ -3,7 +3,7 @@ Init -Title $Version
 
 function MainMenu {
 	Init -Title $Version
-	ShowMenu -VerCredit -Header "SAVE YOUR FILES!" -Options @(
+	ShowMenu -VerCredit -Header "THIS IS A PRERELEASE!" -Description "Things may be broken! Please report any bugs in the Github repo." -Options @(
 		@{
 			Name        = "Stop Processes"
 			Description = "Stops all Adobe Processes"
@@ -13,22 +13,10 @@ function MainMenu {
 			}
 		},
 		@{
-			Name        = "Internet Patches"
-			Description = "Firewall/hosts patches"
+			Name        = "Hosts Patch"
+			Description = "Blocks unnecessary Adobe servers in the hosts file"
 			Code        = { 
-				ShowMenu -Back -VerCredit -Header "INTERNET PATCHES" -Description "Run modules again to remove patches." -Options @(
-					@{
-						Name        = "Firewall Blocks"
-						Description = "Patches credit card trial popup through Windows firewall."
-						Code        = { .\FirewallBlock.ps1 }
-					},
-					@{
-						Name        = "Add to Hosts"
-						Description = "Blocks unnecessary Adobe servers in the hosts file."
-						Code        = { .\HostBlock.ps1 }
-					}
-				)
-			
+				.\HostBlock.ps1			
 			}
 		},
 		@{
@@ -59,7 +47,7 @@ function MainMenu {
 			Name        = "Other"
 			Description = "Credits/Github Repo"
 			Code        = { 
-				ShowMenu -Back -Header "CREDITS" -Description "This project would be impossible without the people contributing to, testing, and supporting it.",
+				ShowMenu -Back -VerCredit -Header "CREDITS" -Description "This project would be impossible without the people contributing to, testing, and supporting it.",
 				"",
 				"Creator/maintainer: @eaaasun",
 				"",
