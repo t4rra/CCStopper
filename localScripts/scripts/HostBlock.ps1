@@ -23,7 +23,15 @@ catch {
 $CurrentHostsList = [System.IO.File]::ReadAllText((Get-Item $HostsFile).FullName) | Select-String -Pattern "(?s)$StartCommentedLine(.*?)$EndCommentedLine" -AllMatches | ForEach-Object { $_.Matches.Value.Trim() }
 
 try {
-	$BlockedAddresses = (Invoke-WebRequest $RemoteURL -Headers @{"Cache-Control" = "no-cache" }).Content.Split("`n", [StringSplitOptions]::RemoveEmptyEntries) | Where-Object { $_ -ne '' } | ForEach-Object { $_.Trim() }
+	$BlockedAddresses = (Invoke-WebRequest $RemoteURL -TimeoutSec 5 -Headers @{"Cache-Control" = "no-cache" }).Content.Split("`n", [StringSplitOptions]::RemoveEmptyEntries) | Where-Object { $_ -ne '' } | ForEach-Object { $_.Trim() }
+	$Offline = $false
+}
+catch {
+	$UpdateAvaliable = $false
+	$Offline = $true
+}
+
+if (!$Offline) {
 	# create formatted list of addresses
 	$NewHostsList = "$StartCommentedLine`r`n"
 	foreach ($Address in $BlockedAddresses) {
@@ -33,9 +41,6 @@ try {
 	$NewHostsList = $NewHostsList.Trim()
 	# compare current hosts list with new hosts list
 	$UpdateAvaliable = (Compare-Object $CurrentHostsList $NewHostsList -SyncWindow 0)
-}
-catch {
-	ShowMenu -Subtitle "Hosts Patch Module" -Header "Cannot connect to Github!" -Description "You may be offline or Github may be down."
 }
 
 function RemoveBlockList {
@@ -90,6 +95,11 @@ if ($CurrentHostsList) {
 	}
 }
 else {
-	AddBlockList
-	OperationCompleted -Operation "Hosts block list added!"
+	if ($Offline) {
+		ShowMenu -Back -Subtitle "Hosts Patch Module" -Header "Cannot connect to Github!" -Description "You may be offline or Github may be down."
+	}
+ else {
+		AddBlockList
+		OperationCompleted -Operation "Hosts block list added!"
+	}
 }
