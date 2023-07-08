@@ -41,7 +41,7 @@ if ($install) {
     $folderPath = "$env:ProgramFiles\CCStopper"
     $items = Invoke-RestMethod -Uri $apiUrl
     Download-Files $items
-    CreateShortcut -targetPath "$folderPath\CCStopper\CCStopper.bat" -shortcutPath "$env:USERPROFILE\Desktop\CCStopper.lnk" -iconPath "$folderPath\icon.ico"
+    CreateShortcut -targetPath "$folderPath\CCStopper.bat" -shortcutPath "$env:USERPROFILE\Desktop\CCStopper.lnk" -iconPath "$folderPath\icon.ico"
 }
 elseif ($shortcut) {
     $folderPath = "$env:ProgramFiles\CCStopper"
