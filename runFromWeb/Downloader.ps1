@@ -57,11 +57,18 @@ if ($install) {
     }
     $items = Invoke-RestMethod -Uri $apiUrl
     Download-Files $items
+    Write-Host "Installed CCStopper!"
     CreateShortcut -targetPath "$folderPath\CCStopper.bat" -shortcutPath "$env:USERPROFILE\Desktop\CCStopper.lnk" -iconPath "$folderPath\icon.ico"
+    Write-Host "Created shortcut on desktop!"
+    Write-Host "Finished! Uninstall CCStopper by running this script again!"
+    pause
+    exit
 }
 elseif ($shortcut) {
     $folderPath = "$env:ProgramFiles\CCStopper"
     CreateShortcut -targetPath "powershell.exe" -arguement "-command ""irm https://ccstopper.netlify.app/run | iex""" -shortcutPath "$env:USERPROFILE\Desktop\CCStopper (Online).lnk" -iconPath "$folderPath\icon.ico"
+    Write-Host "Created shortcut on desktop!"
+    pause 
     exit
 }
 else {
@@ -75,5 +82,4 @@ else {
     # delete temp folder
     Remove-Item -Path $folderPath -Recurse -Force
     Write-Host "Cleaned up! Goodbye!"
-    
 }
