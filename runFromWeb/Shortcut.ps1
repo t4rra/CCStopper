@@ -4,4 +4,3 @@ Invoke-RestMethod "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/runFr
 
 Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$fileLocation`" -shortcut" -Verb runas -Wait
 Remove-Item -Path $fileLocation -Force
-Remove-Item -Path $MyInvocation.MyCommand.Path -Force

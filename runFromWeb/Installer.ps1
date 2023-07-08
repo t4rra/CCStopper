@@ -4,4 +4,3 @@ irm "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/runFromWeb/Download
 
 Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$fileLocation`" -install" -Verb runas -Wait
 Remove-Item -Path $fileLocation -Force
-Remove-Item -Path $MyInvocation.MyCommand.Path -Force
