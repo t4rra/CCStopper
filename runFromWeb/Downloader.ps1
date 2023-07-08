@@ -66,10 +66,27 @@ if ($install) {
 }
 elseif ($shortcut) {
     $folderPath = "$env:ProgramFiles\CCStopper"
-    CreateShortcut -targetPath "powershell.exe" -arguement "-command ""irm https://ccstopper.netlify.app/run | iex""" -shortcutPath "$env:USERPROFILE\Desktop\CCStopper (Online).lnk" -iconPath "$folderPath\icon.ico"
-    Write-Host "Created shortcut on desktop!"
-    pause 
-    exit
+    # check if shortcut exists
+    if (Test-Path -Path "$env:USERPROFILE\Desktop\CCStopper (Online).lnk") {
+        Write-Host "Shortcut already exists! Would you like to delete it?"
+        $response = Read-Host "Y/N"
+        if ($response -eq "Y") {
+            Write-Host "Deleting shortcut..."
+            Remove-Item -Path "$env:USERPROFILE\Desktop\CCStopper (Online).lnk" -Force
+            Write-Host "Deleted shortcut! Goodbye!"
+            pause
+            exit
+        }
+        else {
+            exit
+        }
+    }
+    else {
+        CreateShortcut -targetPath "powershell.exe" -arguement "-command ""irm https://ccstopper.netlify.app/run | iex""" -shortcutPath "$env:USERPROFILE\Desktop\CCStopper (Online).lnk" -iconPath "$folderPath\icon.ico"
+        Write-Host "Created shortcut on desktop!"
+        pause 
+        exit
+    }
 }
 else {
     $folderPath = "$env:TEMP\CCStopper"
