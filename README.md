@@ -1,15 +1,15 @@
-<img src="./runFromWeb/icon.ico" width="80px" alt="CCStopper Logo">
-
+# CCStopper
 ## Table of Contents <!-- omit in toc -->
 
-- [Features/Modules](#featuresmodules)
-- [Run/Install](#runinstall)
-- [v1.2.3-pre.2 changelog](#v123-pre2-changelog)
-- [Contributing](#contributing)
-  - [Issues](#issues)
-  - [Alternate Distributions/Modifications](#alternate-distributionsmodifications)
-  - [Adding Entries to Hosts Blocklist](#adding-entries-to-hosts-blocklist)
-- [Disclaimer/Notice](#disclaimernotice)
+- [CCStopper](#ccstopper)
+  - [Features/Modules](#featuresmodules)
+  - [Run/Install](#runinstall)
+  - [v1.2.3-pre.2 changelog](#v123-pre2-changelog)
+  - [Contributing](#contributing)
+    - [Issues](#issues)
+    - [Alternate Distributions/Modifications](#alternate-distributionsmodifications)
+    - [Adding Entries to Hosts Blocklist](#adding-entries-to-hosts-blocklist)
+  - [Disclaimer/Notice](#disclaimernotice)
 
 ## Features/Modules
 
