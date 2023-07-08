@@ -42,7 +42,7 @@ $apiUrl = "https://api.github.com/repos/eaaasun/CCStopper/contents/localScripts?
 if ($install) {
     $folderPath = "$env:ProgramFiles\CCStopper"
     # check if $folderPath exists
-    if (Test-Path -Path $folderPath) {
+    if (Test-Path -Path "$folderPath\CCStopper.bat") {
         Write-Host "CCStopper is already installed! Would you like to uninstall it?"
         $response = Read-Host "Y/N"
         if ($response -eq "Y") {
