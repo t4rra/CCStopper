@@ -23,6 +23,9 @@ function Download-Files($items, $basePath = "") {
 
 function CreateShortcut($targetPath, $arguement, $shortcutPath, $iconPath) {
     $LogoURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/runFromWeb/icon.ico"
+    if (!(Test-Path -Path $folderPath)) {
+        New-Item -ItemType Directory -Path $folderPath -Force | Out-Null
+    }
     Invoke-WebRequest -Uri $LogoURL -OutFile "$folderPath\icon.ico" -UseBasicParsing
     $WshShell = New-Object -ComObject WScript.Shell
     $Shortcut = $WshShell.CreateShortcut($shortcutPath)
