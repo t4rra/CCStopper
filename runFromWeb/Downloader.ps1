@@ -39,6 +39,21 @@ $apiUrl = "https://api.github.com/repos/eaaasun/CCStopper/contents/localScripts?
 
 if ($install) {
     $folderPath = "$env:ProgramFiles\CCStopper"
+    # check if $folderPath exists
+    if (Test-Path -Path $folderPath) {
+        Write-Host "CCStopper is already installed! Would you like to uninstall it?"
+        $response = Read-Host "Y/N"
+        if ($response -eq "Y") {
+            Write-Host "Uninstalling CCStopper..."
+            Remove-Item -Path $folderPath -Recurse -Force
+            Write-Host "Uninstalled CCStopper! Goodbye!"
+            pause
+            exit
+        }
+        else {
+            exit
+        }
+    }
     $items = Invoke-RestMethod -Uri $apiUrl
     Download-Files $items
     CreateShortcut -targetPath "$folderPath\CCStopper.bat" -shortcutPath "$env:USERPROFILE\Desktop\CCStopper.lnk" -iconPath "$folderPath\icon.ico"
@@ -46,6 +61,7 @@ if ($install) {
 elseif ($shortcut) {
     $folderPath = "$env:ProgramFiles\CCStopper"
     CreateShortcut -targetPath "powershell.exe" -arguement "-command ""irm https://ccstopper.netlify.app/run | iex""" -shortcutPath "$env:USERPROFILE\Desktop\CCStopper (Online).lnk" -iconPath "$folderPath\icon.ico"
+    exit
 }
 else {
     $folderPath = "$env:TEMP\CCStopper"
