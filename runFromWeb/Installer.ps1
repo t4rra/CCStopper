@@ -1,5 +1,4 @@
-$fileLocation = "$env:TEMP\CCStopper\Downloader.ps1"
-mkdir "$env:TEMP\CCStopper"
+$fileLocation = "$env:TEMP\CCStopperDownloader.ps1"
 
 irm "https://raw.githubusercontent.com/eaaasun/CCStopper/dev/runFromWeb/Downloader.ps1" | Out-File $fileLocation -Force
 
