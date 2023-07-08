@@ -6,7 +6,6 @@ param (
 function Download-Files($items, $basePath = "") {
     foreach ($item in $items) {
         if ($item.type -eq "file") {
-            $filePath = if ($basePath) { "$basePath\$($item.name)" } else { $item.name }
             $downloadUrl = $item.download_url
             $outputDirectory = "$folderPath\$basePath"
             $outputFile = Join-Path -Path $outputDirectory -ChildPath $item.name
