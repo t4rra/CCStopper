@@ -13,7 +13,7 @@ function MainMenu {
 			}
 		},
 		@{
-			Name        = "Hosts Patch"
+			Name        = "Add to Hosts"
 			Description = "Blocks unnecessary Adobe servers in the hosts file"
 			Code        = { 
 				.\HostBlock.ps1			
