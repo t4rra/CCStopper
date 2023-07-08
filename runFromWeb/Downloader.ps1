@@ -56,7 +56,7 @@ if ($install) {
     }
     $items = Invoke-RestMethod -Uri $apiUrl
     Download-Files $items
-    Write-Host "Installed CCStopper!"
+    Write-Host "Installed CCStopper at $folderPath!"
     CreateShortcut -targetPath "$folderPath\CCStopper.bat" -shortcutPath "$env:USERPROFILE\Desktop\CCStopper.lnk" -iconPath "$folderPath\icon.ico"
     Write-Host "Created shortcut on desktop!"
     Write-Host "Finished! Uninstall CCStopper by running this script again!"
