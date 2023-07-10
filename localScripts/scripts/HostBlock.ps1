@@ -23,7 +23,7 @@ catch {
 $CurrentHostsList = [System.IO.File]::ReadAllText((Get-Item $HostsFile).FullName) | Select-String -Pattern "(?s)$StartCommentedLine(.*?)$EndCommentedLine" -AllMatches | ForEach-Object { $_.Matches.Value.Trim() }
 
 try {
-	$BlockedAddresses = (Invoke-WebRequest $RemoteURL -TimeoutSec 5 -Headers @{"Cache-Control" = "no-cache" }).Content.Split("`n", [StringSplitOptions]::RemoveEmptyEntries) | Where-Object { $_ -ne '' } | ForEach-Object { $_.Trim() }
+	$BlockedAddresses = (Invoke-WebRequest $RemoteURL -TimeoutSec 5 -UseBasicParsing -Headers @{"Cache-Control" = "no-cache" }).Content.Split("`n", [StringSplitOptions]::RemoveEmptyEntries) | Where-Object { $_ -ne '' } | ForEach-Object { $_.Trim() }
 	$Offline = $false
 }
 catch {

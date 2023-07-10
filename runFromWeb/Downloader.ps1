@@ -10,7 +10,7 @@ function Download-Files($items, $basePath = "") {
             $outputDirectory = "$folderPath\$basePath"
             $outputFile = Join-Path -Path $outputDirectory -ChildPath $item.name
             New-Item -ItemType Directory -Path $outputDirectory -Force | Out-Null
-            Invoke-WebRequest -Uri $downloadUrl -OutFile $outputFile
+            Invoke-WebRequest -Uri $downloadUrl -OutFile $outputFile -UseBasicParsing
         }
         elseif ($item.type -eq "dir") {
             $subFolderPath = if ($basePath) { "$basePath\$($item.name)" } else { $item.name }
