@@ -5,11 +5,11 @@ Stops Adobe's pesky background apps and more 😉
 | Release     | Version    |
 |-------------|-------------|
 | Stable      | v1.2.2-hotfix.1      |
-| Web      | v1.3.0-pre.1      |
-| Dev      | v1.3.0-pre.1      |
+| Web      | v1.2.3-pre.2      |
+| Dev      | v1.2.3-pre.2      |
 
 ## Table of Contents <!-- omit in toc -->
-- [v1.3.0-pre.1 Changelog](#v130-pre1-changelog)
+- [v1.2.3-pre.2 Changelog](#v123-pre2-changelog)
 - [v1.2.2 Changelog](#v122-changelog)
   - [hotfix.1 Changelog](#hotfix1-changelog)
 - [Installation](#installation)
@@ -21,20 +21,23 @@ Stops Adobe's pesky background apps and more 😉
 - [Known Issues](#known-issues)
 - [Disclaimer/Notice](#disclaimernotice)
 
-## v1.3.0-pre.1 Changelog
+## v1.2.3-pre.2 Changelog
 > [Visit the dev readme for updated documentation](https://github.com/eaaasun/CCStopper/tree/dev). 
-- Combined everything into one file
-- One-line install/run 
+- One-line install/run
   - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
-  - see [the dev branch documentation](https://github.com/eaaasun/CCStopper/tree/dev) for commands
-- The hosts file module write/remove addresses in a different way
-  - it *should* migrate old entries, but it hasn't been extensively tested
-  - ***known bug***: if the [hosts list](https://github.com/eaaasun/CCStopper/blob/data/Hosts.txt) has a new entry and system's hosts file don't have the new entry, CCStopper will only give option to remove entries from hosts file. this doesn't apply if ccstopper is installed (via one-line command or zip file)
-  - ***fix***: if the hosts block stops working try removing and then adding the hosts block back. 
-- New module for patching the creative cloud app 
+  - see [below](#one-line-installrun) for commands
+- reverted pre.1's AIO changes
+  - i realized an AIO version would be a nightmare to maintain
+- re-written hosts block module
+  - it will now update hosts file if entries already exists (fixed #80)
+  - new comments surrounding entries in hosts file
+  - it _should_ migrate old entries, but it hasn't been extensively tested
+- New module for patching the creative cloud app
   - credit to AbsentForeskin on the genP discord
-  - requires restart after patching
+  - restart recommended after patching
+- re-written the installer/online scripts to work with multiple files
 - Created logo for shortcut icons (its very original trust)
+- Documentation update
 ## v1.2.2 Changelog
 - Updated user messages in `RemoveAGS.ps1` to be more descriptive
 - Firewall names are more descriptive
