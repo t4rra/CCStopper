@@ -85,7 +85,7 @@ I have no problems with this and enjoy seeing what people do with my code! Pleas
 
 ### Adding Entries to Hosts Blocklist
 
-The `data` branch of CCStopper contains a `hosts.txt` file that has a list of addresses that CCStopper will block. If you think an address from adobe should be blocked, open a pull request with the address added to the bottom of the list. Also state why the address should be added to the hosts block.
+The [data branch](https://github.com/eaaasun/CCStopper/tree/data) of CCStopper contains a `hosts.txt` file that has a list of addresses that CCStopper will block. If you think an address from adobe should be blocked, open a pull request with the address added to the bottom of the list. Also state why the address should be added to the hosts block.
 
 ## Disclaimer/Notice
 
