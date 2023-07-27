@@ -3,7 +3,7 @@ Init -Title $Version
 
 function MainMenu {
 	Init -Title $Version
-	ShowMenu -VerCredit -Header "THIS IS A PRERELEASE!" -Description "Things may be broken! Please report any bugs in the Github repo." -Options @(
+	ShowMenu -VerCredit -Header "Main Menu" -Description "Run modules again to revert their changes. Please report bugs in the GitHub repo." -Options @(
 		@{
 			Name        = "Stop Processes"
 			Description = "Stops all Adobe Processes"
@@ -21,12 +21,12 @@ function MainMenu {
 		},
 		@{
 			Name        = "System Patches"
-			Description = "Genuine checker and hide CC folder in explorer"
+			Description = "CC App Buttons/Genuine Checker/CC Folder"
 			Code        = { 
-				ShowMenu -Back -VerCredit -Header "SYSTEM PATCHES" -Description "Run modules again to remove patches." -Options @(
+				ShowMenu -Back -VerCredit -Header "SYSTEM PATCHES" -Description "Run modules again to revert their changes. Please report bugs in the GitHub repo." -Options @(
 					@{
 						Name        = "Creative Cloud App"
-						Description = "Replaces the 'start trial' button in the Creative Cloud app. WILL CLOSE ALL ADOBE PROCESSES."
+						Description = "Fixes 'start trial' button in the CC app. Restart your system if changes don't apply."
 						Code        = { .\CCApp.ps1 }
 					},
 					@{
@@ -47,9 +47,9 @@ function MainMenu {
 			Name        = "Other"
 			Description = "Credits/Github Repo"
 			Code        = { 
-				ShowMenu -Back -VerCredit -Header "CREDITS" -Description "This project would be impossible without the people contributing to, testing, and supporting it.",
+				ShowMenu -Back -VerCredit -Header "CREDITS" -Description "Big thanks to all the contributors and users!",
 				"",
-				"Creator/maintainer: @eaaasun",
+				"Creator: @eaaasun",
 				"",
 				"Contributors:",
 				"@ItsProfessional, @shdevnull, @ZEN1X",
