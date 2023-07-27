@@ -1,4 +1,5 @@
-$Version = "v1.2.3-pre.2-hotfix.1"
+$Version = "1.2.3"
+$InstallerVer = "1"
 
 function ReadKey([int]$ChoiceNum) {
 	$Indent = 43 - $ChoiceNum
@@ -150,13 +151,13 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 		Write-TopBorder
 		Write-BlankMenuLine
 		Write-BlankMenuLine
-		Write-MenuLine -Contents "CCSTOPPER" -Center
+		Write-MenuLine -Contents "CCSTOPPER v$Version" -Center
 		if ($VerCredit) {
 			if ($Subtitles) {
 				$Subtitles += ""
 			}
 			$Subtitles += "Made by eaaasun"
-			$Subtitles += $Version
+			$Subtitles += "Installer v" + $InstallerVer
 			$VerCredit = $false
 		}
 		foreach ($Subtitle in $Subtitles) {

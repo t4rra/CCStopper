@@ -1,31 +1,24 @@
 # CCStopper <!-- omit in toc -->
+| Release | Latest Version |
+| -------- | -------- |
+| CCStopper | v1.2.3 |
+| Web Installer | v1 |
+
 ## Table of Contents <!-- omit in toc -->
 
-- [Features/Modules](#featuresmodules)
-- [Run/Install](#runinstall)
-- [v1.2.3-pre.2 changelog](#v123-pre2-changelog)
+- [Install/Run](#installrun)
+- [Features](#features)
+- [v1.2.3 changelog](#v123-changelog)
 - [Contributing](#contributing)
   - [Issues](#issues)
   - [Alternate Distributions/Modifications](#alternate-distributionsmodifications)
   - [Adding Entries to Hosts Blocklist](#adding-entries-to-hosts-blocklist)
 - [Disclaimer/Notice](#disclaimernotice)
 
-## Features/Modules
 
-> Every module is reversible by running it again.
+## Install/Run
 
-- Stop Background Processes
-- Add to Hosts
-- System Patches
-  - Patch Creative Cloud App Buttons
-  - Lock Genuine Checker Folder
-  - Hide Creative Cloud Folder in Explorer
-
-## Run/Install
-
-### Powershell - v1.2.3+ Only <!-- omit in toc -->
-
-> ⚠️ By using the commands below, you're running code that can be compromised/broken/changed anytime. Proceed with caution. ⚠️
+### Powershell <!-- omit in toc -->
 
 - Run CCStopper once.
   ```
@@ -37,7 +30,7 @@
   irm https://ccstopper.netlify.app/shortcut | iex
   ```
 
-- Saves CCStopper locally and creates a desktop shortcut. Works offline, however it won't automatically update. Run this command again to uninstall. 
+- Installs CCStopper locally and creates a desktop shortcut. Works offline but won't stay updated. Run this command again to uninstall. 
   ```
   irm https://ccstopper.netlify.app/install | iex
   ```
@@ -47,10 +40,20 @@
 1. Get the latest [release](https://github.com/eaaasun/CCStopper/releases/latest)
 2. Extract the ZIP file (This is important, CCStopper may not work without additional files.)
 3. Run CCStopper.bat
-4. Select an option
-5. Prevent profit (for Adobe)
+4. (Prevent) profit (for Adobe)
 
-## v1.2.3-pre.2 changelog
+## Features
+
+> To undo a module's changes, run said module again.
+
+- Stop Background Processes
+- Add to Hosts
+- System Patches
+  - Patch Creative Cloud App Buttons
+  - Lock Genuine Checker Folder
+  - Hide Creative Cloud Folder in Explorer
+
+## v1.2.3 changelog
 - One-line install/run
   - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
   - see [below](#one-line-installrun) for commands
@@ -60,11 +63,11 @@
   - it will now update hosts file if entries already exists (fixed #80)
   - new comments surrounding entries in hosts file
   - it _should_ migrate old entries, but it hasn't been extensively tested
-- New module for patching the creative cloud app
+- New module for patching the creative cloud app's buttons
   - credit to AbsentForeskin on the genP discord
-  - restart recommended after patching
+  - system restart recommended after patching
 - re-written the installer/online scripts to work with multiple files
-- Created logo for shortcut icons (its very original trust)
+- Created logo for shortcut icons (its very original)
 - Documentation update
 ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) <!-- omit in toc -->
 
