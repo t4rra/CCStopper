@@ -48,7 +48,9 @@ if ($install) {
         if ($response -eq "Y") {
             Write-Host "Uninstalling CCStopper..."
             Remove-Item -Path $folderPath -Recurse -Force
-            Remove-Item -Path "$env:USERPROFILE\Desktop\CCStopper.lnk" -Force
+            if (Test-Path -Path "$env:USERPROFILE\Desktop\CCStopper.lnk") {
+                Remove-Item -Path "$env:USERPROFILE\Desktop\CCStopper.lnk" -Force
+            }
             Write-Host "Uninstalled CCStopper! Goodbye!"
             pause
             exit
