@@ -3,7 +3,7 @@ param (
     [switch]$shortcut
 )
 
-function Download-Files($items, $basePath = "") {
+function DownloadFiles($items, $basePath = "") {
     foreach ($item in $items) {
         if ($item.type -eq "file") {
             $downloadUrl = $item.download_url
@@ -16,7 +16,7 @@ function Download-Files($items, $basePath = "") {
             $subFolderPath = if ($basePath) { "$basePath\$($item.name)" } else { $item.name }
             $subItemsUrl = $item.url
             $subItems = Invoke-RestMethod -Uri $subItemsUrl
-            Download-Files $subItems $subFolderPath
+            DownloadFiles $subItems $subFolderPath
         }
     }
 }
@@ -58,7 +58,7 @@ if ($install) {
         }
     }
     $items = Invoke-RestMethod -Uri $apiUrl
-    Download-Files $items
+    DownloadFiles $items
     Write-Host "Installed CCStopper at $folderPath!"
     CreateShortcut -targetPath "$folderPath\CCStopper.bat" -shortcutPath "$env:USERPROFILE\Desktop\CCStopper.lnk" -iconPath "$folderPath\icon.ico"
     Write-Host "Created shortcut on desktop!"
@@ -69,27 +69,8 @@ if ($install) {
 elseif ($shortcut) {
     $folderPath = "$env:ProgramFiles\CCStopper"
     # check if shortcut exists
-    if (Test-Path -Path "$env:USERPROFILE\Desktop\CCStopper (Online).lnk") {
-        Write-Host "Shortcut already exists!"
-        Pause
-        exit
-    }
-    else {
-        CreateShortcut -targetPath "powershell.exe" -arguement "-command ""irm https://ccstopper.netlify.app/run | iex""" -shortcutPath "$env:USERPROFILE\Desktop\CCStopper (Online).lnk" -iconPath "$folderPath\icon.ico"
-        Write-Host "Created shortcut on desktop!"
-        pause 
-        exit
-    }
-}
-else {
-    $folderPath = "$env:TEMP\CCStopper"
-    $response = Invoke-RestMethod -Uri $apiUrl
-    Download-Files $response
-    # start CCStopper.bat 
-    Write-Host "Starting CCStopper..."
-    Start-Process -FilePath "$folderPath\CCStopper.bat" -Wait
-    Write-Host "Cleaning up..."
-    # delete temp folder
-    Remove-Item -Path $folderPath -Recurse -Force
-    Write-Host "Cleaned up! Goodbye!"
+    CreateShortcut -targetPath "powershell.exe" -arguement "-command ""irm https://ccstopper.netlify.app/run | iex""" -shortcutPath "$env:USERPROFILE\Desktop\CCStopper (Online).lnk" -iconPath "$folderPath\icon.ico"
+    Write-Host "Created shortcut on desktop!"
+    pause 
+    exit
 }
