@@ -15,7 +15,6 @@
   - [Adding Entries to Hosts Blocklist](#adding-entries-to-hosts-blocklist)
 - [Disclaimer/Notice](#disclaimernotice)
 
-
 ## Install/Run
 
 ### Powershell <!-- omit in toc -->
