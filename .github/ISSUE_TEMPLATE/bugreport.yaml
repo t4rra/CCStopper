@@ -43,7 +43,7 @@ body:
   - type: checkboxes
     id: verify
     attributes:
-      label: Verification
+      label: Duplicate Issues
       options:
         - label: I have read through the issues and have not found a duplicate.
           required: true
