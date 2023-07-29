@@ -45,10 +45,10 @@
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
             body: |
-              > This is an automated release. I recommend the [one-line commands](https://github.com/eaaasun/CCStopper#powershell-) instead for a better user experience.
+              > 🤖 This is an automated release. I recommend the [one-line commands](https://github.com/eaaasun/CCStopper#powershell-) instead for a better user experience.
   
               ## Changelog
-              > [Currently unavailable, please visit the README for changelog. (I have no idea how to use github actions lmao)](https://github.com/eaaasun/CCStopper)
+              [Currently unavailable, please visit the README for changelog. (I have no idea how to use github actions lmao)](https://github.com/eaaasun/CCStopper)
             tag_name: auto-${{ steps.vars.outputs.version }}
             name: ${{ steps.vars.outputs.version }}
             files: ./CCStopper.zip
