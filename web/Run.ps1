@@ -16,7 +16,7 @@ function DownloadFiles($items, $basePath = "") {
 	}
 }
 
-$apiUrl = "https://api.github.com/repos/eaaasun/CCStopper/contents/src?ref=dev"
+$apiUrl = "https://api.github.com/repos/eaaasun/CCStopper/contents/src"
 
 $folderPath = "$env:TEMP\CCStopper"
 $response = Invoke-RestMethod -Uri $apiUrl
