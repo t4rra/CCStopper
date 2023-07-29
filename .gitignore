@@ -1,3 +1,4 @@
 .vscode
 CCStopper*.zip
 ~*
+/data

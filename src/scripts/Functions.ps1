@@ -1,19 +1,4 @@
-$Version = "v1.2.2-hotfix.1"
-
-function ArrayFromText {
-    param(
-        [string]$Source,
-        [switch]$IsLocal
-    )
-
-    # Read the content of the source, either local or remote
-    $content = if ($IsLocal) { Get-Content $Source } else { (Invoke-WebRequest $Source -Headers @{"Cache-Control"="no-cache"}).Content }
-
-    # Split into an array and filter out empty lines and whitespace
-    $content.Split("`n", [StringSplitOptions]::RemoveEmptyEntries) `
-            | Where-Object { $_ -ne '' } `
-            | ForEach-Object { $_.Trim() }
-}
+$Version = "v1.2.3"
 
 function ReadKey([int]$ChoiceNum) {
 	$Indent = 43 - $ChoiceNum
@@ -165,13 +150,12 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 		Write-TopBorder
 		Write-BlankMenuLine
 		Write-BlankMenuLine
-		Write-MenuLine -Contents "CCSTOPPER" -Center
+		Write-MenuLine -Contents "CCSTOPPER $Version" -Center
 		if ($VerCredit) {
 			if ($Subtitles) {
 				$Subtitles += ""
 			}
 			$Subtitles += "Made by eaaasun"
-			$Subtitles += $Version
 			$VerCredit = $false
 		}
 		foreach ($Subtitle in $Subtitles) {
@@ -228,7 +212,7 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 		Write-TextBorder
 		Write-BlankMenuLine
 
-		if ($Back) { $Exit = "Back" } else { $Exit = "Exit" }
+		if ($Back) { $Exit = "Main Menu" } else { $Exit = "Exit" }
 		Write-MenuLine -Contents "[Q] $Exit"
 		Write-BlankMenuLine
 
@@ -237,7 +221,7 @@ function ShowMenu([switch]$Back, [switch]$VerCredit, [string[]]$Subtitles, [stri
 
 		ReadKey $($Options.Length)
 		if ($Choice -eq "Q") { 
-			if ($Exit -eq "Back") { 
+			if ($Exit -eq "Main Menu") { 
 				MainMenu
    }
 			else {

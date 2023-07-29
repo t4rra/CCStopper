@@ -3,7 +3,7 @@ Init -Title $Version
 
 function MainMenu {
 	Init -Title $Version
-	ShowMenu -VerCredit -Header "SAVE YOUR FILES!" -Options @(
+	ShowMenu -VerCredit -Header "Main Menu" -Description "Run modules again to revert their changes. Please report bugs in the GitHub repo." -Options @(
 		@{
 			Name        = "Stop Processes"
 			Description = "Stops all Adobe Processes"
@@ -13,29 +13,22 @@ function MainMenu {
 			}
 		},
 		@{
-			Name        = "Internet Patches"
-			Description = "Firewall/hosts patches"
+			Name        = "Add to Hosts"
+			Description = "Blocks unnecessary Adobe servers in the hosts file"
 			Code        = { 
-				ShowMenu -Back -VerCredit -Header "INTERNET PATCHES" -Description "Run modules again to remove patches." -Options @(
-					@{
-						Name        = "Firewall Blocks"
-						Description = "Patches credit card trial popup through Windows firewall."
-						Code        = { .\FirewallBlock.ps1 }
-					},
-					@{
-						Name        = "Add to Hosts"
-						Description = "Blocks unnecessary Adobe servers in the hosts file."
-						Code        = { .\HostBlock.ps1 }
-					}
-				)
-			
+				.\HostBlock.ps1			
 			}
 		},
 		@{
 			Name        = "System Patches"
-			Description = "Genuine checker and hide CC folder in explorer"
+			Description = "CC App Buttons/Genuine Checker/CC Folder"
 			Code        = { 
-				ShowMenu -Back -VerCredit -Header "SYSTEM PATCHES" -Description "Run modules again to remove patches." -Options @(
+				ShowMenu -Back -VerCredit -Header "SYSTEM PATCHES" -Description "Run modules again to revert their changes. Please report bugs in the GitHub repo." -Options @(
+					@{
+						Name        = "Creative Cloud App"
+						Description = "Fixes 'start trial' button in the CC app. Restart your system if changes don't apply."
+						Code        = { .\CCApp.ps1 }
+					},
 					@{
 						Name        = "Genuine Checker"
 						Description = "Replaces and locks the Genuine Checker folder."
@@ -54,9 +47,9 @@ function MainMenu {
 			Name        = "Other"
 			Description = "Credits/Github Repo"
 			Code        = { 
-				ShowMenu -Back -Header "CREDITS" -Description "This project would be impossible without the people contributing to, testing, and supporting it.",
+				ShowMenu -Back -VerCredit -Header "CREDITS" -Description "Big thanks to all the contributors and users!",
 				"",
-				"Creator/maintainer: @eaaasun",
+				"Creator: @eaaasun",
 				"",
 				"Contributors:",
 				"@ItsProfessional, @shdevnull, @ZEN1X",
