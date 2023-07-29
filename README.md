@@ -2,7 +2,7 @@
 | Release | Latest Version |
 | -------- | -------- |
 | CCStopper | v1.2.3 |
-| Web Installer | v1 |
+| Web Installer | v1.0.1 |
 
 ## Table of Contents <!-- omit in toc -->
 
