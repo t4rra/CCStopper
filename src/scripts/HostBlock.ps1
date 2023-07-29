@@ -6,7 +6,7 @@ $EndCommentedLine = "`# END CCStopper Block List - DO NOT EDIT THIS LINE"
 
 $LocalAddress = "0.0.0.0"
 $HostsFile = "$Env:SystemRoot\System32\drivers\etc\hosts"
-$RemoteURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/data/devHosts.txt"
+$RemoteURL = "https://raw.githubusercontent.com/eaaasun/CCStopper/data/Hosts.txt"
 
 # check if hosts file is writable
 try {
