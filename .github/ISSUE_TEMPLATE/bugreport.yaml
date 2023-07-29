@@ -45,6 +45,6 @@ body:
     attributes:
       label: Verification
       options:
-        - label: I have read through the [issues](https://github.com/eaaasun/CCStopper/issues) and have not found a duplicate of this issue.
+        - label: I have read through the issues and have not found a duplicate.
           required: true
 
