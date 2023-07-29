@@ -1,4 +1,4 @@
-# This action automatically creates a release when pushing to master (in the src folder).
+# This action automatically creates a release when pushing to main (in the src folder).
 # It also zips the contents of the src folder and uploads it as an artifact, which is included in the release.
 # The release is tagged with the short commit hash. I have no idea how to add the changelog automatically :(
 
@@ -7,7 +7,7 @@
   on:
     push:
       branches:
-        - master
+        - main
       paths:
         - "src/**"
   
