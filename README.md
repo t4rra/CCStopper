@@ -60,6 +60,8 @@
   - it will now update hosts file if entries already exists (fixed #80)
   - new comments surrounding entries in hosts file
   - it _should_ migrate old entries, but it hasn't been extensively tested
+- Removed firewall block module
+  - The hosts patch + CC App patch works better 
 - New module for patching the creative cloud app's buttons
   - credit to AbsentForeskin on the genP discord
   - system restart recommended after patching
