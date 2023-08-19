@@ -49,7 +49,7 @@ body:
         - One-Line - Shortcut
         - One-Line - Install
         - Manual ZIP Install
-    validation:
+    validations:
       required: true
   - type: checkboxes
     id: verify
