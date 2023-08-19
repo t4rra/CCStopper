@@ -40,6 +40,17 @@ body:
       placeholder: "Windows 11 22H2"
     validations:
       required: false
+  - type: dropdown
+    id: installMethod
+    attributes:
+      label: How did you use CCStopper?
+      options:  
+        - One-Line - Run
+        - One-Line - Shortcut
+        - One-Line - Install
+        - Manual ZIP Install
+    validation:
+      required: true
   - type: checkboxes
     id: verify
     attributes:
