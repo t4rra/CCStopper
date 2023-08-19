@@ -32,14 +32,6 @@ body:
       placeholder: "v2.8.12_pre.2"
     validations:
       required: true
-  - type: input
-    id: windows-ver
-    attributes:
-      label: Windows Version?
-      description: Which Windows version(s) are you experiencing this bug in? Development/testing are done in Windows 11, so other versions may not work.
-      placeholder: "Windows 11 22H2"
-    validations:
-      required: false
   - type: dropdown
     id: installMethod
     attributes:
@@ -51,6 +43,14 @@ body:
         - Manual ZIP Install
     validations:
       required: true
+  - type: input
+    id: windows-ver
+    attributes:
+      label: Windows Version?
+      description: Which Windows version(s) are you experiencing this bug in? Development/testing are done in Windows 11, so other versions may not work.
+      placeholder: "Windows 11 22H2"
+    validations:
+      required: false
   - type: checkboxes
     id: verify
     attributes:
