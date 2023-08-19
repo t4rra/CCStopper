@@ -23,3 +23,10 @@ body:
       placeholder: "There's a neat module from Live Corp that hooks into their robot gardeners and makes them plant flowers."
     validations:
       required: false
+  - type: checkboxes
+    id: duplicates
+    attributes:
+      label: Duplicate Feature Request
+      options:
+        - label: I have checked the issues section and there are no duplicates.
+          required: true
