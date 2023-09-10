@@ -1,11 +1,11 @@
 name: Blank Issue
-description: Blank Issue.
+description: For other things not covered by the templates.
 title: "Blank Issue"
 body:
   - type: markdown
     attributes:
       value: |
-        > I recommend you use one of the [premade templates](https://github.com/eaaasun/CCStopper/issues/new/choose) instead of this one.
+        > I recommend you use one of the [premade templates](https://github.com/eaaasun/CCStopper/issues/new/choose) if applicable instead of this one.
   - type: textarea
     id: body
     attributes:
