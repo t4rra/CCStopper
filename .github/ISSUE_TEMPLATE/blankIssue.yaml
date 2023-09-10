@@ -1,6 +1,6 @@
 name: Blank Issue
 description: Blank Issue.
-title: " "
+title: "Blank Issue"
 body:
   - type: markdown
     attributes:
