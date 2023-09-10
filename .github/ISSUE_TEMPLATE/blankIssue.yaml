@@ -1,0 +1,23 @@
+name: Blank Issue
+description: Blank Issue.
+title: ""
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > I recommend you use one of the [premade templates](https://github.com/eaaasun/CCStopper/issues/new/choose) instead of this one.
+  - type: textarea
+    id: body
+    attributes:
+      label: Body
+    validations:
+      required: true
+  - type: checkboxes
+    id: verify
+    attributes:
+      label: Duplicate Issues
+      options:
+        - label: I have read through the issues and have not found a duplicate.
+          required: true
+
