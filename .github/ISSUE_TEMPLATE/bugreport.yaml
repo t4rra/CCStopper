@@ -32,6 +32,17 @@ body:
       placeholder: "v2.8.12_pre.2"
     validations:
       required: true
+  - type: dropdown
+    id: installMethod
+    attributes:
+      label: How did you use CCStopper?
+      options:  
+        - One-Line - Run
+        - One-Line - Shortcut
+        - One-Line - Install
+        - Manual ZIP Install
+    validations:
+      required: true
   - type: input
     id: windows-ver
     attributes:
