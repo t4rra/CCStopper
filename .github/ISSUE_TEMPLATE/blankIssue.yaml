@@ -1,7 +1,6 @@
 name: Blank Issue
 description: Blank Issue.
-title: ""
-labels: []
+title: " "
 body:
   - type: markdown
     attributes:
