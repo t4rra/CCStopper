@@ -33,19 +33,19 @@ else {
 
 
 	$bytes = [System.IO.File]::ReadAllBytes($AppsPanelBL)
-	$bytes[1117100] = 0xfe
-	$bytes[1216993] = 0xfe
-	$bytes[1987809] = 0xfe
-	$bytes[2149147] = 0xfe
-	$bytes[2150572] = 0xfe
-	$bytes[2151087] = 0xfe
-	$bytes[2151887] = 0xfe
-	$bytes[2278457] = 0xc6
-	$bytes[2278458] = 0x40
-	$bytes[2278467] = 0xc6
-	$bytes[2278468] = 0x40
-	$bytes[2278477] = 0xc6
-	$bytes[2278478] = 0x40
+	$bytes[1116554] = 0xfe
+	$bytes[1216383] = 0xfe
+	$bytes[1987439] = 0xfe
+	$bytes[2150557] = 0xfe
+	$bytes[2151982] = 0xfe
+	$bytes[2152497] = 0xfe
+	$bytes[2153297] = 0xfe
+	$bytes[2279801] = 0xc6
+	$bytes[2279802] = 0x40
+	$bytes[2279811] = 0xc6
+	$bytes[2279812] = 0x40
+	$bytes[2279821] = 0xc6
+	$bytes[2279822] = 0x40
 	[System.IO.File]::WriteAllBytes($AppsPanelBL, $bytes)
 	ShowMenu -Back -Subtitles "Patch Desktop App" -Header "Successfully patched desktop app!" -Description "You may need to restart your system for changes to apply."
 

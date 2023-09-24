@@ -1,7 +1,7 @@
 # CCStopper <!-- omit in toc -->
 | Release | Latest Version |
 | -------- | -------- |
-| CCStopper | v1.2.3-hotfix.1 |
+| CCStopper | v1.2.3-hotfix.2 |
 | Web Installer | v1.0.1 |
 
 ## Table of Contents <!-- omit in toc -->
@@ -48,8 +48,8 @@
 - Stop Background Processes
 - Add to Hosts
 - System Patches
-  - Patch Creative Cloud App Buttons
-  - Lock Genuine Checker Folder
+  - Patch Trial Buttons
+  - Remove Genuine Checker
   - Hide Creative Cloud Folder in Explorer
 
 ## v1.2.3 Changelog
@@ -68,8 +68,8 @@
 - Created logo for shortcut icons (its very original)
 - Documentation update
 
-### Hotfix.1 Changelog <!-- omit in toc -->
-- Changed the hosts block module to use the non-temp hosts file
+### Hotfix.2 Changelog <!-- omit in toc -->
+- Updated trial button patch to work with latest CC update
 <!-- ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) omit in toc -->
 
 
