@@ -33,12 +33,6 @@
             mv 'src' 'CCStopper ${{ steps.vars.outputs.version }}'
             zip -r CCStopper.zip 'CCStopper ${{ steps.vars.outputs.version }}'
   
-        - name: Upload zip
-          uses: actions/upload-artifact@v3.1.2
-          with:
-            name: CCStopper.zip
-            path: CCStopper.zip
-  
         - name: Create Release
           uses: softprops/action-gh-release@v0.1.15
           env:
