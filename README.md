@@ -70,6 +70,7 @@
 
 ### Hotfix.2 Changelog <!-- omit in toc -->
 - Updated trial button patch to work with latest CC update
+  - I get these from the genP discord, big thanks to them!
 <!-- ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) omit in toc -->
 
 
