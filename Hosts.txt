@@ -20,3 +20,5 @@
 ic.adobe.io
 cc-api-data.adobe.io
 m59b4msyph.adobe.io
+7g2gzgk9g1.adobe.io
+127.0.0.1
