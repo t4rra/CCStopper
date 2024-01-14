@@ -1,5 +1,0 @@
-[[redirects]]
-  from = "/*"
-  to = "https://github.com/eaaasun/ccstopper"
-  status = 404
-  force = false
