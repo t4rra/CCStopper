@@ -1,101 +1,98 @@
-# CCStopper <!-- omit in toc -->
-| Release | Latest Version |
-| -------- | -------- |
-| CCStopper | v1.2.3-hotfix.2 |
-| Web Installer | v1.0.1 |
+# Migrating from/Uninstalling CCStopper <!-- omit in toc -->
+ > ⚠️ CCStopper is no longer maintained. I have switched to Mac. The rest of this README will be about uninstallation/alternatives. ⚠️
+
+ No further updates/support will be provided starting Jan. 14, 2024, and the repo will be archived on Mar. 31, 2024.
+
+ The final version of CCStopper is [v1.3](https://github.com/eaaasun/CCStopper/releases/). It only stops Adobe processes, and will not do anything else. Previous releases are still available to download. The previous version's code is still available in the [`full` branch](https://github.com/eaaasun/CCStopper/tree/full).
 
 ## Table of Contents <!-- omit in toc -->
-
-- [Install/Run](#installrun)
-- [Features](#features)
-- [v1.2.3 Changelog](#v123-changelog)
-- [Contributing](#contributing)
-  - [Issues](#issues)
-  - [Alternate Distributions/Modifications](#alternate-distributionsmodifications)
-  - [Adding Entries to Hosts Blocklist](#adding-entries-to-hosts-blocklist)
-- [Disclaimer/Notice](#disclaimernotice)
-
-## Install/Run
-
-### Powershell <!-- omit in toc -->
-
-- Run CCStopper once.
-  ```
-  irm https://ccstopper.netlify.app/run | iex
-  ```
-
-- Create a desktop shortcut that runs the command above. 
-  ```
-  irm https://ccstopper.netlify.app/shortcut | iex
-  ```
-
-- Installs CCStopper locally and creates a desktop shortcut. Works offline but won't stay updated. Run this command again to uninstall. 
-  ```
-  irm https://ccstopper.netlify.app/install | iex
-  ```
-
-### Manual Install <!-- omit in toc -->
-
-1. Get the latest [release](https://github.com/eaaasun/CCStopper/releases/latest)
-2. Extract the ZIP file (This is important, CCStopper may not work without additional files.)
-3. Run CCStopper.bat
-4. (Prevent) profit (for Adobe)
-
-## Features
-
-> To undo a module's changes, run said module again.
-
-- Stop Background Processes
-- Add to Hosts
-- System Patches
-  - Patch Trial Buttons
-  - Remove Genuine Checker
-  - Hide Creative Cloud Folder in Explorer
-
-## v1.2.3 Changelog
-- One-line install/run
-  - thanks [MAS](https://github.com/massgravel/Microsoft-Activation-Scripts) for the idea
-  - see [below](#one-line-installrun) for commands
-- re-written hosts block module
-  - it will now update hosts file if entries already exists (fixed #80)
-  - new comments surrounding entries in hosts file
-  - it _should_ migrate old entries, but it hasn't been extensively tested
-- Removed firewall block module
-  - The hosts patch + CC App patch works better 
-- New module for patching the creative cloud app's buttons
-  - credit to AbsentForeskin on the genP discord
-  - system restart recommended after patching
-- Created logo for shortcut icons (its very original)
-- Documentation update
-
-### Hotfix.2 Changelog <!-- omit in toc -->
-- Updated trial button patch to work with latest CC update
-  - I get these from the genP discord, big thanks to them!
-<!-- ###### Read previous changelogs from [the releases](https://github.com/eaaasun/CCStopper/releases) omit in toc -->
+- [Uninstalling](#uninstalling)
+  - [The Easy Way](#the-easy-way)
+  - [The Hard Way](#the-hard-way)
+    - [Hosts Patch](#hosts-patch)
+    - [Creative Cloud App](#creative-cloud-app)
+    - [Remove Genuine Checker](#remove-genuine-checker)
+    - [Hide Creative Cloud Folder](#hide-creative-cloud-folder)
+- [Alternatives](#alternatives)
+  - [Stop Processes](#stop-processes)
+  - [Hosts/CC App Patch](#hostscc-app-patch)
+  - [Genuine Checker](#genuine-checker)
+  - [Creative Cloud Folder in Explorer](#creative-cloud-folder-in-explorer)
+- [Additional Notes/Goodbye](#additional-notesgoodbye)
 
 
-## Contributing
+# Uninstalling
+## The Easy Way
+Simply run each of the patches that you've applied again. There should be an option to remove the patch.
+> NOTE: The web version of CCStopper no longer work. You will have to manually download CCStopper from the [releases](https://github.com/eaaasun/CCStopper/releases).
 
-> Want to support this project? Please donate your time! If you have Powershell/Batch knowledge, contribute to the project! If not, finding bugs and suggesting features is just as helpful!
+## The Hard Way
+### Hosts Patch
+1. Open the hosts file in a text editor. 
+2. Remove all the lines between the start/end caps, and the start/end caps themselves.
 
-### Issues
 
-Found a bug? Something not working? Please open an issue! Please read through the issue form, and check for existing/closed issues before submitting.
+   ```
+   # START CCStopper Block List - DO NOT EDIT THIS LINE
+   <hosts lines here>
+   # END CCStopper Block List - DO NOT EDIT THIS LINE
+   ```
 
-### Alternate Distributions/Modifications
+3. Save the file.
 
-> I cannot offer any support for CCStopper unless it's a release from this repository.
+### Creative Cloud App
+1. Go to `C:\Program Files (x86)\Common Files\Adobe\Adobe Desktop Common\AppsPanel\`
+2. Make sure you find a `AppsPanelBL.dll.bak` file. If you don't, and Creative Cloud is either not working or still shows the patched apps, you will have to reinstall Creative Cloud.
+3. Delete the `AppsPanelBL.dll` file.
+4. Rename `AppsPanelBL.dll.bak` to `AppsPanelBL.dll`.
+5. You may have to restart your computer for the changes to take effect.
 
-I have no problems with this and enjoy seeing what people do with my code! Please make sure that your fork complies with this repository's license, and that the user knows it's a fork of CCStopper. Also, if you make any improvements, please consider making a pull request!
+### Remove Genuine Checker
 
-### Adding Entries to Hosts Blocklist
+#### Restoring AdobeGenuineValidator.exe <!-- omit in toc -->
+1. Go to `C:\Program Files (x86)\Adobe\Adobe Creative Cloud\Utils\`
+2. Check if there is a `AdobeGenuineValidator.exe.bak` file. Additionally, check that `AdobeGenuineValidator.exe` is a 0 byte file. If either don't apply, this won't work. You should reinstall Creative Cloud to remove the Genuine Checker patch.
+3. `AdobeGenuineValidator.exe` will be locked. Open the file properties, and go to the security tab. Click on `Edit`, and click `Administrators`. Uncheck the `Deny` box for everything. Click Apply to save the changes.
+4. Delete the `AdobeGenuineValidator.exe` file, and rename `AdobeGenuineValidator.exe.bak` to `AdobeGenuineValidator.exe`.
+  
+#### Restoring AdobeGCClient Folder <!-- omit in toc -->
+1. Go to `C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient\`
+2. Check if there is a `AdobeGCClient.bak` folder. If not, this won't work. You should reinstall Creative Cloud to remove the Genuine Checker patch.
+3. `AdobeGCClient` will be locked. Open the folder properties, and go to the security tab. Click on `Edit`, and click `Administrators`. Uncheck the `Deny` box for everything. Click Apply to save the changes.
+4. Delete the `AdobeGCClient` folder, and rename `AdobeGCClient.bak` to `AdobeGCClient`.
 
-The [data branch](https://github.com/eaaasun/CCStopper/tree/data) of CCStopper contains a `hosts.txt` file that has a list of addresses that CCStopper will block. If you think an address from adobe should be blocked, open a pull request with the address added to the bottom of the list. Also state why the address should be added to the hosts block.
+### Hide Creative Cloud Folder
+1. Open the Registry Editor.
+2. Go to `Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\`
+3. Search (`CTRL+F`) for `System.IsPinnedToNameSpaceTree`
+4. Change the value from `0` to `1`.
+5. Restart windows explorer.
 
-## Disclaimer/Notice
+# Alternatives
 
-**Disclaimer:** This script is in an early stage, and offered as-is. There will be _many_ bugs. I am not responsible for any damage, loss of data, or thermonuclear wars caused by these scripts. I am not affiliated with Adobe.
+## Stop Processes
+The final release of CCStopper (v1.3) only stops Adobe processes. Simply download the script, right-click, then select `Run with Powershell`.
 
-**Notice:** Don't use this tool for piracy. It's illegal, and multi-billion dollar companies like Adobe _need_ to profit off unreliable and overpriced software. Piracy _helps_ Adobe by increasing their market dominance.
+## Hosts/CC App Patch
+I recommend following the guides on [genP](https://reddit.com/r/genP). They have a `CreativeCloudPatcher.bat` script that does similar things to CCStopper (Hosts patch, CC App patch)
+
+CreativeCloudPatcher also adds to the hosts file, and like CCStopper, it may not be up-to-date with the latest address the moment Adobe updates them. I recommend you check genP's discord server for the latest URL.
+
+## Genuine Checker
+AGS can be uninstalled by running the following in an admin powershell window:
+```powershell
+[System.Diagnostics.Process]::Start("C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient\AdobeCleanUpUtility.exe")
+```
+*(thanks allstart4u/genP discord)*
+
+## Creative Cloud Folder in Explorer
+[Adobe has an official guide on hiding the Creative Cloud Files folder.](https://helpx.adobe.com/ie/creative-cloud/kb/remove-cc-files-folder-shortcut-navigation-panel.html)
+
+# Additional Notes/Goodbye
+Welp, it's been a fun ride! CCStopper wouldn't have been possible without the help of the community, so thank you!
+
+I won't be creating a CCStopper for Mac as zii seems to be dead, and the current method is just downloading a pre-patched version of the app.
+
+Finally, I'd like to apologize to everyone with an unresolved issue. I'll try my best to help before archiving the repo, but in most cases I'll recommend the aforementioned alternatives.
 
 <h6 align="center">Made with &lt;3, and &lt;/3 for Adobe</h6>

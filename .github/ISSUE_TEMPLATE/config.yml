@@ -1,1 +1,5 @@
 blank_issues_enabled: false
+contact_links:
+  - name: "No New Issues Are Being Accepted"
+    url: "https://github.com/eaaasun/CCStopper"
+    about: "CCStopper is being sunset and will be archived on Mar. 31, 2024. Read the README for more information."
